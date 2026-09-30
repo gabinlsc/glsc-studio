@@ -1,0 +1,832 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#fdfbf7">
+  <meta name="description" content="BREIZH ÉTANCHÉITÉ & RÉNOV — rénovation, couverture et dépannage d'urgence à Lorient et dans le Morbihan. Devis sous 24 h, garantie décennale, intervention 7j/7.">
+  <link rel="canonical" href="https://studio.glsc.fr/btp-demo.html">
+  <meta property="og:url" content="https://studio.glsc.fr/btp-demo.html">
+  <meta name="robots" content="noindex,follow">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="fr_FR">
+  <meta property="og:title" content="BREIZH ÉTANCHÉITÉ & RÉNOV — Rénovation & dépannage à Lorient">
+  <meta property="og:description" content="Le concept de landing page interactive pour les artisans du bâtiment, réalisé par StudioGLSC.">
+  <title>BREIZH ÉTANCHÉITÉ & RÉNOV — Rénovation & dépannage à Lorient</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%231e293b'/%3E%3Cpath d='M13 35 32 17l19 18v4H13z' fill='%23ea580c'/%3E%3Crect x='26' y='39' width='12' height='12' fill='%23fdfbf7'/%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    :root { color-scheme:light; --bg:#fdfbf7; --paper:#fff; --ink:#1e293b; --muted:#5a6572; --faint:#64707d; --line:rgba(30,41,59,.13); --line-strong:rgba(30,41,59,.28); --accent:#ea580c; --accent-dark:#c2410c; --accent-deep:#9a3412; --accent-2:#f59e0b; --accent-soft:#fff4ec; --wa:#15803d; --nav:rgba(253,251,247,.9); --shadow-sm:0 1px 2px rgba(30,41,59,.06); --shadow:0 14px 34px -16px rgba(30,41,59,.28); --shadow-lg:0 34px 74px -34px rgba(30,41,59,.38); }
+    *,*::before,*::after { box-sizing:border-box; }
+    html { scroll-behavior:smooth; scroll-padding-top:126px; }
+    body { margin:0; background:var(--bg); color:var(--ink); font-family:Inter,sans-serif; overflow-x:hidden; -webkit-font-smoothing:antialiased; }
+    h1,h2,h3,h4,.brand,.amount { font-family:'Space Grotesk',Inter,sans-serif; letter-spacing:-.04em; }
+    a { color:inherit; text-decoration:none; }
+    button { font:inherit; color:inherit; }
+    ::selection { background:var(--accent); color:#fff; }
+    :focus-visible { outline:3px solid var(--accent-2); outline-offset:3px; border-radius:6px; }
+    .wrap { width:min(1180px,calc(100% - 44px)); margin-inline:auto; }
+
+    .demo-bar { height:32px; background:var(--ink); color:#94a3b8; font-size:.68rem; letter-spacing:.03em; }
+    .demo-bar a { color:#fdba74; text-decoration:underline; text-underline-offset:3px; }
+    .demo-bar a:hover { color:#fff; }
+
+    .nav { background:var(--nav); border-bottom:1px solid var(--line); backdrop-filter:blur(16px); -webkit-backdrop-filter:blur(16px); }
+    .brand { display:flex; align-items:center; gap:.72rem; }
+    .brand-mark { flex:none; display:grid; place-items:center; width:40px; height:40px; border-radius:12px; background:var(--ink); color:var(--accent); }
+    .brand strong { display:block; font-size:.95rem; font-weight:700; letter-spacing:-.02em; line-height:1.1; }
+    .brand small { display:block; margin-top:3px; color:var(--faint); font-size:.55rem; font-weight:700; letter-spacing:.26em; }
+    .navlink { color:var(--muted); font-weight:600; transition:color .2s; }
+    .navlink:hover { color:var(--accent-dark); }
+    .phone-link { display:inline-flex; align-items:center; gap:.55rem; min-height:44px; padding:9px 16px; border:1px solid var(--line-strong); border-radius:999px; font-weight:800; transition:border-color .2s,background .2s,transform .2s; }
+    .phone-link:hover { border-color:var(--accent); background:var(--accent-soft); transform:translateY(-1px); }
+
+    .btn { display:inline-flex; align-items:center; justify-content:center; gap:.7rem; min-height:52px; padding:14px 24px; border-radius:999px; font-weight:800; white-space:nowrap; transition:transform .2s,box-shadow .2s,background .2s,border-color .2s,color .2s; }
+    .btn:hover { transform:translateY(-2px); }
+    .btn-primary { background:var(--accent-dark); color:#fff; box-shadow:0 16px 34px -14px rgba(194,65,12,.7); }
+    .btn-primary:hover { background:var(--accent-deep); }
+    .btn-ink { background:var(--ink); color:#fff; }
+    .btn-ink:hover { background:#0f172a; }
+    .btn-outline { border:1px solid var(--line-strong); background:transparent; }
+    .btn-outline:hover { border-color:var(--accent); background:var(--accent-soft); color:var(--accent-dark); }
+    .btn-wa { background:var(--wa); color:#fff; }
+    .btn-wa:hover { background:#116331; }
+    .btn-small { min-height:40px; padding:9px 16px; font-size:.83rem; }
+
+    .eyebrow { color:var(--accent-dark); font-size:.66rem; font-weight:800; letter-spacing:.2em; text-transform:uppercase; }
+    .badge { display:inline-flex; align-items:center; gap:.6rem; padding:9px 15px; border:1px solid var(--line); border-radius:999px; background:var(--paper); box-shadow:var(--shadow-sm); font-size:.79rem; font-weight:700; }
+    .dot-live { width:8px; height:8px; flex:none; border-radius:50%; background:var(--accent); }
+    .dot-live.on { background:#16a34a; box-shadow:0 0 0 4px rgba(22,163,74,.18); animation:pulse 2.2s ease-in-out infinite; }
+    @keyframes pulse { 0%,100% { box-shadow:0 0 0 4px rgba(22,163,74,.18); } 50% { box-shadow:0 0 0 8px rgba(22,163,74,.05); } }
+    .rule { height:1px; background:var(--line); border:0; margin:0; }
+
+    .hero { position:relative; overflow:hidden; padding:120px 0 76px; background:radial-gradient(ellipse 70% 60% at 82% 8%,rgba(245,158,11,.14),transparent 62%),radial-gradient(ellipse 60% 55% at 6% 92%,rgba(234,88,12,.09),transparent 60%); }
+    .hero-grid { display:grid; grid-template-columns:1.1fr .9fr; gap:52px; align-items:start; }
+    .hero h1 { margin:20px 0 0; font-size:clamp(2.5rem,6.1vw,5.3rem); line-height:1.02; font-weight:700; }
+    .hero h1 em { font-style:normal; color:var(--accent); }
+    .deck { max-width:540px; margin:24px 0 0; color:var(--muted); font-size:1.05rem; line-height:1.75; }
+    .hero-cta { display:flex; flex-wrap:wrap; gap:12px; margin-top:32px; }
+    .assur { display:flex; flex-wrap:wrap; gap:10px; margin-top:34px; padding-top:30px; border-top:1px solid var(--line); }
+    .assur span { display:flex; align-items:center; gap:.6rem; font-size:.85rem; font-weight:700; color:var(--ink); }
+    .assur span svg { flex:none; color:var(--accent); }
+    .hero-panel { background:var(--paper); border:1px solid var(--line); border-radius:24px; box-shadow:var(--shadow-lg); overflow:hidden; }
+    .hero-panel-head { display:flex; align-items:center; justify-content:space-between; gap:14px; padding:20px 24px; border-bottom:1px solid var(--line); background:var(--ink); color:#fff; }
+    .hero-panel-head small { color:#94a3b8; font-size:.63rem; font-weight:800; letter-spacing:.18em; text-transform:uppercase; }
+    .hero-clock { font-family:'Space Grotesk',sans-serif; font-size:1.5rem; font-weight:600; letter-spacing:-.02em; font-variant-numeric:tabular-nums; }
+    .hero-panel-body { padding:24px; }
+    .hero-panel-body p { margin:14px 0 0; color:var(--muted); line-height:1.7; font-size:.95rem; }
+    .hero-stats { display:grid; grid-template-columns:repeat(3,1fr); margin:22px 0 0; border-top:1px solid var(--line); }
+    .hero-stats div { padding:16px 4px 0; }
+    .hero-stats div + div { padding-left:16px; border-left:1px solid var(--line); }
+    .hero-stats strong { display:block; font-family:'Space Grotesk',sans-serif; font-size:1.25rem; letter-spacing:-.04em; }
+    .hero-stats span { display:block; margin-top:4px; color:var(--faint); font-size:.66rem; font-weight:700; letter-spacing:.12em; text-transform:uppercase; }
+
+    .section { padding:104px 0; }
+    .section-alt { background:var(--ink); color:#f8fafc; }
+    .section-alt .muted { color:#94a3b8; }
+    .section-head { display:flex; justify-content:space-between; align-items:end; gap:40px; margin-bottom:46px; }
+    .section-head h2 { margin:14px 0 0; max-width:720px; font-size:clamp(2.2rem,4.5vw,4.1rem); line-height:1.02; font-weight:700; }
+    .section-head h2 em { font-style:normal; color:var(--accent); }
+    .section-head > p { max-width:400px; margin:0 0 4px; color:var(--muted); line-height:1.75; }
+    .section-alt .eyebrow { color:#fbbf24; }
+
+    .sim { display:grid; grid-template-columns:1.06fr .94fr; gap:0; border:1px solid var(--line); border-radius:28px; background:var(--paper); box-shadow:var(--shadow); overflow:hidden; }
+    .sim-form { padding:38px; display:grid; gap:28px; align-content:start; border-right:1px solid var(--line); }
+    .sim-form fieldset { border:0; padding:0; margin:0; min-width:0; }
+    .sim-form legend { display:flex; align-items:center; gap:.7rem; padding:0; margin-bottom:14px; font-family:'Space Grotesk',sans-serif; font-size:1.02rem; font-weight:600; letter-spacing:-.02em; }
+    .step-num { flex:none; display:grid; place-items:center; width:26px; height:26px; border-radius:8px; background:var(--accent-soft); color:var(--accent-dark); font-size:.76rem; font-weight:800; }
+    .choices { display:grid; gap:10px; }
+    .choices-3 { grid-template-columns:repeat(3,1fr); }
+    .choices-4 { grid-template-columns:repeat(4,1fr); }
+    .choice { position:relative; }
+    .choice input { position:absolute; opacity:0; width:1px; height:1px; }
+    .choice label { display:block; height:100%; padding:15px 16px; border:1px solid var(--line); border-radius:14px; background:var(--bg); cursor:pointer; transition:border-color .18s,background .18s,box-shadow .18s,transform .18s; }
+    .choice label:hover { border-color:var(--line-strong); transform:translateY(-1px); }
+    .choice label strong { display:block; font-size:.9rem; font-weight:800; }
+    .choice label small { display:block; margin-top:5px; color:var(--muted); font-size:.74rem; line-height:1.5; }
+    .choice input:checked + label { border-color:var(--accent); background:var(--accent-soft); box-shadow:inset 0 0 0 1px var(--accent); }
+    .choice input:checked + label strong { color:var(--accent-dark); }
+    .choice input:focus-visible + label { outline:3px solid var(--accent-2); outline-offset:3px; }
+    .zones-field .choices { grid-template-columns:repeat(3,1fr); }
+    .zones-field .choice label { padding:11px 12px; text-align:center; }
+    .zones-field .choice label strong { font-size:.85rem; }
+
+    .sim-result { padding:38px; display:flex; flex-direction:column; background:linear-gradient(170deg,#1e293b,#0f172a); color:#f8fafc; }
+    .sim-result > .eyebrow { color:#fbbf24; }
+    .sim-result-label { margin:22px 0 0; color:#94a3b8; font-size:.7rem; font-weight:800; letter-spacing:.16em; text-transform:uppercase; }
+    .amount { margin:8px 0 0; font-size:clamp(2.3rem,4.6vw,3.5rem); line-height:1; font-weight:600; letter-spacing:-.05em; }
+    .amount .dash { color:#64748b; }
+    .sim-recap { margin:14px 0 0; color:#cbd5e1; font-size:.9rem; line-height:1.65; }
+    .sim-facts { margin:26px 0 0; padding:0; list-style:none; display:grid; gap:0; border-top:1px solid rgba(255,255,255,.14); }
+    .sim-facts li { display:flex; align-items:baseline; justify-content:space-between; gap:16px; padding:13px 0; border-bottom:1px solid rgba(255,255,255,.14); }
+    .sim-facts span { color:#94a3b8; font-size:.82rem; }
+    .sim-facts strong { text-align:right; font-size:.9rem; font-weight:700; }
+    .sim-actions { display:grid; gap:10px; margin-top:26px; }
+    .sim-actions .btn-outline { border-color:rgba(255,255,255,.3); color:#fff; }
+    .sim-actions .btn-outline:hover { background:rgba(255,255,255,.1); border-color:#fff; color:#fff; }
+    .sim-note { margin:16px 0 0; color:#7c8899; font-size:.74rem; line-height:1.6; }
+
+    .tabs { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:28px; }
+    .tab { min-height:44px; padding:10px 20px; border:1px solid var(--line); border-radius:999px; background:transparent; font-size:.88rem; font-weight:800; cursor:pointer; transition:background .2s,border-color .2s,color .2s; }
+    .tab:hover { border-color:var(--line-strong); }
+    .tab[aria-selected="true"] { background:var(--ink); border-color:var(--ink); color:#fff; }
+
+    .ba { --pos:52%; border:1px solid var(--line); border-radius:26px; overflow:hidden; background:var(--ink); box-shadow:var(--shadow-lg); }
+    .ba-stage { position:relative; aspect-ratio:16/9; touch-action:pan-y; }
+    .ba-layer { position:absolute; inset:0; }
+    .ba-layer svg { width:100%; height:100%; display:block; }
+    .ba-before { clip-path:inset(0 calc(100% - var(--pos)) 0 0); }
+    .ba-handle { position:absolute; top:0; bottom:0; left:var(--pos); width:3px; background:#fff; transform:translateX(-50%); box-shadow:0 0 0 1px rgba(15,23,42,.25),0 0 22px rgba(15,23,42,.45); pointer-events:none; }
+    .ba-grip { position:absolute; top:50%; left:50%; width:52px; height:52px; display:grid; place-items:center; border-radius:50%; background:#fff; color:var(--ink); transform:translate(-50%,-50%); box-shadow:0 10px 28px -8px rgba(15,23,42,.6); }
+    .ba-range { position:absolute; inset:0; width:100%; height:100%; margin:0; opacity:0; cursor:ew-resize; -webkit-appearance:none; appearance:none; background:transparent; }
+    .ba-range::-webkit-slider-thumb { -webkit-appearance:none; appearance:none; width:60px; height:100%; cursor:ew-resize; }
+    .ba-range::-moz-range-thumb { width:60px; height:100%; border:0; cursor:ew-resize; }
+    .ba-tag { position:absolute; top:16px; padding:7px 13px; border-radius:999px; font-size:.66rem; font-weight:800; letter-spacing:.15em; text-transform:uppercase; pointer-events:none; }
+    .ba-tag-before { left:16px; background:var(--ink); color:#fff; }
+    .ba-tag-after { right:16px; background:var(--accent-dark); color:#fff; }
+    .ba-meta { display:grid; grid-template-columns:repeat(4,1fr); border-top:1px solid rgba(255,255,255,.14); background:var(--ink); color:#f8fafc; }
+    .ba-meta div { padding:20px 22px; }
+    .ba-meta div + div { border-left:1px solid rgba(255,255,255,.14); }
+    .ba-meta span { display:block; color:#94a3b8; font-size:.62rem; font-weight:800; letter-spacing:.16em; text-transform:uppercase; }
+    .ba-meta strong { display:block; margin-top:7px; font-family:'Space Grotesk',sans-serif; font-size:1.05rem; letter-spacing:-.03em; }
+
+    .process { display:grid; grid-template-columns:repeat(3,1fr); border-top:1px solid rgba(255,255,255,.14); }
+    .process article { padding:34px 32px; }
+    .process article + article { border-left:1px solid rgba(255,255,255,.14); }
+    .process-num { display:inline-grid; place-items:center; width:44px; height:44px; border-radius:14px; background:rgba(245,158,11,.14); color:#fbbf24; font-family:'Space Grotesk',sans-serif; font-size:1.05rem; font-weight:700; }
+    .process h3 { margin:20px 0 9px; font-size:1.28rem; }
+    .process p { margin:0; color:#94a3b8; line-height:1.7; }
+    .process .process-tag { display:block; margin-top:16px; color:#fbbf24; font-size:.66rem; font-weight:800; letter-spacing:.16em; text-transform:uppercase; }
+
+    .zone-layout { display:grid; grid-template-columns:1.16fr .84fr; gap:0; border:1px solid var(--line); border-radius:26px; overflow:hidden; background:var(--paper); box-shadow:var(--shadow); }
+    .zone-chips { display:flex; flex-wrap:wrap; gap:10px; padding:38px; align-content:start; border-right:1px solid var(--line); }
+    .zone-chip { min-height:44px; padding:11px 18px; border:1px solid var(--line); border-radius:999px; background:var(--bg); font-size:.87rem; font-weight:700; cursor:pointer; transition:background .2s,border-color .2s,color .2s,transform .2s; }
+    .zone-chip:hover { border-color:var(--accent); color:var(--accent-dark); transform:translateY(-1px); }
+    .zone-chip[aria-pressed="true"] { background:var(--accent-dark); border-color:var(--accent-dark); color:#fff; }
+    .zone-detail { padding:38px; background:var(--accent-soft); }
+    .zone-detail h3 { margin:16px 0 4px; font-size:1.7rem; }
+    .zone-detail > p { margin:0; color:var(--muted); font-size:.9rem; }
+    .zone-list { margin:26px 0 0; padding:0; list-style:none; display:grid; gap:0; border-top:1px solid rgba(234,88,12,.22); }
+    .zone-list li { display:flex; justify-content:space-between; gap:16px; padding:12px 0; border-bottom:1px solid rgba(234,88,12,.22); font-size:.88rem; }
+    .zone-list span { color:var(--muted); }
+    .zone-list strong { text-align:right; }
+
+    .footer { padding:52px 0 130px; border-top:1px solid var(--line); color:var(--muted); font-size:.85rem; }
+    .footer-cols { display:grid; grid-template-columns:1fr 1fr 1.35fr; gap:36px; }
+    .footer-cols dt { margin-bottom:12px; color:var(--ink); font-size:.66rem; font-weight:800; letter-spacing:.16em; text-transform:uppercase; }
+    .footer-cols dd { margin:0; line-height:1.8; }
+    .footer-cols a { color:var(--ink); border-bottom:1px solid var(--line); }
+    .floating-bar { display:none; }
+
+    .reveal { opacity:0; transform:translateY(18px); transition:opacity .7s ease,transform .7s cubic-bezier(.2,.7,.2,1); }
+    .reveal.visible { opacity:1; transform:translateY(0); }
+
+    @media(max-width:1000px) {
+      .hero-grid,.sim,.zone-layout { grid-template-columns:1fr; }
+      .sim-form,.zone-chips { border-right:0; border-bottom:1px solid var(--line); }
+      .ba-meta { grid-template-columns:repeat(2,1fr); }
+      .ba-meta div:nth-child(3) { border-left:0; border-top:1px solid rgba(255,255,255,.14); }
+      .ba-meta div:nth-child(4) { border-top:1px solid rgba(255,255,255,.14); }
+      .process { grid-template-columns:1fr; }
+      .process article + article { border-left:0; border-top:1px solid rgba(255,255,255,.14); }
+      .footer-cols { grid-template-columns:1fr 1fr; }
+    }
+    @media(max-width:760px) {
+      .wrap { width:min(100% - 32px,1180px); }
+      .demo-bar { font-size:.6rem; }
+      html { scroll-padding-top:112px; }
+      .hero { padding:104px 0 56px; }
+      .hero h1 { font-size:clamp(2.3rem,10.5vw,3.5rem); }
+      .assur { gap:8px 16px; margin-top:28px; padding-top:24px; }
+      .hero-stats { grid-template-columns:1fr; }
+      .hero-stats div + div { padding-left:0; border-left:0; border-top:1px solid var(--line); }
+      .section { padding:72px 0; }
+      .section-head { display:block; margin-bottom:30px; }
+      .section-head > p { margin-top:18px; }
+      .sim-form,.sim-result,.zone-chips,.zone-detail { padding:26px; }
+      .choices-3,.choices-4,.zones-field .choices { grid-template-columns:1fr 1fr; }
+      .ba { border-radius:20px; }
+      .ba-stage { aspect-ratio:4/3; }
+      .ba-meta { grid-template-columns:1fr 1fr; }
+      .footer-cols { grid-template-columns:1fr; gap:26px; }
+      .footer { padding-bottom:150px; }
+      .floating-bar { position:fixed; z-index:60; left:10px; right:10px; bottom:max(10px,env(safe-area-inset-bottom)); display:grid; grid-template-columns:1fr 1fr; gap:8px; padding:8px; border:1px solid var(--line); border-radius:20px; background:rgba(255,255,255,.96); box-shadow:var(--shadow-lg); backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px); }
+      .floating-bar .btn { min-height:52px; padding:10px 12px; font-size:.82rem; }
+    }
+    @media(max-width:420px) {
+      .choices-3,.choices-4,.zones-field .choices { grid-template-columns:1fr; }
+      .ba-meta { grid-template-columns:1fr; }
+      .ba-meta div + div { border-left:0; border-top:1px solid rgba(255,255,255,.14); }
+      .floating-bar .btn { font-size:.76rem; }
+    }
+    @media(prefers-reduced-motion:reduce) { html { scroll-behavior:auto; } *,*::before,*::after { animation-duration:.01ms!important; animation-iteration-count:1!important; transition-duration:.01ms!important; } .reveal { opacity:1; transform:none; } }
+  </style>
+</head>
+<body>
+  <div class="demo-bar fixed inset-x-0 top-0 z-[70] flex items-center justify-center px-3 text-center">
+    <span>Concept démo BTP réalisé par <strong class="text-white">StudioGLSC</strong> · <a href="https://studio.glsc.fr" target="_blank" rel="noopener noreferrer">Retour à la vitrine</a></span>
+  </div>
+
+  <header class="nav fixed inset-x-0 top-8 z-50">
+    <nav class="wrap h-[78px] flex items-center justify-between gap-4" aria-label="Navigation principale">
+      <a href="#accueil" class="brand" aria-label="Breizh Étanchéité &amp; Rénov, accueil">
+        <span class="brand-mark" aria-hidden="true"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 11 9-7 9 7"/><path d="M6 10v9h12v-9"/></svg></span>
+        <span class="leading-none"><strong>BREIZH ÉTANCHÉITÉ</strong><small>&amp; RÉNOV · MORBIHAN</small></span>
+      </a>
+      <div class="hidden lg:flex items-center gap-7 text-[.86rem] font-semibold">
+        <a class="navlink" href="#simulateur">Simulateur</a>
+        <a class="navlink" href="#realisations">Réalisations</a>
+        <a class="navlink" href="#processus">Processus</a>
+        <a class="navlink" href="#zones">Zones</a>
+      </div>
+      <div class="flex items-center gap-2">
+        <a class="phone-link hidden sm:inline-flex" href="tel:+33200000000"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.2a2 2 0 0 1 2.1-.5c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2Z"/></svg>02 00 00 00 00</a>
+        <button id="menu-toggle" type="button" class="lg:hidden grid place-items-center h-11 w-11 rounded-xl border border-[color:var(--line-strong)]" aria-label="Ouvrir le menu" aria-controls="mobile-menu" aria-expanded="false"><span aria-hidden="true">☰</span></button>
+      </div>
+    </nav>
+    <div id="mobile-menu" class="hidden lg:hidden border-t border-[color:var(--line)] bg-[color:var(--bg)] px-5 pb-5 pt-2">
+      <div class="wrap flex flex-col font-bold">
+        <a class="py-3 border-b border-[color:var(--line)]" href="#simulateur">Simulateur</a>
+        <a class="py-3 border-b border-[color:var(--line)]" href="#realisations">Réalisations</a>
+        <a class="py-3 border-b border-[color:var(--line)]" href="#processus">Processus</a>
+        <a class="py-3" href="#zones">Zones d'intervention</a>
+      </div>
+    </div>
+  </header>
+
+  <main id="contenu">
+    <section id="accueil" class="hero">
+      <div class="wrap hero-grid">
+        <div class="reveal">
+          <span class="badge"><i class="dot-live on" id="hero-dot" aria-hidden="true"></i><span id="hero-status">Astreinte dépannage active en Morbihan</span></span>
+          <h1>Vos travaux de rénovation &amp; dépannage d'urgence <em>à Lorient.</em></h1>
+          <p class="deck">Couverture, plomberie, électricité, maçonnerie générale : un artisan local, un interlocuteur unique et un <strong>devis sous 24 h</strong> après le constat sur place. Décennale et RGE, sans mauvaise surprise en fin de chantier.</p>
+          <div class="hero-cta">
+            <a class="btn btn-primary" href="tel:+33200000000">Appel d'urgence <span aria-hidden="true">↗</span></a>
+            <a class="btn btn-outline" href="#simulateur">Simuler un chantier <span aria-hidden="true">↓</span></a>
+          </div>
+          <div class="assur reveal">
+            <span><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2 4 6v6c0 5 3.4 8.9 8 10 4.6-1.1 8-5 8-10V6Z"/><path d="m9 12 2 2 4-4"/></svg>Garantie décennale</span>
+            <span><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="5"/><path d="m8.5 12.5-1.5 8 5-3 5 3-1.5-8"/></svg>Artisan certifié RGE</span>
+            <span><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>Intervention d'urgence 7j/7</span>
+          </div>
+        </div>
+
+        <div class="hero-panel reveal">
+          <div class="hero-panel-head">
+            <small>Astreinte · heure locale</small>
+            <span class="hero-clock" id="hero-clock">--:--</span>
+          </div>
+          <div class="hero-panel-body">
+            <span class="badge"><i class="dot-live on" aria-hidden="true"></i>Réponse sous 30 min</span>
+            <p id="hero-clock-note">Astreinte dépannage active en Morbihan. Fuite, coupure de courant ou toiture endommagée : appelez, un technicien part immédiatement.</p>
+            <div class="hero-stats">
+              <div><strong>17</strong><span>Ans d'atelier</span></div>
+              <div><strong>340</strong><span>Chantiers livrés</span></div>
+              <div><strong>24 h</strong><span>Devis sous 24 h</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="simulateur" class="section">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <div><p class="eyebrow">Simulateur de devis</p><h2>Trois clics.<br>Une <em>fourchette</em> immédiate.</h2></div>
+          <p>Sélectionnez votre type de projet, votre surface et votre commune : l'estimation se recalcule en direct et pré-remplit votre message WhatsApp.</p>
+        </div>
+
+        <div class="sim reveal">
+          <form class="sim-form" id="sim-form">
+            <fieldset>
+              <legend><span class="step-num">1</span>Type de projet</legend>
+              <div class="choices choices-3">
+                <div class="choice"><input type="radio" id="type-urgence" name="type" value="urgence" checked><label for="type-urgence"><strong>Dépannage urgent</strong><small>Fuite, coupure, infiltration</small></label></div>
+                <div class="choice"><input type="radio" id="type-renovation" name="type" value="renovation"><label for="type-renovation"><strong>Rénovation complète</strong><small>Salle de bain, cuisine, électricité</small></label></div>
+                <div class="choice"><input type="radio" id="type-couverture" name="type" value="couverture"><label for="type-couverture"><strong>Couverture</strong><small>Toiture, zinguerie, étanchéité</small></label></div>
+              </div>
+            </fieldset>
+
+            <fieldset>
+              <legend><span class="step-num">2</span>Surface approximative</legend>
+              <div class="choices choices-4">
+                <div class="choice"><input type="radio" id="surf-s1" name="surface" value="s1" checked><label for="surf-s1"><strong>&lt; 30 m²</strong><small>Petite pièce</small></label></div>
+                <div class="choice"><input type="radio" id="surf-s2" name="surface" value="s2"><label for="surf-s2"><strong>30 – 80 m²</strong><small>Logement type</small></label></div>
+                <div class="choice"><input type="radio" id="surf-s3" name="surface" value="s3"><label for="surf-s3"><strong>80 – 150 m²</strong><small>Grande maison</small></label></div>
+                <div class="choice"><input type="radio" id="surf-s4" name="surface" value="s4"><label for="surf-s4"><strong>&gt; 150 m²</strong><small>Immeuble</small></label></div>
+              </div>
+            </fieldset>
+
+            <fieldset class="zones-field">
+              <legend><span class="step-num">3</span>Ville d'intervention</legend>
+              <div class="choices">
+                <div class="choice"><input type="radio" id="zone-lorient" name="zone" value="Lorient" checked><label for="zone-lorient"><strong>Lorient</strong></label></div>
+                <div class="choice"><input type="radio" id="zone-lanester" name="zone" value="Lanester"><label for="zone-lanester"><strong>Lanester</strong></label></div>
+                <div class="choice"><input type="radio" id="zone-ploemeur" name="zone" value="Ploemeur"><label for="zone-ploemeur"><strong>Ploemeur</strong></label></div>
+                <div class="choice"><input type="radio" id="zone-hennebont" name="zone" value="Hennebont"><label for="zone-hennebont"><strong>Hennebont</strong></label></div>
+                <div class="choice"><input type="radio" id="zone-guidel" name="zone" value="Guidel"><label for="zone-guidel"><strong>Guidel</strong></label></div>
+                <div class="choice"><input type="radio" id="zone-queven" name="zone" value="Quéven"><label for="zone-queven"><strong>Quéven</strong></label></div>
+                <div class="choice"><input type="radio" id="zone-saint-ave" name="zone" value="Saint-Avé"><label for="zone-saint-ave"><strong>Saint-Avé</strong></label></div>
+                <div class="choice"><input type="radio" id="zone-lanvauban" name="zone" value="Lanvauban"><label for="zone-lanvauban"><strong>Lanvauban</strong></label></div>
+                <div class="choice"><input type="radio" id="zone-caudan" name="zone" value="Caudan"><label for="zone-caudan"><strong>Caudan</strong></label></div>
+                <div class="choice"><input type="radio" id="zone-pontivy" name="zone" value="Pontivy"><label for="zone-pontivy"><strong>Pontivy</strong></label></div>
+                <div class="choice"><input type="radio" id="zone-auray" name="zone" value="Auray"><label for="zone-auray"><strong>Auray</strong></label></div>
+                <div class="choice"><input type="radio" id="zone-vannes" name="zone" value="Vannes"><label for="zone-vannes"><strong>Vannes</strong></label></div>
+              </div>
+            </fieldset>
+          </form>
+
+          <div class="sim-result">
+            <p class="eyebrow">Estimation instantanée</p>
+            <p class="sim-result-label">Fourchette indicative · TTC</p>
+            <p class="amount" id="sim-amount">—</p>
+            <p class="sim-recap" id="sim-recap">Sélectionnez vos critères pour afficher une estimation.</p>
+            <ul class="sim-facts">
+              <li><span>Durée estimée</span><strong id="sim-delay">—</strong></li>
+              <li><span>Délai d'intervention</span><strong id="sim-interv">—</strong></li>
+              <li><span>Déplacement</span><strong id="sim-fees">—</strong></li>
+            </ul>
+            <div class="sim-actions">
+              <a class="btn btn-wa" id="sim-wa" href="#" target="_blank" rel="noopener noreferrer">Envoyer ce projet sur WhatsApp <span aria-hidden="true">↗</span></a>
+              <a class="btn btn-outline" href="tel:+33200000000">Appeler l'atelier <span aria-hidden="true">↗</span></a>
+            </div>
+            <p class="sim-note">Estimation automatique à titre indicatif, hors accès difficile et hors travaux de gros œuvre. Seul le devis signé fait foi.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="realisations" class="section section-alt">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <div><p class="eyebrow">Réalisations · Avant / Après</p><h2>Faites glisser.<br>Le chantier <em>parle seul.</em></h2></div>
+          <p>Deux chantiers récents dans le Morbihan, avec le détail des délais réellement tenus et du budget moyen constaté sur ce type de travaux.</p>
+        </div>
+
+        <div class="tabs reveal" role="tablist" aria-label="Choisir un chantier">
+          <button class="tab" type="button" role="tab" id="tab-toiture" aria-selected="true" aria-controls="panel-toiture">Toiture · Ploemeur</button>
+          <button class="tab" type="button" role="tab" id="tab-salle" aria-selected="false" aria-controls="panel-salle" tabindex="-1">Salle de bain · Lorient</button>
+        </div>
+
+        <div class="reveal" id="panel-toiture" role="tabpanel" aria-labelledby="tab-toiture" tabindex="0">
+          <div class="ba" data-ba>
+            <div class="ba-stage">
+              <div class="ba-layer ba-after">
+                <svg viewBox="0 0 1200 700" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Après : toiture entièrement refaite, tuiles neuves alignées, mousse disparue et gouttière neuve.">
+                  <defs>
+                    <linearGradient id="sky-t-after" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#9dc4e6"/><stop offset="1" stop-color="#e7f0f6"/></linearGradient>
+                    <linearGradient id="roof-t-after" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#576274"/><stop offset="1" stop-color="#39424f"/></linearGradient>
+                    <clipPath id="clip-t-after"><polygon points="150,510 600,175 1050,510"/></clipPath>
+                  </defs>
+                  <rect width="1200" height="700" fill="url(#sky-t-after)"/>
+                  <g fill="#ffffff" opacity=".85"><ellipse cx="250" cy="118" rx="140" ry="42"/><ellipse cx="372" cy="96" rx="95" ry="36"/><ellipse cx="912" cy="162" rx="160" ry="46"/></g>
+                  <circle cx="1020" cy="112" r="44" fill="#fde68a"/>
+                  <rect x="792" y="238" width="86" height="150" fill="#cbbfa9"/>
+                  <rect x="792" y="238" width="86" height="150" fill="#1e293b" opacity=".08"/>
+                  <rect x="780" y="220" width="110" height="24" rx="4" fill="#94a3b8"/>
+                  <rect x="212" y="470" width="776" height="230" fill="#e9dfcb"/>
+                  <g fill="#334155"><rect x="300" y="540" width="130" height="110" rx="4"/><rect x="535" y="540" width="130" height="110" rx="4"/><rect x="770" y="540" width="130" height="110" rx="4"/></g>
+                  <g fill="#cfe6f5"><rect x="308" y="548" width="114" height="94"/><rect x="543" y="548" width="114" height="94"/><rect x="778" y="548" width="114" height="94"/></g>
+                  <polygon points="150,510 600,175 1050,510" fill="url(#roof-t-after)"/>
+                  <g clip-path="url(#clip-t-after)">
+                    <g stroke="#2b3340" stroke-width="4" opacity=".4"><path d="M60 265H1140M40 330H1160M20 400H1180M0 470H1200"/></g>
+                    <g stroke="#2b3340" stroke-width="3" opacity=".28"><path d="M280 175V520M420 175V520M560 175V520M700 175V520M840 175V520M980 175V520"/></g>
+                    <g transform="translate(538,326) rotate(-14)"><rect width="132" height="86" rx="8" fill="#cfe6f5" stroke="#1f2937" stroke-width="8"/><path d="M66 0v86" stroke="#1f2937" stroke-width="6"/></g>
+                    <rect x="584" y="168" width="32" height="56" rx="6" fill="#ea580c"/>
+                  </g>
+                  <path d="M150 512 600 175 1050 512" fill="none" stroke="#2f3846" stroke-width="18" stroke-linejoin="round"/>
+                  <path d="M150 512 600 175 1050 512" fill="none" stroke="#f59e0b" stroke-width="5" stroke-linejoin="round"/>
+                  <rect x="144" y="500" width="916" height="20" rx="8" fill="#cbd5e1" stroke="#94a3b8" stroke-width="3"/>
+                  <rect x="470" y="520" width="40" height="52" fill="#cbd5e1" stroke="#94a3b8" stroke-width="3"/>
+                </svg>
+              </div>
+              <div class="ba-layer ba-before">
+                <svg viewBox="0 0 1200 700" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Avant : toiture vieillissante, tuiles manquantes, mousse et fissures, gouttière encrassée.">
+                  <defs>
+                    <linearGradient id="sky-t-before" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#b4c1cb"/><stop offset="1" stop-color="#dee4e8"/></linearGradient>
+                    <linearGradient id="roof-t-before" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#5c6167"/><stop offset="1" stop-color="#3b3f44"/></linearGradient>
+                    <clipPath id="clip-t-before"><polygon points="150,510 600,175 1050,510"/></clipPath>
+                  </defs>
+                  <rect width="1200" height="700" fill="url(#sky-t-before)"/>
+                  <g fill="#ffffff" opacity=".55"><ellipse cx="250" cy="130" rx="140" ry="42"/><ellipse cx="372" cy="108" rx="95" ry="36"/><ellipse cx="912" cy="180" rx="160" ry="46"/></g>
+                  <rect x="792" y="238" width="86" height="150" fill="#b3a693"/>
+                  <rect x="792" y="238" width="86" height="150" fill="#1e293b" opacity=".16"/>
+                  <rect x="780" y="220" width="110" height="24" fill="#8d8371"/>
+                  <rect x="212" y="470" width="776" height="230" fill="#c9bda9"/>
+                  <g fill="#5b6270"><rect x="300" y="540" width="130" height="110"/><rect x="535" y="540" width="130" height="110"/><rect x="770" y="540" width="130" height="110"/></g>
+                  <g fill="#8fa0b4" opacity=".75"><rect x="308" y="548" width="114" height="94"/><rect x="543" y="548" width="114" height="94"/><rect x="778" y="548" width="114" height="94"/></g>
+                  <polygon points="150,510 600,175 1050,510" fill="url(#roof-t-before)"/>
+                  <g clip-path="url(#clip-t-before)">
+                    <g stroke="#2c3035" stroke-width="4" opacity=".5"><path d="M60 265H1140M40 330H1160M20 400H1180M0 470H1200"/></g>
+                    <g stroke="#2c3035" stroke-width="3" opacity=".34"><path d="M280 175V520M420 175V520M560 175V520M700 175V520M840 175V520M980 175V520"/></g>
+                    <g fill="#24272b"><polygon points="452,338 556,300 590,372 486,410"/><polygon points="700,432 806,398 840,466 734,500"/></g>
+                    <g fill="#7d8288" opacity=".8"><polygon points="330,286 410,258 436,318 356,346"/><polygon points="880,300 960,272 986,332 906,360"/></g>
+                    <g fill="#4f6b38" opacity=".5"><ellipse cx="330" cy="420" rx="86" ry="30"/><ellipse cx="560" cy="470" rx="120" ry="32"/><ellipse cx="880" cy="404" rx="96" ry="30"/><ellipse cx="660" cy="228" rx="70" ry="20"/></g>
+                    <g fill="#6b4b2a" opacity=".32"><ellipse cx="470" cy="382" rx="62" ry="18"/></g>
+                    <g stroke="#1b1e22" stroke-width="3" fill="none" opacity=".7"><path d="M240 300l46 60 -30 52 52 44"/><path d="M1002 330l-58 56 34 50 -44 46"/></g>
+                  </g>
+                  <path d="M150 512 600 175 1050 512" fill="none" stroke="#33373c" stroke-width="16" stroke-linejoin="round"/>
+                  <rect x="144" y="500" width="916" height="18" rx="6" fill="#7f858c"/>
+                  <rect x="144" y="500" width="916" height="6" rx="3" fill="#5f646a"/>
+                </svg>
+              </div>
+              <span class="ba-tag ba-tag-before">Avant</span>
+              <span class="ba-tag ba-tag-after">Après</span>
+              <div class="ba-handle" aria-hidden="true"><span class="ba-grip"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m9 7-5 5 5 5M15 7l5 5-5 5"/></svg></span></div>
+              <input class="ba-range" type="range" min="0" max="100" value="52" step="0.5" aria-label="Faire glisser pour comparer l'avant et l'après de la toiture">
+            </div>
+            <div class="ba-meta">
+              <div><span>Commune</span><strong>Ploemeur</strong></div>
+              <div><span>Surface</span><strong>96 m²</strong></div>
+              <div><span>Délai chantier</span><strong>9 jours</strong></div>
+              <div><span>Budget moyen</span><strong>22 400 €</strong></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="reveal hidden" id="panel-salle" role="tabpanel" aria-labelledby="tab-salle" tabindex="0">
+          <div class="ba" data-ba>
+            <div class="ba-stage">
+              <div class="ba-layer ba-after">
+                <svg viewBox="0 0 1200 700" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Après : salle de bain entièrement refaite, carrelage grand format, douche à l'italienne et meuble vasque.">
+                  <defs>
+                    <pattern id="tiles-s-after" width="150" height="100" patternUnits="userSpaceOnUse">
+                      <rect width="150" height="100" fill="#f1f5f9"/>
+                      <path d="M0 0H150V100" fill="none" stroke="#dde5ee" stroke-width="3"/>
+                    </pattern>
+                    <pattern id="floor-s-after" width="150" height="150" patternUnits="userSpaceOnUse">
+                      <rect width="150" height="150" fill="#e9e4da"/>
+                      <path d="M0 0H150V150" fill="none" stroke="#d6cfc1" stroke-width="4"/>
+                    </pattern>
+                    <linearGradient id="glass-s-after" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#e2f0fb" stop-opacity=".85"/><stop offset="1" stop-color="#c7dcef" stop-opacity=".35"/></linearGradient>
+                  </defs>
+                  <rect width="1200" height="700" fill="url(#tiles-s-after)"/>
+                  <rect y="430" width="1200" height="270" fill="url(#floor-s-after)"/>
+                  <rect x="0" y="424" width="1200" height="8" fill="#cbd5e1"/>
+                  <g>
+                    <rect x="820" y="70" width="380" height="360" rx="6" fill="url(#glass-s-after)"/>
+                    <rect x="820" y="70" width="380" height="360" rx="6" fill="none" stroke="#ffffff" stroke-width="9"/>
+                    <path d="M1010 70v360" stroke="#cbd5e1" stroke-width="9"/>
+                    <rect x="900" y="130" width="16" height="200" rx="8" fill="#94a3b8"/>
+                    <rect x="858" y="112" width="100" height="26" rx="13" fill="#94a3b8"/>
+                    <circle cx="1064" cy="180" r="16" fill="#94a3b8"/>
+                  </g>
+                  <g>
+                    <rect x="150" y="96" width="200" height="184" rx="92" fill="#dbe6f2" stroke="#cbd5e1" stroke-width="8"/>
+                    <path d="M186 150a80 80 0 0 1 62-22" stroke="#ffffff" stroke-width="10" fill="none" stroke-linecap="round" opacity=".9"/>
+                  </g>
+                  <g>
+                    <rect x="120" y="300" width="270" height="118" rx="10" fill="#1f2937"/>
+                    <rect x="112" y="290" width="286" height="20" rx="8" fill="#e2e8f0"/>
+                    <rect x="140" y="326" width="230" height="76" rx="8" fill="#334155"/>
+                    <path d="M255 310v44" stroke="#cbd5e1" stroke-width="8" stroke-linecap="round"/>
+                    <rect x="196" y="418" width="118" height="12" rx="6" fill="#cbd5e1"/>
+                  </g>
+                  <g>
+                    <rect x="480" y="330" width="230" height="100" rx="10" fill="#1f2937"/>
+                    <rect x="472" y="320" width="246" height="20" rx="8" fill="#e2e8f0"/>
+                    <rect x="560" y="246" width="16" height="76" rx="8" fill="#94a3b8"/>
+                  </g>
+                  <g>
+                    <rect x="560" y="60" width="16" height="210" rx="8" fill="#94a3b8"/>
+                    <rect x="560" y="60" width="120" height="16" rx="8" fill="#94a3b8"/>
+                    <circle cx="674" cy="68" r="18" fill="#94a3b8"/>
+                  </g>
+                  <g>
+                    <rect x="352" y="418" width="12" height="14" rx="4" fill="#94a3b8"/>
+                    <rect x="348" y="378" width="20" height="44" rx="5" fill="#16a34a"/>
+                    <path d="M358 378c-22-30-46-16-40 8M358 378c22-30 46-16 40 8" stroke="#16a34a" stroke-width="9" fill="none" stroke-linecap="round"/>
+                  </g>
+                  <rect x="0" y="0" width="1200" height="14" fill="#fef3c7"/>
+                </svg>
+              </div>
+              <div class="ba-layer ba-before">
+                <svg viewBox="0 0 1200 700" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Avant : salle de bain ancienne, peinture écaillée, moisissures, carrelage jauni et fenêtre embuée.">
+                  <defs>
+                    <pattern id="tiles-s-before" width="90" height="60" patternUnits="userSpaceOnUse">
+                      <rect width="90" height="60" fill="#bcb5a7"/>
+                      <path d="M0 0H90V60" fill="none" stroke="#a49c8d" stroke-width="3"/>
+                    </pattern>
+                    <pattern id="floor-s-before" width="70" height="70" patternUnits="userSpaceOnUse">
+                      <rect width="70" height="70" fill="#8e887e"/>
+                      <path d="M0 0H70V70" fill="none" stroke="#7b756c" stroke-width="4"/>
+                    </pattern>
+                  </defs>
+                  <rect width="1200" height="700" fill="url(#tiles-s-before)"/>
+                  <g fill="#4b5a3c" opacity=".62">
+                    <ellipse cx="240" cy="150" rx="120" ry="72"/><ellipse cx="660" cy="96" rx="90" ry="52"/><ellipse cx="1040" cy="330" rx="110" ry="64"/><ellipse cx="420" cy="392" rx="76" ry="40"/>
+                  </g>
+                  <g fill="#b9b2a4" opacity=".85">
+                    <path d="M120 0c40 40 24 82 66 112s96 8 120 44-18 74 22 106l-40 24H96l24-70Z"/>
+                    <path d="M620 300c34-26 74-10 92 20s-14 58 16 78l-38 32h-96l26-64Z"/>
+                  </g>
+                  <g stroke="#6b6357" stroke-width="4" fill="none" opacity=".85">
+                    <path d="M760 0l-14 90 26 58 -20 84 30 70"/><path d="M1040 60l-20 60 24 44"/>
+                  </g>
+                  <rect y="430" width="1200" height="270" fill="url(#floor-s-before)"/>
+                  <rect x="0" y="424" width="1200" height="10" fill="#6f6a62"/>
+                  <g>
+                    <rect x="800" y="90" width="220" height="180" fill="#8e969f" stroke="#6b7078" stroke-width="12"/>
+                    <rect x="800" y="90" width="220" height="180" fill="#6f7883" opacity=".55"/>
+                    <path d="M812 100 1008 262M808 200 860 106M900 100l110 108" stroke="#c8ced4" stroke-width="7" opacity=".65"/>
+                    <path d="M800 90h220v180" fill="none" stroke="#5c6167" stroke-width="6"/>
+                    <rect x="820" y="300" width="180" height="92" rx="8" fill="#d6d0c4" stroke="#a8a296" stroke-width="5"/>
+                    <g stroke="#a8a296" stroke-width="6"><path d="M848 306v80M876 306v80M904 306v80M932 306v80M960 306v80M988 306v80"/></g>
+                  </g>
+                  <g>
+                    <rect x="140" y="378" width="230" height="28" rx="12" fill="#cdc6b9" stroke="#a8a296" stroke-width="5"/>
+                    <rect x="240" y="404" width="42" height="94" fill="#c1baac" stroke="#a8a296" stroke-width="5"/>
+                    <ellipse cx="261" cy="522" rx="72" ry="18" fill="#b3ac9e" stroke="#a8a296" stroke-width="5"/>
+                    <path d="M258 344v34" stroke="#9aa0a8" stroke-width="9" stroke-linecap="round"/>
+                    <ellipse cx="255" cy="404" rx="30" ry="10" fill="#8e887e"/>
+                  </g>
+                  <g>
+                    <rect x="474" y="386" width="136" height="62" rx="10" fill="#d8d2c5" stroke="#a8a296" stroke-width="5"/>
+                    <rect x="484" y="446" width="116" height="74" rx="8" fill="#c6bfb1" stroke="#a8a296" stroke-width="5"/>
+                    <rect x="506" y="352" width="72" height="42" rx="6" fill="#cdc6b9" stroke="#a8a296" stroke-width="5"/>
+                  </g>
+                  <rect x="0" y="120" width="110" height="310" fill="#7d7161" stroke="#5f5749" stroke-width="6"/>
+                  <circle cx="88" cy="278" r="9" fill="#c0b49c"/>
+                  <g fill="#6f5b3c" opacity=".4"><ellipse cx="1100" cy="600" rx="120" ry="46"/><ellipse cx="180" cy="660" rx="140" ry="42"/></g>
+                </svg>
+              </div>
+              <span class="ba-tag ba-tag-before">Avant</span>
+              <span class="ba-tag ba-tag-after">Après</span>
+              <div class="ba-handle" aria-hidden="true"><span class="ba-grip"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m9 7-5 5 5 5M15 7l5 5-5 5"/></svg></span></div>
+              <input class="ba-range" type="range" min="0" max="100" value="52" step="0.5" aria-label="Faire glisser pour comparer l'avant et l'après de la salle de bain">
+            </div>
+            <div class="ba-meta">
+              <div><span>Commune</span><strong>Lorient</strong></div>
+              <div><span>Surface</span><strong>7 m²</strong></div>
+              <div><span>Délai chantier</span><strong>12 jours</strong></div>
+              <div><span>Budget moyen</span><strong>11 800 €</strong></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="processus" class="section section-alt">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <div><p class="eyebrow">Confiance &amp; processus</p><h2>Trois étapes.<br>Aucun <em>rebond</em>.</h2></div>
+          <p>Le même déroulé pour une fuite à 22 h ou une rénovation complète : constat, devis ferme, réception garantie. Vous savez toujours à quelle étape vous êtes.</p>
+        </div>
+        <div class="process reveal">
+          <article><span class="process-num">01</span><h3>Constat sur place</h3><p>Nous passons sur site, relevons les points sensibles et identifions les contraintes d'accès. Le diagnostic est écrit noir sur blanc.</p><span class="process-tag">Gratuit · sous 48 h</span></article>
+          <article><span class="process-num">02</span><h3>Devis fixe</h3><p>Une fourchette claire, un prix ferme et un délai annoncé. Le devis détaille la main-d'œuvre, les fournitures et les finitions.</p><span class="process-tag">Sous 24 h · sans engagement</span></article>
+          <article><span class="process-num">03</span><h3>Réception garantie</h3><p>Nettoyage, contrôle des finitions et remise du dossier d'assurance. Garantie décennale et parfait achèvement sur tous nos chantiers.</p><span class="process-tag">10 ans · pièces Justifiées</span></article>
+        </div>
+      </div>
+    </section>
+
+    <section id="zones" class="section">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <div><p class="eyebrow">Zone d'intervention</p><h2>Le Morbihan<br><em>en entier.</em></h2></div>
+          <p>Survolez une commune pour connaître la distance depuis l'atelier, le délai d'intervention et les frais de déplacement appliqués.</p>
+        </div>
+        <div class="zone-layout reveal">
+          <div class="zone-chips" id="zone-chips" role="group" aria-label="Communes couvertes"></div>
+          <div class="zone-detail" aria-live="polite">
+            <p class="eyebrow">Commune sélectionnée</p>
+            <h3 id="zone-name">Lorient</h3>
+            <p id="zone-sub">Atelier et dépôt · zone d'intervention prioritaire</p>
+            <ul class="zone-list">
+              <li><span>Distance atelier</span><strong id="zone-dist">0 km</strong></li>
+              <li><span>Délai d'intervention</span><strong id="zone-delay">sous 24 h</strong></li>
+              <li><span>Frais de déplacement</span><strong id="zone-fees">Offerts</strong></li>
+              <li><span>Urgence 7j/7</span><strong id="zone-urgent">Incluse</strong></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="wrap footer-cols">
+      <dl><dt>BREIZH ÉTANCHÉITÉ &amp; RÉNOV</dt><dd>14 rue des Charpentiers<br>56100 Lorient<br>Morbihan, Bretagne</dd></dl>
+      <dl><dt>Contact</dt><dd><a href="tel:+33200000000">02 00 00 00 00</a><br><a href="mailto:contact@breizh-renov.example">contact@breizh-renov.example</a><br>Du lundi au samedi · 8 h – 19 h</dd></dl>
+      <dl><dt>Mentions</dt><dd>Concept de démonstration réalisé par <a href="https://studio.glsc.fr" target="_blank" rel="noopener noreferrer">StudioGLSC</a>. Entreprise, adresse, téléphone, chiffres et réalisations fictifs : cette page n'est pas un site d'artisan réel.</dd></dl>
+    </div>
+  </footer>
+
+  <div class="floating-bar">
+    <a class="btn btn-wa" href="tel:+33200000000">Appel d'urgence</a>
+    <a class="btn btn-outline" id="floating-wa" href="#" target="_blank" rel="noopener noreferrer" style="border-color:var(--wa);color:var(--wa)">WhatsApp chantier</a>
+  </div>
+
+  <script>
+    // Coordonnées 100% fictives : à remplacer par les informations réelles de l'entreprise avant toute publication.
+    const PHONE_DISPLAY = '02 00 00 00 00';
+    const PHONE_TEL = '+33200000000';
+    const WHATSAPP_PHONE = '33200000000';
+
+    // ---------- Menu mobile ----------
+    const menuButton = document.querySelector('#menu-toggle');
+    const menu = document.querySelector('#mobile-menu');
+    function closeMenu(restoreFocus = false) {
+      menu.classList.add('hidden');
+      menuButton.setAttribute('aria-expanded','false');
+      menuButton.setAttribute('aria-label','Ouvrir le menu');
+      if (restoreFocus) menuButton.focus();
+    }
+    menuButton.addEventListener('click', () => {
+      const open = menuButton.getAttribute('aria-expanded') !== 'true';
+      menu.classList.toggle('hidden', !open);
+      menuButton.setAttribute('aria-expanded', String(open));
+      menuButton.setAttribute('aria-label', open ? 'Fermer le menu' : 'Ouvrir le menu');
+    });
+    menu.querySelectorAll('a').forEach(link => link.addEventListener('click', () => closeMenu()));
+    document.addEventListener('keydown', event => { if (event.key === 'Escape' && menuButton.getAttribute('aria-expanded') === 'true') closeMenu(true); });
+    matchMedia('(min-width: 1024px)').addEventListener('change', event => { if (event.matches) closeMenu(); });
+
+    // ---------- Fuseau horaire de l'atelier ----------
+    function parisClock() {
+      const now = new Date();
+      const parts = Object.fromEntries(new Intl.DateTimeFormat('en-GB',{timeZone:'Europe/Paris',hour:'2-digit',minute:'2-digit',hourCycle:'h23'}).formatToParts(now).map(part => [part.type, part.value]));
+      const weekday = new Intl.DateTimeFormat('en-US',{timeZone:'Europe/Paris',weekday:'short'}).format(now);
+      const dayMap = {Sun:0,Mon:1,Tue:2,Wed:3,Thu:4,Fri:5,Sat:6};
+      return { hour: Number(parts.hour), minute: Number(parts.minute), day: dayMap[weekday] };
+    }
+    function refreshClock() {
+      const { hour, minute, day } = parisClock();
+      const clock = document.querySelector('#hero-clock');
+      clock.textContent = `${String(hour).padStart(2,'0')} h ${String(minute).padStart(2,'0')}`;
+      const isSunday = day === 0;
+      const atNight = hour < 7 || hour >= 20;
+      const note = document.querySelector('#hero-clock-note');
+      const status = document.querySelector('#hero-status');
+      const dot = document.querySelector('#hero-dot');
+      if (isSunday) {
+        status.textContent = 'Astreinte dépannage active · dimanche';
+        note.textContent = 'Le dimanche, seule l’astreinte dépannage reste active : fuite, coupure de courant ou toiture endommagée, un technicien est mobilisable.';
+      } else if (atNight) {
+        status.textContent = 'Astreinte dépannage active · cette nuit';
+        note.textContent = 'Il est ' + clock.textContent + '. L’astreinte dépannage reste active sur tout le Morbihan : appelez, un technicien part immédiatement.';
+      } else {
+        status.textContent = 'Astreinte dépannage active en Morbihan';
+        note.textContent = 'Il est ' + clock.textContent + '. Chantiers en cours sur le bassin de Lorient : appelez pour être rappelé sur place.';
+      }
+      dot.classList.toggle('on', true);
+    }
+    refreshClock();
+    setInterval(refreshClock, 20000);
+
+    // ---------- Comparateur Avant / Après ----------
+    const comparators = [...document.querySelectorAll('[data-ba]')];
+    function setSplit(value) {
+      comparators.forEach(item => item.style.setProperty('--pos', value + '%'));
+    }
+    comparators.forEach(item => {
+      const range = item.querySelector('.ba-range');
+      range.addEventListener('input', event => setSplit(event.target.value));
+    });
+    setSplit(52);
+
+    // ---------- Onglets de chantiers ----------
+    const tabs = [...document.querySelectorAll('.tab')];
+    function selectTab(index, focus = false) {
+      tabs.forEach((tab, i) => {
+        const selected = i === index;
+        tab.setAttribute('aria-selected', String(selected));
+        tab.tabIndex = selected ? 0 : -1;
+        document.getElementById(tab.getAttribute('aria-controls')).classList.toggle('hidden', !selected);
+        if (selected && focus) tab.focus();
+      });
+    }
+    tabs.forEach((tab, index) => {
+      tab.addEventListener('click', () => selectTab(index));
+      tab.addEventListener('keydown', event => {
+        if (!['ArrowRight','ArrowLeft','Home','End'].includes(event.key)) return;
+        event.preventDefault();
+        const next = event.key === 'Home' ? 0 : event.key === 'End' ? tabs.length - 1
+          : event.key === 'ArrowRight' ? (index + 1) % tabs.length : (index - 1 + tabs.length) % tabs.length;
+        selectTab(next, true);
+      });
+    });
+
+    // ---------- Simulateur de devis ----------
+    const PROJECTS = {
+      urgence: { label:'Dépannage urgent', base:290, rate:25, min:20, delay: () => ['Immédiat', 'sous 4 h'] },
+      renovation: { label:'Rénovation complète', base:950, rate:780, min:25, delay: s => { const a = Math.max(2, Math.round(s / 35)); return [a + ' semaines', (a + 1) + ' semaines']; } },
+      couverture: { label:'Couverture / toiture', base:1800, rate:190, min:40, delay: s => { const a = Math.max(2, Math.round(s / 45)); return [a + ' semaines', (a + 1) + ' semaines']; } }
+    };
+    const SURFACES = {
+      s1:{ short:'moins de 30 m²', mid:20 },
+      s2:{ short:'30 à 80 m²', mid:55 },
+      s3:{ short:'80 à 150 m²', mid:115 },
+      s4:{ short:'plus de 150 m²', mid:200 }
+    };
+    const ZONES = [
+      { name:'Lorient', dist:0 }, { name:'Lanester', dist:3 }, { name:'Caudan', dist:6 },
+      { name:'Guidel', dist:6 }, { name:'Quéven', dist:7 }, { name:'Lanvauban', dist:8 },
+      { name:'Ploemeur', dist:8 }, { name:'Saint-Avé', dist:9 }, { name:'Hennebont', dist:18 },
+      { name:'Pontivy', dist:45 }, { name:'Auray', dist:60 }, { name:'Vannes', dist:78 }
+    ];
+    const euros = value => new Intl.NumberFormat('fr-FR',{style:'currency',currency:'EUR',maximumFractionDigits:0}).format(value);
+    const round50 = value => Math.round(value / 50) * 50;
+    function zoneInfo(name) {
+      const zone = ZONES.find(item => item.name === name) || ZONES[0];
+      const delay = zone.dist === 0 ? 'sous 24 h' : zone.dist <= 20 ? '24 à 48 h' : zone.dist <= 50 ? '48 à 72 h' : '72 h ouvrées';
+      const fees = zone.dist === 0 ? 'Offerts' : zone.dist <= 20 ? '25 €' : zone.dist <= 50 ? '45 €' : '70 €';
+      return { zone, delay, fees };
+    }
+    function buildWaMessage(type, surface, city, low, high) {
+      const project = PROJECTS[type];
+      return `Bonjour, je souhaite un devis pour un projet « ${project.label} » — ${SURFACES[surface].short}, commune de ${city}. Estimation indicative affichée sur votre site : ${euros(low)} – ${euros(high)}. Pouvez-vous me rappeler ?`;
+    }
+
+    const simForm = document.querySelector('#sim-form');
+    const simAmount = document.querySelector('#sim-amount');
+    const simRecap = document.querySelector('#sim-recap');
+    const simDelay = document.querySelector('#sim-delay');
+    const simInterv = document.querySelector('#sim-interv');
+    const simFees = document.querySelector('#sim-fees');
+    const simWa = document.querySelector('#sim-wa');
+    const floatingWa = document.querySelector('#floating-wa');
+
+    function updateSimulator() {
+      const data = new FormData(simForm);
+      const type = data.get('type');
+      const surface = data.get('surface');
+      const city = data.get('zone');
+      const project = PROJECTS[type];
+      const zoneDetail = zoneInfo(city);
+      const area = Math.max(SURFACES[surface].mid, project.min);
+      let total = project.base + area * project.rate;
+      const { hour } = parisClock();
+      if (type === 'urgence' && (hour < 7 || hour >= 20)) total *= 1.15;
+      const coefficient = 1 + Math.min(zoneDetail.zone.dist, 80) * 0.0022;
+      const low = round50(total * 0.85 * coefficient);
+      const high = round50(total * 1.35 * coefficient);
+      const [delayFrom, delayTo] = project.delay(area);
+
+      simAmount.innerHTML = `${euros(low)} <span class="dash">–</span> ${euros(high)}`;
+      simRecap.textContent = `${project.label} · ${SURFACES[surface].short} · ${city}`;
+      simDelay.textContent = delayFrom === delayTo ? delayFrom : `${delayFrom} à ${delayTo}`;
+      simInterv.textContent = zoneDetail.delay;
+      simFees.textContent = zoneDetail.fees;
+
+      const message = buildWaMessage(type, surface, city, low, high);
+      [simWa, floatingWa].forEach(link => { link.href = `https://wa.me/${WHATSAPP_PHONE}?text=${encodeURIComponent(message)}`; });
+    }
+    simForm.addEventListener('change', updateSimulator);
+    updateSimulator();
+
+    // ---------- Zones d'intervention ----------
+    const zoneChips = document.querySelector('#zone-chips');
+    const zoneName = document.querySelector('#zone-name');
+    const zoneSub = document.querySelector('#zone-sub');
+    const zoneDist = document.querySelector('#zone-dist');
+    const zoneDelay = document.querySelector('#zone-delay');
+    const zoneFees = document.querySelector('#zone-fees');
+    const zoneUrgent = document.querySelector('#zone-urgent');
+    let activeZone = 'Lorient';
+
+    function renderZone(name) {
+      const { zone, delay, fees } = zoneInfo(name);
+      activeZone = zone.name;
+      zoneName.textContent = zone.name;
+      zoneSub.textContent = zone.dist === 0
+        ? 'Atelier et dépôt · zone d’intervention prioritaire'
+        : `Commune couverte · ${zone.dist} km depuis l’atelier de Lorient`;
+      zoneDist.textContent = `${zone.dist} km`;
+      zoneDelay.textContent = delay;
+      zoneFees.textContent = fees;
+      zoneUrgent.textContent = zone.dist <= 50 ? 'Incluse' : 'Sur devis';
+      zoneChips.querySelectorAll('.zone-chip').forEach(chip => chip.setAttribute('aria-pressed', String(chip.dataset.zone === activeZone)));
+    }
+    ZONES.forEach(zone => {
+      const chip = document.createElement('button');
+      chip.type = 'button';
+      chip.className = 'zone-chip';
+      chip.dataset.zone = zone.name;
+      chip.textContent = zone.name;
+      chip.setAttribute('aria-pressed', String(zone.name === activeZone));
+      chip.addEventListener('mouseenter', () => renderZone(zone.name));
+      chip.addEventListener('focus', () => renderZone(zone.name));
+      chip.addEventListener('click', () => renderZone(zone.name));
+      chip.addEventListener('blur', () => renderZone(activeZone));
+      zoneChips.append(chip);
+    });
+    renderZone('Lorient');
+
+    // ---------- Révélation au défilement ----------
+    const items = document.querySelectorAll('.reveal');
+    if ('IntersectionObserver' in window && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      const observer = new IntersectionObserver((entries, io) => entries.forEach(entry => {
+        if (entry.isIntersecting) { entry.target.classList.add('visible'); io.unobserve(entry.target); }
+      }), { threshold:.08, rootMargin:'0px 0px -24px 0px' });
+      items.forEach(item => observer.observe(item));
+    } else {
+      items.forEach(item => item.classList.add('visible'));
+    }
+  </script>
+</body>
+</html>
