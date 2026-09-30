@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="fr" data-theme="light">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f5f7fb">
+  <meta name="robots" content="noindex,follow">
+  <title>Page introuvable — StudioGLSC</title>
+  <style>
+    :root { color-scheme:light; --bg:#f5f7fb; --paper:#fff; --ink:#151d31; --muted:#647087; --line:rgba(21,29,49,.13); --blue:#315be8; }
+    @media(prefers-color-scheme:dark) { :root { color-scheme:dark; --bg:#111725; --paper:#1a2334; --ink:#f4f6fc; --muted:#a9b4ca; --line:rgba(235,241,255,.14); --blue:#92aaff; } }
+    * { box-sizing:border-box; }
+    body { min-height:100vh; margin:0; display:grid; place-items:center; padding:24px; background:radial-gradient(ellipse at 50% 18%,rgba(49,91,232,.13),transparent 48%),var(--bg); color:var(--ink); font:16px/1.6 system-ui,-apple-system,"Segoe UI",sans-serif; }
+    main { width:min(100%,680px); padding:clamp(30px,7vw,68px); background:var(--paper); border:1px solid var(--line); border-radius:28px; box-shadow:0 24px 80px rgba(37,66,151,.1); text-align:center; }
+    main { position:relative; overflow:hidden; animation:card-enter .8s cubic-bezier(.2,.75,.2,1) both; }
+    main:before { content:""; position:absolute; width:210px; height:210px; right:-95px; top:-100px; border:1px solid color-mix(in srgb,var(--blue) 25%,transparent); border-radius:50%; box-shadow:0 0 0 25px color-mix(in srgb,var(--blue) 5%,transparent),0 0 0 50px color-mix(in srgb,var(--blue) 4%,transparent); animation:ring 11s linear infinite; }
+    .brand { color:var(--ink); font-weight:850; letter-spacing:-.06em; text-decoration:none; }
+    .brand span { color:var(--blue); }
+    .code { position:relative; margin:45px 0 4px; color:var(--blue); font-size:clamp(5rem,20vw,9rem); font-weight:850; letter-spacing:-.1em; line-height:.9; animation:code-pop .85s .12s cubic-bezier(.2,1.7,.4,1) both; text-shadow:0 9px 34px color-mix(in srgb,var(--blue) 20%,transparent); }
+    h1 { margin:20px 0 10px; font-size:clamp(1.7rem,5vw,2.5rem); letter-spacing:-.05em; line-height:1.1; }
+    p { max-width:440px; margin:0 auto; color:var(--muted); }
+    .actions { display:flex; flex-wrap:wrap; justify-content:center; gap:12px; margin-top:28px; }
+    .button { display:inline-flex; min-height:48px; align-items:center; justify-content:center; padding:0 20px; border:1px solid var(--line); border-radius:999px; color:var(--ink); font-weight:750; text-decoration:none; }
+    .button.primary { border-color:transparent; background:var(--blue); color:var(--bg); }
+    .button:focus-visible { outline:3px solid #ff835c; outline-offset:4px; }
+    @keyframes card-enter { from { opacity:0; transform:translateY(26px) scale(.98); } to { opacity:1; transform:none; } }
+    @keyframes code-pop { from { opacity:0; transform:translateY(25px) scale(.5) rotate(-8deg); } to { opacity:1; transform:none; } }
+    @keyframes ring { to { transform:rotate(360deg); } }
+    @media(prefers-reduced-motion:reduce) { main,.code,main:before { animation:none; } }
+  </style>
+</head>
+<body>
+  <main>
+    <a class="brand" href="/">Studio<span>GLSC</span></a>
+    <p class="code" aria-hidden="true">404</p>
+    <h1>Cette page est introuvable.</h1>
+    <p>Le lien a peut-être changé. Vous pouvez revenir à l’accueil ou consulter les offres.</p>
+    <div class="actions">
+      <a class="button primary" href="/">Retour à l’accueil</a>
+      <a class="button" href="/#offres">Voir les offres</a>
+    </div>
+  </main>
+</body>
+</html>
