@@ -3,8 +3,9 @@
 User-agent: *
 Allow: /
 
-# club-demo.html est volontairement absent du sitemap : la page porte
-# <meta name="robots" content="noindex,follow">. Elle n'est pas non plus
-# bloquée ici, sinon les robots ne pourraient plus lire ce noindex.
+# club-demo.html et btp-demo.html sont volontairement absents du sitemap :
+# ces pages de démonstration portent <meta name="robots" content="noindex,follow">.
+# Elles ne sont pas non plus bloquées ici, sinon les robots ne pourraient
+# plus lire ce noindex.
 
 Sitemap: https://studio.glsc.fr/sitemap.xml
