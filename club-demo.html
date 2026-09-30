@@ -1,0 +1,416 @@
+<!doctype html>
+<html lang="fr" data-theme="dark">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#08080a">
+  <meta name="description" content="CLUB56 — club de nuit à Lorient. Programme de la semaine, tables VIP, infos pratiques et itinéraire.">
+  <link rel="canonical" href="https://studio.glsc.fr/club-demo.html">
+  <meta property="og:url" content="https://studio.glsc.fr/club-demo.html">
+  <meta name="robots" content="noindex,follow">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="fr_FR">
+  <meta property="og:title" content="CLUB56 — Lorient">
+  <meta property="og:description" content="Lorient après minuit. Le concept de landing page interactive par StudioGLSC.">
+  <title>CLUB56 — Lorient</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%2308080a'/%3E%3Ctext x='32' y='43' font-family='Helvetica,Arial,sans-serif' font-size='27' font-weight='700' letter-spacing='-1.5' fill='%23e8d5a4' text-anchor='middle'%3E56%3C/text%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    :root { color-scheme:dark; --bg:#08080a; --panel:#0d0d10; --panel-2:#121216; --text:#f7f7f8; --muted:#8b8b93; --gold:#c8a96a; --gold-light:#e8d5a4; --line:rgba(255,255,255,.10); --nav:rgba(8,8,10,.86); }
+    *,*::before,*::after { box-sizing:border-box; }
+    html { scroll-behavior:smooth; scroll-padding-top:110px; }
+    body { margin:0; background:var(--bg); color:var(--text); font-family:'DM Sans',sans-serif; overflow-x:hidden; -webkit-font-smoothing:antialiased; }
+    body:after { content:""; position:fixed; inset:0; z-index:80; pointer-events:none; opacity:.035; background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='150' height='150'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='150' height='150' filter='url(%23n)'/%3E%3C/svg%3E"); }
+    h1,h2,h3,.brand { font-family:Manrope,sans-serif; letter-spacing:-.055em; }
+    a { color:inherit; text-decoration:none; }
+    ::selection { background:var(--gold); color:#0b0b0d; }
+    :focus-visible { outline:2px solid var(--gold-light); outline-offset:4px; border-radius:5px; }
+    .wrap { width:min(1180px,calc(100% - 44px)); margin-inline:auto; }
+
+    .demo-bar { height:31px; background:#050506; border-bottom:1px solid var(--line); color:#8b8b93; font-size:.68rem; letter-spacing:.04em; }
+    .demo-bar a { color:var(--gold-light); text-decoration:underline; text-underline-offset:3px; }
+
+    .nav-glass { background:var(--nav); border-bottom:1px solid var(--line); backdrop-filter:blur(16px); -webkit-backdrop-filter:blur(16px); }
+    .navlink { color:var(--muted); transition:color .2s; }
+    .navlink:hover { color:var(--text); }
+
+    .eyebrow { color:var(--gold); font-size:.66rem; font-weight:800; letter-spacing:.2em; text-transform:uppercase; }
+    .gold { color:var(--gold-light); }
+    .rule { height:1px; background:var(--line); border:0; margin:0; }
+
+    .btn { display:inline-flex; align-items:center; justify-content:center; gap:.7rem; min-height:48px; padding:13px 20px; border-radius:999px; font-weight:800; transition:transform .2s,background .2s,box-shadow .2s,border-color .2s; }
+    .btn:hover { transform:translateY(-2px); }
+    .btn-primary { color:#0b0b0d; background:var(--gold-light); }
+    .btn-primary:hover { box-shadow:0 14px 38px rgba(232,213,164,.16); }
+    .btn-outline { border:1px solid var(--line); background:transparent; }
+    .btn-outline:hover { border-color:rgba(255,255,255,.28); background:rgba(255,255,255,.05); }
+    .btn-small { min-height:40px; padding:10px 15px; font-size:.84rem; }
+
+    .open-badge { display:inline-flex; align-items:center; gap:9px; padding:10px 14px; border:1px solid var(--line); border-radius:999px; font-size:.78rem; font-weight:700; }
+    .status-dot { width:8px; height:8px; border-radius:50%; background:var(--gold); }
+    .status-dot.open { background:#7ee0ae; box-shadow:0 0 12px rgba(126,224,174,.6); }
+
+    .hero { position:relative; overflow:hidden; display:flex; align-items:center; padding:150px 0 78px; }
+    .hero-wm { position:absolute; right:-3%; top:50%; transform:translateY(-52%); font:800 clamp(13rem,32vw,30rem) Manrope,sans-serif; line-height:.78; letter-spacing:-.06em; color:transparent; -webkit-text-stroke:1px rgba(232,213,164,.12); pointer-events:none; user-select:none; }
+    .hero-grid { position:relative; z-index:2; display:grid; grid-template-columns:1.15fr .85fr; gap:44px; align-items:end; }
+    .hero h1 { font-size:clamp(3.4rem,9.2vw,8.6rem); line-height:.87; font-weight:800; margin:22px 0 0; }
+    .hero h1 em { font-style:normal; color:var(--gold-light); }
+    .deck { max-width:520px; margin:26px 0 0; color:var(--muted); font-size:1.05rem; line-height:1.7; }
+    .hero-cta { display:flex; flex-wrap:wrap; gap:12px; margin-top:34px; }
+    .hero-strip { position:relative; z-index:2; display:grid; grid-template-columns:repeat(3,1fr); margin-top:54px; border-top:1px solid var(--line); }
+    .hero-strip div { padding:19px 0; }
+    .hero-strip div+div { padding-left:24px; border-left:1px solid var(--line); }
+    .hero-strip span { display:block; color:var(--muted); font-size:.64rem; font-weight:800; letter-spacing:.16em; text-transform:uppercase; }
+    .hero-strip strong { display:block; margin-top:7px; font:700 1rem Manrope,sans-serif; letter-spacing:-.03em; }
+
+    .section { padding:108px 0; }
+    .section-dark { background:var(--panel); }
+    .section-head { display:flex; justify-content:space-between; align-items:end; gap:36px; margin-bottom:46px; }
+    .section-head h2 { margin:14px 0 0; max-width:760px; font-size:clamp(2.4rem,4.8vw,4.6rem); line-height:1; font-weight:800; }
+    .section-head > p { max-width:390px; color:var(--muted); line-height:1.7; margin:0 0 4px; }
+
+    .sessions { border-top:1px solid var(--line); }
+    .session { display:grid; grid-template-columns:76px 1fr auto auto; gap:26px; align-items:center; padding:28px 6px; border-bottom:1px solid var(--line); transition:background .25s; }
+    .session:hover { background:rgba(255,255,255,.022); }
+    .session-date { display:grid; gap:3px; }
+    .session-date .wd,.session-date .mo { color:var(--muted); font-size:.63rem; font-weight:800; letter-spacing:.17em; text-transform:uppercase; }
+    .session-date .dd { font:800 2rem Manrope,sans-serif; letter-spacing:-.06em; line-height:1; color:var(--gold-light); }
+    .session h3 { font-size:clamp(1.45rem,2.9vw,2rem); line-height:1.05; margin:0; }
+    .session-note { margin:9px 0 0; color:var(--gold); font-size:.67rem; font-weight:800; letter-spacing:.16em; text-transform:uppercase; }
+    .session-genres { margin:0; max-width:210px; color:var(--muted); font-size:.85rem; line-height:1.5; text-align:right; }
+    .session-cta { display:inline-flex; align-items:center; gap:.55rem; min-height:40px; padding:10px 16px; border:1px solid var(--line); border-radius:999px; font-size:.82rem; font-weight:800; white-space:nowrap; transition:border-color .2s,background .2s,color .2s; }
+    .session-cta:hover { border-color:var(--gold); background:var(--gold-light); color:#0b0b0d; }
+    .sessions-note { margin:20px 0 0; color:var(--muted); font-size:.78rem; line-height:1.65; }
+
+    .vip-grid { display:grid; grid-template-columns:1.14fr .86fr; border:1px solid var(--line); }
+    .vip-feature { position:relative; overflow:hidden; padding:44px; border-right:1px solid var(--line); }
+    .vip-feature h3 { margin:22px 0 14px; font-size:clamp(2.2rem,4.4vw,3.6rem); line-height:1; font-weight:800; }
+    .vip-feature p { color:var(--muted); max-width:420px; line-height:1.7; margin:0; }
+    .vip-feature .btn { margin-top:30px; }
+    .vip-feature:after { content:"56"; position:absolute; right:4%; bottom:-14%; font:800 clamp(8rem,17vw,15rem) Manrope,sans-serif; line-height:1; color:rgba(232,213,164,.045); pointer-events:none; }
+    .vip-feature > * { position:relative; z-index:1; }
+    .vip-list { display:grid; grid-template-rows:1fr 1fr; }
+    .vip-item { padding:30px 32px; }
+    .vip-item+.vip-item { border-top:1px solid var(--line); }
+    .vip-item h3 { margin:14px 0 7px; font-size:1.2rem; }
+    .vip-item p { margin:0; color:var(--muted); line-height:1.65; font-size:.88rem; }
+    .price-mark { color:var(--gold); font:800 .68rem 'DM Sans',sans-serif; letter-spacing:.17em; text-transform:uppercase; }
+    .pack-row { display:grid; grid-template-columns:repeat(3,1fr); margin-top:22px; border:1px solid var(--line); }
+    .pack-row article { padding:26px 28px; }
+    .pack-row article+article { border-left:1px solid var(--line); }
+    .pack-row h3 { margin:14px 0 6px; font-size:1.1rem; }
+    .pack-row p { margin:0; color:var(--muted); font-size:.87rem; line-height:1.6; }
+
+    .notice-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:0 46px; border-top:1px solid var(--line); }
+    .notice { display:grid; grid-template-columns:auto 1fr; gap:20px; padding:30px 0; border-bottom:1px solid var(--line); }
+    .notice-num { font:800 .68rem Manrope,sans-serif; letter-spacing:.14em; color:var(--gold); padding-top:4px; }
+    .notice h3 { margin:0 0 8px; font-size:1.12rem; }
+    .notice p { margin:0; color:var(--muted); line-height:1.65; font-size:.9rem; }
+
+    .location-grid { display:grid; grid-template-columns:.88fr 1.12fr; gap:0; border:1px solid var(--line); }
+    .address-card { padding:40px; border-right:1px solid var(--line); }
+    .address-card h3 { font-size:1.5rem; margin:16px 0 14px; }
+    .address-card address { color:var(--muted); font-style:normal; line-height:1.75; }
+    .address-card .phone { display:inline-block; margin-top:20px; font-weight:800; border-bottom:1px solid var(--gold); padding-bottom:2px; }
+    .address-actions { display:flex; flex-wrap:wrap; gap:9px; margin-top:28px; }
+    .map-card { position:relative; min-height:100%; overflow:hidden; background:var(--panel-2); }
+    .map-grid { position:absolute; inset:-30px; opacity:.22; transform:rotate(-8deg) scale(1.15); background-image:linear-gradient(34deg,transparent 46%,rgba(255,255,255,.2) 47%,rgba(255,255,255,.2) 48%,transparent 49%),linear-gradient(145deg,transparent 42%,rgba(255,255,255,.14) 43%,rgba(255,255,255,.14) 44%,transparent 45%),linear-gradient(90deg,transparent 48%,rgba(255,255,255,.1) 49%,rgba(255,255,255,.1) 50%,transparent 51%); background-size:130px 110px,180px 145px,95px 105px; }
+    .map-label { position:absolute; color:rgba(255,255,255,.34); font-size:.6rem; font-weight:800; letter-spacing:.17em; text-transform:uppercase; }
+    .map-label.one { top:20%; left:14%; }
+    .map-label.two { top:62%; left:64%; }
+    .map-pin { position:absolute; top:46%; left:51%; width:50px; height:50px; display:grid; place-items:center; border-radius:50% 50% 50% 8px; transform:rotate(-45deg); color:#0b0b0d; background:var(--gold-light); box-shadow:0 0 0 10px rgba(232,213,164,.09); }
+    .map-pin svg { transform:rotate(45deg); width:20px; height:20px; }
+    .map-overlay { position:absolute; inset:auto 0 0; display:flex; flex-wrap:wrap; justify-content:space-between; align-items:center; gap:12px; padding:20px 24px; border-top:1px solid var(--line); background:var(--panel); }
+    .map-overlay small { display:block; color:var(--muted); margin-top:4px; font-size:.8rem; }
+    .map-actions { display:flex; gap:8px; }
+    .map-actions a { min-height:38px; display:inline-flex; align-items:center; padding:9px 14px; border-radius:999px; border:1px solid var(--line); font-size:.75rem; font-weight:800; }
+
+    .footer { padding:52px 0 116px; border-top:1px solid var(--line); color:var(--muted); font-size:.82rem; }
+    .footer-cols { display:grid; grid-template-columns:1fr 1fr 1.3fr; gap:34px; }
+    .footer-cols dt { color:var(--text); font-size:.66rem; font-weight:800; letter-spacing:.16em; text-transform:uppercase; margin-bottom:12px; }
+    .footer-cols dd { margin:0; line-height:1.75; }
+    .footer-cols a { color:var(--text); border-bottom:1px solid var(--line); }
+    .floating-book { display:none; }
+
+    .reveal { opacity:0; transform:translateY(18px); transition:opacity .7s ease,transform .7s cubic-bezier(.2,.7,.2,1); }
+    .reveal.visible { opacity:1; transform:translateY(0); }
+
+    @media(max-width:980px) {
+      .hero-grid { grid-template-columns:1fr; gap:0; }
+      .hero-wm { right:-8%; top:auto; bottom:8%; transform:none; }
+      .hero-strip { grid-template-columns:1fr; }
+      .hero-strip div+div { padding-left:0; border-left:0; border-top:1px solid var(--line); }
+      .session { grid-template-columns:66px 1fr; gap:16px 20px; }
+      .session-genres { grid-column:2; text-align:left; max-width:none; }
+      .session-cta { grid-column:2; justify-self:start; }
+      .notice-grid { grid-template-columns:1fr; }
+      .vip-grid,.location-grid { grid-template-columns:1fr; }
+      .vip-feature,.address-card { border-right:0; border-bottom:1px solid var(--line); }
+      .footer-cols { grid-template-columns:1fr 1fr; }
+      .pack-row { grid-template-columns:1fr; }
+      .pack-row article+article { border-left:0; border-top:1px solid var(--line); }
+      .map-card { min-height:340px; }
+    }
+    @media(max-width:700px) {
+      .wrap { width:min(100% - 34px,1180px); }
+      .demo-bar { font-size:.6rem; }
+      .hero { padding:132px 0 58px; }
+      .hero h1 { font-size:clamp(3.1rem,14vw,5.2rem); }
+      .hero-cta { margin-top:26px; }
+      .hero-strip { margin-top:38px; }
+      .section { padding:74px 0; }
+      .section-head { display:block; margin-bottom:32px; }
+      .section-head > p { margin-top:18px; }
+      .session { padding:24px 2px; }
+      .vip-feature,.address-card { padding:28px; }
+      .map-overlay { display:block; }
+      .map-actions { margin-top:12px; }
+      .footer-cols { grid-template-columns:1fr; gap:26px; }
+      .footer { padding-bottom:124px; }
+      .floating-book { position:fixed; z-index:60; left:12px; right:12px; bottom:max(12px,env(safe-area-inset-bottom)); display:flex; align-items:center; justify-content:center; gap:10px; min-height:54px; border-radius:999px; color:#0b0b0d; background:var(--gold-light); text-align:center; font-weight:800; }
+    }
+    @media(prefers-reduced-motion:reduce) { html { scroll-behavior:auto; } *,*::before,*::after { animation-duration:.01ms!important; animation-iteration-count:1!important; transition-duration:.01ms!important; } .reveal { opacity:1; transform:none; } body:after { display:none; } }
+  </style>
+</head>
+<body>
+  <div class="demo-bar fixed inset-x-0 top-0 z-[70] flex items-center justify-center px-3 text-center">
+    <span>Démonstration interactive réalisée par <strong class="text-white">StudioGLSC</strong> · <a href="https://studio.glsc.fr" target="_blank" rel="noopener noreferrer">Retour à la vitrine</a></span>
+  </div>
+  <header class="nav-glass fixed inset-x-0 top-[31px] z-50">
+    <nav class="wrap h-[74px] flex items-center justify-between gap-4" aria-label="Navigation principale">
+      <a href="#accueil" class="brand flex items-center gap-3 shrink-0" aria-label="Club56, accueil">
+        <span class="grid place-items-center h-9 w-9 rounded-full border border-[color:var(--gold)] text-[color:var(--gold-light)] text-[.82rem] font-extrabold" aria-hidden="true">56</span>
+        <span class="leading-[1.05]"><strong class="block text-[1.02rem] tracking-[.14em]">CLUB56</strong><small class="block text-[.56rem] tracking-[.32em] text-[color:var(--muted)]">CLUB · LORIENT</small></span>
+      </a>
+      <div class="hidden lg:flex items-center gap-7 text-[.83rem] font-bold" id="desktop-nav">
+        <a class="navlink" href="#agenda">Programme</a><a class="navlink" href="#vip">Tables &amp; VIP</a><a class="navlink" href="#infos">Infos pratiques</a><a class="navlink" href="#acces">Accès</a>
+      </div>
+      <div class="flex items-center gap-2">
+        <span class="hidden sm:inline-flex open-badge"><i class="status-dot" id="status-dot"></i><span id="open-status">Jeu. — Sam. · 00h30–06h30</span></span>
+        <a class="btn btn-primary btn-small hidden sm:inline-flex" href="#vip">Réserver <span aria-hidden="true">↗</span></a>
+        <button id="menu-toggle" type="button" class="lg:hidden grid place-items-center h-10 w-10 rounded-full border border-white/10" aria-label="Ouvrir le menu" aria-controls="mobile-menu" aria-expanded="false"><span aria-hidden="true">☰</span></button>
+      </div>
+    </nav>
+    <div id="mobile-menu" class="hidden lg:hidden border-t border-white/10 bg-[color:var(--bg)] px-5 pb-5 pt-2">
+      <div class="wrap flex flex-col font-bold"><a class="py-3 border-b border-white/10" href="#agenda">Programme</a><a class="py-3 border-b border-white/10" href="#vip">Tables &amp; VIP</a><a class="py-3 border-b border-white/10" href="#infos">Infos pratiques</a><a class="py-3" href="#acces">Accès</a></div>
+    </div>
+  </header>
+
+  <main id="contenu">
+    <section id="accueil" class="hero">
+      <span class="hero-wm" aria-hidden="true">56</span>
+      <div class="wrap">
+        <div class="hero-grid">
+          <div class="reveal">
+            <span class="eyebrow">Lorient · Jeu. → Sam.</span>
+            <h1>Lorient<br>après minuit<em>.</em></h1>
+          </div>
+          <div class="reveal">
+            <span class="open-badge"><i class="status-dot" id="hero-status-dot"></i><span id="hero-status">Prochaine nuit · du jeudi au samedi</span></span>
+            <p class="deck">Trois nuits par semaine, une seule piste, et pas un seul regard sur l&rsquo;horloge. La réservation se fait en trente secondes.</p>
+            <div class="hero-cta"><a class="btn btn-primary" data-wa data-message="Bonjour, je souhaite réserver une table au Club56." href="#vip">Réserver une table <span aria-hidden="true">↗</span></a><a class="btn btn-outline" href="#agenda">Voir le programme <span aria-hidden="true">↓</span></a></div>
+          </div>
+        </div>
+        <div class="hero-strip reveal">
+          <div><span>Ouverture</span><strong>Jeudi → Samedi</strong></div>
+          <div><span>Portes</span><strong>00h30 — 06h30</strong></div>
+          <div><span>Accès</span><strong>Strictement +18</strong></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="agenda" class="section section-dark">
+      <div class="wrap">
+        <div class="section-head reveal"><div><p class="eyebrow">Programme de la semaine</p><h2>Trois nuits.<br>Une seule ambiance.</h2></div><p>Jeudi étudiant, vendredi clubbing, samedi all night long. Les dates se mettent à jour automatiquement chaque lundi.</p></div>
+
+        <div class="sessions">
+          <article class="session reveal" data-event-day="4" data-event-title="Jeudi Étudiant">
+            <div class="session-date"><span class="wd" data-date-weekday>jour</span><strong class="dd" data-date-number>—</strong><span class="mo" data-date-month>date</span></div>
+            <div><h3>Jeudi Étudiant</h3><p class="session-note" data-event-note>Campus session</p></div>
+            <p class="session-genres" data-event-genres>Hip-hop · R&amp;B · club edits</p>
+            <a class="session-cta" data-wa data-event-wa href="#vip">Réserver <span aria-hidden="true">↗</span></a>
+          </article>
+          <article class="session reveal" data-event-day="5" data-event-title="Vendredi Clubbing">
+            <div class="session-date"><span class="wd" data-date-weekday>jour</span><strong class="dd" data-date-number>—</strong><span class="mo" data-date-month>date</span></div>
+            <div><h3>Vendredi Clubbing</h3><p class="session-note" data-event-note>Guest night</p></div>
+            <p class="session-genres" data-event-genres>DJ guest · house · club hits</p>
+            <a class="session-cta" data-wa data-event-wa href="#vip">Réserver <span aria-hidden="true">↗</span></a>
+          </article>
+          <article class="session reveal" data-event-day="6" data-event-title="Samedi All Night Long">
+            <div class="session-date"><span class="wd" data-date-weekday>jour</span><strong class="dd" data-date-number>—</strong><span class="mo" data-date-month>date</span></div>
+            <div><h3>Samedi All Night Long</h3><p class="session-note" data-event-note>All night long</p></div>
+            <p class="session-genres" data-event-genres>Club sounds · hits · dancefloor</p>
+            <a class="session-cta" data-wa data-event-wa href="#vip">Réserver <span aria-hidden="true">↗</span></a>
+          </article>
+        </div>
+        <p class="sessions-note">Le line-up de chaque soirée est annoncé sur les réseaux la veille. Le programme se remet à jour chaque lundi.</p>
+      </div>
+    </section>
+
+    <section id="vip" class="section">
+      <div class="wrap">
+        <div class="section-head reveal"><div><p class="eyebrow">Tables &amp; espace VIP</p><h2>Votre soirée,<br>à votre place.</h2></div><p>Un carré pour le groupe, une mezzanine pour voir la piste de haut, ou une bouteille à partager. Dites-nous combien vous êtes, on s&rsquo;occupe du reste.</p></div>
+        <div class="vip-grid reveal">
+          <div class="vip-feature">
+            <span class="eyebrow">Expérience privilégiée</span>
+            <h3>Le carré.<br>Votre soirée.</h3>
+            <p>Installez votre groupe, choisissez votre pack bouteilles et franchissez la file d&rsquo;attente : on vous ouvre un accès direct.</p>
+            <a class="btn btn-primary" data-wa data-message="Bonjour, je souhaite connaître les disponibilités et les packs pour un carré VIP au Club56." href="#acces">Demander un carré VIP <span aria-hidden="true">↗</span></a>
+          </div>
+          <div class="vip-list">
+            <article class="vip-item"><span class="price-mark">01 / Carré VIP</span><h3>Un espace à vous</h3><p>De 6 à 12 personnes, entrée prioritaire et bottle service dédié pendant toute la nuit.</p></article>
+            <article class="vip-item"><span class="price-mark">02 / Mezzanine</span><h3>La piste vue d&rsquo;en haut</h3><p>Vue plongeante sur le dancefloor, table côté rail, service au comptoir de l&rsquo;étage.</p></article>
+          </div>
+        </div>
+        <div class="pack-row">
+          <article class="reveal"><span class="price-mark">Pack découverte</span><h3>Une bouteille</h3><p>Sélection classique, idéal pour un carré qui se lance.</p></article>
+          <article class="reveal"><span class="price-mark">Pack groupe</span><h3>Plusieurs bouteilles</h3><p>Composition selon l&rsquo;effectif et la soirée.</p></article>
+          <article class="reveal"><span class="price-mark">Sur demande</span><h3>Une occasion spéciale</h3><p>Anniversaire, demande en mariage, soirée privée&nbsp;: on construit la formule.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section id="infos" class="section section-dark">
+      <div class="wrap">
+        <div class="section-head reveal"><div><p class="eyebrow">Avant de pousser la porte</p><h2>Les infos<br>utiles.</h2></div><p>Entrée, vestiaire, tenue, contrôle&nbsp;: tout ce qu&rsquo;il faut savoir avant de venir, sans mauvaise surprise à 3h du matin.</p></div>
+        <div class="notice-grid">
+          <article class="notice reveal"><span class="notice-num">01</span><div><h3>Entrée</h3><p>Tarif avec consommation affiché à la caisse, variable selon la soirée. Comptez 20&nbsp;€ le jeudi, 25&nbsp;€ le vendredi et le samedi.</p></div></article>
+          <article class="notice reveal"><span class="notice-num">02</span><div><h3>Vestiaire</h3><p>Service disponible dès l&rsquo;ouverture. 3&nbsp;€ par veste, obligatoire avant 2h.</p></div></article>
+          <article class="notice reveal"><span class="notice-num">03</span><div><h3>Tenue</h3><p>Tenue sobre et soignée. Baskets de sport et tongues refusées à l&rsquo;entrée, la piste ne pardonne pas.</p></div></article>
+          <article class="notice reveal"><span class="notice-num">04</span><div><h3>Contrôle</h3><p>Strictement +18. Carte d&rsquo;identité physique obligatoire, y compris carte d&rsquo;identité électronique. Photocopies et photos refusées.</p></div></article>
+        </div>
+      </div>
+    </section>
+
+    <section id="acces" class="section">
+      <div class="wrap">
+        <div class="section-head reveal"><div><p class="eyebrow">Nous trouver</p><h2>Deux pas du<br>centre.</h2></div><p>Club56 est au cœur de Lorient, à cinq minutes à pied de la gare. Ouvrez l&rsquo;itinéraire, on vous attend.</p></div>
+        <div class="location-grid reveal">
+          <div class="address-card">
+            <span class="eyebrow">Club56 · Lorient</span>
+            <h3>Quai de l&rsquo;Exemple</h3>
+            <address>Quai de l&rsquo;Exemple<br>56100 Lorient<br>France</address>
+            <a class="phone" href="tel:+33000000000">00 00 00 00 00 ↗</a>
+            <div class="address-actions">
+              <a class="btn btn-outline btn-small" href="https://waze.com/ul?q=Quai%20de%20l%27Exemple%2C%2056100%20Lorient&amp;navigate=yes" target="_blank" rel="noopener noreferrer">Waze <span aria-hidden="true">↗</span></a>
+              <a class="btn btn-outline btn-small" href="https://www.google.com/maps/search/?api=1&amp;query=Quai+de+l%27Exemple%2C+56100+Lorient" target="_blank" rel="noopener noreferrer">Google Maps <span aria-hidden="true">↗</span></a>
+            </div>
+          </div>
+          <div class="map-card">
+            <div class="map-grid" aria-hidden="true"></div>
+            <span class="map-label one" aria-hidden="true">Centre-ville</span>
+            <span class="map-label two" aria-hidden="true">Le port</span>
+            <div class="map-pin" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg></div>
+            <div class="map-overlay">
+              <div><strong>Quai de l&rsquo;Exemple</strong><small>56100 Lorient · Morbihan</small></div>
+              <div class="map-actions"><a href="https://waze.com/ul?q=Quai%20de%20l%27Exemple%2C%2056100%20Lorient&amp;navigate=yes" target="_blank" rel="noopener noreferrer">Waze ↗</a><a href="https://www.google.com/maps/search/?api=1&amp;query=Quai+de+l%27Exemple%2C+56100+Lorient" target="_blank" rel="noopener noreferrer">Maps ↗</a></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="wrap footer-cols">
+      <dl><dt>Club56</dt><dd>Quai de l&rsquo;Exemple<br>56100 Lorient</dd></dl>
+      <dl><dt>Contact</dt><dd><a href="tel:+33000000000">00 00 00 00 00</a><br><a href="mailto:bonjour@club56.example">bonjour@club56.example</a></dd></dl>
+      <dl><dt>Mentions</dt><dd>Concept de démonstration réalisé par <a href="https://studio.glsc.fr" target="_blank" rel="noopener noreferrer">StudioGLSC</a>. Adresse, téléphone et programme fictifs.</dd></dl>
+    </div>
+  </footer>
+  <a class="floating-book" data-wa data-message="Bonjour, je souhaite réserver un carré ou une table au Club56." href="#vip" aria-label="Réserver un carré ou une table sur WhatsApp">Réserver un carré / une table <span aria-hidden="true">↗</span></a>
+
+  <script>
+    // Numéro et adresse 100% fictifs : à remplacer par les informations réelles du club avant toute publication.
+    const WHATSAPP_PHONE = '33000000000';
+    const menuButton = document.querySelector('#menu-toggle');
+    const menu = document.querySelector('#mobile-menu');
+    function closeMenu(restoreFocus = false) {
+      menu.classList.add('hidden'); menuButton.setAttribute('aria-expanded','false'); menuButton.setAttribute('aria-label','Ouvrir le menu');
+      if (restoreFocus) menuButton.focus();
+    }
+    menuButton.addEventListener('click', () => {
+      const open = menuButton.getAttribute('aria-expanded') !== 'true';
+      menu.classList.toggle('hidden', !open); menuButton.setAttribute('aria-expanded', String(open)); menuButton.setAttribute('aria-label', open ? 'Fermer le menu' : 'Ouvrir le menu');
+    });
+    menu.querySelectorAll('a').forEach(link => link.addEventListener('click', () => closeMenu()));
+    document.addEventListener('keydown', event => { if (event.key === 'Escape' && menuButton.getAttribute('aria-expanded') === 'true') closeMenu(true); });
+    matchMedia('(min-width: 1024px)').addEventListener('change', event => { if (event.matches) closeMenu(); });
+
+    const encode = value => encodeURIComponent(value);
+    function waUrl(message) { return `https://wa.me/${WHATSAPP_PHONE}?text=${encode(message)}`; }
+    function venueClock() {
+      const now = new Date();
+      const parts = Object.fromEntries(new Intl.DateTimeFormat('en-GB',{timeZone:'Europe/Paris',year:'numeric',month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit',hourCycle:'h23'}).formatToParts(now).map(part => [part.type,part.value]));
+      const weekday = new Intl.DateTimeFormat('en-US',{timeZone:'Europe/Paris',weekday:'short'}).format(now);
+      const dayMap = {Sun:0,Mon:1,Tue:2,Wed:3,Thu:4,Fri:5,Sat:6};
+      return {year:Number(parts.year),month:Number(parts.month),date:Number(parts.day),hour:Number(parts.hour),minute:Number(parts.minute),day:dayMap[weekday]};
+    }
+    document.querySelectorAll('[data-wa]').forEach(link => {
+      const card = link.closest('[data-event-title]');
+      const title = card?.dataset.eventTitle;
+      const date = card?.querySelector('[data-date-long]')?.textContent;
+      const message = link.dataset.message || `Bonjour, je souhaite réserver une table${title ? ` pour ${title}${date ? ` (${date})` : ''}` : ''} au Club56.`;
+      link.href = waUrl(message);
+      link.target = '_blank';
+      link.rel = 'noopener noreferrer';
+    });
+    document.querySelectorAll('[data-event-day]').forEach(card => {
+      const today = venueClock();
+      const targetDay = Number(card.dataset.eventDay);
+      let offset = (targetDay - today.day + 7) % 7;
+      if (offset === 0 && today.hour >= 7) offset = 7;
+      const eventDate = new Date(Date.UTC(today.year,today.month-1,today.date+offset,12));
+      const label = new Intl.DateTimeFormat('fr-FR',{timeZone:'Europe/Paris',weekday:'long',day:'numeric',month:'long'}).format(eventDate);
+      const short = new Intl.DateTimeFormat('fr-FR',{timeZone:'Europe/Paris',weekday:'short'}).format(eventDate).replace('.','');
+      card.querySelector('[data-date-weekday]').textContent = short;
+      card.querySelector('[data-date-number]').textContent = new Intl.DateTimeFormat('fr-FR',{timeZone:'Europe/Paris',day:'2-digit'}).format(eventDate);
+      card.querySelector('[data-date-month]').textContent = new Intl.DateTimeFormat('fr-FR',{timeZone:'Europe/Paris',month:'short'}).format(eventDate).replace('.','');
+      const eventLink = card.querySelector('[data-event-wa]');
+      eventLink.href = waUrl(`Bonjour, je souhaite réserver une table pour ${card.dataset.eventTitle} le ${label} au Club56.`);
+      eventLink.target = '_blank'; eventLink.rel = 'noopener noreferrer';
+      const longLabel = document.createElement('span'); longLabel.dataset.dateLong = ''; longLabel.className = 'sr-only'; longLabel.textContent = label;
+      card.append(longLabel);
+    });
+
+    function refreshOpenStatus() {
+      const now = venueClock();
+      const day = now.day;
+      const hour = now.hour + now.minute/60;
+      const openNow = [4,5,6].includes(day) && hour >= .5 && hour < 6.5;
+      const dot = document.querySelector('#status-dot');
+      const heroDot = document.querySelector('#hero-status-dot');
+      const label = document.querySelector('#open-status');
+      const heroLabel = document.querySelector('#hero-status');
+      if (openNow) {
+        dot.classList.add('open'); heroDot.classList.add('open');
+        label.textContent = 'Ouvert maintenant · ferme à 06h30'; heroLabel.textContent = 'Le club est ouvert · fermera à 06h30';
+        return;
+      }
+      dot.classList.remove('open'); heroDot.classList.remove('open');
+      const openDays = [4,5,6];
+      let nextDelta = 7;
+      for (const openDay of openDays) {
+        let delta = (openDay - day + 7) % 7;
+        if (delta === 0 && hour >= 6.5) delta = 7;
+        if (delta < nextDelta) nextDelta = delta;
+      }
+      const next = new Date(Date.UTC(now.year,now.month-1,now.date+nextDelta,12));
+      const weekday = new Intl.DateTimeFormat('fr-FR',{timeZone:'Europe/Paris',weekday:'long'}).format(next);
+      label.textContent = 'Jeu. — Sam. · 00h30–06h30';
+      heroLabel.textContent = `Prochaine ouverture · ${weekday} à 00h30`;
+    }
+    refreshOpenStatus();
+    setInterval(refreshOpenStatus,60000);
+
+    const items = document.querySelectorAll('.reveal');
+    if ('IntersectionObserver' in window && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      const observer = new IntersectionObserver((entries,io) => entries.forEach(entry => { if (entry.isIntersecting) { entry.target.classList.add('visible'); io.unobserve(entry.target); } }),{threshold:.08,rootMargin:'0px 0px -25px 0px'});
+      items.forEach(item => observer.observe(item));
+    } else items.forEach(item => item.classList.add('visible'));
+  </script>
+</body>
+</html>

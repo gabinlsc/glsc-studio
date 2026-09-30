@@ -1,0 +1,316 @@
+<!doctype html>
+<html lang="fr" data-theme="light">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f5f7fb">
+  <meta name="description" content="StudioGLSC crée des sites vitrines rapides et adaptés au mobile pour artisans, commerçants et indépendants en Bretagne. One-page Express livrée en 48 h, à partir de 400 €.">
+  <link rel="canonical" href="https://studio.glsc.fr/">
+  <meta property="og:url" content="https://studio.glsc.fr/">
+  <meta name="robots" content="index,follow">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="fr_FR">
+  <meta property="og:title" content="StudioGLSC — Votre vitrine web en 48 h">
+  <meta property="og:description" content="Un site rapide, pensé pour le smartphone et sans abonnement obligatoire. One-Page Express à 400 €.">
+  <title>StudioGLSC — Votre vitrine web livrée en 48 h</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script>
+    try { document.documentElement.dataset.theme = localStorage.getItem('studioglsc-theme') || 'light'; } catch { document.documentElement.dataset.theme = 'light'; }
+  </script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    :root { color-scheme:light; --bg:#f5f7fb; --paper:#fff; --soft:#e9eef7; --ink:#151d31; --muted:#647087; --line:rgba(21,29,49,.13); --green:#315be8; --green-strong:#2446c8; --green-soft:#e1e8ff; --sun:#ff835c; --nav:rgba(245,247,251,.88); --shadow:0 22px 70px rgba(37,66,151,.12); --btn-h:54px; --btn-px:23px; --btn-gap:.7rem; }
+    :root[data-theme="dark"] { color-scheme:dark; --bg:#111725; --paper:#1a2334; --soft:#202b40; --ink:#f4f6fc; --muted:#a9b4ca; --line:rgba(235,241,255,.14); --green:#92aaff; --green-strong:#b6c5ff; --green-soft:#283653; --sun:#ff9c78; --nav:rgba(17,23,37,.88); --shadow:0 22px 70px rgba(0,0,0,.28); }
+    *,*::before,*::after { box-sizing:border-box; }
+    html { scroll-behavior:smooth; scroll-padding-top:126px; }
+    body { margin:0; background:var(--bg); color:var(--ink); font-family:'DM Sans',sans-serif; transition:background .3s,color .3s; }
+    h1,h2,h3,.wordmark { font-family:Manrope,sans-serif; letter-spacing:-.055em; }
+    a { color:inherit; }
+    ::selection { background:var(--green); color:#fff; }
+    :focus-visible { outline:3px solid var(--sun); outline-offset:4px; border-radius:4px; }
+    .wrap { width:min(1160px, calc(100% - 48px)); margin-inline:auto; }
+    .muted { color:var(--muted); }
+    .eyebrow { color:var(--green); font-size:.72rem; line-height:1.2; letter-spacing:.17em; font-weight:800; text-transform:uppercase; }
+    .header { background:var(--nav); border-bottom:1px solid var(--line); backdrop-filter:blur(18px); -webkit-backdrop-filter:blur(18px); }
+    .logo-mark { background:var(--green); color:var(--bg); }
+    .nav-link { color:var(--muted); transition:color .2s; }
+    .nav-link:hover { color:var(--green); }
+    .button-main,.button-soft,.whatsapp-button { display:inline-flex; align-items:center; justify-content:center; gap:var(--btn-gap); min-height:var(--btn-h); padding:0 var(--btn-px); border-radius:999px; font-size:1rem; font-weight:700; line-height:1.25; text-align:center; }
+    .button-main { border:1px solid transparent; background:var(--green); color:var(--bg); transition:transform .22s,background .22s,box-shadow .22s; box-shadow:0 10px 26px rgba(49,91,232,.18); }
+    .button-main:hover { transform:translateY(-2px); background:var(--green-strong); box-shadow:0 14px 34px rgba(49,91,232,.24); }
+    .button-soft { border:1px solid var(--line); background:transparent; transition:background .2s,border-color .2s,transform .2s; }
+    .button-soft:hover { background:var(--paper); border-color:var(--green); transform:translateY(-2px); }
+    .btn-compact { min-height:42px; padding:0 16px; font-size:.875rem; }
+    .button-soft.icon-button { min-height:40px; width:40px; padding:0; }
+    .cta-row { display:flex; flex-wrap:wrap; gap:.75rem; margin-top:23px; }
+    .hero .cta-row { margin-top:32px; }
+    .hero { position:relative; isolation:isolate; overflow:hidden; padding:158px 0 92px; }
+    .hero:before { position:absolute; content:""; z-index:-2; inset:0; background:radial-gradient(ellipse 38% 52% at 84% 29%,var(--green-soft),transparent 76%),radial-gradient(ellipse 26% 30% at 3% 86%,rgba(214,163,74,.11),transparent 75%); }
+    .hero-grid { display:grid; grid-template-columns:1.12fr .88fr; align-items:center; gap:46px; }
+    .hero h1 { max-width:760px; font-size:clamp(3.25rem,7.5vw,7rem); line-height:.99; font-weight:800; }
+    .hero h1 em { color:var(--green); font-style:normal; }
+    .art-panel { position:relative; min-height:430px; display:grid; place-items:center; }
+    .art-ring { position:absolute; width:min(390px,85%); aspect-ratio:1; border:1px solid var(--line); border-radius:50%; }
+    .art-ring:before,.art-ring:after { content:""; position:absolute; inset:8%; border:1px solid var(--line); border-radius:50%; }
+    .art-ring:after { inset:18%; }
+    .art-leaf { position:absolute; width:61%; height:61%; top:19%; left:20%; border-radius:38% 62% 55% 45%; transform:rotate(-28deg); background:radial-gradient(circle at 32% 25%,#b9c8ff 0%,#6584ff 22%,#315be8 58%,#253f9e 100%); box-shadow:0 30px 90px rgba(49,91,232,.27); opacity:.96; }
+    :root[data-theme="dark"] .art-leaf { background:radial-gradient(circle at 32% 25%,#d1d9ff 0%,#8ca5ff 22%,#5577f1 58%,#2e4389 100%); }
+    .art-leaf:after { content:"48"; position:absolute; inset:0; display:grid; place-items:center; color:#fff; font:800 clamp(4rem,8vw,7rem) Manrope,sans-serif; letter-spacing:-.1em; transform:rotate(28deg); text-shadow:0 5px 30px rgba(14,29,89,.25); }
+    .local-note { position:absolute; z-index:2; right:0; bottom:29px; max-width:245px; background:var(--paper); border:1px solid var(--line); border-radius:20px; padding:18px 20px; box-shadow:var(--shadow); }
+    .local-note p { margin:4px 0 0; }
+    .hero-bottom { margin-top:70px; padding-top:19px; border-top:1px solid var(--line); display:flex; justify-content:space-between; gap:15px; font-size:.75rem; letter-spacing:.12em; text-transform:uppercase; font-weight:700; color:var(--muted); }
+    .section { padding:112px 0; }
+    .section-head { display:flex; justify-content:space-between; align-items:end; gap:40px; margin-bottom:45px; }
+    .section-head h2 { font-size:clamp(2.5rem,5vw,4.6rem); line-height:1.04; font-weight:800; max-width:780px; margin:17px 0 0; }
+    .section-head > p { max-width:350px; line-height:1.7; margin:0 0 4px; }
+    .service-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:14px; }
+    .service { min-height:275px; padding:26px; background:var(--paper); border:1px solid var(--line); border-radius:23px; transition:transform .24s,border-color .24s,box-shadow .24s; }
+    .service:hover { transform:translateY(-5px); border-color:color-mix(in srgb,var(--green) 40%,transparent); box-shadow:var(--shadow); }
+    .service-icon { display:grid; place-items:center; width:46px; height:46px; border-radius:15px; background:var(--green-soft); color:var(--green); font-size:1.3rem; font-weight:700; }
+    .service h3 { font-size:1.26rem; margin:32px 0 10px; letter-spacing:-.04em; }
+    .service p { color:var(--muted); line-height:1.65; font-size:.94rem; margin:0; }
+    .band { background:var(--soft); }
+    .price-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; align-items:stretch; }
+    .price-card { position:relative; padding:30px; border:1px solid var(--line); border-radius:24px; background:var(--paper); display:flex; flex-direction:column; min-height:430px; }
+    .price-card.featured { border:1.5px solid var(--green); box-shadow:var(--shadow); transform:translateY(-7px); }
+    .price-card.featured .eyebrow { display:inline-flex; align-self:flex-start; background:var(--green-soft); border-radius:999px; padding:8px 11px; letter-spacing:.11em; }
+    .price-card h3 { font-size:1.45rem; margin:14px 0 6px; }
+    .price { font:800 2.7rem Manrope,sans-serif; letter-spacing:-.07em; margin:13px 0 2px; }
+    .price small { font:600 .86rem 'DM Sans',sans-serif; letter-spacing:0; color:var(--muted); }
+    .price-desc { min-height:48px; color:var(--muted); line-height:1.55; font-size:.9rem; }
+    .check-list { list-style:none; padding:0; margin:20px 0 24px; display:grid; gap:12px; color:var(--muted); font-size:.9rem; }
+    .check-list li:before { content:"✓"; color:var(--green); font-weight:800; margin-right:10px; }
+    .price-card .button-soft,.price-card .button-main { margin-top:auto; width:100%; }
+    .price-note { color:var(--muted); font-size:.83rem; line-height:1.65; margin:24px 0 0; }
+    .project-intro { display:flex; gap:20px; align-items:flex-start; padding:24px; border:1px solid var(--line); border-radius:20px; background:var(--paper); margin-bottom:18px; }
+    .project-intro .dot { flex:none; width:11px; height:11px; border-radius:99px; margin-top:7px; background:var(--sun); box-shadow:0 0 0 6px color-mix(in srgb,var(--sun) 18%,transparent); }
+    .project-intro p { margin:0; line-height:1.65; color:var(--muted); }
+    .project-grid { display:grid; grid-template-columns:1.1fr .9fr .9fr; gap:14px; }
+    .project { min-height:260px; padding:24px; display:flex; flex-direction:column; justify-content:space-between; background:var(--paper); border:1px solid var(--line); border-radius:23px; text-decoration:none; transition:transform .2s,border-color .2s,box-shadow .2s; }
+    .project:hover { transform:translateY(-4px); border-color:var(--green); }
+    .project .project-top { display:flex; align-items:center; justify-content:space-between; color:var(--muted); font-size:.75rem; text-transform:uppercase; letter-spacing:.11em; font-weight:800; }
+    .project-symbol { width:58px; height:58px; border-radius:19px; display:grid; place-items:center; background:var(--green-soft); color:var(--green); font:800 1.6rem Manrope,sans-serif; }
+    .project h3 { margin:24px 0 5px; font-size:1.5rem; }
+    .project p { margin:0; color:var(--muted); line-height:1.55; font-size:.9rem; }
+    .project-reserved { border-style:dashed; background:transparent; }
+    .project-reserved .project-symbol { background:var(--soft); color:var(--muted); }
+    .steps { border-top:1px solid var(--line); }
+    .step { display:grid; grid-template-columns:90px 1fr 1fr; align-items:start; gap:22px; padding:29px 0; border-bottom:1px solid var(--line); }
+    .step-num { font:800 2.1rem Manrope,sans-serif; color:var(--green); letter-spacing:-.07em; }
+    .step h3 { margin:2px 0 0; font-size:1.3rem; }
+    .step p { margin:0; color:var(--muted); line-height:1.65; }
+    .contact { padding:78px; background:var(--green); color:#fff; border-radius:30px; position:relative; overflow:hidden; }
+    :root[data-theme="dark"] .contact { background:#2446c8; }
+    .contact:after { content:""; position:absolute; width:420px; height:420px; border:1px solid rgba(255,255,255,.16); border-radius:50%; right:-90px; top:-190px; box-shadow:0 0 0 45px rgba(255,255,255,.035),0 0 0 90px rgba(255,255,255,.025); }
+    .contact > * { position:relative; z-index:1; }
+    .contact .eyebrow { color:rgba(255,255,255,.82); }
+    .contact h2 { max-width:800px; font-size:clamp(2.8rem,6.7vw,6rem); line-height:1; margin:20px 0; }
+    .contact-copy { color:rgba(255,255,255,.78); max-width:560px; line-height:1.75; font-size:1.08rem; }
+    .contact .button-main { background:#fff; color:#2446c8; box-shadow:none; }
+    .contact .button-main:hover { background:#e7ecff; }
+    .contact-email { display:block; margin-top:19px; color:rgba(255,255,255,.8); font-weight:600; text-underline-offset:4px; }
+    .whatsapp-button { border:1px solid var(--line); color:var(--ink); text-decoration:none; transition:background .2s,transform .2s,border-color .2s; }
+    .whatsapp-button:hover { background:var(--soft); transform:translateY(-2px); }
+    .contact .button-soft,.contact .whatsapp-button { border-color:rgba(255,255,255,.5); color:#fff; }
+    .contact .button-soft:hover,.contact .whatsapp-button:hover { background:rgba(255,255,255,.12); border-color:#fff; }
+    .button-soft[aria-disabled="true"] { opacity:.55; cursor:not-allowed; }
+    .whatsapp-button[aria-disabled="true"] { opacity:.55; cursor:not-allowed; }
+    .hosting-card { grid-column:1/-1; min-height:0; background:var(--paper); border:1px solid var(--line); border-radius:22px; padding:25px 29px; display:grid; grid-template-columns:1fr auto; gap:22px; align-items:center; }
+    .hosting-card h3 { margin:0 0 6px; font:700 1.18rem Manrope,sans-serif; letter-spacing:-.04em; }
+    .hosting-card p { margin:0; color:var(--muted); line-height:1.6; }
+    .hosting-prices { text-align:right; white-space:nowrap; font-weight:800; color:var(--green); }
+    .hosting-prices small { display:block; color:var(--muted); font-weight:600; margin-top:4px; }
+    .project-demo { background:linear-gradient(140deg,#101629,#26375c 70%,#415ed2); color:#f6f7ff; border:0; overflow:hidden; }
+.project-demo:hover { box-shadow:0 18px 52px rgba(65,94,210,.34); }
+    .project-demo .project-top,.project-demo p { color:rgba(246,247,255,.76); }
+    .project-demo h3 { color:#fff; }
+    .demo-window { margin-top:22px; background:rgba(255,255,255,.08); border:1px solid rgba(255,255,255,.16); border-radius:15px; padding:16px; backdrop-filter:blur(8px); }
+    .demo-window .demo-line { height:7px; border-radius:9px; background:rgba(255,255,255,.32); margin:8px 0; }
+    .demo-window .demo-line.short { width:56%; }
+    .demo-window .demo-pill { display:inline-flex; padding:7px 10px; border-radius:99px; background:#819aff; color:#121a33; font-size:.64rem; font-weight:900; letter-spacing:.1em; text-transform:uppercase; }
+    .demo-window .demo-pill.light { background:rgba(255,255,255,.14); color:#fff; border:1px solid rgba(255,255,255,.25); }
+    .demo-light { background:linear-gradient(145deg,#f7f9ff,#e2eaff); color:#17213b; }
+    .demo-light .project-top,.demo-light p { color:#66738f; }
+    .demo-light h3 { color:#17213b; }
+    .demo-light .demo-window { background:#fff; border-color:rgba(30,48,100,.1); box-shadow:0 15px 40px rgba(36,65,145,.1); }
+    .demo-light .demo-line { background:#d8e0f4; }
+    .demo-light .demo-pill { background:#315be8; color:#fff; }
+    footer { padding:45px 0 26px; }
+    .footer-top { display:flex; justify-content:space-between; align-items:flex-start; gap:30px; padding-bottom:32px; border-bottom:1px solid var(--line); }
+    .footer-note { max-width:380px; line-height:1.65; color:var(--muted); font-size:.9rem; }
+    .footer-links { display:flex; flex-wrap:wrap; gap:22px; color:var(--muted); font-size:.9rem; }
+    .footer-links a:hover { color:var(--green); }
+    .footer-legal { display:flex; flex-wrap:wrap; align-items:center; gap:9px 20px; padding:24px 0 0; color:var(--muted); font-size:.9rem; }
+    .footer-legal-label { font-size:.7rem; letter-spacing:.15em; text-transform:uppercase; font-weight:800; color:var(--muted); }
+    .footer-legal a { text-decoration:none; }
+    .footer-legal a:hover { color:var(--green); }
+    .footer-bottom { display:flex; justify-content:space-between; gap:20px; padding-top:20px; color:var(--muted); font-size:.78rem; }
+    .reveal { opacity:0; transform:translateY(20px); transition:opacity .65s ease,transform .65s cubic-bezier(.2,.7,.2,1); }
+    .reveal.visible { opacity:1; transform:translateY(0); }
+    @media(max-width:900px) { .hero-grid { grid-template-columns:1fr  .72fr; gap:12px; } .service-grid { grid-template-columns:repeat(2,1fr); } .project-grid { grid-template-columns:1fr 1fr; } .project:first-child { grid-column:span 2; } .section { padding:88px 0; } .contact { padding:56px; } }
+    @media(max-width:680px) { .wrap { width:min(100% - 34px,1160px); } .hero { padding:132px 0 65px; } .hero-grid { grid-template-columns:1fr; } .hero h1 { font-size:clamp(3.15rem,14vw,5.2rem); } .art-panel { min-height:255px; margin-top:5px; } .art-ring { width:220px; } .art-leaf { width:43%; height:76%; top:10%; left:29%; } .local-note { right:0; bottom:5px; padding:13px 15px; max-width:210px; } .hero-bottom { margin-top:42px; font-size:.62rem; } .section { padding:72px 0; } .section-head { display:block; margin-bottom:30px; } .section-head > p { margin-top:18px; } .service-grid,.price-grid,.project-grid { grid-template-columns:1fr; } .service { min-height:220px; } .service h3 { margin-top:22px; } .price-card { min-height:0; } .price-card.featured { transform:none; } .hosting-card { grid-column:auto; grid-template-columns:1fr; } .hosting-prices { text-align:left; } .project:first-child { grid-column:auto; } .project { min-height:230px; } .step { grid-template-columns:50px 1fr; gap:12px; } .step p { grid-column:2; } .contact { padding:36px 25px; border-radius:23px; } .contact:after { right:-280px; top:-230px; } .cta-row > * { width:100%; } .footer-top,.footer-bottom { display:block; } .footer-links { margin-top:25px; gap:15px 20px; } .footer-bottom span+span { display:block; margin-top:8px; } #mobile-menu { background:var(--bg); border-bottom:1px solid var(--line); } }
+    @media(prefers-reduced-motion:reduce) { html { scroll-behavior:auto; } *,*::before,*::after { animation-duration:.01ms!important; animation-iteration-count:1!important; transition-duration:.01ms!important; } .reveal { opacity:1; transform:none; } }
+  </style>
+</head>
+<body>
+  <a href="#contenu" class="sr-only focus:not-sr-only focus:fixed focus:z-[100] focus:top-3 focus:left-3 button-main">Aller au contenu</a>
+  <header class="header fixed inset-x-0 top-0 z-50">
+    <nav class="wrap h-[74px] flex items-center justify-between gap-4" aria-label="Navigation principale">
+      <a href="#accueil" class="flex items-center gap-3 shrink-0" aria-label="StudioGLSC, accueil">
+        <!-- Remplacer ce monogramme par le logo SVG/PNG définitif quand il sera prêt. -->
+        <span class="logo-mark grid place-items-center w-10 h-10 rounded-[14px] font-extrabold text-lg" aria-hidden="true">G</span>
+        <span class="wordmark text-[1.18rem] font-extrabold">Studio<span style="color:var(--green)">GLSC</span></span>
+      </a>
+      <div class="hidden md:flex items-center gap-7 text-sm font-bold" id="desktop-nav">
+        <a class="nav-link" href="#services">Services</a><a class="nav-link" href="#offres">Forfaits</a><a class="nav-link" href="#realisations">Réalisations</a><a class="nav-link" href="#methode">Méthode</a>
+      </div>
+      <div class="flex items-center gap-2">
+        <button id="theme-toggle" class="button-soft icon-button" type="button" aria-label="Activer le thème sombre" title="Changer de thème"><span id="theme-icon" aria-hidden="true">☾</span></button>
+        <a href="mailto:pro@glsc.fr?subject=Demande%20de%20devis%20-%20StudioGLSC" class="button-main btn-compact">Demander un devis <span aria-hidden="true">↗</span></a>
+        <button id="menu-toggle" class="md:hidden button-soft icon-button" type="button" aria-controls="mobile-menu" aria-expanded="false" aria-label="Ouvrir le menu"><span aria-hidden="true">☰</span></button>
+      </div>
+    </nav>
+    <div id="mobile-menu" class="hidden md:hidden px-5 pb-5 pt-1">
+      <div class="wrap flex flex-col text-base font-bold"><a class="py-3 border-b" style="border-color:var(--line)" href="#services">Services</a><a class="py-3 border-b" style="border-color:var(--line)" href="#offres">Forfaits</a><a class="py-3 border-b" style="border-color:var(--line)" href="#realisations">Réalisations</a><a class="py-3" href="#methode">Méthode</a></div>
+    </div>
+  </header>
+
+  <main id="contenu">
+    <section id="accueil" class="hero">
+      <div class="wrap">
+        <div class="hero-grid">
+          <div>
+            <p class="eyebrow reveal">Studio web indépendant · StudioGLSC</p>
+            <h1 class="reveal mt-6">Votre vitrine web<br>livrée <em>en 48h.</em><br>Sans abonnement caché.</h1>
+            <p class="muted text-lg md:text-xl leading-relaxed max-w-[610px] mt-7 reveal">Un site ultra fluide, pensé pour tout usage et conçu pour transformer les visites en appels et demandes de devis directs.</p>
+            <div class="cta-row reveal"><a href="mailto:pro@glsc.fr?subject=Demande%20de%20devis%20-%20StudioGLSC" class="button-main">Demander un devis <span aria-hidden="true">↗</span></a><a class="button-soft" data-phone-link aria-disabled="true" tabindex="-1" title="Ajoutez votre numéro de téléphone dans la configuration du site">Appeler directement <span aria-hidden="true">↗</span></a><a class="whatsapp-button" data-whatsapp-link aria-disabled="true" tabindex="-1" title="Ajoutez votre numéro WhatsApp dans la configuration du site">WhatsApp <span aria-hidden="true">↗</span></a></div>
+            <p class="muted mt-5 text-sm reveal">Premier échange gratuit. Réponse directe avec Gabin, basé près de Lorient.</p>
+          </div>
+          <div class="art-panel reveal" aria-hidden="true"><div class="art-ring"></div><div class="art-leaf"></div><div class="local-note"><span class="eyebrow">Intervention en Bretagne</span><p class="font-bold">Réactif · Basé près de Lorient<br><span class="muted font-normal">Ille-et-Vilaine · à distance</span></p></div></div>
+        </div>
+        <div class="hero-bottom reveal"><span>Création web indépendante</span><span class="hidden sm:inline"></span><span>01 — StudioGLSC</span></div>
+      </div>
+    </section>
+
+    <section id="services" class="section">
+      <div class="wrap">
+        <div class="section-head reveal"><div><p class="eyebrow">Ce que je peux faire pour vous</p><h2>Votre activité mérite une présence web <span style="color:var(--green)">à la hauteur.</span></h2></div><p class="muted">Un site bien pensé aide vos futurs clients à comprendre ce que vous faites et à vous contacter simplement.</p></div>
+        <div class="service-grid">
+          <article class="service reveal"><span class="service-icon" aria-hidden="true">↗</span><h3>Création de site vitrine</h3><p>Une présentation professionnelle de votre activité, de vos services et des moyens de vous joindre.</p></article>
+          <article class="service reveal"><span class="service-icon" aria-hidden="true">◌</span><h3>Refonte de site</h3><p>Une structure plus claire, un design actuel et une navigation agréable sur mobile comme sur ordinateur.</p></article>
+          <article class="service reveal"><span class="service-icon" aria-hidden="true">⌘</span><h3>Fonctionnalités web</h3><p>Des pages et outils adaptés à votre besoin : formulaires, contenus dynamiques et intégrations utiles.</p></article>
+          <article class="service reveal"><span class="service-icon" aria-hidden="true">＋</span><h3>Suivi & évolutions</h3><p>Un interlocuteur direct pour les mises à jour, les ajustements et les questions après la mise en ligne.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section id="offres" class="section band">
+      <div class="wrap">
+        <div class="section-head reveal"><div><p class="eyebrow">Des offres sans engagement imposé</p><h2>Un prix clair.<br>Votre site vous appartient.</h2></div><p class="muted">Choisissez la formule adaptée : une page express, une refonte plus complète ou un hébergement facultatif.</p></div>
+        <div class="price-grid">
+          <article class="price-card featured reveal"><span class="eyebrow">Recommandé</span><h3>One-Page Express</h3><p class="price">400 €</p><p class="price-desc">Votre activité, vos coordonnées et un chemin direct vers l’appel ou la demande de devis.</p><ul class="check-list"><li>Livré en 48h*</li><li>Design sur mesure, mobile et ordinateur</li><li>Formulaire envoyé vers votre boîte mail</li><li>Boutons Appel direct et WhatsApp</li><li>100 % propriétaire de votre site</li><li>Zéro abonnement obligatoire</li></ul><a class="button-main" href="mailto:pro@glsc.fr?subject=One-Page%20Express%20-%20devis">Choisir One-Page Express ↗</a></article>
+          <article class="price-card reveal"><span class="eyebrow">Pour un site existant ou plus complet</span><h3>Refonte & Multi-pages</h3><p class="price">Sur devis</p><p class="price-desc">Moderniser un ancien site ou présenter vos services, réalisations et tarifs sur plusieurs pages.</p><ul class="check-list"><li>Refonte ou création multi-pages</li><li>Pages Services, Réalisations, Tarifs…</li><li>Optimisation SEO local</li><li>Optimisation de la vitesse</li><li>Accompagnement sur mesure</li></ul><a class="button-soft" href="mailto:pro@glsc.fr?subject=Refonte%20ou%20site%20multi-pages">Décrire mon besoin ↗</a></article>
+          <article class="price-card reveal"><span class="eyebrow">Option facultative · au choix du client</span><h3>Sérénité & Hébergement</h3><p class="price">15 € <small>/ mois</small></p><p class="price-desc">Une option de suivi et d’hébergement, sans engagement obligatoire pour créer ou posséder votre site.</p><ul class="check-list"><li>Ou 150 € / an (2 mois offerts)</li><li>Hébergement haute disponibilité sur serveur sécurisé</li><li>Certificat SSL et connexion HTTPS</li><li>Sauvegardes régulières</li><li>Petites modifications de contenu incluses</li></ul><a class="button-soft" href="mailto:pro@glsc.fr?subject=Option%20S%C3%A9r%C3%A9nit%C3%A9%20et%20H%C3%A9bergement">Choisir cette option ↗</a></article>
+        </div>
+        <p class="price-note reveal">* Le délai de 48 h commence à réception des textes, photos et informations nécessaires, et après validation du périmètre. L’hébergement à 15 € / mois ou 150 € / an est une option au choix du client. La création du site n’impose aucun abonnement. Boutique en ligne non proposée pour le moment.</p>
+      </div>
+    </section>
+
+    <section id="realisations" class="section">
+      <div class="wrap">
+        <div class="section-head reveal"><div><p class="eyebrow">Réalisations & démonstrations</p><h2>Démos & concepts <span style="color:var(--green)">interactifs.</span></h2></div><p class="muted">Un projet personnel en ligne, un concept démo consultable et un univers en préparation, pour montrer comment un site peut guider vos clients vers l’action.</p></div>
+        <div class="project-intro reveal"><span class="dot" aria-hidden="true"></span><p><strong>Deux cartes sont des concepts démo.</strong> Le concept Clubbing & Nightlife est consultable en ligne ; l’univers Artisanat & BTP est en préparation. Ces maquettes illustrent des pistes d’interface pour des secteurs différents, ce ne sont pas des projets clients.</p></div>
+        <div class="project-grid">
+          <a class="project reveal" href="https://glsc.fr" target="_blank" rel="noopener noreferrer" aria-label="Visiter glsc.fr, site personnel et portfolio technique de Gabin Lescoat (nouvel onglet)"><div class="project-top"><span>En ligne · Projet personnel</span><span aria-hidden="true">↗</span></div><div><span class="project-symbol" aria-hidden="true">G</span><h3>glsc.fr</h3><p>Mon site personnel et portfolio technique.</p></div></a>
+          <a class="project project-demo reveal" href="https://studio.glsc.fr/club-demo.html" aria-label="Découvrir la démo Clubbing & Nightlife, concept de landing page pour le Club56 à Lorient"><div class="project-top"><span>Concept démo</span><span>Clubbing & Nightlife →</span></div><div class="demo-window" aria-hidden="true"><span class="demo-pill">Agenda</span><div class="demo-line"></div><div class="demo-line short"></div><span class="demo-pill light">Réserver une table ↗</span></div><div><h3>Clubbing & Nightlife</h3><p>Une landing page sombre et dynamique, avec agenda et réservation de tables.</p></div></a>
+          <article class="project project-demo demo-light reveal"><div class="project-top"><span>Concept démo</span><span>Artisanat & BTP</span></div><div class="demo-window" aria-hidden="true"><span class="demo-pill">Votre activité, visible</span><div class="demo-line"></div><div class="demo-line short"></div><span class="demo-pill">Appeler · Demander un devis</span></div><div><h3>Artisanat & BTP</h3><p>Une vitrine claire et directe, pensée pour la prise de contact sur mobile.</p></div></article>
+        </div>
+      </div>
+    </section>
+
+    <section id="methode" class="section band">
+      <div class="wrap">
+        <div class="section-head reveal"><div><p class="eyebrow">Une collaboration directe</p><h2>Vous parlez à la personne qui crée votre site.</h2></div><p class="muted">Un projet clair, des échanges simples et un suivi de près à chaque étape.</p></div>
+        <div class="steps">
+          <article class="step reveal"><span class="step-num">01</span><h3>On fait le point</h3><p>Vous m’expliquez votre activité, vos objectifs et vos priorités lors d’un premier échange gratuit.</p></article>
+          <article class="step reveal"><span class="step-num">02</span><h3>Je vous propose un cadre</h3><p>Vous recevez une proposition et un devis qui précisent le contenu, le budget et les étapes.</p></article>
+          <article class="step reveal"><span class="step-num">03</span><h3>On construit et on ajuste</h3><p>Je réalise le site, vous partagez vos retours, puis nous préparons ensemble sa mise en ligne.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="section pb-10" aria-labelledby="contact-title">
+      <div class="wrap"><div class="contact reveal"><p class="eyebrow">Echange gratuit.</p><h2 id="contact-title">Votre prochain client<br>vous cherche déjà.</h2><p class="contact-copy">Présentez-moi votre activité et ce dont vous avez besoin. Je travaille avec réactivité et reste disponible pour répondre à vos questions.</p><div class="cta-row"><a class="button-main" href="mailto:pro@glsc.fr?subject=Demande%20de%20devis%20-%20StudioGLSC">Demander un devis par e-mail <span aria-hidden="true">↗</span></a><a class="button-soft" data-phone-link aria-disabled="true" tabindex="-1" title="Ajoutez votre numéro de téléphone dans la configuration du site">Appeler directement <span aria-hidden="true">↗</span></a><a class="whatsapp-button" data-whatsapp-link aria-disabled="true" tabindex="-1" title="Ajoutez votre numéro WhatsApp dans la configuration du site">WhatsApp <span aria-hidden="true">↗</span></a></div><a class="contact-email" href="mailto:pro@glsc.fr">pro@glsc.fr</a></div></div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <div class="footer-top"><div><a href="#accueil" class="wordmark text-xl font-extrabold">Studio<span style="color:var(--green)">GLSC</span></a><p class="footer-note">Studio web indépendant de Gabin Lescoat.<br>Création de sites vitrines en Bretagne.</p></div><div class="footer-links"><a href="#services">Services</a><a href="#offres">Forfaits</a><a href="#realisations">Réalisations</a><a href="#methode">Méthode</a><a href="mailto:pro@glsc.fr">Écrire un e-mail ↗</a></div></div>
+      <div class="footer-legal"><span class="footer-legal-label">Informations légales</span><a href="https://studio.glsc.fr/mentions-legales.html">Mentions légales</a><a href="https://studio.glsc.fr/cgu.html">CGU</a><a href="https://studio.glsc.fr/cgv.html">CGV</a></div>
+      <div class="footer-bottom"><span>© <span id="year"></span> StudioGLSC · Gabin Lescoat</span><span>Bretagne</span></div>
+    </div>
+  </footer>
+  <script>
+    // Renseigner le numéro public au format international, par exemple +33612345678.
+    const CONTACT_PHONE = '+33767204424';
+    const PHONE_DIGITS = CONTACT_PHONE.replace(/\D/g, '');
+    const WHATSAPP_PHONE = PHONE_DIGITS.startsWith('0') ? `33${PHONE_DIGITS.slice(1)}` : PHONE_DIGITS;
+    const root = document.documentElement;
+    const themeButton = document.querySelector('#theme-toggle');
+    const themeIcon = document.querySelector('#theme-icon');
+    function setTheme(theme) {
+      root.dataset.theme = theme;
+      try { localStorage.setItem('studioglsc-theme', theme); } catch {}
+      document.querySelector('meta[name="theme-color"]').content = theme === 'dark' ? '#111725' : '#f5f7fb';
+      themeIcon.textContent = theme === 'dark' ? '☼' : '☾';
+      themeButton.setAttribute('aria-label', theme === 'dark' ? 'Activer le thème clair' : 'Activer le thème sombre');
+    }
+    setTheme(root.dataset.theme || 'light');
+    themeButton.addEventListener('click', () => setTheme(root.dataset.theme === 'dark' ? 'light' : 'dark'));
+
+    const menuButton = document.querySelector('#menu-toggle');
+    const menu = document.querySelector('#mobile-menu');
+    function closeMenu(restoreFocus = false) {
+      menu.classList.add('hidden'); menuButton.setAttribute('aria-expanded','false'); menuButton.setAttribute('aria-label','Ouvrir le menu');
+      if (restoreFocus) menuButton.focus();
+    }
+    menuButton.addEventListener('click', () => {
+      const open = menuButton.getAttribute('aria-expanded') !== 'true';
+      menu.classList.toggle('hidden', !open); menuButton.setAttribute('aria-expanded', String(open)); menuButton.setAttribute('aria-label', open ? 'Fermer le menu' : 'Ouvrir le menu');
+    });
+    menu.querySelectorAll('a').forEach(link => link.addEventListener('click', () => closeMenu()));
+    document.addEventListener('keydown', event => { if (event.key === 'Escape' && menuButton.getAttribute('aria-expanded') === 'true') closeMenu(true); });
+    matchMedia('(min-width: 768px)').addEventListener('change', event => { if (event.matches) closeMenu(); });
+
+    const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const revealItems = document.querySelectorAll('.reveal');
+    if ('IntersectionObserver' in window && !reduceMotion) {
+      const observer = new IntersectionObserver((entries, io) => entries.forEach(entry => { if (entry.isIntersecting) { entry.target.classList.add('visible'); io.unobserve(entry.target); } }), {threshold:.08,rootMargin:'0px 0px -24px 0px'});
+      revealItems.forEach(item => observer.observe(item));
+    } else revealItems.forEach(item => item.classList.add('visible'));
+    document.querySelector('#year').textContent = new Date().getFullYear();
+    document.querySelectorAll('[data-whatsapp-link]').forEach(link => {
+      if (/^\d{8,15}$/.test(WHATSAPP_PHONE)) {
+        const message = encodeURIComponent('Bonjour Gabin, je vous contacte au sujet de la création de mon site.');
+        link.href = `https://wa.me/${WHATSAPP_PHONE}?text=${message}`;
+        link.target = '_blank';
+        link.rel = 'noopener noreferrer';
+        link.removeAttribute('aria-disabled');
+        link.removeAttribute('tabindex');
+        link.removeAttribute('title');
+      }
+    });
+    document.querySelectorAll('[data-phone-link]').forEach(link => {
+      if (CONTACT_PHONE.trim()) {
+        link.href = `tel:${CONTACT_PHONE.replace(/[^\d+]/g, '')}`;
+        link.removeAttribute('aria-disabled');
+        link.removeAttribute('tabindex');
+        link.removeAttribute('title');
+      }
+    });
+  </script>
+</body>
+</html>
