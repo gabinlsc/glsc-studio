@@ -27,6 +27,7 @@
   <link rel="stylesheet" href="/assets/studio.css">
   <script>
     // Thème appliqué avant l'affichage (pas de flash) : choix mémorisé, sinon réglage du système.
+    document.documentElement.classList.add('js');
     try {
       var saved = localStorage.getItem('studioglsc-theme');
       document.documentElement.dataset.theme = saved || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
@@ -67,6 +68,13 @@
       <symbol id="i-layout" viewBox="0 0 24 24"><rect width="7" height="9" x="3" y="3" rx="1"/><rect width="7" height="5" x="14" y="3" rx="1"/><rect width="7" height="9" x="14" y="12" rx="1"/><rect width="7" height="5" x="3" y="16" rx="1"/></symbol>
       <symbol id="i-lifebuoy" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="4"/><path d="m4.93 4.93 4.24 4.24M14.83 9.17l4.24-4.24M14.83 14.83l4.24 4.24M9.17 14.83l-4.24 4.24"/></symbol>
       <symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></symbol>
+      <symbol id="i-minus" viewBox="0 0 24 24"><path d="M5 12h14"/></symbol>
+      <symbol id="i-shield" viewBox="0 0 24 24"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></symbol>
+      <symbol id="i-key" viewBox="0 0 24 24"><circle cx="7.5" cy="15.5" r="5.5"/><path d="m21 2-9.6 9.6M15.5 7.5l3 3L22 7l-3-3"/></symbol>
+      <symbol id="i-file" viewBox="0 0 24 24"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7z"/><path d="M14 2v4a2 2 0 0 0 2 2h4M9 13h6M9 17h6"/></symbol>
+      <symbol id="i-unlock" viewBox="0 0 24 24"><rect width="18" height="11" x="3" y="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 9.9-1"/></symbol>
+      <symbol id="i-play" viewBox="0 0 24 24"><path d="m6 3 14 9-14 9z"/></symbol>
+      <symbol id="i-calendar" viewBox="0 0 24 24"><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></symbol>
       <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></symbol>
     </defs>
   </svg>
@@ -109,6 +117,17 @@
       </div>
     </div>
   </header>
+  <nav class="rail" id="rail" aria-label="Sections de la page">
+    <ol>
+      <li><a href="#services"><span>Services</span></a></li>
+      <li><a href="#offres"><span>Forfaits</span></a></li>
+      <li><a href="#engagements"><span>Engagements</span></a></li>
+      <li><a href="#realisations"><span>Réalisations</span></a></li>
+      <li><a href="#methode"><span>Méthode</span></a></li>
+      <li><a href="#questions"><span>FAQ</span></a></li>
+      <li><a href="#contact"><span>Contact</span></a></li>
+    </ol>
+  </nav>
   <div class="scroll-progress" role="progressbar" aria-label="Progression dans la page" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><span></span></div>
 
   <main id="contenu">
@@ -220,6 +239,45 @@
           <div><span class="badge" style="margin:0">Option facultative · facturation récurrente</span><h3>Sérénité &amp; Hébergement</h3><p>Hébergement sécurisé, certificat SSL, sauvegardes régulières et petites modifications de contenu. Sans engagement obligatoire.</p></div>
           <div class="hosting-prices"><strong>30 € / mois</strong><span class="muted">ou 300 € / an · 2 mois offerts</span><a class="btn btn-secondary btn-sm" href="mailto:pro@glsc.fr?subject=Option%20S%C3%A9r%C3%A9nit%C3%A9%20et%20H%C3%A9bergement">Choisir cette option <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a></div>
         </article>
+        <div class="compare reveal">
+          <div class="compare-head"><h3>Comparer les formules</h3><p class="muted">Ce que comprend chaque formule, d’un coup d’œil.</p></div>
+          <div class="table-wrap" tabindex="0" role="region" aria-label="Tableau comparatif des formules (défilable)">
+            <table>
+              <thead><tr><th scope="col"><span class="sr-only">Critère</span></th><th scope="col">One-Page Express</th><th scope="col">Refonte &amp; Multi-pages</th><th scope="col">Sérénité &amp; Hébergement<small>option</small></th></tr></thead>
+              <tbody>
+                <tr><th scope="row">Prix</th><td><strong>400 €</strong></td><td><strong>Sur devis</strong></td><td><strong>30 € / mois</strong><small>ou 300 € / an</small></td></tr>
+                <tr><th scope="row">Première version en 48 h*</th><td class="yes"><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span class="sr-only">Oui</span></td><td class="no">Selon le devis</td><td class="no"><svg class="icon" aria-hidden="true"><use href="#i-minus"/></svg><span class="sr-only">Non concerné</span></td></tr>
+                <tr><th scope="row">Design sur mesure, mobile et ordinateur</th><td class="yes"><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span class="sr-only">Oui</span></td><td class="yes"><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span class="sr-only">Oui</span></td><td class="no"><svg class="icon" aria-hidden="true"><use href="#i-minus"/></svg><span class="sr-only">Non concerné</span></td></tr>
+                <tr><th scope="row">Formulaire, boutons Appel direct et WhatsApp</th><td class="yes"><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span class="sr-only">Oui</span></td><td class="no">Selon le devis</td><td class="no"><svg class="icon" aria-hidden="true"><use href="#i-minus"/></svg><span class="sr-only">Non concerné</span></td></tr>
+                <tr><th scope="row">Pages Services, Réalisations, Tarifs…</th><td class="no"><svg class="icon" aria-hidden="true"><use href="#i-minus"/></svg><span class="sr-only">Non</span></td><td class="yes"><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span class="sr-only">Oui</span></td><td class="no"><svg class="icon" aria-hidden="true"><use href="#i-minus"/></svg><span class="sr-only">Non concerné</span></td></tr>
+                <tr><th scope="row">Référencement local et vitesse de chargement</th><td class="no"><svg class="icon" aria-hidden="true"><use href="#i-minus"/></svg><span class="sr-only">Non</span></td><td class="yes"><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span class="sr-only">Oui</span></td><td class="no"><svg class="icon" aria-hidden="true"><use href="#i-minus"/></svg><span class="sr-only">Non concerné</span></td></tr>
+                <tr><th scope="row">Hébergement sécurisé, SSL, sauvegardes, petites modifications</th><td class="no"><svg class="icon" aria-hidden="true"><use href="#i-minus"/></svg><span class="sr-only">Non</span></td><td class="no"><svg class="icon" aria-hidden="true"><use href="#i-minus"/></svg><span class="sr-only">Non</span></td><td class="yes"><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span class="sr-only">Oui</span></td></tr>
+                <tr><th scope="row">Abonnement obligatoire</th><td>Aucun</td><td>Aucun</td><td>Résiliable à tout moment</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <form class="estimate reveal" id="estimate" aria-labelledby="estimate-title" onsubmit="return false">
+          <div class="estimate-head"><span class="eyebrow">Estimation</span><h3 id="estimate-title">Combien ça coûte pour moi ?</h3></div>
+          <div class="estimate-grid">
+            <fieldset><legend>La création du site</legend>
+              <label class="choice"><input type="radio" name="est-site" value="express" checked><span><strong>One-Page Express</strong><small>400 €, paiement ponctuel</small></span></label>
+              <label class="choice"><input type="radio" name="est-site" value="multi"><span><strong>Refonte ou multi-pages</strong><small>Sur devis</small></span></label>
+            </fieldset>
+            <fieldset><legend>L’hébergement (facultatif)</legend>
+              <label class="choice"><input type="radio" name="est-host" value="none" checked><span><strong>Je m’en occupe</strong><small>Aucun abonnement</small></span></label>
+              <label class="choice"><input type="radio" name="est-host" value="month"><span><strong>Sérénité, au mois</strong><small>30 € / mois</small></span></label>
+              <label class="choice"><input type="radio" name="est-host" value="year"><span><strong>Sérénité, à l’année</strong><small>300 € / an · 2 mois offerts</small></span></label>
+            </fieldset>
+            <div class="estimate-result" aria-live="polite">
+              <p class="estimate-label">Votre première année</p>
+              <p class="estimate-total" id="est-total">400 €</p>
+              <ul class="estimate-lines" id="est-lines"></ul>
+              <p class="estimate-note">Prix TTC : TVA non applicable (franchise en base, article 293 B du CGI). Estimation indicative, le devis fait foi.</p>
+              <button type="button" class="btn btn-primary" id="est-cta">Demander ce devis <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></button>
+            </div>
+          </div>
+        </form>
         <div class="timeline reveal" aria-label="Les étapes de livraison en 48 heures">
           <div class="timeline-step"><strong>Nous cadrons le projet</strong><span>Vous m’envoyez les textes, photos et informations ; nous validons ensemble le périmètre.</span></div>
           <div class="timeline-step"><strong>Je crée la page</strong><span>Les 48 heures démarrent quand tous les éléments sont reçus et le projet cadré.</span></div>
@@ -229,7 +287,20 @@
       </div>
     </section>
 
-    <section id="realisations" class="section">
+    <section id="engagements" class="section" aria-labelledby="eng-title">
+      <div class="wrap">
+        <div class="section-head reveal"><div><p class="eyebrow">Mes engagements</p><h2 id="eng-title">Ce que vous pouvez attendre, <span class="accent">noir sur blanc.</span></h2></div><p>Ces points figurent dans mes conditions générales de vente : ils ne sont pas là pour faire joli.</p></div>
+        <div class="pledge-grid">
+          <article class="pledge reveal"><span class="service-icon" aria-hidden="true"><svg class="icon"><use href="#i-file"/></svg></span><h3>Devis gratuit, sans engagement</h3><p>Le premier échange est gratuit. Le devis précise le périmètre, le prix, les délais et le paiement ; il est valable 30 jours.</p></article>
+          <article class="pledge reveal"><span class="service-icon" aria-hidden="true"><svg class="icon"><use href="#i-key"/></svg></span><h3>Votre site vous appartient</h3><p>Au paiement intégral, vous devenez propriétaire de la conception graphique et du contenu créé pour vous, et les codes sources vous sont cédés.</p></article>
+          <article class="pledge reveal"><span class="service-icon" aria-hidden="true"><svg class="icon"><use href="#i-unlock"/></svg></span><h3>Aucun abonnement imposé</h3><p>L’hébergement est une option. Elle se résilie à tout moment par e-mail, sans frais ni préavis, et la période non consommée est remboursée au prorata sur demande.</p></article>
+          <article class="pledge reveal"><span class="service-icon" aria-hidden="true"><svg class="icon"><use href="#i-shield"/></svg></span><h3>Un prix sans surprise</h3><p>Prix TTC, TVA non applicable. Toute modification du périmètre en cours de projet fait l’objet d’un avenant écrit, jamais d’une facture surprise.</p></article>
+        </div>
+        <p class="pledge-note reveal">Droit de rétractation de 14 jours pour les particuliers, sans frais de rétractation. <a href="/cgv.html">Lire les conditions générales de vente</a>.</p>
+      </div>
+    </section>
+
+    <section id="realisations" class="section band">
       <div class="wrap">
         <div class="section-head reveal"><div><p class="eyebrow">Réalisations &amp; démonstrations</p><h2>Démos &amp; concepts <span class="accent">interactifs.</span></h2></div><p>Un projet personnel en ligne et deux concepts démo consultables, pour montrer comment un site peut guider vos clients vers l’action.</p></div>
         <div class="callout reveal"><svg class="icon" aria-hidden="true"><use href="#i-info"/></svg><p><strong>Deux cartes sont des concepts démo.</strong> Le concept Clubbing &amp; Nightlife et le concept Artisanat &amp; BTP sont tous deux consultables en ligne. Ces maquettes illustrent des pistes d’interface pour des secteurs différents, ce ne sont pas des projets clients.</p></div>
@@ -247,10 +318,28 @@
             <div class="project-body"><h3>Artisanat &amp; BTP</h3><p>Une vitrine claire et directe, pensée pour la prise de contact sur mobile.</p><span class="project-link">Voir la démo <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></span></div>
           </a>
         </div>
+        <div class="demo-lab reveal">
+          <div class="demo-lab-copy">
+            <p class="eyebrow">Essayer en direct</p>
+            <h3>Testez une démo comme le ferait un client, sur son téléphone.</h3>
+            <p class="muted">Choisissez un concept puis lancez-le dans le téléphone. La démo ne se charge que lorsque vous cliquez.</p>
+            <div class="seg" role="tablist" aria-label="Choisir une démo">
+              <button type="button" role="tab" aria-selected="true" data-demo="/club-demo.html" data-title="Clubbing &amp; Nightlife">Clubbing &amp; Nightlife</button>
+              <button type="button" role="tab" aria-selected="false" data-demo="/btp-demo.html" data-title="Artisanat &amp; BTP">Artisanat &amp; BTP</button>
+            </div>
+            <div class="btn-row">
+              <button type="button" class="btn btn-primary" id="demo-launch"><svg class="icon" aria-hidden="true"><use href="#i-play"/></svg> Lancer la démo</button>
+              <a class="btn btn-secondary" id="demo-open" href="/club-demo.html" target="_blank" rel="noopener">Ouvrir en plein écran <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+            </div>
+          </div>
+          <div class="demo-phone" aria-live="polite">
+            <div class="demo-screen" id="demo-screen"><div class="demo-placeholder"><svg class="icon" aria-hidden="true"><use href="#i-play"/></svg><span>Aperçu mobile</span></div></div>
+          </div>
+        </div>
       </div>
     </section>
 
-    <section id="methode" class="section band">
+    <section id="methode" class="section">
       <div class="wrap">
         <div class="section-head reveal"><div><p class="eyebrow">Une collaboration directe</p><h2>Vous parlez à la personne qui crée votre site.</h2></div><p>Un projet clair, des échanges simples et un suivi de près à chaque étape.</p></div>
         <div class="steps"><span class="steps-progress" aria-hidden="true"></span>
@@ -261,7 +350,7 @@
       </div>
     </section>
 
-    <section id="questions" class="section" aria-labelledby="faq-title">
+    <section id="questions" class="section band" aria-labelledby="faq-title">
       <div class="wrap faq-layout">
         <div class="section-head reveal"><div><p class="eyebrow">Questions fréquentes</p><h2 id="faq-title">Avant de <span class="accent">se lancer.</span></h2></div><p>Les réponses aux questions les plus courantes sur le délai, le contenu et la propriété du site.</p></div>
         <div class="faq-list reveal">
@@ -285,17 +374,69 @@
               <a class="btn btn-secondary" data-phone-link aria-disabled="true" tabindex="-1" title="Ajoutez votre numéro de téléphone dans la configuration du site"><svg class="icon" aria-hidden="true"><use href="#i-phone"/></svg> Appeler directement</a>
               <a class="btn btn-wa" data-whatsapp-link aria-disabled="true" tabindex="-1" title="Ajoutez votre numéro WhatsApp dans la configuration du site"><svg class="icon" aria-hidden="true"><use href="#i-chat"/></svg> WhatsApp</a>
             </div>
+            <p class="contact-booking"><a class="btn btn-secondary" data-booking-link href="mailto:pro@glsc.fr?subject=%C3%89change%20gratuit%20-%20proposition%20de%20cr%C3%A9neau"><svg class="icon" aria-hidden="true"><use href="#i-calendar"/></svg> <span data-booking-label>Proposer un créneau</span></a></p>
             <a class="contact-email" href="mailto:pro@glsc.fr"><svg class="icon" aria-hidden="true"><use href="#i-mail"/></svg> pro@glsc.fr</a>
           </div>
-          <form id="contact-form" class="contact-form">
-            <label for="form-name">Votre nom<input id="form-name" name="name" autocomplete="name" required></label>
-            <label for="form-email">Votre e-mail<input id="form-email" name="email" type="email" autocomplete="email" required></label>
-            <label for="form-service">Votre besoin<select id="form-service" name="service" required><option value="" selected disabled>Choisir une formule</option><option>One-Page Express</option><option>Refonte ou site multi-pages</option><option>Hébergement et suivi</option><option>Autre demande</option></select></label>
-            <label for="form-message">Quelques mots sur votre projet<textarea id="form-message" name="message" required></textarea></label>
-            <button class="btn btn-primary" type="submit">Préparer ma demande <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></button>
-            <p class="form-note">Aucune donnée n’est enregistrée sur le site. Le formulaire prépare un e-mail dans votre application de messagerie.</p>
+          <form id="contact-form" class="contact-form" novalidate>
+            <div class="form-top"><p class="form-step-label" id="step-label" aria-live="polite">Étape 1 sur 4</p><div class="form-progress" aria-hidden="true"><span id="step-bar"></span></div></div>
+            <fieldset class="step-pane" data-step="1"><legend>Quelle est votre activité ?</legend>
+              <div class="choice-grid">
+                <label class="choice"><input type="radio" name="activity" value="Artisan / BTP" required><span><strong>Artisan / BTP</strong></span></label>
+                <label class="choice"><input type="radio" name="activity" value="Commerce"><span><strong>Commerce</strong></span></label>
+                <label class="choice"><input type="radio" name="activity" value="Restauration"><span><strong>Restauration</strong></span></label>
+                <label class="choice"><input type="radio" name="activity" value="Santé et bien-être"><span><strong>Santé et bien-être</strong></span></label>
+                <label class="choice"><input type="radio" name="activity" value="Beauté"><span><strong>Beauté</strong></span></label>
+                <label class="choice"><input type="radio" name="activity" value="Association ou club"><span><strong>Association ou club</strong></span></label>
+                <label class="choice"><input type="radio" name="activity" value="Autre activité"><span><strong>Autre</strong></span></label>
+              </div>
+              <p class="field-error" data-error="activity" role="alert"></p>
+            </fieldset>
+            <fieldset class="step-pane" data-step="2"><legend>De quoi avez-vous besoin ?</legend>
+              <div class="choice-grid one">
+                <label class="choice"><input type="radio" name="service" value="One-Page Express" required><span><strong>One-Page Express</strong><small>Une page, 400 €</small></span></label>
+                <label class="choice"><input type="radio" name="service" value="Refonte ou site multi-pages"><span><strong>Refonte ou site multi-pages</strong><small>Sur devis</small></span></label>
+                <label class="choice"><input type="radio" name="service" value="Hébergement et suivi"><span><strong>Hébergement et suivi</strong><small>30 € / mois ou 300 € / an</small></span></label>
+                <label class="choice"><input type="radio" name="service" value="Autre demande"><span><strong>Autre demande</strong><small>On en parle</small></span></label>
+              </div>
+              <p class="field-error" data-error="service" role="alert"></p>
+            </fieldset>
+            <fieldset class="step-pane" data-step="3"><legend>Pour quand ?</legend>
+              <div class="choice-grid one">
+                <label class="choice"><input type="radio" name="timing" value="Dès que possible" required><span><strong>Dès que possible</strong></span></label>
+                <label class="choice"><input type="radio" name="timing" value="Dans le mois"><span><strong>Dans le mois</strong></span></label>
+                <label class="choice"><input type="radio" name="timing" value="Je ne suis pas pressé"><span><strong>Je ne suis pas pressé</strong></span></label>
+              </div>
+              <p class="field-error" data-error="timing" role="alert"></p>
+            </fieldset>
+            <fieldset class="step-pane" data-step="4"><legend>Comment vous joindre ?</legend>
+              <label for="form-name">Votre nom<input id="form-name" name="name" autocomplete="name" required aria-describedby="err-name"></label>
+              <p class="field-error" id="err-name" data-error="name" role="alert"></p>
+              <label for="form-email">Votre e-mail<input id="form-email" name="email" type="email" autocomplete="email" inputmode="email" required aria-describedby="err-email"></label>
+              <p class="field-error" id="err-email" data-error="email" role="alert"></p>
+              <label for="form-phone">Téléphone <span class="opt">(facultatif)</span><input id="form-phone" name="phone" type="tel" autocomplete="tel" inputmode="tel"></label>
+              <label for="form-message">Quelques mots sur votre projet <span class="opt">(facultatif)</span><textarea id="form-message" name="message"></textarea></label>
+              <div class="hp" aria-hidden="true"><label>Ne pas remplir<input name="website" tabindex="-1" autocomplete="off"></label></div>
+            </fieldset>
+            <div class="form-nav">
+              <button class="btn btn-secondary btn-sm" type="button" id="step-back" hidden>Retour</button>
+              <button class="btn btn-primary" type="button" id="step-next">Continuer <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></button>
+              <button class="btn btn-primary" type="submit" id="step-send" hidden>Envoyer ma demande <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></button>
+            </div>
+            <p class="form-note" id="form-note">Aucune donnée n’est enregistrée sur le site. Le formulaire prépare un e-mail dans votre application de messagerie.</p>
             <p class="form-status" id="form-status" role="status" aria-live="polite"></p>
           </form>
+          <div class="form-done" id="form-done" hidden tabindex="-1">
+            <span class="done-icon" aria-hidden="true"><svg class="icon"><use href="#i-check"/></svg></span>
+            <h3 id="done-title">Merci !</h3>
+            <p id="done-text"></p>
+            <ol class="done-steps"><li><strong>Je lis votre demande</strong><span>et je reviens vers vous directement.</span></li><li><strong>Nous faisons le point</strong><span>lors d’un échange gratuit, sans engagement.</span></li><li><strong>Vous recevez un devis</strong><span>qui précise le contenu, le budget et les étapes.</span></li></ol>
+            <div class="done-fallback" id="done-fallback" hidden>
+              <p>Votre messagerie ne s’est pas ouverte ? Copiez le message et envoyez-le à <a href="mailto:pro@glsc.fr">pro@glsc.fr</a>.</p>
+              <textarea id="done-copy" readonly rows="6" aria-label="Message à envoyer"></textarea>
+              <button type="button" class="btn btn-secondary btn-sm" id="done-copy-btn">Copier le message</button>
+            </div>
+            <button type="button" class="btn btn-secondary btn-sm" id="done-restart">Envoyer une autre demande</button>
+          </div>
         </div>
       </div>
     </section>
@@ -305,8 +446,9 @@
     <div class="wrap">
       <div class="footer-top">
         <div><a href="#accueil" class="brand" aria-label="StudioGLSC, haut de page"><span class="logo-mark" aria-hidden="true">G</span><span class="wordmark">Studio<span>GLSC</span></span></a><p class="footer-note">Studio web indépendant de Gabin Lescoat.<br>Création de sites vitrines en Bretagne.</p></div>
-        <div class="footer-links"><a href="#services">Services</a><a href="#offres">Forfaits</a><a href="#realisations">Réalisations</a><a href="#methode">Méthode</a><a href="#questions">FAQ</a><a href="#contact">Contact</a><a href="mailto:pro@glsc.fr">Écrire un e-mail ↗</a></div>
+        <div class="footer-links"><a href="#services">Services</a><a href="#offres">Forfaits</a><a href="#engagements">Engagements</a><a href="#realisations">Réalisations</a><a href="#methode">Méthode</a><a href="#questions">FAQ</a><a href="#contact">Contact</a><a href="mailto:pro@glsc.fr">Écrire un e-mail ↗</a></div>
       </div>
+      <p class="footer-status">StudioGLSC · Gabin Lescoat, entrepreneur individuel (auto-entrepreneur) · immatriculation en cours</p>
       <div class="footer-legal"><span class="footer-legal-label">Informations légales</span><a href="/mentions-legales.html">Mentions légales</a><a href="/cgu.html">CGU</a><a href="/cgv.html">CGV</a></div>
       <div class="footer-bottom"><span>© <span id="year"></span> StudioGLSC · Gabin Lescoat</span><span>Bretagne</span></div>
     </div>

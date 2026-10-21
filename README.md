@@ -15,7 +15,16 @@ Site statique, sans framework ni ressource externe : une page d'accueil, deux d�
 | `club-demo.html`, `btp-demo.html` | concepts démo (ils chargent encore Google Fonts et Tailwind depuis un CDN, ce que les mentions légales indiquent) |
 | `404.html` | page d'erreur |
 
-Le numéro de téléphone public se règle en haut de `assets/studio.js` (`CONTACT_PHONE`).
+## Réglages (haut de `assets/studio.js`)
+
+| Constante | Rôle |
+| --- | --- |
+| `CONTACT_PHONE` | numéro public (liens « Appeler » et WhatsApp) |
+| `BOOKING_URL` | lien de prise de rendez-vous (Cal.com, Calendly…) ; vide : le bouton propose d'écrire pour convenir d'un créneau |
+| `REPLY_DELAY` | délai annoncé après l'envoi, par exemple `sous 24 h ouvrées` ; vide : aucune promesse de délai |
+| `CONTACT_ENDPOINT` | adresse du service qui reçoit les demandes ; vide : le formulaire prépare un e-mail dans la messagerie du visiteur |
+
+Le formulaire pose trois questions (activité, besoin, délai) puis demande les coordonnées. Les engagements affichés sur la page reprennent les CGV : si les CGV changent, la section « Mes engagements » (`#engagements`) et l'estimation (`#estimate`) doivent suivre. La ligne de statut du pied de page (« immatriculation en cours ») est à mettre à jour avec le SIREN.
 
 ## Déployer
 
