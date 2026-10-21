@@ -580,3 +580,39 @@ footer { padding: 72px 0 36px; border-top: 1px solid var(--line); background: va
 .section.flush-top { padding-top: 0; }
 .badge.flat { margin: 0; }
 .mt { margin-top: 20px; }
+
+/* =====================================================================
+   Page de suivi de projet (suivi/)
+   ===================================================================== */
+.suivi-top { border-bottom: 1px solid var(--line); background: var(--surface); }
+.suivi-bar { display: flex; align-items: center; justify-content: space-between; gap: 16px; height: 68px; }
+.suivi-badge { padding: 5px 12px; border-radius: 999px; background: var(--accent-soft); color: var(--accent); font-size: .78rem; font-weight: 600; }
+.suivi { max-width: 760px; padding: 40px 0 72px; display: grid; gap: 20px; }
+.suivi h1 { margin-top: 8px; font-size: clamp(1.8rem, 4vw, 2.6rem); line-height: 1.1; letter-spacing: -.03em; }
+.suivi-card { padding: clamp(20px, 4vw, 32px); border: 1px solid var(--line); border-radius: var(--radius-lg); background: var(--surface); box-shadow: var(--shadow-sm); }
+.suivi-card h2 { font-size: 1.25rem; margin-bottom: 14px; }
+.p-steps { display: grid; gap: 0; counter-reset: s; }
+.p-step { position: relative; display: flex; align-items: center; gap: 14px; padding: 12px 0 12px 0; color: var(--muted); }
+.p-step + .p-step::before { content: ""; position: absolute; left: 11px; top: -12px; width: 2px; height: 24px; background: var(--line-strong); }
+.p-step.done + .p-step::before, .p-step.current::before { background: var(--accent); }
+.p-dot { flex: none; width: 24px; height: 24px; border-radius: 50%; border: 2px solid var(--line-strong); background: var(--surface); }
+.p-step.done .p-dot { border-color: var(--ok); background: var(--ok) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 6 9 17l-5-5'/%3E%3C/svg%3E") center / 14px no-repeat; }
+.p-step.current .p-dot { border-color: var(--accent); box-shadow: 0 0 0 5px var(--accent-soft); background: var(--accent); }
+.p-step.done .p-label { color: var(--ink); }
+.p-step.current .p-label { color: var(--ink); font-weight: 600; }
+.p-done { margin-top: 12px; padding: 12px 16px; border-radius: 12px; background: var(--ok-soft); color: var(--ok); font-weight: 500; }
+.thread { display: grid; gap: 12px; max-height: 24rem; overflow: auto; margin-bottom: 16px; }
+.bubble { max-width: 88%; padding: 10px 14px; border-radius: 14px; border: 1px solid var(--line); background: var(--bg); }
+.bubble.client { justify-self: end; background: var(--accent-soft); border-color: color-mix(in srgb, var(--accent) 25%, var(--line)); }
+.bubble p { margin-top: 4px; }
+.pre-wrap { white-space: pre-wrap; overflow-wrap: anywhere; }
+.msg-form { display: grid; gap: 12px; }
+.msg-form textarea { width: 100%; padding: 12px 14px; border: 1px solid var(--line-strong); border-radius: 10px; background: var(--bg); color: var(--ink); font: 400 1rem/1.5 var(--font); resize: vertical; }
+.msg-form textarea:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 4px var(--accent-soft); }
+.drop { display: grid; gap: 4px; place-items: center; margin-top: 12px; padding: 28px 16px; border: 2px dashed var(--line-strong); border-radius: 14px; background: var(--bg); text-align: center; cursor: pointer; transition: border-color .15s, background .15s; }
+.drop:hover, .drop.over { border-color: var(--accent); background: var(--accent-soft); }
+.file-list { display: grid; gap: 8px; margin-top: 12px; }
+.file-list li { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 4px 12px; padding: 10px 14px; border: 1px solid var(--line); border-radius: 10px; background: var(--bg); }
+.f-name { overflow-wrap: anywhere; font-weight: 500; }
+.suivi-foot { padding: 0 0 48px; color: var(--muted); font-size: .86rem; }
+.suivi-foot a { color: var(--accent); }

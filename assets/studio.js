@@ -9,7 +9,7 @@
   // Délai de réponse annoncé après l'envoi du formulaire, par exemple 'sous 24 h ouvrées'. Vide : aucune promesse de délai.
   var REPLY_DELAY = '';
   // Adresse du service qui reçoit les demandes (POST JSON). Vide : le formulaire prépare un e-mail dans la messagerie du visiteur.
-  var CONTACT_ENDPOINT = '';
+  var CONTACT_ENDPOINT = '/api/contact';
   // ------------------------------------------------------
   var PHONE_DIGITS = CONTACT_PHONE.replace(/\D/g, '');
   var WHATSAPP_PHONE = PHONE_DIGITS.indexOf('0') === 0 ? '33' + PHONE_DIGITS.slice(1) : PHONE_DIGITS;
