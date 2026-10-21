@@ -17,6 +17,10 @@ Site statique, sans framework ni ressource externe : une page d'accueil, deux d�
 
 Le numéro de téléphone public se règle en haut de `assets/studio.js` (`CONTACT_PHONE`).
 
+## Déployer
+
+Sur le serveur, en root : `curl -fsSL https://raw.githubusercontent.com/gabinlsc/glsc-studio/main/deploy.sh | sudo bash` (ajouter `-s -- <branche>` pour une autre branche). Le script lit le dossier du site dans nginx, sauvegarde l'existant dans `/var/backups/glsc`, vérifie que le site répond et revient en arrière sinon.
+
 ## Régénérer les images et les polices
 
 `python3 tools/build-assets.py fonts | thumbs <dossier de captures> | brand` (Pillow, fonttools, brotli ; les captures des démos sont faites avec Chromium). Le site, lui, n'a besoin d'aucun outil.
