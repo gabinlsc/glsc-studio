@@ -1,0 +1,18 @@
+{
+  "name": "glsc-studio",
+  "private": true,
+  "type": "module",
+  "description": "Site statique de StudioGLSC : outils de génération et de vérification (le site lui-même n'a aucune dépendance).",
+  "scripts": {
+    "build": "node tools/build-site.mjs",
+    "check": "node tools/build-site.mjs && git diff --exit-code -- . ':!package-lock.json' && node tools/check-links.mjs && node tools/check-seo.mjs && node tools/check-budget.mjs",
+    "test": "node tests/e2e.mjs && node tests/csp.mjs && node tests/a11y.mjs",
+    "lighthouse": "node tests/lighthouse.mjs"
+  },
+  "devDependencies": {
+    "axe-core": "4.10.2",
+    "lighthouse": "12.3.0",
+    "playwright": "1.49.1",
+    "chrome-launcher": "1.1.2"
+  }
+}

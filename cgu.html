@@ -11,16 +11,15 @@
   <meta property="og:locale" content="fr_FR">
   <meta property="og:title" content="Conditions générales d'utilisation — StudioGLSC">
   <meta property="og:description" content="Accès au site, propriété intellectuelle, engagements des parties et limitation de responsabilité.">
+  <meta property="og:image" content="https://studio.glsc.fr/assets/img/og.png">
   <meta name="robots" content="index,follow">
   <title>Conditions générales d'utilisation — StudioGLSC</title>
   <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
   <link rel="icon" href="/assets/favicon-32.png" sizes="32x32" type="image/png">
   <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
   <link rel="preload" href="/assets/fonts/inter-400.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="https://studio.glsc.fr/legal.css">
-  <script>
-    try { document.documentElement.dataset.theme = localStorage.getItem('studioglsc-theme') || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'); } catch { document.documentElement.dataset.theme = 'light'; }
-  </script>
+  <link rel="stylesheet" href="/legal.css">
+  <script src="/assets/theme-init.js"></script>
 </head>
 <body>
   <a href="#contenu" class="skip-link">Aller au contenu</a>
@@ -125,7 +124,7 @@
     <div class="wrap">
       <div class="footer-top">
         <div>
-          <a href="https://studio.glsc.fr/" class="wordmark" style="font-size:1.25rem">Studio<span class="accent">GLSC</span></a>
+          <a href="https://studio.glsc.fr/" class="wordmark lg">Studio<span class="accent">GLSC</span></a>
           <p class="footer-note">Studio web indépendant de Gabin Lescoat.<br>Création de sites vitrines en Bretagne.</p>
         </div>
         <div class="footer-links">
@@ -149,41 +148,6 @@
     </div>
   </footer>
 
-  <script>
-    const root = document.documentElement;
-    const themeButton = document.querySelector('#theme-toggle');
-    const themeIcon = document.querySelector('#theme-icon');
-    function setTheme(theme) {
-      root.dataset.theme = theme;
-      try { localStorage.setItem('studioglsc-theme', theme); } catch {}
-      document.querySelector('meta[name="theme-color"]').content = theme === 'dark' ? '#0a0f1c' : '#f6f7f9';
-      themeIcon.textContent = theme === 'dark' ? '☼' : '☾';
-      themeButton.setAttribute('aria-label', theme === 'dark' ? 'Activer le thème clair' : 'Activer le thème sombre');
-    }
-    setTheme(root.dataset.theme || 'light');
-    themeButton.addEventListener('click', () => setTheme(root.dataset.theme === 'dark' ? 'light' : 'dark'));
-
-    document.querySelectorAll('[data-year]').forEach(el => { el.textContent = new Date().getFullYear(); });
-
-    const legalBody = document.querySelector('.legal-body');
-    const tocList = document.querySelector('[data-toc]');
-    const headings = legalBody ? [...legalBody.querySelectorAll('h2[id]')] : [];
-    if (tocList && headings.length) {
-      headings.forEach(heading => {
-        const item = document.createElement('li');
-        const link = document.createElement('a');
-        link.href = `#${heading.id}`;
-        link.textContent = heading.textContent;
-        item.append(link);
-        tocList.append(item);
-      });
-    } else if (tocList) {
-      const toc = document.querySelector('.toc');
-      if (toc) toc.remove();
-    }
-
-    const remaining = [...document.querySelectorAll('.todo')].map(el => el.textContent.trim());
-    if (remaining.length) console.warn('[StudioGLSC] Champs à compléter avant la mise en ligne :', remaining);
-  </script>
+  <script src="/assets/legal.js" defer></script>
 </body>
 </html>

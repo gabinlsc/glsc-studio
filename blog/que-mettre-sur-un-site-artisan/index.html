@@ -22,13 +22,7 @@
   <link rel="preload" href="/assets/fonts/inter-400.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/assets/fonts/inter-display-700.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="/assets/studio.css">
-  <script>
-    document.documentElement.classList.add('js');
-    try {
-      var saved = localStorage.getItem('studioglsc-theme');
-      document.documentElement.dataset.theme = saved || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
-    } catch (e) { document.documentElement.dataset.theme = 'light'; }
-  </script>
+  <script src="/assets/theme-init.js"></script>
   <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -86,7 +80,7 @@
   </script>
 </head>
 <body>
-  <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <svg class="sprite" width="0" height="0" aria-hidden="true" focusable="false">
     <defs>
       <symbol id="i-check" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></symbol>
       <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></symbol>
@@ -173,7 +167,7 @@
         <h2 id="ce-qu-il-vaut-mieux-eviter">Ce qu’il vaut mieux éviter</h2><ul class="ticks"><li>Les longs textes avant le premier moyen de contact</li><li>Les photos floues ou trop lourdes</li><li>Les animations qui ralentissent la page</li><li>Les informations périmées</li></ul>
       </div>
     </div></article>
-    <section class="section band"><div class="wrap"><div class="section-head"><div><p class="eyebrow">À lire aussi</p><h2>Pour aller plus loin</h2></div></div><div class="link-grid"><a class="link-card" href="/sites-pour/artisans-btp/"><strong>Site pour artisans &amp; btp</strong><span>Plombiers, électriciens, couvreurs, maçons, peintres…</span><span class="link-more">Lire <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></span></a><a class="link-card" href="/blog/mentions-legales-site-professionnel/"><strong>Mentions légales d’un site professionnel : ce qu’il faut afficher</strong><span>Éditeur, hébergeur, coordonnées, données personnelles : les grandes rubriques des mentions légales d’un site professionnel en France. Informations générales, pas un conseil juridique.</span><span class="link-more">Lire <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></span></a></div></div></section>
+    <section class="section band"><div class="wrap"><div class="section-head"><div><p class="eyebrow">À lire aussi</p><h2>Pour aller plus loin</h2></div></div><div class="link-grid"><a class="link-card" href="/sites-pour/artisans-btp/"><strong>Site pour artisans &amp; btp</strong><span>Plombiers, électriciens, couvreurs, maçons, peintres…</span><span class="link-more">Lire <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></span></a><a class="link-card" href="/blog/mentions-legales-site-professionnel/"><strong>Mentions légales d’un site professionnel : ce qu’il faut afficher</strong><span>Éditeur, hébergeur, coordonnées, données personnelles : les grandes rubriques des mentions légales d’un site pro. Informations générales, pas un conseil juridique.</span><span class="link-more">Lire <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></span></a></div></div></section>
     <section class="section cta-band-wrap"><div class="wrap"><div class="cta-band">
       <div><h2>Parlons de votre projet</h2><p>Le premier échange est gratuit et sans engagement. Je vous réponds directement.</p></div>
       <div class="btn-row"><a class="btn btn-primary" href="/#contact">Demander un devis <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a><a class="btn btn-secondary" href="/#offres">Voir les tarifs</a></div>

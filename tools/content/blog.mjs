@@ -64,7 +64,7 @@ export const ARTICLES = [
   {
     slug: 'mentions-legales-site-professionnel', date: '2026-10-21', tag: 'Légal',
     title: 'Mentions légales d’un site professionnel : ce qu’il faut afficher',
-    desc: 'Éditeur, hébergeur, coordonnées, données personnelles : les grandes rubriques des mentions légales d’un site professionnel en France. Informations générales, pas un conseil juridique.',
+    desc: 'Éditeur, hébergeur, coordonnées, données personnelles : les grandes rubriques des mentions légales d’un site pro. Informations générales, pas un conseil juridique.',
     lead: 'Un site professionnel doit en principe permettre d’identifier qui l’édite et qui l’héberge. Voici les grandes rubriques, présentées simplement. Ce texte est informatif : pour votre situation, vérifiez auprès d’un professionnel du droit.',
     sections: [
       { h: 'Qui édite le site', p: ['Les mentions doivent identifier l’éditeur : nom ou dénomination, adresse, coordonnées (e-mail, téléphone), et, selon le statut, des informations d’immatriculation comme le SIREN ou SIRET. Pour une société, la forme juridique et le capital s’ajoutent.'] },

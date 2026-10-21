@@ -1,0 +1,43 @@
+name: Vérifications
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  statique:
+    name: Pages générées, liens, référencement, poids
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 22, cache: npm }
+      - run: npm ci --ignore-scripts
+      - name: Les pages générées sont à jour
+        run: |
+          node tools/build-site.mjs
+          git diff --exit-code -- . ':!package-lock.json' || { echo '::error::Lancer « node tools/build-site.mjs » et commiter le résultat.'; exit 1; }
+      - run: node tools/check-links.mjs
+      - run: node tools/check-seo.mjs
+      - run: node tools/check-budget.mjs
+
+  navigateur:
+    name: Parcours, CSP, accessibilité, Lighthouse
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 22, cache: npm }
+      - run: npm ci --ignore-scripts
+      - run: npx playwright install --with-deps chromium
+      - run: node tests/e2e.mjs
+      - run: node tests/csp.mjs
+      - run: node tests/a11y.mjs
+      - name: Lighthouse (mobile)
+        run: |
+          export CHROME_PATH="$(node -e "import('playwright').then(m => console.log(m.chromium.executablePath()))")"
+          node tests/lighthouse.mjs

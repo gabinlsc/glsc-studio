@@ -39,6 +39,22 @@ Sur le serveur, en root : `curl -fsSL https://raw.githubusercontent.com/gabinlsc
 `node tools/check-links.mjs` vérifie les liens internes, les ancres et les icônes de toutes les pages.
 Pour la fiche Google, voir `docs/google-business-profile.md`.
 
+## Vérifications
+
+`npm ci --ignore-scripts` puis :
+
+| Commande | Ce qu'elle contrôle |
+| --- | --- |
+| `npm run check` | pages générées à jour, liens et ancres, référencement (titres, descriptions, canoniques, JSON-LD), budget de poids |
+| `npm test` | parcours dans Chromium (formulaire, estimation, démos, 404), politique CSP de production, accessibilité (axe-core) |
+| `npm run lighthouse` | scores Lighthouse mobile ≥ 90 (performance) et ≥ 95 (accessibilité, bonnes pratiques, SEO) |
+
+Le tout tourne aussi sur chaque PR (`.github/workflows/check.yml`). Si Chromium n'est pas celui de Playwright, indiquer son chemin dans `CHROMIUM_PATH`.
+
+## Sécurité du serveur
+
+`deploy/studio-security.conf` contient les en-têtes (CSP stricte, HSTS, Permissions-Policy…) et les règles de cache. `deploy.sh` l'installe dans `/etc/nginx/snippets/` et indique la ligne à ajouter dans le bloc `server` de nginx (`include snippets/studio-security.conf;`) : il ne modifie jamais la configuration nginx tout seul.
+
 ## Régénérer les images et les polices
 
 `python3 tools/build-assets.py fonts | thumbs <dossier de captures> | brand` (Pillow, fonttools, brotli ; les captures des démos sont faites avec Chromium). Le site, lui, n'a besoin d'aucun outil.
