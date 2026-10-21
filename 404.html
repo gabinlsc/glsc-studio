@@ -22,6 +22,16 @@
     .nf h1 { margin-top: 20px; font-size: clamp(1.6rem, 4.5vw, 2.2rem); line-height: 1.15; }
     .nf p { max-width: 42ch; margin: 14px auto 0; color: var(--muted); }
     .nf .btn-row { justify-content: center; margin-top: 28px; }
+    .nf-search { margin-top: 28px; text-align: left; }
+    .nf-search label { display: block; margin-bottom: 8px; font-size: .85rem; font-weight: 600; }
+    .nf-search input { width: 100%; min-height: 48px; padding: 12px 14px; border: 1px solid var(--line-strong); border-radius: 10px; background: var(--bg); color: var(--ink); font: 400 1rem/1.4 var(--font); }
+    .nf-search input:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 4px var(--accent-soft); }
+    .nf-results { display: grid; gap: 8px; margin-top: 12px; }
+    .nf-results a { display: block; padding: 12px 14px; border: 1px solid var(--line); border-radius: 10px; background: var(--bg); text-decoration: none; }
+    .nf-results a:hover, .nf-results a:focus-visible { border-color: var(--accent); }
+    .nf-results strong { display: block; font-weight: 600; font-size: .95rem; }
+    .nf-results span { color: var(--muted); font-size: .85rem; }
+    .nf .nf-hint { margin: 10px 0 0; max-width: none; text-align: left; color: var(--muted); font-size: .88rem; }
   </style>
 </head>
 <body>
@@ -34,6 +44,13 @@
       <a class="btn btn-primary" href="/">Retour à l’accueil</a>
       <a class="btn btn-secondary" href="/#offres">Voir les offres</a>
     </div>
+    <form class="nf-search" id="nf-search" role="search" onsubmit="return false" hidden>
+      <label for="nf-q">Chercher une page du site</label>
+      <input id="nf-q" type="search" placeholder="Tarifs, plombier, Lorient, mentions légales…" autocomplete="off">
+      <p class="nf-hint" id="nf-hint" aria-live="polite"></p>
+      <div class="nf-results" id="nf-results"></div>
+    </form>
   </main>
+  <script src="/assets/notfound.js" defer></script>
 </body>
 </html>

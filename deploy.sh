@@ -11,6 +11,7 @@ DOMAIN=studio.glsc.fr
 REPO=gabinlsc/glsc-studio
 BACKUPS=/var/backups/glsc
 FILES=(index.html 404.html legal.css cgu.html cgv.html mentions-legales.html club-demo.html btp-demo.html robots.txt sitemap.xml)
+DIRS=(a-propos blog creation-site-web sites-pour)   # pages générées (tools/build-site.mjs)
 
 c() { printf '\033[%sm%s\033[0m\n' "$1" "$2"; }
 info() { c 36 "▸ $*"; }
@@ -34,7 +35,7 @@ else
   curl -fsSL "https://codeload.github.com/$REPO/tar.gz/$REF" | tar -xz -C "$WORK"
   SRC="$(find "$WORK" -mindepth 1 -maxdepth 1 -type d | head -1)"
 fi
-for f in "${FILES[@]}" assets/studio.css assets/studio.js assets/fonts/inter-400.woff2 assets/favicon.svg; do
+for f in "${FILES[@]}" assets/studio.css assets/studio.js assets/home.js assets/fonts/inter-400.woff2 assets/favicon.svg; do
   [ -s "$SRC/$f" ] || die "Archive incomplète : $f manquant. Rien n'a été modifié."
 done
 ok "archive complète"
@@ -48,17 +49,23 @@ ls -1t "$BACKUPS"/studio-*.tar.gz 2>/dev/null | tail -n +6 | xargs -r rm -f
 
 # ---- installation
 OWNER="$(stat -c '%u:%g' "$ROOT")"
-rollback() { c 31 "  ↩ retour à la version précédente"; rm -rf "$ROOT/assets"; tar -xzf "$BK" -C "$ROOT"; exit 1; }
+rollback() { c 31 "  ↩ retour à la version précédente"; rm -rf "$ROOT/assets" "${DIRS[@]/#/$ROOT/}"; tar -xzf "$BK" -C "$ROOT"; exit 1; }
 rm -rf "$ROOT/assets.new"; cp -r "$SRC/assets" "$ROOT/assets.new"
 find "$ROOT/assets.new" -type d -exec chmod 755 {} + ; find "$ROOT/assets.new" -type f -exec chmod 644 {} +
 for f in "${FILES[@]}"; do install -m 644 "$SRC/$f" "$ROOT/$f.new" && mv -f "$ROOT/$f.new" "$ROOT/$f"; done
 rm -rf "$ROOT/assets.old"; [ -d "$ROOT/assets" ] && mv "$ROOT/assets" "$ROOT/assets.old"; mv "$ROOT/assets.new" "$ROOT/assets"; rm -rf "$ROOT/assets.old"
+for d in "${DIRS[@]}"; do
+  [ -d "$SRC/$d" ] || continue
+  rm -rf "$ROOT/$d.new" "$ROOT/$d.old"; cp -r "$SRC/$d" "$ROOT/$d.new"
+  find "$ROOT/$d.new" -type d -exec chmod 755 {} + ; find "$ROOT/$d.new" -type f -exec chmod 644 {} +
+  [ -d "$ROOT/$d" ] && mv "$ROOT/$d" "$ROOT/$d.old"; mv "$ROOT/$d.new" "$ROOT/$d"; rm -rf "$ROOT/$d.old"
+done
 chown -R "$OWNER" "$ROOT" 2>/dev/null || true
 ok "fichiers en place"
 
 # ---- vérification
 if [ -z "${GLSC_SRC:-}" ] && command -v curl >/dev/null; then
-  for path in / /assets/studio.css /assets/fonts/inter-400.woff2 /mentions-legales.html; do
+  for path in / /assets/studio.css /assets/home.js /assets/fonts/inter-400.woff2 /mentions-legales.html /blog/ /a-propos/; do
     code="$(curl -s -o /dev/null -w '%{http_code}' --max-time 15 "https://$DOMAIN$path" || echo 000)"
     [ "$code" = 200 ] && ok "$path → 200" || { c 31 "  ✗ $path → $code"; rollback; }
   done
