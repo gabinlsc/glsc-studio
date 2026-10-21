@@ -9,7 +9,7 @@ const b = await launch();
 const home = await b.newContext({ viewport: { width: 1440, height: 900 } });
 await home.route(/cdn\.tailwindcss|fonts\.g/, (r) => r.abort());
 let pg = await home.newPage(); const errs = [];
-pg.on('pageerror', (e) => errs.push(e.message)); pg.on('console', (m) => m.type() === 'error' && !/ERR_FAILED|net::/.test(m.text()) && errs.push(m.text()));
+pg.on('pageerror', (e) => errs.push(e.message)); pg.on('console', (m) => m.type() === 'error' && !/ERR_FAILED|net::|503/.test(m.text()) && errs.push(m.text()));
 await pg.goto(base + '/', { waitUntil: 'networkidle' });
 // estimation
 assert.equal(await pg.textContent('#est-total'), '400 €'); ok('estimation par défaut : 400 €');
@@ -30,10 +30,16 @@ await pg.fill('#form-name', 'Léa Martin'); await pg.fill('#form-email', 'lea@@x
 await pg.fill('#form-email', 'lea@example.fr');
 await pg.click('#step-back'); assert.equal(await pg.textContent('#step-label'), 'Étape 3 sur 4'); await pg.click('#step-next'); ok('retour puis avance conservent les réponses');
 await pg.route('mailto:**', (r) => r.abort()).catch(() => {});
+await pg.route('**/api/contact', (r) => r.fulfill({ status: 503, body: '{}' }));
 await pg.click('#step-send'); await pg.waitForTimeout(300);
 assert.equal(await pg.locator('#form-done').isVisible(), true); assert.match(await pg.textContent('#done-title'), /Merci Léa/); assert.equal(await pg.locator('#done-fallback').isVisible(), true);
-const copy = await pg.inputValue('#done-copy'); assert.match(copy, /Activité : Commerce/); assert.match(copy, /Besoin : One-Page Express/); assert.match(copy, /Léa Martin/); ok('confirmation + message à copier si pas de messagerie');
+const copy = await pg.inputValue('#done-copy'); assert.match(copy, /Activité : Commerce/); assert.match(copy, /Besoin : One-Page Express/); assert.match(copy, /Léa Martin/); ok('service indisponible : repli e-mail + message à copier');
+await pg.unroute('**/api/contact'); let posted = null; await pg.route('**/api/contact', (r) => { posted = r.request().postDataJSON(); r.fulfill({ status: 201, contentType: 'application/json', body: '{"ok":true}' }); });
 await pg.click('#done-restart'); assert.equal(await pg.locator('#contact-form').isVisible(), true); assert.equal(await pg.textContent('#step-label'), 'Étape 1 sur 4'); ok('nouvelle demande réinitialise');
+await pg.check('input[name=activity][value="Commerce"]', { force: true }); await pg.click('#step-next'); await pg.check('input[name=service][value="One-Page Express"]', { force: true }); await pg.click('#step-next'); await pg.check('input[name=timing][value="Dans le mois"]', { force: true }); await pg.click('#step-next');
+await pg.fill('#form-name', 'Léa Martin'); await pg.fill('#form-email', 'lea@example.fr'); await pg.click('#step-send'); await pg.waitForSelector('#form-done:not([hidden])');
+assert.equal(await pg.locator('#done-fallback').isVisible(), false); assert.equal(posted.email, 'lea@example.fr'); assert.equal(posted.service, 'One-Page Express'); ok('service disponible : demande envoyée à /api/contact, sans repli');
+await pg.click('#done-restart');
 // piège anti-robot : rien ne s'affiche
 await pg.check('input[name=activity][value="Commerce"]', { force: true }); await pg.click('#step-next'); await pg.check('input[name=service][value="One-Page Express"]', { force: true }); await pg.click('#step-next'); await pg.check('input[name=timing][value="Dans le mois"]', { force: true }); await pg.click('#step-next');
 await pg.fill('#form-name', 'Bot'); await pg.fill('#form-email', 'bot@example.fr'); await pg.evaluate(() => { document.querySelector('input[name=website]').value = 'http://spam'; }); await pg.click('#step-send');
