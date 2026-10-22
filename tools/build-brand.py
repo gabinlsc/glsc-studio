@@ -9,7 +9,7 @@ from fontTools.pens.transformPen import TransformPen
 
 ROOT = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..")
 OUT = os.path.join(ROOT, "assets/brand")
-BLUE, BLUE_DEEP, INK, WHITE, BLUE_LIGHT = "#2447D6", "#1B37B0", "#0B1220", "#FFFFFF", "#8AA4FF"
+BLUE, BLUE_DEEP, INK, WHITE = "#2447D6", "#1B37B0", "#0B1220", "#FFFFFF"
 
 # Le « G » du monogramme (grille 64 × 64), identique à assets/favicon.svg
 G = open(os.path.join(ROOT, "assets/favicon.svg"), encoding="utf-8").read().split('<path d="')[1].split('"')[0]
@@ -44,7 +44,7 @@ FILES["studioglsc-lettre-bleu.svg"] = svg(32, 35, f'<path d="{G}" fill="{BLUE}"/
 FILES["studioglsc-lettre-blanc.svg"] = svg(32, 35, f'<path d="{G}" fill="{WHITE}"/>', vb="16 14.5 32 35")
 FILES["studioglsc-lettre-noir.svg"], _ = svg(32, 35, f'<path d="{G}" fill="{INK}"/>', vb="16 14.5 32 35"), 0
 FILES["studioglsc-logo.svg"], W = lockup(BLUE, WHITE, INK, BLUE)
-FILES["studioglsc-logo-fond-sombre.svg"], _ = lockup(BLUE, WHITE, WHITE, BLUE_LIGHT)
+FILES["studioglsc-logo-fond-sombre.svg"], _ = lockup(BLUE, WHITE, WHITE, BLUE)
 FILES["studioglsc-logo-noir.svg"], _ = lockup(INK, WHITE, INK, INK)
 FILES["studioglsc-logo-blanc.svg"], _ = lockup(WHITE, INK, WHITE, WHITE)
 
@@ -77,7 +77,7 @@ COLORS_CSS = """/* StudioGLSC — palette de marque */
   --glsc-blue: #2447D6;        /* bleu StudioGLSC (couleur principale) */
   --glsc-blue-deep: #1B37B0;   /* bleu profond (survol, états actifs) */
   --glsc-blue-soft: #E9EEFE;   /* bleu très pâle (fonds, pastilles) */
-  --glsc-blue-light: #8AA4FF;  /* bleu clair (texte accent sur fond sombre) */
+  --glsc-night: #0A0F1C;       /* nuit (fond du thème sombre) */
   --glsc-ink: #0B1220;         /* encre (texte, fonds sombres) */
   --glsc-muted: #566074;       /* gris texte secondaire */
   --glsc-line: #E1E5ED;        /* filets */

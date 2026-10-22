@@ -321,7 +321,7 @@ const WORD_PATH = ''; // le logotype de la figure « zone de protection » est v
     ['Fond', '#F6F7F9', 'Arrière-plan de page', 'Fond général du site en thème clair.', '#0B1220', ''],
     ['Surface', '#FFFFFF', 'Cartes et formulaires', 'Éléments posés sur le fond.', '#0B1220', ''],
     ['Vert confirmation', '#107A57', 'Réussite et disponibilité', 'Validations, pastille « en ligne », WhatsApp.', '#FFFFFF', ''],
-    ['Bleu clair', '#8AA4FF', 'Accent sur fond sombre', 'Remplace le bleu principal en thème sombre.', '#0A0F1C', 'dark'],
+    ['Nuit', '#0A0F1C', 'Fond du thème sombre', 'Arrière-plan du site en thème sombre ; le bleu reste le même.', '#FFFFFF', 'dark'],
   ];
   const swatch = ([name, hex, role, use, on, kind]) => `<li class="bk-sw reveal"><button type="button" class="bk-sw-chip" data-copy="${hex}" data-copied="Couleur copiée" aria-label="Copier ${esc(name)} ${hex}"><span class="bk-sw-fill" data-bg="${hex}" data-fg="${on}"><b>${esc(name)}</b><span>Copier ${hex}</span></span></button><dl class="bk-sw-meta"><div><dt>HEX</dt><dd>${hex}</dd></div><div><dt>RVB</dt><dd>${rgb(hex)}</dd></div><div><dt>Rôle</dt><dd>${esc(role)}</dd></div></dl><p class="muted">${esc(use)}</p><p class="bk-ct">Texte ${on === '#FFFFFF' ? 'blanc' : 'sombre'} dessus : <b>${ratio(hex, on).toFixed(1)}:1</b> · ${badge(ratio(hex, on))}</p></li>`;
   const logoCards = [
@@ -450,3 +450,25 @@ const searchable = [{ path: '/', title: 'Accueil', desc: 'Création de sites vit
 mkdirSync(join(ROOT, 'assets'), { recursive: true });
 writeFileSync(join(ROOT, 'assets/search-index.json'), JSON.stringify(searchable.map((r) => ({ u: r.path, t: r.title, d: r.desc, k: r.keywords }))));
 console.log(`${registry.length} pages générées · plan du site : ${urls.length} adresses · index de recherche : ${searchable.length} entrées`);
+
+// ---------------------------------------------------------------- empreintes des feuilles de style et scripts
+// Chaque lien local vers un .css ou .js reçoit ?v=<empreinte du fichier> : une mise à jour est vue tout de suite, même si le navigateur a gardé l'ancienne version en cache.
+{
+  const { createHash } = await import('node:crypto');
+  const { readdirSync } = await import('node:fs');
+  const { resolve, relative: rel, dirname: dn } = await import('node:path');
+  const SKIP = new Set(['node_modules', '.git', 'tools', 'tests', 'docs', 'branding', 'deploy', '.github']);
+  const pagesAll = [];
+  (function walk(d) { for (const f of readdirSync(d, { withFileTypes: true })) { if (SKIP.has(f.name)) continue; const p = join(d, f.name); if (f.isDirectory()) walk(p); else if (f.name.endsWith('.html')) pagesAll.push(p); } })(ROOT);
+  const hashes = new Map();
+  const hashOf = (file) => { if (!hashes.has(file)) hashes.set(file, existsSync(file) ? createHash('sha1').update(readFileSync(file)).digest('hex').slice(0, 8) : null); return hashes.get(file); };
+  for (const page of pagesAll) {
+    const src = readFileSync(page, 'utf8');
+    const out = src.replace(/(<(?:link|script)\b[^>]*?\s(?:href|src)=")([^"?#]+\.(?:css|js))(?:\?v=[0-9a-f]+)?(")/g, (m, a, u, c) => {
+      if (/^(https?:)?\/\//.test(u)) return m;
+      const file = u.startsWith('/') ? join(ROOT, u) : resolve(dn(page), u);
+      const h = hashOf(file); return h ? `${a}${u}?v=${h}${c}` : m;
+    });
+    if (out !== src) writeFileSync(page, out);
+  }
+}
