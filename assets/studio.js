@@ -18,6 +18,11 @@
   var root = document.documentElement;
   var reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
 
+  // Photo absente : on remet le monogramme.
+  $$('img[data-fallback]').forEach(function (img) {
+    var swap = function () { var d = document.createElement('div'); d.className = 'about-photo about-monogram'; d.setAttribute('aria-hidden', 'true'); d.textContent = img.getAttribute('data-fallback'); img.replaceWith(d); };
+    if (img.complete && !img.naturalWidth) swap(); else img.addEventListener('error', swap, { once: true });
+  });
   window.StudioCfg = { BOOKING_URL: BOOKING_URL, REPLY_DELAY: REPLY_DELAY, CONTACT_ENDPOINT: CONTACT_ENDPOINT, $: $, $$: $$, reduceMotion: reduceMotion };
 
   /* ---------- Thème ---------- */

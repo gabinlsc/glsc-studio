@@ -38,6 +38,7 @@ for (const page of pages) {
     if (u.startsWith('#')) { if (u.length > 1 && !ids.has(u.slice(1))) fail(page, `ancre introuvable ${u}`); continue; }
     const path = u.startsWith('/') ? u : join(dirname(own), u);
     const file = urlToFile(path);
+    if (!file && path === "/assets/img/gabin.jpg") continue; // photo déposée sur le serveur par activate.sh
     if (!file) { fail(page, `lien cassé ${u}`); continue; }
     const hash = (u.match(/#(.+)$/) || [])[1];
     if (hash && file.endsWith('.html') && !new RegExp(`\\sid="${hash}"`).test(html(file))) fail(page, `ancre ${u} absente de ${relative(ROOT, file)}`);
