@@ -11,6 +11,9 @@ Site statique, sans framework ni ressource externe : une page d'accueil, deux d�
 | `assets/studio.js` | thème, menu mobile, animations, formulaire (prépare un e-mail, rien n'est enregistré), liens téléphone et WhatsApp |
 | `assets/fonts/` | Inter, hébergée sur le site (sous-ensemble latin, woff2) |
 | `assets/img/` | vignettes des réalisations (webp) et image de partage |
+| `a-propos/`, `sites-pour/`, `creation-site-web/`, `blog/` | pages de contenu **générées** par `node tools/build-site.mjs` (ne pas les modifier à la main) |
+| `tools/content/*.mjs`, `tools/site.config.json` | le texte de ces pages et les réglages (liens officiels, fiche Google) |
+| `assets/search-index.json` | index de la recherche de la page 404 (généré) |
 | `legal.css`, `mentions-legales.html`, `cgu.html`, `cgv.html` | pages légales |
 | `club-demo.html`, `btp-demo.html` | concepts démo (ils chargent encore Google Fonts et Tailwind depuis un CDN, ce que les mentions légales indiquent) |
 | `404.html` | page d'erreur |
@@ -29,6 +32,12 @@ Le formulaire pose trois questions (activité, besoin, délai) puis demande les 
 ## Déployer
 
 Sur le serveur, en root : `curl -fsSL https://raw.githubusercontent.com/gabinlsc/glsc-studio/main/deploy.sh | sudo bash` (ajouter `-s -- <branche>` pour une autre branche). Le script lit le dossier du site dans nginx, sauvegarde l'existant dans `/var/backups/glsc`, vérifie que le site répond et revient en arrière sinon.
+
+## Pages de contenu et référencement
+
+`node tools/build-site.mjs` régénère : à propos, une page par métier, une page par ville, le blog, le plan du site (`sitemap.xml`), l'index de recherche et les colonnes de liens du pied de page (dans `index.html`, entre les repères `@footer-cols`). L'en-tête, le pied de page et les icônes viennent d'`index.html` : on ne les maintient qu'à un seul endroit.
+`node tools/check-links.mjs` vérifie les liens internes, les ancres et les icônes de toutes les pages.
+Pour la fiche Google, voir `docs/google-business-profile.md`.
 
 ## Régénérer les images et les polices
 
