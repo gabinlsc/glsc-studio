@@ -5,6 +5,7 @@
   var root = document.documentElement;
   var calm = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   if (!calm) root.classList.add('js-motion');
+  try { if (window.self !== window.top) root.classList.add('is-embedded'); } catch (e) { root.classList.add('is-embedded'); }
   var $ = function (s, c) { return (c || document).querySelector(s); };
   var $$ = function (s, c) { return Array.prototype.slice.call((c || document).querySelectorAll(s)); };
   window.Demo = { $: $, $$: $$, calm: calm };

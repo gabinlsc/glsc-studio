@@ -25,7 +25,9 @@
   <link rel="preload" href="/assets/fonts/inter-400.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/assets/fonts/inter-display-700.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="/assets/studio.css">
+  <link rel="stylesheet" href="/assets/fx.css">
   <script src="/assets/theme-init.js"></script>
+  <script src="/assets/fx.js"></script>
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -186,6 +188,8 @@
       </div>
     </section>
 
+    <div class="fx-ticker" aria-hidden="true"><div class="fx-ticker-track"><span>Sites vitrines</span><span>Sur mesure</span><span>Mobile d’abord</span><span>Sans abonnement</span><span>Première version en 48 h</span><span>Réponse directe</span><span>Vous êtes propriétaire</span><span>Bretagne</span></div></div>
+
     <section id="services" class="section">
       <div class="wrap">
         <div class="section-head reveal"><div><p class="eyebrow">Ce que je peux faire pour vous</p><h2>Votre activité mérite une présence web <span class="accent">à la hauteur.</span></h2></div><p>Un site bien pensé aide vos futurs clients à comprendre ce que vous faites et à vous contacter simplement.</p></div>
@@ -319,30 +323,39 @@
           <!--@demo-cards:end-->
         </div>
         <p class="reveal all-demos"><a class="btn btn-secondary" href="/demos/">Voir les six démos <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a></p>
-        <div class="demo-lab reveal">
-          <div class="demo-lab-copy">
+        <!--@showcase:start-->
+        <div class="showcase reveal" id="showcase" data-device="phone">
+          <div class="sc-copy">
             <p class="eyebrow">Essayer en direct</p>
-            <h3>Testez une démo comme le ferait un client, sur son téléphone.</h3>
-            <p class="muted">Choisissez un concept puis lancez-le dans le téléphone. La démo ne se charge que lorsque vous cliquez.</p>
-            <div class="seg" role="tablist" aria-label="Choisir une démo">
-              <!--@demo-tabs:start-->
-              <button type="button" role="tab" aria-selected="true" data-demo="/demos/restaurant/" data-title="Restaurant">Restaurant</button>
-              <button type="button" role="tab" aria-selected="false" data-demo="/demos/coiffeur/" data-title="Coiffure">Coiffure</button>
-              <button type="button" role="tab" aria-selected="false" data-demo="/demos/photographe/" data-title="Photographe">Photographe</button>
-              <button type="button" role="tab" aria-selected="false" data-demo="/demos/gite/" data-title="Gîte et location">Gîte et location</button>
-              <button type="button" role="tab" aria-selected="false" data-demo="/demos/club/" data-title="Club et concerts">Club et concerts</button>
-              <button type="button" role="tab" aria-selected="false" data-demo="/demos/btp/" data-title="Artisan du bâtiment">Artisan du bâtiment</button>
-              <!--@demo-tabs:end-->
-            </div>
-            <div class="btn-row">
-              <button type="button" class="btn btn-primary" id="demo-launch"><svg class="icon" aria-hidden="true"><use href="#i-play"/></svg> Lancer la démo</button>
-              <a class="btn btn-secondary" id="demo-open" href="/demos/restaurant/" target="_blank" rel="noopener">Ouvrir en plein écran <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
-            </div>
+            <h3>Testez une démo comme le ferait un client.</h3>
+            <p class="muted">Choisissez un secteur : la démo s’ouvre dans l’appareil de votre choix, et elle est entièrement utilisable.</p>
           </div>
-          <div class="demo-phone" aria-live="polite">
-            <div class="demo-screen" id="demo-screen"><div class="demo-placeholder"><svg class="icon" aria-hidden="true"><use href="#i-play"/></svg><span>Aperçu mobile</span></div></div>
+          <div class="sc-list" role="tablist" aria-label="Choisir une démo" aria-orientation="vertical">
+            <button type="button" class="sc-tab" role="tab" id="sc-tab-0" aria-selected="true" aria-controls="sc-panel" tabindex="0" data-demo="/demos/restaurant/" data-title="Restaurant" data-name="Maison Kerloc’h" data-features="Carte filtrable|Ouvert maintenant|Réservation en 3 étapes"><img class="sc-thumb" src="/assets/img/demo-restaurant.webp" width="96" height="60" loading="lazy" alt=""><span class="sc-meta"><b>Restaurant</b><small>Maison Kerloc’h</small></span><span class="sc-num" aria-hidden="true">01</span></button>
+            <button type="button" class="sc-tab" role="tab" id="sc-tab-1" aria-selected="false" aria-controls="sc-panel" tabindex="-1" data-demo="/demos/coiffeur/" data-title="Coiffure" data-name="Atelier Maëlle" data-features="Nuancier interactif|Tarifs détaillés|Prise de rendez-vous"><img class="sc-thumb" src="/assets/img/demo-coiffeur.webp" width="96" height="60" loading="lazy" alt=""><span class="sc-meta"><b>Coiffure</b><small>Atelier Maëlle</small></span><span class="sc-num" aria-hidden="true">02</span></button>
+            <button type="button" class="sc-tab" role="tab" id="sc-tab-2" aria-selected="false" aria-controls="sc-panel" tabindex="-1" data-demo="/demos/photographe/" data-title="Photographe" data-name="Ewen Le Gall" data-features="Diaporama plein écran|Visionneuse au clavier|Simulateur de tirages"><img class="sc-thumb" src="/assets/img/demo-photographe.webp" width="96" height="60" loading="lazy" alt=""><span class="sc-meta"><b>Photographe</b><small>Ewen Le Gall</small></span><span class="sc-num" aria-hidden="true">03</span></button>
+            <button type="button" class="sc-tab" role="tab" id="sc-tab-3" aria-selected="false" aria-controls="sc-panel" tabindex="-1" data-demo="/demos/gite/" data-title="Gîte et location" data-name="Ty Mor" data-features="Calendrier de dispos|Tarifs saisonniers|Plan des environs"><img class="sc-thumb" src="/assets/img/demo-gite.webp" width="96" height="60" loading="lazy" alt=""><span class="sc-meta"><b>Gîte et location</b><small>Ty Mor</small></span><span class="sc-num" aria-hidden="true">04</span></button>
+            <button type="button" class="sc-tab" role="tab" id="sc-tab-4" aria-selected="false" aria-controls="sc-panel" tabindex="-1" data-demo="/demos/club/" data-title="Club et concerts" data-name="Quai 56" data-features="Agenda filtrable|Billetterie simulée|Ouvert ce soir"><img class="sc-thumb" src="/assets/img/demo-club.webp" width="96" height="60" loading="lazy" alt=""><span class="sc-meta"><b>Club et concerts</b><small>Quai 56</small></span><span class="sc-num" aria-hidden="true">05</span></button>
+            <button type="button" class="sc-tab" role="tab" id="sc-tab-5" aria-selected="false" aria-controls="sc-panel" tabindex="-1" data-demo="/demos/btp/" data-title="Artisan du bâtiment" data-name="Atelier Le Goff" data-features="Comparateur avant/après|Estimateur de travaux|Méthode en étapes"><img class="sc-thumb" src="/assets/img/demo-btp.webp" width="96" height="60" loading="lazy" alt=""><span class="sc-meta"><b>Artisan du bâtiment</b><small>Atelier Le Goff</small></span><span class="sc-num" aria-hidden="true">06</span></button>
+          </div>
+          <div class="sc-stage" id="sc-panel" role="tabpanel" aria-labelledby="sc-tab-0">
+            <div class="sc-top">
+              <div class="sc-switch" role="group" aria-label="Appareil d’aperçu">
+                <button type="button" aria-pressed="true" data-device="phone"><svg class="icon" aria-hidden="true"><use href="#i-phone"/></svg> Mobile</button>
+                <button type="button" aria-pressed="false" data-device="desktop"><svg class="icon" aria-hidden="true"><use href="#i-monitor"/></svg> Ordinateur</button>
+              </div>
+              <a class="btn btn-secondary btn-sm" id="demo-open" href="/demos/restaurant/" target="_blank" rel="noopener">Plein écran <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+            </div>
+            <div class="sc-device">
+              <div class="sc-frame">
+                <div class="sc-chrome" aria-hidden="true"><i></i><i></i><i></i><span id="sc-url">studio.glsc.fr/demos/restaurant/</span></div>
+                <div class="demo-screen" id="demo-screen"><div class="demo-placeholder"><span class="sc-spin" aria-hidden="true"></span><span>Chargement de la démo…</span></div></div>
+              </div>
+            </div>
+            <ul class="sc-feats" id="sc-feats" aria-label="Ce que contient cette démo"><li>Carte filtrable</li><li>Ouvert maintenant</li><li>Réservation en 3 étapes</li></ul>
           </div>
         </div>
+        <!--@showcase:end-->
       </div>
     </section>
 
@@ -370,7 +383,7 @@
       </div>
     </section>
 
-    <section id="contact" class="section flush-top" aria-labelledby="contact-title">
+    <section id="contact" class="section contact-section" aria-labelledby="contact-title">
       <div class="wrap">
         <div class="contact reveal">
           <div>
@@ -382,7 +395,7 @@
               <a class="btn btn-wa" data-whatsapp-link aria-disabled="true" tabindex="-1" title="Ajoutez votre numéro WhatsApp dans la configuration du site"><svg class="icon" aria-hidden="true"><use href="#i-chat"/></svg> WhatsApp</a>
             </div>
             <p class="contact-booking"><a class="btn btn-secondary" data-booking-link href="mailto:pro@glsc.fr?subject=%C3%89change%20gratuit%20-%20proposition%20de%20cr%C3%A9neau"><svg class="icon" aria-hidden="true"><use href="#i-calendar"/></svg> <span data-booking-label>Proposer un créneau</span></a></p>
-            <a class="contact-email" href="mailto:pro@glsc.fr"><svg class="icon" aria-hidden="true"><use href="#i-mail"/></svg> pro@glsc.fr</a>
+            <div class="contact-mail-row"><a class="contact-email" href="mailto:pro@glsc.fr"><svg class="icon" aria-hidden="true"><use href="#i-mail"/></svg> pro@glsc.fr</a><button type="button" class="copy-btn" data-copy="pro@glsc.fr" aria-label="Copier l’adresse e-mail">Copier</button></div>
           </div>
           <form id="contact-form" class="contact-form" novalidate>
             <div class="form-top"><p class="form-step-label" id="step-label" aria-live="polite">Étape 1 sur 4</p><div class="form-progress" aria-hidden="true"><span id="step-bar"></span></div></div>
@@ -459,14 +472,17 @@
       <div class="footer-cols">
         <div><p class="footer-col-title">Sites par métier</p><ul><li><a href="/sites-pour/artisans-btp/">Artisans &amp; BTP</a></li><li><a href="/sites-pour/commercants/">Commerçants</a></li><li><a href="/sites-pour/restauration/">Restauration</a></li><li><a href="/sites-pour/sante-bien-etre/">Santé &amp; bien-être</a></li><li><a href="/sites-pour/beaute/">Beauté &amp; coiffure</a></li><li><a href="/sites-pour/associations-clubs/">Associations &amp; clubs</a></li></ul></div>
         <div><p class="footer-col-title">En Bretagne</p><ul><li><a href="/creation-site-web/rennes/">Site web à Rennes</a></li><li><a href="/creation-site-web/lorient/">Site web à Lorient</a></li><li><a href="/creation-site-web/vannes/">Site web à Vannes</a></li><li><a href="/creation-site-web/quimper/">Site web à Quimper</a></li><li><a href="/creation-site-web/brest/">Site web à Brest</a></li><li><a href="/creation-site-web/saint-brieuc/">Site web à Saint-Brieuc</a></li></ul></div>
-        <div><p class="footer-col-title">Ressources</p><ul><li><a href="/blog/">Le blog</a></li><li><a href="/blog/cout-site-vitrine-artisan/">Combien coûte un site vitrine pour un artisan ?</a></li><li><a href="/blog/que-mettre-sur-un-site-artisan/">Que mettre sur le site d’un artisan : la checklist</a></li><li><a href="/blog/site-vitrine-ou-reseaux-sociaux/">Site vitrine ou réseaux sociaux : faut-il choisir ?</a></li><li><a href="/a-propos/">À propos</a></li></ul></div>
+        <div><p class="footer-col-title">Ressources</p><ul><li><a href="/demos/">Démos interactives</a></li><li><a href="/marque/">Kit de marque</a></li><li><a href="/blog/">Le blog</a></li><li><a href="/blog/cout-site-vitrine-artisan/">Combien coûte un site vitrine pour un artisan ?</a></li><li><a href="/blog/que-mettre-sur-un-site-artisan/">Que mettre sur le site d’un artisan : la checklist</a></li><li><a href="/blog/site-vitrine-ou-reseaux-sociaux/">Site vitrine ou réseaux sociaux : faut-il choisir ?</a></li><li><a href="/a-propos/">À propos</a></li></ul></div>
       </div>
       <!--@footer-cols:end-->
       <p class="footer-status">StudioGLSC · Gabin Lescoat, entrepreneur individuel (auto-entrepreneur) · immatriculation en cours</p>
       <div class="footer-legal"><span class="footer-legal-label">Informations légales</span><a href="/mentions-legales.html">Mentions légales</a><a href="/cgu.html">CGU</a><a href="/cgv.html">CGV</a></div>
+      <div class="fx-mega" aria-hidden="true" data-text="StudioGLSC">StudioGLSC</div>
       <div class="footer-bottom"><span>© <span id="year"></span> StudioGLSC · Gabin Lescoat</span><span>Bretagne</span></div>
     </div>
   </footer>
+  <a class="fx-top" href="#accueil" aria-label="Retour en haut de la page"><svg viewBox="0 0 52 52" aria-hidden="true"><circle class="tr" cx="26" cy="26" r="22"/><circle class="pr" cx="26" cy="26" r="22"/></svg><svg class="icon arr" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+  <div class="m-cta" role="region" aria-label="Contact rapide"><a class="btn btn-primary" href="#contact">Demander un devis</a><a class="btn btn-secondary" data-phone-link aria-disabled="true" tabindex="-1"><svg class="icon" aria-hidden="true"><use href="#i-phone"/></svg> Appeler</a></div>
   <script src="/assets/studio.js" defer></script>
   <script src="/assets/home.js" defer></script>
 </body>

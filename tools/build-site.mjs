@@ -28,7 +28,7 @@ const cols = `<!--@footer-cols:start-->
       <div class="footer-cols">
         <div><p class="footer-col-title">Sites par métier</p><ul>${METIERS.map((m) => `<li><a href="/sites-pour/${m.slug}/">${esc(m.name)}</a></li>`).join('')}</ul></div>
         <div><p class="footer-col-title">En Bretagne</p><ul>${VILLES.map((v) => `<li><a href="/creation-site-web/${v.slug}/">Site web à ${esc(v.name)}</a></li>`).join('')}</ul></div>
-        <div><p class="footer-col-title">Ressources</p><ul><li><a href="/blog/">Le blog</a></li>${ARTICLES.slice(0, 3).map((a) => `<li><a href="/blog/${a.slug}/">${esc(a.title)}</a></li>`).join('')}<li><a href="/a-propos/">À propos</a></li></ul></div>
+        <div><p class="footer-col-title">Ressources</p><ul><li><a href="/demos/">Démos interactives</a></li><li><a href="/marque/">Kit de marque</a></li><li><a href="/blog/">Le blog</a></li>${ARTICLES.slice(0, 3).map((a) => `<li><a href="/blog/${a.slug}/">${esc(a.title)}</a></li>`).join('')}<li><a href="/a-propos/">À propos</a></li></ul></div>
       </div>
       <!--@footer-cols:end-->`;
 if (index.includes('<!--@footer-cols:start-->')) index = index.replace(/<!--@footer-cols:start-->[\s\S]*?<!--@footer-cols:end-->/, cols);
@@ -38,10 +38,36 @@ const demoCard = (d) => `<a class="project reveal" href="/demos/${d.slug}/" aria
             <div class="project-shot"><img src="/assets/img/demo-${d.slug}.webp" width="960" height="600" loading="lazy" alt="${esc(d.alt)}"><span class="project-tag">Démo · ${esc(d.sector)}</span></div>
             <div class="project-body"><h3>${esc(d.name)}</h3><p>${esc(d.blurb)}</p><span class="project-link">Voir la démo ${icon('arrow')}</span></div>
           </a>`;
-const demoTabs = DEMOS.map((d, i) => `<button type="button" role="tab" aria-selected="${i === 0}" data-demo="/demos/${d.slug}/" data-title="${esc(d.sector)}">${esc(d.sector)}</button>`).join('\n              ');
 index = index.replace(/<!--@demo-cards:start-->[\s\S]*?<!--@demo-cards:end-->/, `<!--@demo-cards:start-->\n          ${DEMOS.slice(0, 2).map(demoCard).join('\n          ')}\n          <!--@demo-cards:end-->`);
-index = index.replace(/<!--@demo-tabs:start-->[\s\S]*?<!--@demo-tabs:end-->/, `<!--@demo-tabs:start-->\n              ${demoTabs}\n              <!--@demo-tabs:end-->`);
-index = index.replace(/(<a class="btn btn-secondary" id="demo-open" href=")[^"]*(")/, `$1/demos/${DEMOS[0].slug}/$2`);
+const showcase = `<!--@showcase:start-->
+        <div class="showcase reveal" id="showcase" data-device="phone">
+          <div class="sc-copy">
+            <p class="eyebrow">Essayer en direct</p>
+            <h3>Testez une démo comme le ferait un client.</h3>
+            <p class="muted">Choisissez un secteur : la démo s’ouvre dans l’appareil de votre choix, et elle est entièrement utilisable.</p>
+          </div>
+          <div class="sc-list" role="tablist" aria-label="Choisir une démo" aria-orientation="vertical">
+            ${DEMOS.map((d, i) => `<button type="button" class="sc-tab" role="tab" id="sc-tab-${i}" aria-selected="${i === 0}" aria-controls="sc-panel" tabindex="${i === 0 ? 0 : -1}" data-demo="/demos/${d.slug}/" data-title="${esc(d.sector)}" data-name="${esc(d.name)}" data-features="${esc(d.features.join('|'))}"><img class="sc-thumb" src="/assets/img/demo-${d.slug}.webp" width="96" height="60" loading="lazy" alt=""><span class="sc-meta"><b>${esc(d.sector)}</b><small>${esc(d.name)}</small></span><span class="sc-num" aria-hidden="true">0${i + 1}</span></button>`).join('\n            ')}
+          </div>
+          <div class="sc-stage" id="sc-panel" role="tabpanel" aria-labelledby="sc-tab-0">
+            <div class="sc-top">
+              <div class="sc-switch" role="group" aria-label="Appareil d’aperçu">
+                <button type="button" aria-pressed="true" data-device="phone"><svg class="icon" aria-hidden="true"><use href="#i-phone"/></svg> Mobile</button>
+                <button type="button" aria-pressed="false" data-device="desktop"><svg class="icon" aria-hidden="true"><use href="#i-monitor"/></svg> Ordinateur</button>
+              </div>
+              <a class="btn btn-secondary btn-sm" id="demo-open" href="/demos/${DEMOS[0].slug}/" target="_blank" rel="noopener">Plein écran ${icon('arrow')}</a>
+            </div>
+            <div class="sc-device">
+              <div class="sc-frame">
+                <div class="sc-chrome" aria-hidden="true"><i></i><i></i><i></i><span id="sc-url">studio.glsc.fr/demos/${DEMOS[0].slug}/</span></div>
+                <div class="demo-screen" id="demo-screen"><div class="demo-placeholder"><span class="sc-spin" aria-hidden="true"></span><span>Chargement de la démo…</span></div></div>
+              </div>
+            </div>
+            <ul class="sc-feats" id="sc-feats" aria-label="Ce que contient cette démo">${DEMOS[0].features.map((f) => `<li>${esc(f)}</li>`).join('')}</ul>
+          </div>
+        </div>
+        <!--@showcase:end-->`;
+index = index.replace(/<!--@showcase:start-->[\s\S]*?<!--@showcase:end-->/, showcase);
 // JSON-LD de l'accueil : liens officiels (dont la fiche Google Business Profile si renseignée) et zones desservies.
 const sameAs = [...CFG.sameAs, ...(CFG.googleBusinessProfile ? [CFG.googleBusinessProfile] : [])];
 index = index.replace(/"areaServed": (?:"[^"]*"|\[[^\]]*\]),\s*(?:"sameAs": \[[^\]]*\],\s*)?/, `"areaServed": ${JSON.stringify(['Bretagne', ...VILLES.map((v) => v.name)])},\n    "sameAs": ${JSON.stringify(sameAs)},\n    `);
@@ -82,7 +108,9 @@ function shell({ path, title, desc, type = 'website', jsonld = [], body, noindex
   <link rel="preload" href="/assets/fonts/inter-400.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/assets/fonts/inter-display-700.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="/assets/studio.css">
+  <link rel="stylesheet" href="/assets/fx.css">
   <script src="/assets/theme-init.js"></script>
+  <script src="/assets/fx.js"></script>
 ${ld}
 </head>
 <body>
