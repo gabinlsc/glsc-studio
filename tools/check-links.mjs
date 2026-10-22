@@ -6,7 +6,7 @@ import { fileURLToPath } from 'node:url';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
 const ORIGIN = 'https://studio.glsc.fr';
-const SKIP = new Set(['node_modules', '.git', 'tools', 'branding']);
+const SKIP = new Set(['node_modules', '.git', 'tools', 'branding', 'promo']);
 const pages = [];
 (function walk(dir) {
   for (const f of readdirSync(dir)) {

@@ -25,7 +25,7 @@
   <link rel="preload" href="/assets/fonts/inter-400.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/assets/fonts/inter-display-700.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="/assets/studio.css?v=ae4d0bea">
-  <link rel="stylesheet" href="/assets/fx.css?v=0896ef88">
+  <link rel="stylesheet" href="/assets/fx.css?v=e1f2f212">
   <script src="/assets/theme-init.js?v=74add099"></script>
   <script src="/assets/fx.js?v=e8da89c8"></script>
   <script type="application/ld+json">
@@ -335,6 +335,20 @@
       </div>
     </section>
 
+    <section id="film" class="section" aria-labelledby="film-title">
+      <div class="wrap">
+        <div class="section-head reveal"><div><p class="eyebrow">Le film</p><h2 id="film-title">StudioGLSC en <span class="accent">47 secondes.</span></h2></div><p>Un site pensé pour le mobile, une première version en 48 heures et des tarifs clairs. À regarder en version complète, courte ou verticale.</p></div>
+        <div class="film reveal" id="film-box" data-len="full" data-fmt="h">
+          <div class="film-opts" hidden>
+            <div class="sc-switch" role="group" aria-label="Durée du film"><button type="button" data-len="full" aria-pressed="true">Complet · 47 s</button><button type="button" data-len="short" aria-pressed="false">Court · 15 s</button></div>
+            <div class="sc-switch" role="group" aria-label="Format du film"><button type="button" data-fmt="h" aria-pressed="true">Horizontal</button><button type="button" data-fmt="v" aria-pressed="false">Vertical</button></div>
+          </div>
+          <div class="film-stage"><video id="film-video" controls playsinline preload="none" width="1280" height="720" poster="/assets/video/studioglsc-complet-h.webp" aria-label="Film de présentation de StudioGLSC"><source src="/assets/video/studioglsc-complet-h.mp4" type="video/mp4"><a href="/assets/video/studioglsc-complet-h.mp4">Télécharger le film (MP4)</a></video></div>
+          <p class="film-note muted">Avec le son, c’est mieux. <a href="/marque/#films">Télécharger les films</a></p>
+        </div>
+      </div>
+    </section>
+
     <section id="realisations" class="section band">
       <div class="wrap">
         <div class="section-head reveal"><div><p class="eyebrow">Réalisations &amp; démonstrations</p><h2>Démos &amp; concepts <span class="accent">interactifs.</span></h2></div><p>Mon site personnel et six démos interactives, pour montrer comment un site peut guider vos clients vers l’action.</p></div>
@@ -520,6 +534,6 @@
   <a class="fx-top" href="#accueil" aria-label="Retour en haut de la page"><svg viewBox="0 0 52 52" aria-hidden="true"><circle class="tr" cx="26" cy="26" r="22"/><circle class="pr" cx="26" cy="26" r="22"/></svg><svg class="icon arr" aria-hidden="true"><use href="#i-arrow"/></svg></a>
   <div class="m-cta" role="region" aria-label="Contact rapide"><a class="btn btn-primary" href="#contact">Devis gratuit</a><a class="btn btn-secondary" data-phone-link aria-disabled="true" tabindex="-1"><svg class="icon" aria-hidden="true"><use href="#i-phone"/></svg> Appeler</a></div>
   <script src="/assets/studio.js?v=8e609c6b" defer></script>
-  <script src="/assets/home.js?v=63895643" defer></script>
+  <script src="/assets/home.js?v=b8bb1056" defer></script>
 </body>
 </html>

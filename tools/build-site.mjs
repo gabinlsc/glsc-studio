@@ -16,6 +16,8 @@ const ORIGIN = CFG.origin;
 const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 const icon = (id, cls = 'icon') => `<svg class="${cls}" aria-hidden="true"><use href="#i-${id}"/></svg>`;
 const dateFr = (iso) => new Date(iso + 'T12:00:00Z').toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'UTC' });
+const FILMS = [['complet-h', 'Film complet, horizontal', '47 s · 1280 × 720'], ['complet-v', 'Film complet, vertical', '47 s · 720 × 1280'], ['court-h', 'Version courte, horizontale', '15 s · 1280 × 720'], ['court-v', 'Version courte, verticale', '15 s · 720 × 1280']];
+const fileSize = (u) => { const b = statSync(join(ROOT, u)).size; return (b / 1048576).toFixed(1).replace('.', ',') + ' Mo'; };
 const words = (s) => s.split(/\s+/).filter(Boolean).length;
 
 // ---------------------------------------------------------------- gabarit lu dans index.html
@@ -363,7 +365,7 @@ const WORD_PATH = ''; // le logotype de la figure « zone de protection » est v
       </div>
     </div></section>
 
-    <nav class="bk-nav" aria-label="Sections du centre de marque"><div class="wrap"><a href="#logo">Logo</a><a href="#zone">Construction</a><a href="#erreurs">À éviter</a><a href="#couleurs">Couleurs</a><a href="#typo">Typographie</a><a href="#interface">Interface</a><a href="#ton">Ton</a><a href="#reseaux">Réseaux</a><a href="#kit">Kit</a></div></nav>
+    <nav class="bk-nav" aria-label="Sections du centre de marque"><div class="wrap"><a href="#logo">Logo</a><a href="#zone">Construction</a><a href="#erreurs">À éviter</a><a href="#couleurs">Couleurs</a><a href="#typo">Typographie</a><a href="#interface">Interface</a><a href="#ton">Ton</a><a href="#reseaux">Réseaux</a><a href="#films">Films</a><a href="#kit">Kit</a></div></nav>
 
     <section class="section" id="logo"><div class="wrap">
       <div class="section-head"><div><p class="eyebrow">Le logo</p><h2>Un monogramme, un logotype, <span class="accent">six usages.</span></h2></div><p>Le G blanc sur carré bleu est la signature du studio. Choisissez la version qui convient au fond sur lequel elle sera posée.</p></div>
@@ -431,6 +433,11 @@ const WORD_PATH = ''; // le logotype de la figure « zone de protection » est v
         <div><h3>Présentation courte</h3><p id="boiler">StudioGLSC est le studio web indépendant de Gabin Lescoat, en Bretagne. Il crée des sites vitrines clairs et rapides pour les artisans, commerçants et indépendants : première version en 48 h, paiement ponctuel, et vous restez propriétaire de votre site.</p></div>
         <button type="button" class="btn btn-secondary" data-copy="StudioGLSC est le studio web indépendant de Gabin Lescoat, en Bretagne. Il crée des sites vitrines clairs et rapides pour les artisans, commerçants et indépendants : première version en 48 h, paiement ponctuel, et vous restez propriétaire de votre site." data-copied="Texte copié">Copier le texte</button>
       </div>
+    </div></section>
+
+    <section class="section" id="films"><div class="wrap">
+      <div class="section-head"><div><p class="eyebrow">Films</p><h2>Le film de présentation, <span class="accent">à partager.</span></h2></div><p>Quatre versions du même film : complète ou courte, horizontale pour le site et YouTube, verticale pour LinkedIn, Instagram et TikTok. Libres de droits pour présenter StudioGLSC.</p></div>
+      <ul class="bk-social">${FILMS.map(([slug, name, spec], i) => `<li class="reveal" data-d="${i * 70}"><div class="bk-soc-img ${slug.endsWith('-v') ? 'av' : 'wide'}"><img src="/assets/video/studioglsc-${slug}.webp" alt="Image d’aperçu du film : ${name}" width="${slug.endsWith('-v') ? 180 : 300}" height="${slug.endsWith('-v') ? 320 : 169}" loading="lazy"></div><h3>${name}</h3><p class="muted">${spec} · ${fileSize('/assets/video/studioglsc-' + slug + '.mp4')}</p><div class="bk-dl"><a href="/assets/video/studioglsc-${slug}.mp4" download>MP4</a></div></li>`).join('')}</ul>
     </div></section>
 
     <section class="section" id="kit"><div class="wrap"><div class="bk-kit reveal">

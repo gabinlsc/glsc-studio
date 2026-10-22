@@ -62,6 +62,15 @@ assert.equal(await pg.locator('#rail').isVisible(), true); await pg.evaluate(() 
 assert.equal(await pg.locator('#rail a[aria-current="location"]').getAttribute('href'), '#engagements'); ok('sommaire latéral suit la section');
 // bouton rendez-vous : Cal.com
 assert.equal(await pg.getAttribute('[data-booking-link]', 'href'), 'https://cal.com/studioglsc/premier-echange'); ok('rendez-vous : lien Cal.com du premier échange');
+// film de présentation : choix de la durée et du format
+await pg.evaluate(() => document.querySelector('#film').scrollIntoView());
+assert.equal(await pg.locator('.film-opts').isVisible(), true);
+assert.match(await pg.getAttribute('#film-video source', 'src'), /studioglsc-complet-h\.mp4$/);
+await pg.click('.film-opts button[data-len="short"]'); await pg.click('.film-opts button[data-fmt="v"]');
+assert.match(await pg.evaluate(() => document.querySelector('#film-video source').getAttribute('src')), /studioglsc-court-v\.mp4$/);
+assert.equal(await pg.getAttribute('#film-box', 'data-fmt'), 'v'); assert.match(await pg.evaluate(() => document.querySelector('#film-video').getAttribute('poster')), /court-v\.webp$/);
+for (const u of ['complet-h.mp4', 'court-v.mp4', 'court-v.webp']) { const r = await pg.evaluate((x) => fetch('/assets/video/studioglsc-' + x, { method: 'HEAD' }).then((q) => q.status + ' ' + q.headers.get('content-type')), u); assert.match(r, /^200 (video\/mp4|image\/webp)/, u + ' : ' + r); }
+ok('film : durée et format changent la source, fichiers présents');
 assert.equal(await pg.locator('.price-card').count(), 3); assert.match(await pg.textContent('#offres'), /550 €/); assert.match(await pg.textContent('#offres'), /950 €/); assert.match(await pg.textContent('#offres'), /50 € \/ mois/); assert.doesNotMatch(await pg.textContent('body'), /400 €|non proposée/); ok('tarifs : 550 € / dès 750 € / dès 950 € / abonnement 50 € et 500 €, aucune trace de l’ancien prix');
 // estimation -> formulaire
 await pg.check('input[name="est-site"][value="express"]', { force: true }); await pg.check('input[name="est-host"][value="none"]', { force: true });

@@ -141,3 +141,13 @@ html.fx-theme-vt::view-transition-old(root) { z-index: 1; } html.fx-theme-vt::vi
 
 /* Les panneaux à halo décoratif ne doivent jamais défiler d'eux-mêmes (scrollIntoView sur un contenu interne les décalait) */
 .contact, .showcase, .bk-kit, .hero { overflow: clip; }
+
+/* ---------- Film de présentation ---------- */
+.film { display: grid; gap: 18px; justify-items: center; }
+.film-opts { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; }
+.film-opts[hidden] { display: none; }
+.film-stage { width: 100%; max-width: 960px; border-radius: 20px; overflow: hidden; background: #0A0F1C; border: 1px solid var(--line); box-shadow: 0 30px 70px -40px rgba(11, 18, 32, .55); }
+.film-stage video { display: block; width: 100%; height: auto; aspect-ratio: 16 / 9; background: #0A0F1C; }
+.film[data-fmt="v"] .film-stage { max-width: 400px; }
+.film[data-fmt="v"] .film-stage video { aspect-ratio: 9 / 16; }
+.film-note { font-size: .9rem; text-align: center; }

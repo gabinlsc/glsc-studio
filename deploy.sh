@@ -35,7 +35,7 @@ else
   curl -fsSL "https://codeload.github.com/$REPO/tar.gz/$REF" | tar -xz -C "$WORK"
   SRC="$(find "$WORK" -mindepth 1 -maxdepth 1 -type d | head -1)"
 fi
-for f in "${FILES[@]}" assets/studio.css assets/studio.js assets/home.js assets/fonts/inter-400.woff2 assets/favicon.svg assets/theme-init.js assets/notfound.css assets/legal.js assets/suivi.js assets/fx.js assets/fx.css assets/brand.css assets/brand.js assets/brand/studioglsc-kit-de-marque.zip marque/index.html suivi/index.html demos/index.html demos/shared/demo.css demos/shared/demo.js demos/restaurant/index.html demos/fonts/fraunces.woff2; do
+for f in "${FILES[@]}" assets/studio.css assets/studio.js assets/home.js assets/fonts/inter-400.woff2 assets/favicon.svg assets/theme-init.js assets/notfound.css assets/legal.js assets/suivi.js assets/fx.js assets/fx.css assets/brand.css assets/brand.js assets/brand/studioglsc-kit-de-marque.zip assets/video/studioglsc-complet-h.mp4 marque/index.html suivi/index.html demos/index.html demos/shared/demo.css demos/shared/demo.js demos/restaurant/index.html demos/fonts/fraunces.woff2; do
   [ -s "$SRC/$f" ] || die "Archive incomplète : $f manquant. Rien n'a été modifié."
 done
 ok "archive complète"
