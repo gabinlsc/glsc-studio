@@ -1,11 +1,13 @@
 #!/usr/bin/env python3
 """Bande-son du film (synthèse pure, numpy) : nappes, basse, arpèges, whooshs aux changements de scène, clic, cloche finale.
    Aucun échantillon externe, aucune musique sous licence. Sortie : promo/audio/bande-son.wav (44,1 kHz stéréo)."""
-import os, numpy as np, wave
-SR = 44100; DUR = 47.0; N = int(SR * DUR)
+import os, sys, numpy as np, wave
+SHORT = 'short' in sys.argv[1:]  # version courte (~14,5 s)
+SR = 44100; DUR = 14.5 if SHORT else 47.0; N = int(SR * DUR)
 rng = np.random.default_rng(7)
 t = np.arange(N) / SR
-CUTS = [4.2, 10.4, 18.6, 23.6, 30.4, 36.6, 40.3]
+CUTS = [2.2, 4.1, 6.3, 8.2, 10.1] if SHORT else [4.2, 10.4, 18.6, 23.6, 30.4, 36.6, 40.3]
+T_PULSE, T_ARP, T_END, T_CLICK, BELLS = (2.0, 2.4, 13.4, 10.05, (10.9, 10.95, 11.8, 12.5)) if SHORT else (4.0, 10.7, 37.0, 39.55, (40.95, 41.0, 42.35, 43.45))
 L = np.zeros(N); R = np.zeros(N)
 
 def hz(note):  # note MIDI -> Hz
@@ -35,9 +37,9 @@ for ci, s0 in enumerate(starts):
             add(v * 0.055, s0, 1 - 0.35 * pan, 0.65 + 0.35 * pan)
 # --- basse et pulsation à partir de la scène B
 bpm = 80; beat = 60 / bpm
-for k in range(int((DUR - 4.0) / beat)):
-    tb = 4.0 + k * beat
-    if tb > 45.5: break
+for k in range(int((DUR - T_PULSE) / beat)):
+    tb = T_PULSE + k * beat
+    if tb > DUR - 1.5: break
     n = int(0.42 * SR); tt = np.arange(n) / SR; f = 95 * np.exp(-tt * 9) + 42
     kick = np.sin(2 * np.pi * np.cumsum(f) / SR) * np.exp(-tt * 7.5) * 0.55
     add(kick, tb, 0.9, 0.9)
@@ -50,9 +52,9 @@ def pluck(f, dur=1.1):
     n = int(dur * SR); tt = np.arange(n) / SR
     return (np.sin(2 * np.pi * f * tt) + 0.35 * np.sin(2 * np.pi * 2 * f * tt) * np.exp(-tt * 6) + 0.15 * np.sin(2 * np.pi * 3 * f * tt) * np.exp(-tt * 9)) * np.exp(-tt * 4.2) * np.minimum(1, tt * 400)
 step = beat / 2
-k = 0; tb = 10.7
-while tb < 37.0:
-    ci = max(i for i, s in enumerate(starts) if s <= tb); notes = CH[ci][1:] + [CH[ci][1] + 12, CH[ci][2] + 12]
+k = 0; tb = T_ARP
+while tb < T_END:
+    ci = min(max(i for i, s in enumerate(starts) if s <= tb), len(CH) - 1); notes = CH[ci][1:] + [CH[ci][1] + 12, CH[ci][2] + 12]
     note = notes[[0, 2, 1, 3, 2, 4, 1, 3][k % 8]] + 12; amp = 0.075 if k % 4 else 0.10
     pan = 0.5 + 0.4 * np.sin(k * 0.9); add(pluck(hz(note)) * amp, tb, 1 - pan * 0.6, 0.4 + pan * 0.6)
     tb += step; k += 1
@@ -71,12 +73,12 @@ for c in CUTS:
     boom = np.sin(2 * np.pi * 52 * tt * np.exp(-tt * .25)) * np.exp(-tt * 2.6) * 0.5 + rng.normal(0, 1, n) * np.exp(-tt * 26) * 0.10
     add(boom, c - 0.02)
 # --- clic de la souris (scène G) puis cloche du logo
-cl = int(0.08 * SR); tt = np.arange(cl) / SR; add((np.sin(2 * np.pi * 2400 * tt) + 0.6 * rng.normal(0, 1, cl)) * np.exp(-tt * 70) * 0.14, 39.55)
+cl = int(0.08 * SR); tt = np.arange(cl) / SR; add((np.sin(2 * np.pi * 2400 * tt) + 0.6 * rng.normal(0, 1, cl)) * np.exp(-tt * 70) * 0.14, T_CLICK)
 def bell(f, dur=4.5):
     n = int(dur * SR); tt = np.arange(n) / SR; v = 0
     for r, a, d in ((1, 1.0, 1.1), (2.01, .5, 1.6), (2.76, .33, 2.2), (4.07, .22, 3.0), (5.4, .12, 4.0)): v = v + np.sin(2 * np.pi * f * r * tt) * a * np.exp(-tt * d)
     return v * np.minimum(1, tt * 300)
-add(bell(hz(81)) * 0.07, 40.95, 1.0, 0.8); add(bell(hz(76)) * 0.05, 41.0, 0.8, 1.0); add(bell(hz(88)) * 0.05, 42.35, 0.9, 1.0); add(bell(hz(93)) * 0.04, 43.45, 0.9, 1.0)
+add(bell(hz(81)) * 0.07, BELLS[0], 1.0, 0.8); add(bell(hz(76)) * 0.05, BELLS[1], 0.8, 1.0); add(bell(hz(88)) * 0.05, BELLS[2], 0.9, 1.0); add(bell(hz(93)) * 0.04, BELLS[3], 0.9, 1.0)
 # --- réverbération (réponse impulsionnelle synthétique, légèrement différente à gauche et à droite)
 def ir(seed, sec=2.6):
     r = np.random.default_rng(seed); n = int(sec * SR); tt = np.arange(n) / SR; x = r.normal(0, 1, n) * np.exp(-tt * 2.1)
@@ -90,7 +92,7 @@ pk = max(np.abs(L).max(), np.abs(R).max()); L2 = L / pk + wetL * 0.30; R2 = R / 
 g = np.minimum(1, t / 1.2) * np.minimum(1, (DUR - t) / 1.6); L2 *= g; R2 *= g
 pk = max(np.abs(L2).max(), np.abs(R2).max()); L2 = L2 / pk * 0.89; R2 = R2 / pk * 0.89
 os.makedirs(os.path.join(os.path.dirname(os.path.abspath(__file__)), "audio"), exist_ok=True)
-out = os.path.join(os.path.dirname(os.path.abspath(__file__)), "audio/bande-son.wav")
+out = os.path.join(os.path.dirname(os.path.abspath(__file__)), "audio/bande-son-courte.wav" if SHORT else "audio/bande-son.wav")
 pcm = (np.stack([L2, R2], 1) * 32767).astype("<i2")
 with wave.open(out, "wb") as w:
     w.setnchannels(2); w.setsampwidth(2); w.setframerate(SR); w.writeframes(pcm.tobytes())

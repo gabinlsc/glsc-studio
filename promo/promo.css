@@ -27,7 +27,7 @@ html, body { width: 1920px; height: 1080px; overflow: hidden; background: #000; 
 .mid { position: absolute; left: 0; right: 0; text-align: center; top: 110px; font-size: 128px; } #eTitle { font-size: 100px; top: 84px; }
 
 /* téléphone */
-.hero3d, .ring3d { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; transform-style: preserve-3d; pointer-events: none; }
+.hero3d, .ring3d { position: absolute; left: 0; top: 0; width: 100%; height: 100%; transform-style: preserve-3d; pointer-events: none; }
 .hero3d { z-index: 40; } .ring3d { z-index: 2; }
 .phone { position: absolute; left: 50%; top: 50%; width: 418px; height: 872px; margin: -436px 0 0 -209px; transform-style: preserve-3d; will-change: transform; }
 .phone .frame { position: absolute; inset: 0; border-radius: 68px; background: #0e1119; box-shadow: 0 0 0 2px #596076, 0 0 0 5px #171b27, inset 0 0 0 2px #1d2230, 0 60px 120px rgba(0,0,0,.55); }
@@ -85,3 +85,23 @@ html, body { width: 1920px; height: 1080px; overflow: hidden; background: #000; 
 
 #sC { perspective: 2400px; perspective-origin: 50% 46%; }
 .ring3d .phone, .ring3d .phone * { backface-visibility: hidden; }
+
+/* ---------- Format vertical 9:16 (1080 × 1920) ---------- */
+html.v, html.v body { width: 1080px; height: 1920px; } html.v #stage { width: 1080px; height: 1920px; }
+.v .g1 { width: 1500px; height: 1500px; left: -210px; top: 200px; } .v .g2 { width: 1400px; height: 1400px; left: -160px; top: 300px; } .v .g3 { width: 1500px; height: 1500px; left: -210px; top: 300px; }
+.v .big { font-size: 128px; } .v .big .ln { white-space: normal; }
+.v #aTitle { font-size: 122px; padding: 0 60px; line-height: 1.04; } .v #aTitle .ln { display: inline; } .v #aTitle .ln.b { display: block; }
+.v .kick { font-size: 28px; }
+.v .copy { position: absolute; top: 150px; left: 70px; right: 70px; width: auto; transform: none; } .v .copy.left, .v .copy.right { left: 70px; right: 70px; width: auto; }
+.v .copy .big { font-size: 118px; margin: 22px 0 26px; } .v .lede { font-size: 40px; }
+.v .cap { bottom: 120px; font-size: 118px; } .v .kick.c { top: 150px; }
+.v .dnum { left: 50%; margin-left: -280px; top: 240px; width: 560px; height: 560px; margin-top: 0; } .v .dnum .n { font-size: 250px; padding-top: 130px; }
+.v #dCopy { top: 930px; } .v #dCopy .big { font-size: 96px; } .v .steps { flex-wrap: wrap; } .v .steps li { font-size: 32px; padding: 18px 28px; }
+.v .mid { font-size: 112px; top: 150px; padding: 0 50px; } .v #eTitle { font-size: 108px; top: 150px; } .v .mid .ln { white-space: normal; }
+.v .cards { top: 470px; height: 1400px; } .v .card { width: 900px; height: 500px; border-radius: 40px; } .v .card .win { height: 300px; left: 20px; right: 20px; top: 20px; border-radius: 24px; } .v .card h3 { top: 336px; font-size: 46px; left: 32px; } .v .card p { top: 396px; font-size: 27px; left: 32px; right: 32px; }
+.v .prices { flex-direction: column; left: 70px; right: 70px; top: 420px; gap: 24px; } .v .pc { padding: 30px 44px; display: grid; grid-template-columns: 1fr auto; align-items: center; column-gap: 24px; }
+.v .pn { grid-column: 1; font-size: 34px; } .v .pd { grid-column: 1; margin-top: 8px; font-size: 28px; } .v .pv { grid-column: 2; grid-row: 1 / span 2; margin: 0; font-size: 130px; text-align: right; } .v .pv u { font-size: 30px; margin-bottom: 0; } .v .pv i { font-size: 80px; } .v .pc:first-child .pv { padding-top: 0; }
+.v .foot { bottom: 150px; font-size: 34px; padding: 0 70px; }
+.v .cta { top: 1060px; font-size: 42px; padding: 30px 40px; gap: 16px; } .v .cta em { font-size: 28px; padding: 10px 16px; } .v .cta .ico { width: 44px; height: 44px; }
+.v .mark { width: 150px; height: 150px; } .v .word { font-size: 138px; } .v .logo { margin-top: -200px; height: 160px; gap: 26px; } .v .tag { top: 1130px; font-size: 48px; padding: 0 60px; } .v .url { top: 1260px; font-size: 40px; }
+.v #bCopy { top: 130px; }

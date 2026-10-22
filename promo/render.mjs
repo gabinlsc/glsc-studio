@@ -11,13 +11,15 @@ const args = process.argv.slice(2);
 const opt = (n, d) => { const i = args.indexOf('--' + n); return i < 0 ? d : args[i + 1]; };
 const { base, close } = await serve({ csp: false });
 const b = await launch();
-const ctx = await b.newContext({ viewport: { width: 1920, height: 1080 }, deviceScaleFactor: 1 });
+const vertical = args.includes('--vertical'), short = args.includes('--short');
+const VW = vertical ? 1080 : 1920, VH = vertical ? 1920 : 1080;
+const ctx = await b.newContext({ viewport: { width: VW, height: VH }, deviceScaleFactor: 1 });
 const pg = await ctx.newPage();
 pg.on('pageerror', (e) => console.error('ERREUR PAGE', e.message));
-await pg.goto(base + '/promo/index.html'); await pg.waitForFunction(() => window.READY === true, null, { timeout: 30000 });
+await pg.goto(base + `/promo/index.html?f=${vertical ? 'v' : 'h'}&s=${short ? 1 : 0}`); await pg.waitForFunction(() => window.READY === true, null, { timeout: 30000 });
 
 if (args[0] === '--frames') {
-  const dir = args[2]; mkdirSync(dir, { recursive: true });
+  const dir = args.slice(2).find((a) => !a.startsWith('--')); mkdirSync(dir, { recursive: true });
   for (const t of args[1].split(',').map(Number)) { await pg.evaluate((x) => window.render(x), t); await settle(pg); await settle(pg); await pg.screenshot({ path: join(dir, `t${String(t).replace('.', '_')}.png`) }); console.log('t =', t); }
 } else {
   const out = args[0], fps = +opt('fps', 30), total = await pg.evaluate(() => window.TOTAL), from = +opt('from', 0), to = +opt('to', total), audio = opt('audio', '');

@@ -12,7 +12,16 @@
   const eio5 = (x) => (x < .5 ? 16 * x ** 5 : 1 - Math.pow(-2 * x + 2, 5) / 2);
   const back = (x) => { const c1 = 1.70158, c3 = c1 + 1; return 1 + c3 * Math.pow(x - 1, 3) + c1 * Math.pow(x - 1, 2); };
   const spring = (x) => (x <= 0 ? 0 : x >= 1 ? 1 : 1 - Math.exp(-7 * x) * Math.cos(11 * x));
-  window.FPS = 30; window.TOTAL = 47;
+  const Q = new URLSearchParams(location.search), V = Q.get('f') === 'v', SHORT = Q.get('s') === '1';
+  const W = V ? 1080 : 1920, H = V ? 1920 : 1080, CX = W / 2, CY = H / 2;
+  document.documentElement.classList.toggle('v', V);
+  // Version courte : extraits accélérés de la version longue (début, fin, vitesse)
+  const SEGS = [[0.2, 4.4, 1.9], [4.2, 7.6, 1.8], [10.4, 14.6, 1.9], [18.6, 22.2, 1.9], [30.4, 34.0, 1.9], [39.6, 46.4, 1.6]];
+  const SEG_OUT = []; (() => { let a = 0; SEGS.forEach(([s0, s1, sp]) => { const d = (s1 - s0) / sp; SEG_OUT.push([a, a + d, s0, sp]); a += d; }); })();
+  const mapT = (t) => { for (const [a, b, s0, sp] of SEG_OUT) if (t < b) return s0 + (t - a) * sp; const l = SEG_OUT[SEG_OUT.length - 1]; return l[2] + (l[1] - l[0]) * l[3]; };
+  window.FPS = 30; window.TOTAL = SHORT ? Math.round(SEG_OUT[SEG_OUT.length - 1][1] * 10) / 10 + .2 : 47;
+  window.CUTS_OUT = SHORT ? SEG_OUT.map((x) => x[0]).slice(1) : [];
+  const LAY = V ? { hx: 0, hy: 330, hs: 1.12, ringS: 1.22, ringY: 20, ctaY: 1110, curFrom: [880, 1560], cardW: 900 } : { hx: 480, hy: 0, hs: 1, ringS: .76, ringY: -78, ctaY: 700, curFrom: [1560, 930], cardW: 520 };
   const T = { A: 0, B: 4.2, C: 10.4, D: 18.6, E: 23.6, F: 30.4, G: 36.6, H: 40.3 };
   window.CUTS = Object.values(T).slice(1);
 
@@ -67,16 +76,17 @@
     else if (kind === 'left') el.style.clipPath = `inset(0 0 0 ${(1 - p) * 100}%)`;
   };
 
-  function render(t) {
+  function render(tIn) {
+    const tOut = tIn, t = SHORT ? mapT(tIn) : tIn;
     // --- visibilité / révélations
     sc.A.style.visibility = 'visible';
-    reveal(sc.B, t, T.B, T.B + 1.2, 'circle', 1180, 540, eio5);
+    reveal(sc.B, t, T.B, T.B + 1.2, 'circle', V ? CX : 1180, V ? CY + 140 : CY, eio5);
     reveal(sc.C, t, T.C, T.C + .95, 'up', 0, 0, eio5);
-    reveal(sc.D, t, T.D, T.D + 1.1, 'circle', 520, 540, eio5);
-    reveal(sc.E, t, T.E, T.E + 1.1, 'circle', 960, 1080, eio5);
+    reveal(sc.D, t, T.D, T.D + 1.1, 'circle', V ? CX : 520, V ? 620 : CY, eio5);
+    reveal(sc.E, t, T.E, T.E + 1.1, 'circle', CX, H, eio5);
     reveal(sc.F, t, T.F, T.F + .95, 'left', 0, 0, eio5);
-    reveal(sc.G, t, T.G, T.G + 1.0, 'circle', 960, 540, eio5);
-    reveal(sc.H, t, T.H, T.H + 1.1, 'circle', 960, 700, eio5);
+    reveal(sc.G, t, T.G, T.G + 1.0, 'circle', CX, CY, eio5);
+    reveal(sc.H, t, T.H, T.H + 1.1, 'circle', CX + 50, LAY.ctaY, eio5);
     ['A', 'B', 'C', 'D', 'E', 'F', 'G'].forEach((k, i) => { const nx = ['B', 'C', 'D', 'E', 'F', 'G', 'H'][i]; if (t > T[nx] + 1.25) sc[k].style.visibility = 'hidden'; });
     // fonds : léger défilement du quadrillage
     document.querySelectorAll('.grid').forEach((g) => { g.style.transform = `translate(${-t * 14 % 72}px, ${-t * 9 % 72}px)`; });
@@ -90,9 +100,9 @@
     if (!heroPhone) return;
     const rise = expo(P(t, 3.0, 4.5)), toRight = eio5(P(t, 4.6, 6.2)), exit = eio5(P(t, 10.4, 11.3));
     const bob = Math.sin(t * 1.6) * 10;
-    let x = lerp(0, 480, toRight), y = lerp(1000, 0, rise) + bob * rise, ry = lerp(-38, 0, rise) + lerp(0, -14, toRight) + Math.sin(t * .9) * 4 * toRight;
+    let x = lerp(0, LAY.hx, toRight), y = lerp(H - 80, 0, rise) + bob * rise + lerp(0, LAY.hy, toRight), ry = lerp(-38, 0, rise) + lerp(0, -14, toRight) + Math.sin(t * .9) * 4 * toRight;
     let rx = lerp(8, 0, rise) + 4 * toRight, rz = lerp(6, 0, rise) + lerp(0, 3, toRight);
-    let s = lerp(.92, 1, rise) * lerp(1, .98, toRight);
+    let s = lerp(.92, 1, rise) * lerp(1, .98 * LAY.hs, toRight);
     // sortie : le téléphone pivote et disparaît pendant que l'anneau arrive
     ry += exit * 80; s *= 1 - exit * .35; x = lerp(x, 0, exit);
     tf(hero, { x, y, ry, rx, r: rz, s, o: t < 3.0 ? 0 : 1 - eo3(P(t, 10.55, 11.2)) });
@@ -108,12 +118,12 @@
     /* ===== C : anneau ===== */
     const cl = t - T.C, ringIn = eo4(P(t, 10.8, 12.0)), idx = Math.max(0, (t - 11.7) / 1.12), flo = Math.min(Math.floor(idx), 5), frac = idx - Math.floor(idx);
     const stepAng = idx >= 6 ? 6 : flo + eio5(clamp(frac * 1.35 > 1 ? 1 : frac * 1.35)), th = -60 * Math.min(stepAng, 5.0 + eio5(clamp((idx - 5) * 1.35)));
-    const R = 900, cy = Math.sin(t * 1.3) * 8;
+    const R = V ? 1250 : 900, cy = Math.sin(t * 1.3) * 8;
     tf(ring, { z: -R * ringIn * 0 + 0, o: 1 });
-    ring.style.transform = `translate3d(0, ${cy - 78}px, ${-R + (1 - ringIn) * -900}px) rotateX(-6deg) rotateY(${th - (1 - ringIn) * 120}deg) scale(${lerp(.55, 1, ringIn)})`;
+    ring.style.transform = `translate3d(0, ${cy + LAY.ringY}px, ${-R + (1 - ringIn) * -900}px) rotateX(-6deg) rotateY(${th - (1 - ringIn) * 120}deg) scale(${lerp(.55, 1, ringIn)})`;
     ring.style.opacity = ringIn;
     ringPhones.forEach((p, i) => {
-      p.style.transform = `rotateY(${i * 60}deg) translateZ(${R}px) scale(.76)`;
+      p.style.transform = `rotateY(${i * 60}deg) translateZ(${R}px) scale(${LAY.ringS})`;
       const front = Math.abs((((i * 60 + th) % 360) + 540) % 360 - 180); // 0 = face caméra
       p.scroll(lerp(0, 520, eio(P(t, 11.7 + i * 1.1, 12.9 + i * 1.1))) + Math.sin(t * 1.1 + i) * 8);
     });
@@ -138,9 +148,9 @@
     /* ===== E : fonctionnalités ===== */
     words(wE, t, T.E + .7, { stagger: .11 });
     cards.forEach((c, i) => {
-      const a = T.E + 1.5 + i * .45, p = expo(P(t, a, a + 1.1)), x = 110 + i * 590;
+      const a = T.E + 1.5 + i * .45, p = expo(P(t, a, a + 1.1)), x = V ? 90 : 110 + i * 590, y0 = V ? 380 + i * 540 : 0;
       const sway = Math.sin(t * 1.2 + i) * 6;
-      tf(c.el, { x, y: (1 - p) * 700 + sway * p, ry: (i - 1) * -10 * (1 - p * .7), rx: (1 - p) * 14, s: lerp(.86, 1, p), o: eo3(P(t, a, a + .5)) });
+      tf(c.el, { x, y: y0 + (1 - p) * (V ? 900 : 700) + sway * p, ry: V ? 0 : (i - 1) * -10 * (1 - p * .7), rx: (1 - p) * 14, s: lerp(.86, 1, p), o: eo3(P(t, a, a + .5)) });
       const win = c.win; const sp = eio(P(t, a + .6, a + 4.8)); c.img.style.transform = `translateY(${-(c.y0 + sp * c.dy)}px)`;
     });
     out($('#eTitle'), t, 29.6, 30.4, -40); cards.forEach((c) => { const o = eio(P(t, 29.8, 30.5)); if (o > 0) { c.el.style.opacity = 1 - o; } });
@@ -158,9 +168,9 @@
     words(wG, t, T.G + .55, { stagger: .12 });
     const btn = $('#gBtn'), bp = expo(P(t, T.G + 1.5, T.G + 2.4)), press = P(t, 39.55, 39.75) * (1 - P(t, 39.75, 40.05));
     btn.style.transform = `translateX(-50%) translateY(${(1 - bp) * 90}px) scale(${lerp(.9, 1, bp) - press * .05})`; btn.style.opacity = eo3(P(t, T.G + 1.5, T.G + 2)); btn.style.filter = `blur(${(1 - bp) * 10}px)`;
-    const cp = eio(P(t, 38.3, 39.5)), cx = lerp(1560, 1010, cp), cyy = lerp(930, 690, cp) - Math.sin(cp * Math.PI) * 60;
+    const cp = eio(P(t, 38.3, 39.5)), cx = lerp(LAY.curFrom[0], CX + 50, cp), cyy = lerp(LAY.curFrom[1], LAY.ctaY - 10, cp) - Math.sin(cp * Math.PI) * 60;
     tf($('#gCursor'), { x: cx, y: cyy, s: 1 - press * .12, o: eo3(P(t, 38.2, 38.6)) * (1 - eo3(P(t, 40.1, 40.5))) });
-    const rp = eo3(P(t, 39.6, 40.3)); tf($('#gRip'), { x: 1010, y: 700, s: rp * 3.2, o: (1 - rp) * (rp > 0 ? 1 : 0) });
+    const rp = eo3(P(t, 39.6, 40.3)); tf($('#gRip'), { x: CX + 50, y: LAY.ctaY, s: rp * 3.2, o: (1 - rp) * (rp > 0 ? 1 : 0) });
     out($('#gTitle'), t, 40.0, 40.6, -40);
 
     /* ===== H : logo ===== */
@@ -173,7 +183,7 @@
     const tg = eo4(P(t, T.H + 3.4, T.H + 4.2)), ur = eo4(P(t, T.H + 3.9, T.H + 4.7));
     tf($('#lTag'), { y: (1 - tg) * 36, o: tg, b: (1 - tg) * 10 }); tf($('#url'.replace('#url', '#lUrl')), { y: (1 - ur) * 36, o: ur, b: (1 - ur) * 10 });
     tf($('.g3', sc.H), { s: lerp(.8, 1.05, P(t, T.H, 47)), o: eo3(P(t, T.H + .3, T.H + 2)) });
-    $('#fade').style.opacity = Math.max(1 - eo3(P(t, 0, .5)), eo3(P(t, 46.2, 47)));
+    $('#fade').style.opacity = Math.max(1 - eo3(P(tOut, 0, .45)), eo3(P(tOut, window.TOTAL - .8, window.TOTAL)));
   }
   window.render = render;
 
@@ -187,9 +197,9 @@
     heroPhone = makePhone('home'); hero.append(heroPhone);
     RING.forEach((n) => { const p = makePhone(n); ring.append(p); ringPhones.push(p); });
     cardDefs.forEach(([name, sel, h, d, dy], i) => {
-      const meta = META[name], k = 472 / 390, el = document.createElement('div'); el.className = 'card';
+      const meta = META[name], el = document.createElement('div'); el.className = 'card';
       el.innerHTML = `<div class="win"><img src="img/${name}.jpg" alt=""></div><h3>${h}</h3><p>${d}</p>`; $('#eCards').append(el);
-      cards.push({ el, img: $('img', el), win: $('.win', el), y0: (meta.top[sel] - 40) * k, dy: dy * k });
+      const win = $('.win', el), k = win.clientWidth / 390; cards.push({ el, img: $('img', el), win, y0: (meta.top[sel] - 40) * k, dy: dy * k });
     });
     window.READY = true; render(0);
   })();
