@@ -6,7 +6,7 @@ import { fileURLToPath } from 'node:url';
 import { chromium } from 'playwright';
 
 export const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
-const TYPES = { '.html': 'text/html; charset=utf-8', '.css': 'text/css', '.js': 'text/javascript', '.json': 'application/json', '.woff2': 'font/woff2', '.png': 'image/png', '.webp': 'image/webp', '.svg': 'image/svg+xml', '.ico': 'image/x-icon', '.xml': 'application/xml', '.txt': 'text/plain' };
+const TYPES = { '.html': 'text/html; charset=utf-8', '.css': 'text/css', '.js': 'text/javascript', '.json': 'application/json', '.woff2': 'font/woff2', '.png': 'image/png', '.webp': 'image/webp', '.mp4': 'video/mp4', '.svg': 'image/svg+xml', '.ico': 'image/x-icon', '.xml': 'application/xml', '.txt': 'text/plain' };
 
 // La politique CSP de production : première ligne « add_header Content-Security-Policy » du fichier nginx (celle du serveur).
 export const CSP = /add_header Content-Security-Policy "([^"]+)"/.exec(readFileSync(join(ROOT, 'deploy/studio-security.conf'), 'utf8'))[1];
