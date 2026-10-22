@@ -2,7 +2,7 @@
 // Le gabarit (en-tête, pied de page, icônes) est lu dans index.html : on ne le maintient qu'à un seul endroit.
 //   node tools/build-site.mjs
 // Contenu : tools/content/*.mjs · réglages : tools/site.config.json
-import { existsSync, mkdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
+import { existsSync, mkdirSync, readFileSync, rmSync, statSync, writeFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { METIERS } from './content/metiers.mjs';
@@ -80,7 +80,7 @@ const footer = toSub(grab(/<footer>[\s\S]*?<\/footer>/, 'pied de page'));
 
 // ---------------------------------------------------------------- squelette d'une page
 const registry = []; // pour le plan du site et la recherche
-function shell({ path, title, desc, type = 'website', jsonld = [], body, noindex = false, search = [] }) {
+function shell({ path, title, desc, type = 'website', jsonld = [], body, noindex = false, search = [], head = '', scripts = '' }) {
   const url = ORIGIN + path;
   if (!noindex) registry.push({ path, title, desc, keywords: search.join(' ') });
   const ld = jsonld.map((j) => `  <script type="application/ld+json">\n${JSON.stringify({ '@context': 'https://schema.org', ...j }, null, 2)}\n  </script>`).join('\n');
@@ -111,7 +111,7 @@ function shell({ path, title, desc, type = 'website', jsonld = [], body, noindex
   <link rel="stylesheet" href="/assets/fx.css">
   <script src="/assets/theme-init.js"></script>
   <script src="/assets/fx.js"></script>
-${ld}
+${head}${ld}
 </head>
 <body>
   ${sprite}
@@ -123,7 +123,7 @@ ${body}
   </main>
   ${footer}
   <script src="/assets/studio.js" defer></script>
-</body>
+${scripts}</body>
 </html>
 `;
 }
@@ -285,6 +285,10 @@ for (const a of ARTICLES) {
   write(`/blog/${a.slug}/`, shell({ path: `/blog/${a.slug}/`, title: a.title, desc: a.desc, type: 'article', jsonld: [bc.ld, { '@type': 'Article', headline: a.title, description: a.desc, datePublished: a.date, dateModified: a.date, inLanguage: 'fr-FR', author: { '@type': 'Person', name: 'Gabin Lescoat', url: 'https://glsc.fr/' }, publisher: orgRef, mainEntityOfPage: ORIGIN + `/blog/${a.slug}/`, image: ORIGIN + '/assets/img/og.png' }], body, search: [a.tag, a.title, 'article', 'conseil'] }));
 }
 
+
+const GPATH = readFileSync(join(ROOT, 'assets/favicon.svg'), 'utf8').split('<path d="')[1].split('"')[0];
+const ZIP_SIZE = (() => { try { return Math.round(statSync(join(ROOT, 'assets/brand/studioglsc-kit-de-marque.zip')).size / 1024) + ' Ko'; } catch { return ''; } })();
+const WORD_PATH = ''; // le logotype de la figure « zone de protection » est volontairement omis : seul le monogramme est coté
 // ---------------------------------------------------------------- galerie des démos
 {
   const bc = crumbs([['Accueil', '/'], ['Démos', '/demos/']]);
@@ -298,6 +302,141 @@ for (const a of ARTICLES) {
       <div><p class="eyebrow">Par métier</p><h2>Voir les sites par activité</h2><ul class="ticks">${DEMOS.map((d) => `<li>${esc(d.sector)} : ${esc(d.features.join(', ').toLowerCase())}</li>`).join('')}</ul>${heroCtas}</div>
     </div></section>` + ctaBand();
   write('/demos/', shell({ path: '/demos/', title: 'Démos de sites web par métier', desc: 'Six démos interactives de sites vitrines : restaurant, coiffeur, photographe, gîte, club, artisan du bâtiment. Carte, réservation, calendrier, billetterie, estimation.', jsonld: [bc.ld], body, search: ['démo', 'exemples', 'réalisations', 'restaurant', 'coiffeur', 'photographe', 'gîte', 'club', 'artisan'] }));
+}
+
+// ---------------------------------------------------------------- centre de marque (/marque/)
+{
+  const lum = (hex) => { const c = [1, 3, 5].map((i) => parseInt(hex.slice(i, i + 2), 16) / 255).map((v) => (v <= 0.03928 ? v / 12.92 : ((v + 0.055) / 1.055) ** 2.4)); return 0.2126 * c[0] + 0.7152 * c[1] + 0.0722 * c[2]; };
+  const ratio = (a, b) => { const [x, y] = [lum(a), lum(b)].sort((m, n) => n - m); return (x + 0.05) / (y + 0.05); };
+  const rgb = (hex) => [1, 3, 5].map((i) => parseInt(hex.slice(i, i + 2), 16)).join(', ');
+  const badge = (r) => (r >= 7 ? 'AAA' : r >= 4.5 ? 'AA' : r >= 3 ? 'AA texte large' : 'à éviter');
+  const COLORS = [
+    ['Bleu StudioGLSC', '#2447D6', 'Couleur principale', 'Boutons, liens, monogramme, accents.', '#FFFFFF', 'main'],
+    ['Bleu profond', '#1B37B0', 'Survol et états actifs', 'Quand un élément bleu est survolé ou pressé.', '#FFFFFF', ''],
+    ['Bleu pâle', '#E9EEFE', 'Fond doux', 'Pastilles, icônes, zones mises en avant.', '#0B1220', ''],
+    ['Encre', '#0B1220', 'Texte et fonds sombres', 'Titres, texte courant, scène de contact.', '#FFFFFF', ''],
+    ['Gris texte', '#566074', 'Texte secondaire', 'Légendes, descriptions, informations discrètes.', '#FFFFFF', ''],
+    ['Filet', '#E1E5ED', 'Séparateurs', 'Bordures de cartes, lignes, grilles.', '#0B1220', ''],
+    ['Fond', '#F6F7F9', 'Arrière-plan de page', 'Fond général du site en thème clair.', '#0B1220', ''],
+    ['Surface', '#FFFFFF', 'Cartes et formulaires', 'Éléments posés sur le fond.', '#0B1220', ''],
+    ['Vert confirmation', '#107A57', 'Réussite et disponibilité', 'Validations, pastille « en ligne », WhatsApp.', '#FFFFFF', ''],
+    ['Bleu clair', '#8AA4FF', 'Accent sur fond sombre', 'Remplace le bleu principal en thème sombre.', '#0A0F1C', 'dark'],
+  ];
+  const swatch = ([name, hex, role, use, on, kind]) => `<li class="bk-sw reveal"><button type="button" class="bk-sw-chip" data-copy="${hex}" data-copied="Couleur copiée" aria-label="Copier ${esc(name)} ${hex}"><span class="bk-sw-fill" data-bg="${hex}" data-fg="${on}"><b>${esc(name)}</b><span>Copier ${hex}</span></span></button><dl class="bk-sw-meta"><div><dt>HEX</dt><dd>${hex}</dd></div><div><dt>RVB</dt><dd>${rgb(hex)}</dd></div><div><dt>Rôle</dt><dd>${esc(role)}</dd></div></dl><p class="muted">${esc(use)}</p><p class="bk-ct">Texte ${on === '#FFFFFF' ? 'blanc' : 'sombre'} dessus : <b>${ratio(hex, on).toFixed(1)}:1</b> · ${badge(ratio(hex, on))}</p></li>`;
+  const logoCards = [
+    ['studioglsc-logo.svg', 'studioglsc-logo-2400.png', 'Logo horizontal', 'Fond clair', 'light'],
+    ['studioglsc-logo-fond-sombre.svg', 'studioglsc-logo-fond-sombre-2400.png', 'Logo, fond sombre', 'Fond sombre', 'dark'],
+    ['studioglsc-monogramme.svg', 'studioglsc-monogramme-1024.png', 'Monogramme', 'Réseaux, favicon, applications', 'light'],
+    ['studioglsc-monogramme-blanc.svg', null, 'Monogramme blanc', 'Fond bleu ou photo sombre', 'blue'],
+    ['studioglsc-lettre-bleu.svg', null, 'Lettre G seule', 'Très petits formats, tampon', 'light'],
+    ['studioglsc-logo-noir.svg', null, 'Logo noir', 'Impression en une couleur', 'light'],
+  ];
+  const logoCard = ([svg, png, name, use, bg]) => `<li class="bk-logo reveal"><div class="bk-stage ${bg}" data-bg="${bg}"><img src="/assets/brand/${svg}" alt="${esc(name)}" loading="lazy"></div><div class="bk-logo-meta"><div><h3>${esc(name)}</h3><p class="muted">${esc(use)}</p></div><div class="bk-dl"><a href="/assets/brand/${svg}" download>SVG</a>${png ? `<a href="/assets/brand/${png}" download>PNG</a>` : ''}</div></div></li>`;
+  const dos = [
+    ['Garder les proportions', 'Le monogramme est un carré : on le redimensionne sans le déformer.', 'ok', ''],
+    ['Laisser respirer', 'Une marge égale à la moitié de la hauteur du monogramme, au minimum.', 'ok', ''],
+    ['Respecter les couleurs', 'Bleu et blanc, ou les variantes noir et blanc fournies.', 'ok', ''],
+  ];
+  const donts = [
+    ['Étirer ou écraser', 'stretch'], ['Faire pivoter', 'rotate'], ['Changer les couleurs', 'recolor'], ['Ajouter une ombre ou un halo', 'shadow'], ['Mettre sur un fond chargé', 'busy'], ['Redessiner le G', 'redraw'],
+  ];
+  const tones = [
+    ['Clair', 'On dit ce qu’on fait, avec des mots simples.', 'Nous mettons en œuvre une solution digitale omnicanale.', 'Je crée votre site et il fonctionne sur téléphone.'],
+    ['Direct', 'Une phrase, une idée. Le prix et le délai d’abord.', 'Nos tarifs sont disponibles sur demande après étude.', 'One-Page Express : 400 €, première version en 48 h.'],
+    ['Humain', 'On parle à une personne, pas à un « utilisateur ».', 'Les utilisateurs peuvent contacter notre équipe.', 'Vous m’écrivez, je vous réponds moi-même.'],
+    ['Honnête', 'On n’invente ni références, ni garanties.', 'Plus de 500 clients satisfaits.', 'Studio indépendant, quelques projets, un suivi de près.'],
+  ];
+  const body = `
+    <section class="brand-hero"><div class="wrap bk-hero-grid">
+      <div>
+        <p class="eyebrow">Centre de marque</p>
+        <h1>Une identité simple, <span class="accent">reconnaissable en un coup d’œil.</span></h1>
+        <p class="hero-lead">Logos, couleurs, typographie et règles d’usage de StudioGLSC. Tout ce qu’il faut pour représenter le studio avec cohérence : sur un site, une carte de visite, un réseau social ou un document partenaire.</p>
+        <div class="btn-row"><a class="btn btn-primary" href="/assets/brand/studioglsc-kit-de-marque.zip" download>Télécharger le kit complet ${icon('arrow')}</a><a class="btn btn-secondary" href="#logo">Voir les logos</a></div>
+        <p class="hero-note">Kit .zip : SVG, PNG, palette CSS et règles essentielles · ${ZIP_SIZE}</p>
+      </div>
+      <div class="bk-hero-art" aria-hidden="true">
+        <div class="bk-orbit o1"></div><div class="bk-orbit o2"></div>
+        <svg class="bk-hero-mark" viewBox="0 0 64 64"><rect class="bk-sq" width="64" height="64" rx="16" fill="#2447D6"/><path class="bk-g-draw" pathLength="1" d="${GPATH}" /></svg>
+        <span class="bk-tag t1">#2447D6</span><span class="bk-tag t2">Inter Display 700</span><span class="bk-tag t3">rayon 25 %</span>
+      </div>
+    </div></section>
+
+    <nav class="bk-nav" aria-label="Sections du centre de marque"><div class="wrap"><a href="#logo">Logo</a><a href="#zone">Construction</a><a href="#erreurs">À éviter</a><a href="#couleurs">Couleurs</a><a href="#typo">Typographie</a><a href="#interface">Interface</a><a href="#ton">Ton</a><a href="#reseaux">Réseaux</a><a href="#kit">Kit</a></div></nav>
+
+    <section class="section" id="logo"><div class="wrap">
+      <div class="section-head"><div><p class="eyebrow">Le logo</p><h2>Un monogramme, un logotype, <span class="accent">six usages.</span></h2></div><p>Le G blanc sur carré bleu est la signature du studio. Choisissez la version qui convient au fond sur lequel elle sera posée.</p></div>
+      <div class="bk-bg-switch" role="group" aria-label="Aperçu sur fond"><span>Aperçu sur fond :</span><button type="button" aria-pressed="false" data-bgset="light">Clair</button><button type="button" aria-pressed="false" data-bgset="dark">Sombre</button><button type="button" aria-pressed="false" data-bgset="blue">Bleu</button><button type="button" aria-pressed="false" data-bgset="check">Transparent</button><button type="button" aria-pressed="true" data-bgset="auto">Par défaut</button></div>
+      <ul class="bk-logo-grid">${logoCards.map(logoCard).join('')}</ul>
+    </div></section>
+
+    <section class="section band" id="zone"><div class="wrap">
+      <div class="section-head"><div><p class="eyebrow">Construction</p><h2>Zone de protection et <span class="accent">taille minimale.</span></h2></div><p>Un logo se lit mieux quand il a de la place. Ces repères évitent qu’il soit collé à un texte, une image ou un bord.</p></div>
+      <div class="bk-anatomy">
+        <figure class="bk-fig reveal"><svg viewBox="0 0 520 300" role="img" aria-label="Zone de protection autour du logo : une demi-hauteur du monogramme de chaque côté"><rect class="bk-clear" x="30" y="30" width="460" height="240" rx="6"/><g transform="translate(110 118)"><rect width="64" height="64" rx="16" fill="#2447D6"/><path d="${GPATH}" fill="#fff"/><path d="${WORD_PATH}" fill="#0B1220" transform="translate(0 0)"/></g><g class="bk-dim"><path d="M30 150h80M410 150h80"/><path d="M270 30v88M270 182v88"/></g><text x="70" y="140" text-anchor="middle">½ h</text><text x="450" y="140" text-anchor="middle">½ h</text><text x="290" y="82">½ h</text><text x="290" y="238">½ h</text></svg><figcaption>Laissez autour du logo un espace libre égal à <b>la moitié de la hauteur du monogramme</b>.</figcaption></figure>
+        <figure class="bk-fig reveal" data-d="120"><div class="bk-sizes"><div><img src="/assets/brand/studioglsc-monogramme.svg" alt="" width="24" height="24"><span>24 px</span></div><div><img src="/assets/brand/studioglsc-monogramme.svg" alt="" width="48" height="48"><span>48 px</span></div><div><img src="/assets/brand/studioglsc-monogramme.svg" alt="" width="96" height="96"><span>96 px</span></div><div class="wide"><img src="/assets/brand/studioglsc-logo.svg" alt="" width="120" height="28"><span>120 px</span></div></div><figcaption>Tailles minimales : <b>24 px</b> pour le monogramme, <b>120 px</b> de large pour le logo horizontal, <b>8 mm</b> à l’impression.</figcaption></figure>
+      </div>
+    </div></section>
+
+    <section class="section" id="erreurs"><div class="wrap">
+      <div class="section-head"><div><p class="eyebrow">Bon usage</p><h2>Ce qu’il faut faire, <span class="accent">et éviter.</span></h2></div><p>Un logo déformé ou recoloré perd sa force. Voici les principales erreurs.</p></div>
+      <ul class="bk-dos">${dos.map(([t, d]) => `<li class="bk-do reveal"><span class="bk-ico ok" aria-hidden="true">${icon('check')}</span><h3>${esc(t)}</h3><p class="muted">${esc(d)}</p></li>`).join('')}</ul>
+      <ul class="bk-donts">${donts.map(([t, k], i) => `<li class="bk-dont reveal" data-d="${i * 60}"><div class="bk-bad ${k}"><img src="/assets/brand/studioglsc-monogramme.svg" alt="" width="72" height="72" loading="lazy"></div><p><span class="bk-ico no" aria-hidden="true">×</span> ${esc(t)}</p></li>`).join('')}</ul>
+    </div></section>
+
+    <section class="section band" id="couleurs"><div class="wrap">
+      <div class="section-head"><div><p class="eyebrow">Couleurs</p><h2>Bleu profond, blanc, <span class="accent">et rien de plus.</span></h2></div><p>Une palette sobre, pensée pour la lisibilité. Cliquez sur une couleur pour copier son code. Les rapports de contraste suivent les règles d’accessibilité WCAG.</p></div>
+      <div class="bk-ratio reveal" aria-hidden="true"><span class="r1">Bleu 60 %</span><span class="r2">Blanc et fonds 30 %</span><span class="r3">Encre 10 %</span></div>
+      <ul class="bk-sw-grid">${COLORS.map(swatch).join('')}</ul>
+    </div></section>
+
+    <section class="section" id="typo"><div class="wrap">
+      <div class="section-head"><div><p class="eyebrow">Typographie</p><h2>Inter, en deux <span class="accent">rôles.</span></h2></div><p>Inter Display 700 pour les titres, Inter 400, 500 et 600 pour les textes. Polices libres (licence SIL OFL), hébergées sur le site.</p></div>
+      <div class="bk-type">
+        <div class="bk-specimen reveal"><p class="bk-spec-label">Titres · Inter Display 700</p><p class="bk-spec-big" id="type-demo" contenteditable="true" spellcheck="false" role="textbox" aria-label="Modifier le texte d’essai" aria-multiline="false">Un site web à votre image.</p><p class="bk-hint">Cliquez sur le texte pour essayer le vôtre.</p><div class="bk-glyphs" aria-hidden="true">Aa Bb Cc Dd Ee Ff Gg 0123456789 € % &amp; ?</div></div>
+        <div class="bk-scale reveal" data-d="100">
+          <div><span class="bk-l">Titre 1</span><p class="s1">Un prix clair.</p></div>
+          <div><span class="bk-l">Titre 2</span><p class="s2">Votre site vous appartient.</p></div>
+          <div><span class="bk-l">Titre 3</span><p class="s3">Première version en 48 h</p></div>
+          <div><span class="bk-l">Texte · Inter 400</span><p class="s4">Clair, rapide et pensé pour que vos clients trouvent facilement l’essentiel.</p></div>
+          <div><span class="bk-l">Étiquette · Inter 600</span><p class="s5">Échange gratuit</p></div>
+        </div>
+      </div>
+    </div></section>
+
+    <section class="section band" id="interface"><div class="wrap">
+      <div class="section-head"><div><p class="eyebrow">Interface</p><h2>Les éléments, <span class="accent">tels qu’ils s’affichent.</span></h2></div><p>Ces composants sont ceux du site : coins arrondis généreux, ombres douces, un seul bleu pour guider l’œil.</p></div>
+      <div class="bk-ui">
+        <div class="bk-ui-card reveal"><p class="bk-spec-label">Boutons</p><div class="btn-row"><a class="btn btn-primary" href="#interface">Principal</a><a class="btn btn-secondary" href="#interface">Secondaire</a><a class="btn btn-wa" href="#interface">WhatsApp</a></div></div>
+        <div class="bk-ui-card reveal" data-d="60"><p class="bk-spec-label">Pastille et badge</p><p class="pill"><i aria-hidden="true"></i> Studio web indépendant</p> <span class="badge">Recommandé</span></div>
+        <div class="bk-ui-card reveal" data-d="120"><p class="bk-spec-label">Rayons</p><div class="bk-radii"><span data-r="10"></span><span data-r="16"></span><span data-r="24"></span><span data-r="999"></span></div><p class="muted">10 · 16 · 24 px · pastille</p></div>
+        <div class="bk-ui-card reveal" data-d="180"><p class="bk-spec-label">Carte de service</p><article class="service"><span class="service-icon" aria-hidden="true">${icon('monitor')}</span><h3>Site vitrine</h3><p>Une présentation claire de votre activité.</p></article></div>
+      </div>
+    </div></section>
+
+    <section class="section" id="ton"><div class="wrap">
+      <div class="section-head"><div><p class="eyebrow">Voix</p><h2>On parle comme on <span class="accent">travaille.</span></h2></div><p>Le ton de StudioGLSC est celui d’un indépendant : simple, précis et sincère. Quatre principes, avec un exemple pour chacun.</p></div>
+      <ul class="bk-tone">${tones.map(([t, d, no, yes], i) => `<li class="bk-tone-card reveal" data-d="${i * 70}"><h3>${esc(t)}</h3><p class="muted">${esc(d)}</p><p class="bk-no"><span aria-hidden="true">×</span>${esc(no)}</p><p class="bk-yes"><span aria-hidden="true">✓</span>${esc(yes)}</p></li>`).join('')}</ul>
+    </div></section>
+
+    <section class="section band" id="reseaux"><div class="wrap">
+      <div class="section-head"><div><p class="eyebrow">Réseaux et partage</p><h2>Prêt à publier, <span class="accent">à la bonne taille.</span></h2></div><p>Avatar carré, bannière et image de partage : chacun est livré aux dimensions des plateformes courantes.</p></div>
+      <ul class="bk-social">
+        <li class="reveal"><div class="bk-soc-img av"><img src="/assets/brand/studioglsc-avatar-1080.png" alt="Avatar StudioGLSC" width="180" height="180" loading="lazy"></div><h3>Avatar</h3><p class="muted">1080 × 1080 px. Le G reste dans la zone sûre quand la plateforme le recadre en rond.</p><div class="bk-dl"><a href="/assets/brand/studioglsc-avatar-1080.png" download>PNG</a></div></li>
+        <li class="reveal" data-d="80"><div class="bk-soc-img wide"><img src="/assets/brand/studioglsc-banniere-1500x500.png" alt="Bannière StudioGLSC" width="300" height="100" loading="lazy"></div><h3>Bannière</h3><p class="muted">1500 × 500 px. LinkedIn, X, YouTube : recadrez selon la plateforme.</p><div class="bk-dl"><a href="/assets/brand/studioglsc-banniere-1500x500.png" download>PNG</a></div></li>
+        <li class="reveal" data-d="160"><div class="bk-soc-img wide"><img src="/assets/img/og.png" alt="Image de partage StudioGLSC" width="300" height="158" loading="lazy"></div><h3>Image de partage</h3><p class="muted">1200 × 630 px. Affichée quand un lien du site est partagé.</p><div class="bk-dl"><a href="/assets/img/og.png" download>PNG</a></div></li>
+      </ul>
+      <div class="bk-boiler reveal">
+        <div><h3>Présentation courte</h3><p id="boiler">StudioGLSC est le studio web indépendant de Gabin Lescoat, en Bretagne. Il crée des sites vitrines clairs et rapides pour les artisans, commerçants et indépendants : première version en 48 h, paiement ponctuel, et vous restez propriétaire de votre site.</p></div>
+        <button type="button" class="btn btn-secondary" data-copy="StudioGLSC est le studio web indépendant de Gabin Lescoat, en Bretagne. Il crée des sites vitrines clairs et rapides pour les artisans, commerçants et indépendants : première version en 48 h, paiement ponctuel, et vous restez propriétaire de votre site." data-copied="Texte copié">Copier le texte</button>
+      </div>
+    </div></section>
+
+    <section class="section" id="kit"><div class="wrap"><div class="bk-kit reveal">
+      <div><p class="eyebrow">Le kit complet</p><h2>Tout dans <span class="accent">un seul fichier.</span></h2><p class="hero-lead">Logos en SVG et PNG, palette CSS, avatar, bannière, image de partage et rappel des règles. ${ZIP_SIZE}.</p><ul class="bk-contents"><li>10 logos vectoriels (SVG)</li><li>8 images (PNG)</li><li>Variables CSS de la palette</li><li>Mémo des règles d’usage</li></ul></div>
+      <div class="bk-kit-cta"><a class="btn btn-primary btn-big" href="/assets/brand/studioglsc-kit-de-marque.zip" download>Télécharger le kit ${icon('arrow')}</a><p class="muted">Une question sur l’utilisation de la marque ? <a href="mailto:pro@glsc.fr?subject=Utilisation%20de%20la%20marque%20StudioGLSC">pro@glsc.fr</a></p></div>
+    </div></div></section>` + ctaBand('Un projet de site web ?', 'Le premier échange est gratuit et sans engagement.');
+  write('/marque/', shell({ path: '/marque/', title: 'Centre de marque : logo, couleurs, typographie', desc: 'Le kit de marque StudioGLSC : logos en SVG et PNG, palette de couleurs, typographie, règles d’usage et ton éditorial. Téléchargez le kit complet.', body, noindex: true, head: '  <link rel="stylesheet" href="/assets/brand.css">\n', scripts: '  <script src="/assets/brand.js" defer></script>\n' }));
 }
 // ---------------------------------------------------------------- plan du site, index de recherche
 const fixed = [

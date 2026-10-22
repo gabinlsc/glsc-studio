@@ -76,7 +76,7 @@
 .fx-ticker-track { display: flex; width: max-content; will-change: transform; }
 .fx-ticker-track span { transform: skewX(var(--sk, 0deg)); display: inline-flex; align-items: center; gap: 28px; padding-right: 28px; font: 700 clamp(1.15rem, 2.4vw, 1.7rem)/1 var(--font-display); letter-spacing: -.02em; color: var(--ink); white-space: nowrap; }
 .fx-ticker-track span::after { content: ""; width: 9px; height: 9px; border-radius: 2px; background: var(--accent); transform: rotate(45deg); }
-.fx-ticker-track span:nth-child(even) { color: transparent; -webkit-text-stroke: 1.2px var(--ink); }
+.fx-ticker-track span:nth-child(even) { color: transparent; -webkit-text-stroke: 1.3px var(--ink); letter-spacing: .01em; paint-order: stroke fill; }
 .fx-calm .fx-ticker { overflow: visible; } .fx-calm .fx-ticker-track { width: auto; flex-wrap: wrap; row-gap: 10px; justify-content: center; padding-inline: 20px; }
 
 /* ---------- Pied de page : grand logotype ---------- */
