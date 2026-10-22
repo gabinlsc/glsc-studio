@@ -67,3 +67,10 @@ Le tout tourne aussi sur chaque PR (`.github/workflows/check.yml`). Si Chromium 
 - Visuels : `python3 tools/build-demo-images.py` (paysages et affiches illustrés, sans banque d'images ni photo) ; vignettes : `CHROMIUM_PATH=… node tools/build-demo-thumbs.mjs`.
 - Chaque démo est fictive, `noindex`, sans requête externe ni script en ligne (elle passe sous la CSP de production) ; ses formulaires sont simulés.
 - Tests : `tests/demos.mjs` (parcours de chaque démo), `tests/csp.mjs` et `tests/a11y.mjs` (toutes les démos).
+
+## Animations et centre de marque
+
+- `assets/fx.css` + `assets/fx.js` : couche d'animations (titres mot à mot, aurore et grille qui suivent le curseur, maquette inclinable, compteurs, halos de cartes, boutons aimantés, bandeau dont la vitesse suit le défilement, grand logotype du pied de page, onde circulaire au changement de thème, retour en haut avec anneau, barre d'appel mobile). Tout est coupé avec `prefers-reduced-motion`, les effets au pointeur sont réservés aux appareils à souris. Aucune dépendance.
+- `/marque/` : centre de marque (page `noindex`), généré par `tools/build-site.mjs` ; styles `assets/brand.css`, script `assets/brand.js`.
+- Kit : `node tools/build-brand.mjs` régénère `assets/brand/` (SVG dessinés en courbes à partir d'Inter Display, PNG via Chromium, archive `.zip`).
+- Tests : `tests/marque.mjs`, et le sélecteur de démos dans `tests/e2e.mjs`.

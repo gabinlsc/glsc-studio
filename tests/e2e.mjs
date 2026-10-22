@@ -45,9 +45,12 @@ await pg.check('input[name=activity][value="Commerce"]', { force: true }); await
 await pg.fill('#form-name', 'Bot'); await pg.fill('#form-email', 'bot@example.fr'); await pg.evaluate(() => { document.querySelector('input[name=website]').value = 'http://spam'; }); await pg.click('#step-send');
 assert.equal(await pg.locator('#form-done').isVisible(), false); ok('champ piège rempli : rien n’est envoyé');
 // démos
-await pg.evaluate(() => document.querySelector('.demo-lab').scrollIntoView());
-assert.equal(await pg.locator('#demo-screen iframe').count(), 0); await pg.click('#demo-launch'); assert.equal(await pg.locator('#demo-screen iframe').count(), 1); ok('démo chargée seulement au clic');
-assert.equal(await pg.locator('.seg button').count(), 6); await pg.click('.seg button:nth-child(6)'); assert.match(await pg.getAttribute('#demo-screen iframe', 'src'), /demos\/btp\//); assert.match(await pg.getAttribute('#demo-open', 'href'), /demos\/btp\//); ok('changement de démo (six onglets)');
+await pg.evaluate(() => document.querySelector('#showcase').scrollIntoView());
+await pg.waitForSelector('#demo-screen iframe', { timeout: 5000 }); assert.match(await pg.getAttribute('#demo-screen iframe', 'src'), /demos\/restaurant\//); ok('démo chargée automatiquement quand la zone est visible');
+assert.equal(await pg.locator('.sc-tab').count(), 6); await pg.click('.sc-tab:nth-child(6)'); await pg.waitForFunction(() => /demos\/btp\//.test(document.querySelector('#demo-screen iframe:last-of-type')?.src || ''));
+assert.match(await pg.getAttribute('#demo-open', 'href'), /demos\/btp\//); assert.equal(await pg.getAttribute('.sc-tab:nth-child(6)', 'aria-selected'), 'true'); ok('changement de démo (six cartes)');
+await pg.click('.sc-switch button[data-device="desktop"]'); assert.equal(await pg.getAttribute('#showcase', 'data-device'), 'desktop'); assert.equal(await pg.getAttribute('.sc-switch button[data-device="desktop"]', 'aria-pressed'), 'true'); ok('bascule mobile / ordinateur');
+await pg.focus('.sc-tab[aria-selected="true"]'); await pg.keyboard.press('ArrowUp'); assert.equal(await pg.getAttribute('.sc-tab:nth-child(5)', 'aria-selected'), 'true'); ok('sélecteur de démos au clavier');
 // rail
 assert.equal(await pg.locator('#rail').isVisible(), true); await pg.evaluate(() => document.querySelector('#engagements').scrollIntoView()); await pg.waitForTimeout(600);
 assert.equal(await pg.locator('#rail a[aria-current="location"]').getAttribute('href'), '#engagements'); ok('sommaire latéral suit la section');

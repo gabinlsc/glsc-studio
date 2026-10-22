@@ -15,7 +15,7 @@ for (const theme of ['light', 'dark']) {
     await page.addInitScript(() => document.addEventListener('securitypolicyviolation', (e) => console.error('CSP ' + e.violatedDirective + ' ' + e.blockedURI)));
     await page.goto(base + path, { waitUntil: 'networkidle' });
     if (path === '/') { // les parties interactives ne doivent pas non plus être bloquées
-      await page.click('#theme-toggle'); await page.click('#demo-launch'); await page.fill('#estimate input[value="month"]', '', { force: true }).catch(() => {});
+      await page.click('#theme-toggle'); await page.evaluate(() => document.querySelector('#showcase').scrollIntoView()); await page.waitForSelector('#demo-screen iframe'); await page.fill('#estimate input[value="month"]', '', { force: true }).catch(() => {});
       await page.waitForTimeout(400);
     }
     assert.deepEqual(issues, [], `${path} (${theme}) : ${issues.join(' | ')}`);

@@ -7,7 +7,7 @@
   // Lien de prise de rendez-vous (Cal.com, Calendly…). Vide : le bouton propose d'écrire pour convenir d'un créneau.
   var BOOKING_URL = '';
   // Délai de réponse annoncé après l'envoi du formulaire, par exemple 'sous 24 h ouvrées'. Vide : aucune promesse de délai.
-  var REPLY_DELAY = '';
+  var REPLY_DELAY = 'sous 48 h ouvrées';
   // Adresse du service qui reçoit les demandes (POST JSON). Vide : le formulaire prépare un e-mail dans la messagerie du visiteur.
   var CONTACT_ENDPOINT = '/api/contact';
   // ------------------------------------------------------

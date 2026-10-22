@@ -185,25 +185,40 @@
   });
   function resetNeeded() { return form.hidden; }
 
-  /* ---------- Démos en direct dans un téléphone ---------- */
-  var demoTabs = $$('.seg button'), demoOpen = $('#demo-open'), screen = $('#demo-screen');
-  var demoUrl = demoTabs[0].dataset.demo, demoTitle = demoTabs[0].dataset.title;
-  function loadDemo() {
-    screen.textContent = '';
-    var frame = document.createElement('iframe');
-    frame.src = demoUrl; frame.title = 'Démo : ' + demoTitle; frame.loading = 'lazy';
-    frame.setAttribute('sandbox', 'allow-scripts allow-same-origin allow-popups allow-forms');
-    screen.append(frame);
-  }
-  demoTabs.forEach(function (tab) {
-    tab.addEventListener('click', function () {
-      demoTabs.forEach(function (t) { t.setAttribute('aria-selected', String(t === tab)); });
-      demoUrl = tab.dataset.demo; demoTitle = tab.dataset.title; demoOpen.href = demoUrl;
-      if (screen.querySelector('iframe')) loadDemo();
+  /* ---------- Démos en direct : liste de cartes + appareil au choix ---------- */
+  var show = $('#showcase');
+  if (show) {
+    var tabs = $$('.sc-tab', show), screen = $('#demo-screen'), openLink = $('#demo-open'), feats = $('#sc-feats'), urlBar = $('#sc-url');
+    var devBtns = $$('.sc-switch button', show), cur = 0, device = 'phone', started = false;
+    var SIZE = { phone: [390, 800], desktop: [1280, 800] };
+    function fit() {
+      var wrap = $('.sc-device', show), avail = Math.max(240, wrap.clientWidth - 24), d = SIZE[device];
+      var w = device === 'phone' ? Math.min(300, avail - 20) : avail - 22;
+      screen.style.setProperty('--iw', d[0]); screen.style.setProperty('--ih', d[1]); screen.style.setProperty('--s', (w / d[0]).toFixed(4));
+    }
+    function load(i, instant) {
+      cur = i; var t = tabs[i], url = t.dataset.demo;
+      tabs.forEach(function (x, k) { x.setAttribute('aria-selected', String(k === i)); x.tabIndex = k === i ? 0 : -1; });
+      $('#sc-panel').setAttribute('aria-labelledby', t.id); openLink.href = url; urlBar.textContent = 'studio.glsc.fr' + url;
+      feats.textContent = ''; t.dataset.features.split('|').forEach(function (f) { var li = document.createElement('li'); li.textContent = f; feats.append(li); });
+      var old = $('iframe', screen), frame = document.createElement('iframe');
+      frame.src = url; frame.title = 'Démo : ' + t.dataset.title + ', ' + t.dataset.name; frame.loading = 'eager';
+      frame.setAttribute('sandbox', 'allow-scripts allow-same-origin allow-popups allow-forms');
+      frame.addEventListener('load', function () { requestAnimationFrame(function () { frame.classList.add('ready'); var ph = $('.demo-placeholder', screen); if (ph) ph.remove(); if (old) setTimeout(function () { old.remove(); }, 450); }); });
+      screen.append(frame);
+    }
+    tabs.forEach(function (t, i) {
+      t.addEventListener('click', function () { if (i !== cur || !started) { started = true; load(i); } });
+      t.addEventListener('keydown', function (e) {
+        var k = { ArrowDown: 1, ArrowRight: 1, ArrowUp: -1, ArrowLeft: -1 }[e.key]; if (!k) return;
+        e.preventDefault(); var n = (i + k + tabs.length) % tabs.length; tabs[n].focus(); tabs[n].click();
+      });
     });
-  });
-  $('#demo-launch').addEventListener('click', loadDemo);
-  function fitDemo() { screen.style.setProperty('--s', String(screen.clientWidth / 390)); }
-  fitDemo(); addEventListener('resize', fitDemo);
+    devBtns.forEach(function (b) { b.addEventListener('click', function () { device = b.dataset.device; show.dataset.device = device; devBtns.forEach(function (x) { x.setAttribute('aria-pressed', String(x === b)); }); fit(); }); });
+    fit(); addEventListener('resize', fit);
+    /* La première démo ne se charge que lorsque la zone devient visible. */
+    var launch = function () { if (started) return; started = true; load(0); };
+    if ('IntersectionObserver' in window) { var vio = new IntersectionObserver(function (es) { if (es[0].isIntersecting) { vio.disconnect(); launch(); } }, { rootMargin: '200px' }); vio.observe(show); } else launch();
+  }
 
 })();

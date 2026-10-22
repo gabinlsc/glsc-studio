@@ -1,0 +1,146 @@
+/* StudioGLSC — couche d'animations. Chargée après studio.css.
+   Tout ce qui bouge est conditionné : mouvement réduit = rien ne s'anime (la page reste complète),
+   effets au pointeur = uniquement sur appareil à souris. Aucune ressource externe. */
+
+@property --fx-a { syntax: "<angle>"; initial-value: 0deg; inherits: false; }
+@view-transition { navigation: auto; }
+::view-transition-old(root), ::view-transition-new(root) { animation-duration: .32s; animation-timing-function: cubic-bezier(.2, .7, .2, 1); }
+
+/* ---------- Titres : les mots montent un à un dans leur masque ---------- */
+.fxw { display: inline-block; overflow: hidden; vertical-align: top; padding-bottom: .14em; margin-bottom: -.14em; }
+.fxw > span { display: inline-block; }
+.hero h1 span.fxw, .hero h1 span.fxw > span { display: inline-block; }
+.fx-split .accent { background: none; -webkit-text-fill-color: currentColor; color: var(--accent); }
+.fx-split .accent .fxw > span { background: linear-gradient(100deg, var(--accent) 20%, color-mix(in srgb, var(--accent) 50%, #8b5cf6) 50%, var(--accent) 80%); background-size: 220% 100%; -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+.fx-on .fx-split .fxw > span { transform: translateY(112%) rotate(3deg); opacity: 0; transition: transform .95s cubic-bezier(.2, .7, .1, 1), opacity .6s; transition-delay: calc(var(--i, 0) * 70ms + var(--d, 0ms)); }
+.fx-on .fx-split.fx-in .fxw > span { transform: none; opacity: 1; }
+.fx-on .fx-split.fx-in .accent .fxw > span { animation: fx-shimmer 7s ease-in-out 1.4s infinite; }
+@keyframes fx-shimmer { 0%, 100% { background-position: 0% 0; } 50% { background-position: 100% 0; } }
+
+/* ---------- Fond du héros : aurore + grille qui suit le curseur ---------- */
+.hero::before { -webkit-mask-image: radial-gradient(ellipse 70% 60% at var(--mx, 62%) var(--my, 30%), #000, transparent 75%); mask-image: radial-gradient(ellipse 70% 60% at var(--mx, 62%) var(--my, 30%), #000, transparent 75%); }
+.fx-aurora { position: absolute; inset: 0; z-index: -1; overflow: hidden; pointer-events: none; }
+.fx-aurora i { position: absolute; width: 62vmax; height: 62vmax; border-radius: 50%; opacity: .55; will-change: transform; }
+.fx-aurora i:nth-child(1) { left: -22vmax; top: -34vmax; background: radial-gradient(circle, color-mix(in srgb, var(--accent) 26%, transparent), transparent 62%); animation: fx-drift-a 22s ease-in-out infinite alternate; }
+.fx-aurora i:nth-child(2) { right: -26vmax; top: -20vmax; background: radial-gradient(circle, color-mix(in srgb, #8b5cf6 18%, transparent), transparent 62%); animation: fx-drift-b 28s ease-in-out infinite alternate; }
+.fx-aurora i:nth-child(3) { left: 24vmax; bottom: -46vmax; background: radial-gradient(circle, color-mix(in srgb, #06b6d4 14%, transparent), transparent 62%); animation: fx-drift-a 34s ease-in-out infinite alternate-reverse; }
+@keyframes fx-drift-a { to { transform: translate3d(9vmax, 5vmax, 0) scale(1.12); } }
+@keyframes fx-drift-b { to { transform: translate3d(-8vmax, 7vmax, 0) scale(.92); } }
+.fx-calm .fx-aurora i { animation: none; }
+
+/* ---------- Maquette du héros : se construit, puis réagit au curseur ---------- */
+.mock { perspective: 1300px; }
+.mock-browser, .mock-phone { transition: transform .35s cubic-bezier(.2, .7, .2, 1); }
+.fx-on .mock-browser { transform: rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg)); transform-style: preserve-3d; }
+.fx-on .mock-phone { transform: translate3d(var(--px, 0px), var(--py, 0px), 40px); }
+.fx-on .mock-chip { translate: var(--cx, 0px) var(--cy, 0px); }
+.fx-on .mock-chip.c1 { animation: fx-bob 5.5s ease-in-out infinite; }
+.fx-on .mock-chip.c2 { animation: fx-bob 6.5s ease-in-out -2s infinite; }
+@keyframes fx-bob { 50% { margin-top: -9px; } }
+.fx-on .mock-phone { animation: fx-sway 8s ease-in-out infinite; }
+@keyframes fx-sway { 50% { margin-bottom: 10px; } }
+.fx-on .mock-h, .fx-on .mock-p, .fx-on .mock-pill, .fx-on .mock-actions > *, .fx-on .mock-btn { transform-origin: left; animation: fx-build .8s cubic-bezier(.2, .7, .1, 1) backwards; animation-delay: calc(.5s + var(--b, 0) * 90ms); }
+.fx-on .mock-card { animation: fx-pop .7s cubic-bezier(.2, .8, .2, 1.1) backwards; animation-delay: calc(1s + var(--b, 0) * 110ms); }
+.fx-on .mock-logo { animation: fx-pop .6s cubic-bezier(.2, .8, .2, 1.3) backwards .4s; }
+@keyframes fx-build { from { transform: scaleX(0); opacity: 0; } }
+@keyframes fx-pop { from { transform: scale(.8) translateY(10px); opacity: 0; } }
+
+/* ---------- Pastille « en ligne » qui pulse ---------- */
+.fx-on .pill i { position: relative; }
+.fx-on .pill i::after { content: ""; position: absolute; inset: -4px; border-radius: 50%; border: 2px solid var(--ok); opacity: 0; animation: fx-ping 2.6s ease-out infinite; }
+@keyframes fx-ping { 0% { transform: scale(.6); opacity: .8; } 80%, 100% { transform: scale(2.2); opacity: 0; } }
+
+/* ---------- Boutons : reflet au survol, aimant ---------- */
+.btn { position: relative; overflow: hidden; }
+.btn-primary::after { content: ""; position: absolute; inset: 0; background: linear-gradient(105deg, transparent 35%, rgba(255, 255, 255, .32) 50%, transparent 65%); transform: translateX(-120%); pointer-events: none; }
+.fx-on .btn-primary:hover::after { transform: translateX(120%); transition: transform .75s cubic-bezier(.2, .7, .2, 1); }
+.fx-mag { translate: var(--mx, 0px) var(--my, 0px); transition: translate .25s cubic-bezier(.2, .7, .2, 1), transform .15s, background .15s, box-shadow .2s; }
+.fx-ripple { position: absolute; border-radius: 50%; background: rgba(255, 255, 255, .45); transform: scale(0); animation: fx-ripple .65s ease-out forwards; pointer-events: none; }
+@keyframes fx-ripple { to { transform: scale(1); opacity: 0; } }
+
+/* ---------- Cartes : halo qui suit la souris ---------- */
+.fx-gl { position: absolute; inset: 0; border-radius: inherit; pointer-events: none; opacity: 0; transition: opacity .3s; background: radial-gradient(280px circle at var(--gx, 50%) var(--gy, 50%), color-mix(in srgb, var(--accent) 13%, transparent), transparent 70%); z-index: 0; }
+.fx-glow { position: relative; }
+.fx-glow:hover > .fx-gl { opacity: 1; }
+.fx-glow > *:not(.fx-gl) { position: relative; z-index: 1; }
+.fx-glow.reveal, .fx-glow.service, .fx-glow.pledge, .fx-glow.metric { transition: opacity .7s var(--ease), transform .7s var(--ease), border-color .25s, box-shadow .25s; }
+.service.fx-glow:hover, .pledge.fx-glow:hover, .project.fx-glow:hover { border-color: color-mix(in srgb, var(--accent) 45%, var(--line)); }
+
+/* ---------- Offre recommandée : bordure lumineuse qui tourne ---------- */
+.price-card.featured { position: relative; }
+.fx-on .price-card.featured::before { content: ""; position: absolute; inset: -2px; border-radius: inherit; padding: 2px; background: conic-gradient(from var(--fx-a), var(--accent), transparent 28%, transparent 72%, var(--accent)); -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor; mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0); animation: fx-spin 6s linear infinite; pointer-events: none; }
+@keyframes fx-spin { to { --fx-a: 360deg; } }
+
+/* ---------- Bandeau de mots dont la vitesse suit le défilement ---------- */
+.fx-ticker { overflow: hidden; border-block: 1px solid var(--line); background: var(--surface); padding: 18px 0; margin-top: clamp(40px, 6vw, 72px); }
+.fx-ticker-track { display: flex; width: max-content; will-change: transform; }
+.fx-ticker-track span { transform: skewX(var(--sk, 0deg)); display: inline-flex; align-items: center; gap: 28px; padding-right: 28px; font: 700 clamp(1.15rem, 2.4vw, 1.7rem)/1 var(--font-display); letter-spacing: -.02em; color: var(--ink); white-space: nowrap; }
+.fx-ticker-track span::after { content: ""; width: 9px; height: 9px; border-radius: 2px; background: var(--accent); transform: rotate(45deg); }
+.fx-ticker-track span:nth-child(even) { color: transparent; -webkit-text-stroke: 1.3px var(--ink); letter-spacing: .01em; paint-order: stroke fill; }
+.fx-calm .fx-ticker { overflow: visible; } .fx-calm .fx-ticker-track { width: auto; flex-wrap: wrap; row-gap: 10px; justify-content: center; padding-inline: 20px; }
+
+/* ---------- Pied de page : grand logotype ---------- */
+.fx-mega { margin: clamp(28px, 5vw, 56px) 0 -.12em; font: 700 clamp(3.2rem, 17.5vw, 15rem)/.82 var(--font-display); letter-spacing: -.055em; white-space: nowrap; text-align: center; user-select: none; overflow: hidden; -webkit-mask-image: linear-gradient(#000 40%, transparent 98%); mask-image: linear-gradient(#000 40%, transparent 98%); }
+.fx-mega span { display: inline-block; color: transparent; -webkit-text-stroke: 1.5px var(--line-strong); background: linear-gradient(var(--accent), var(--accent)) 0 100% / 100% 0 no-repeat; -webkit-background-clip: text; background-clip: text; transition: background-size .9s cubic-bezier(.2, .7, .1, 1), transform .9s cubic-bezier(.2, .7, .1, 1), opacity .6s; transition-delay: calc(var(--i) * 45ms); }
+.fx-on .fx-mega span { transform: translateY(70%); opacity: 0; }
+.fx-on .fx-mega.fx-in span { transform: none; opacity: 1; background-size: 100% 100%; -webkit-text-stroke-color: var(--accent); }
+.fx-mega .g { -webkit-text-stroke-color: var(--accent); }
+
+/* ---------- Retour en haut (anneau de progression) + barre d'appel mobile ---------- */
+.fx-top { position: fixed; right: 22px; bottom: 22px; z-index: 55; width: 52px; height: 52px; display: grid; place-items: center; border-radius: 50%; background: var(--surface); box-shadow: var(--shadow); color: var(--ink); opacity: 0; transform: translateY(14px) scale(.9); pointer-events: none; transition: opacity .3s, transform .3s cubic-bezier(.2, .7, .2, 1); }
+.fx-top.show { opacity: 1; transform: none; pointer-events: auto; }
+.fx-top svg { position: absolute; inset: 0; transform: rotate(-90deg); }
+.fx-top circle { fill: none; stroke-width: 3; } .fx-top .tr { stroke: var(--line); } .fx-top .pr { stroke: var(--accent); stroke-linecap: round; transition: stroke-dashoffset .12s linear; }
+.fx-top .arr { width: 18px; height: 18px; position: relative; transform: rotate(-90deg); }
+.fx-top:hover { transform: translateY(-3px); }
+.m-cta { display: none; }
+@media (max-width: 720px) {
+  .fx-top { display: none; }
+  .m-cta { position: fixed; inset: auto 12px 12px; z-index: 55; display: flex; gap: 8px; padding: 8px; border: 1px solid var(--line); border-radius: 18px; background: color-mix(in srgb, var(--surface) 92%, transparent); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); box-shadow: var(--shadow-lg); transform: translateY(130%); transition: transform .4s cubic-bezier(.2, .7, .2, 1); }
+  .m-cta.show { transform: none; }
+  .m-cta .btn { flex: 1; min-height: 46px; padding: 0 12px; }
+  body:has(.m-cta) footer { padding-bottom: 80px; }
+}
+
+/* ---------- Logo et en-tête ---------- */
+.logo-mark { transition: transform .45s cubic-bezier(.3, 1.6, .5, 1); }
+.brand:hover .logo-mark { transform: rotate(-8deg) scale(1.08); }
+.fx-on .header .logo-mark { animation: fx-pop .7s cubic-bezier(.2, .8, .2, 1.4) backwards .1s; }
+.header.fx-stuck { box-shadow: 0 8px 24px -16px rgba(11, 18, 32, .3); }
+
+/* ---------- Sections : trait d'accroche qui se dessine ---------- */
+.fx-on .eyebrow::before { transition: width .9s cubic-bezier(.2, .7, .1, 1) .2s; }
+
+@media (prefers-reduced-motion: reduce) {
+  .fx-aurora i, .mock-chip, .mock-phone, .pill i::after, .price-card.featured::before { animation: none !important; }
+}
+
+/* ---------- Espacement : la section contact respire, avec sa scène sombre animée ---------- */
+.contact-section { padding-top: clamp(96px, 11vw, 150px); padding-bottom: clamp(96px, 11vw, 150px); }
+.contact { background-image: linear-gradient(rgba(255, 255, 255, .045) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, .045) 1px, transparent 1px); background-size: 48px 48px; background-color: var(--ink); box-shadow: 0 50px 90px -50px color-mix(in srgb, var(--accent) 70%, transparent); }
+:root[data-theme="dark"] .contact { background-image: linear-gradient(var(--line) 1px, transparent 1px), linear-gradient(90deg, var(--line) 1px, transparent 1px); background-color: var(--surface); }
+.contact::after { content: ""; position: absolute; z-index: -1; width: 520px; height: 520px; left: -200px; bottom: -260px; border-radius: 50%; background: radial-gradient(closest-side, color-mix(in srgb, #8b5cf6 32%, transparent), transparent); }
+.fx-on .contact::before { animation: fx-drift-b 14s ease-in-out infinite alternate; }
+.fx-on .contact::after { animation: fx-drift-a 18s ease-in-out infinite alternate; }
+.contact-mail-row { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; margin-top: 26px; }
+.contact-mail-row .contact-email { margin-top: 0; }
+.copy-btn { min-height: 34px; padding: 0 14px; border: 1px solid rgba(255, 255, 255, .28); border-radius: 999px; background: rgba(255, 255, 255, .08); color: inherit; font: 600 .82rem/1 var(--font); cursor: pointer; transition: background .2s, border-color .2s, transform .2s; }
+.copy-btn:hover { background: rgba(255, 255, 255, .16); border-color: rgba(255, 255, 255, .5); }
+:root[data-theme="dark"] .copy-btn { background: var(--surface-2); border-color: var(--line-strong); }
+
+/* ---------- Notification discrète ---------- */
+.fx-toast { position: fixed; left: 50%; bottom: 28px; z-index: 80; display: inline-flex; align-items: center; gap: 10px; padding: 12px 18px; border-radius: 999px; background: var(--ink); color: var(--bg); font: 600 .92rem/1 var(--font); box-shadow: var(--shadow-lg); transform: translate(-50%, 24px); opacity: 0; transition: transform .4s cubic-bezier(.2, .8, .2, 1.2), opacity .3s; pointer-events: none; }
+.fx-toast.show { transform: translate(-50%, 0); opacity: 1; }
+.fx-toast::before { content: ""; width: 18px; height: 18px; border-radius: 50%; background: var(--ok) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12.5l4.5 4.5L19 7.500'/%3E%3C/svg%3E") center / 11px no-repeat; }
+@media (max-width: 720px) { .fx-toast { bottom: 96px; } }
+
+/* ---------- En-tête qui se range quand on lit vers le bas ---------- */
+.header { transition: transform .4s cubic-bezier(.2, .7, .2, 1), box-shadow .3s, background .3s; }
+.header.fx-hide { transform: translateY(-110%); }
+
+/* ---------- Bascule de thème : onde circulaire depuis le bouton ---------- */
+html.fx-theme-vt::view-transition-old(root), html.fx-theme-vt::view-transition-new(root) { animation: none; mix-blend-mode: normal; }
+html.fx-theme-vt::view-transition-old(root) { z-index: 1; } html.fx-theme-vt::view-transition-new(root) { z-index: 2; }
+
+/* Les panneaux à halo décoratif ne doivent jamais défiler d'eux-mêmes (scrollIntoView sur un contenu interne les décalait) */
+.contact, .showcase, .bk-kit, .hero { overflow: clip; }
