@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="fr" data-theme="light">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f6f7f9">
+  <meta name="robots" content="noindex,nofollow">
+  <meta name="referrer" content="no-referrer">
+  <title>Suivi de projet · StudioGLSC</title>
+  <meta name="description" content="Page privée de suivi de projet StudioGLSC : avancement, messages et dépôt de fichiers.">
+  <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="/assets/favicon-32.png" sizes="32x32" type="image/png">
+  <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+  <link rel="stylesheet" href="/assets/studio.css">
+  <script src="/assets/theme-init.js"></script>
+</head>
+<body class="suivi-page">
+  <a class="skip-link" href="#contenu">Aller au contenu</a>
+  <header class="suivi-top">
+    <div class="wrap suivi-bar">
+      <a href="/" class="brand" aria-label="StudioGLSC, accueil"><span class="logo-mark" aria-hidden="true">G</span><span class="wordmark">Studio<span>GLSC</span></span></a>
+      <span class="suivi-badge">Page privée</span>
+    </div>
+  </header>
+
+  <main id="contenu" class="wrap suivi">
+    <p id="state-loading" class="muted" role="status">Chargement de votre suivi…</p>
+    <section id="state-error" class="suivi-card" hidden>
+      <h1>Ce lien ne fonctionne pas</h1>
+      <p id="error-text" class="muted"></p>
+      <p>Besoin d’aide ? Écrivez-moi à <a href="mailto:pro@glsc.fr">pro@glsc.fr</a>.</p>
+    </section>
+
+    <div id="project" hidden>
+      <p class="eyebrow">Suivi de projet</p>
+      <h1 id="p-title"></h1>
+      <p id="p-client" class="muted"></p>
+
+      <section class="suivi-card" aria-labelledby="h-steps">
+        <h2 id="h-steps">Avancement</h2>
+        <ol class="p-steps" id="p-steps"></ol>
+        <p id="p-done" class="p-done" hidden>Le projet est terminé. Merci pour votre confiance !</p>
+      </section>
+
+      <section class="suivi-card" aria-labelledby="h-msg">
+        <h2 id="h-msg">Messages</h2>
+        <div class="thread" id="thread" aria-live="polite"></div>
+        <form id="msg-form" class="msg-form">
+          <label for="msg-text" class="sr-only">Votre message</label>
+          <textarea id="msg-text" rows="3" maxlength="2000" placeholder="Écrire à Gabin…" required></textarea>
+          <div class="form-nav"><button class="btn btn-primary" type="submit" id="msg-send">Envoyer</button></div>
+          <p class="form-status" id="msg-status" role="status" aria-live="polite"></p>
+        </form>
+      </section>
+
+      <section class="suivi-card" aria-labelledby="h-files">
+        <h2 id="h-files">Vos fichiers</h2>
+        <p class="muted">Textes, logo, photos… Formats acceptés : JPG, PNG, WebP, PDF, Word, Excel, LibreOffice et fichiers texte. 8 Mo par fichier.</p>
+        <label class="drop" for="file-input"><strong>Choisir des fichiers</strong><span class="muted">ou les déposer ici</span></label>
+        <input id="file-input" class="sr-only" type="file" multiple accept=".jpg,.jpeg,.png,.webp,.pdf,.docx,.xlsx,.odt,.ods,.txt,.md,.csv">
+        <p class="form-status" id="up-status" role="status" aria-live="polite"></p>
+        <ul class="file-list" id="files"></ul>
+      </section>
+    </div>
+  </main>
+
+  <footer class="suivi-foot">
+    <div class="wrap"><p>Cette page est privée : ne partagez pas son adresse. Vos messages et fichiers ne sont lus que par Gabin Lescoat et conservés le temps du projet (voir les <a href="/mentions-legales.html#donnees">mentions légales</a>).</p></div>
+  </footer>
+  <script src="/assets/suivi.js" defer></script>
+</body>
+</html>

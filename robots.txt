@@ -2,6 +2,8 @@
 
 User-agent: *
 Allow: /
+Disallow: /suivi/
+Disallow: /api/
 
 # club-demo.html et btp-demo.html sont volontairement absents du sitemap :
 # ces pages de démonstration portent <meta name="robots" content="noindex,follow">.
