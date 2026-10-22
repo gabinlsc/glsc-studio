@@ -237,4 +237,20 @@
     if ('IntersectionObserver' in window) { var vio = new IntersectionObserver(function (es) { if (es[0].isIntersecting) { vio.disconnect(); launch(); } }, { rootMargin: '200px' }); vio.observe(show); } else launch();
   }
 
+  /* ---------- Film de présentation : choix de la durée et du format ---------- */
+  var film = $('#film-box'), video = $('#film-video');
+  if (film && video) {
+    var opts = $('.film-opts', film); opts.hidden = false;
+    var swap = function () {
+      var base = '/assets/video/studioglsc-' + (film.dataset.len === 'short' ? 'court' : 'complet') + '-' + film.dataset.fmt;
+      video.pause(); video.poster = base + '.webp'; $('source', video).src = base + '.mp4'; video.load();
+    };
+    $$('button', opts).forEach(function (b) {
+      b.addEventListener('click', function () {
+        var k = b.dataset.len ? 'len' : 'fmt'; film.dataset[k] = b.dataset[k];
+        $$('button[data-' + k + ']', opts).forEach(function (x) { x.setAttribute('aria-pressed', String(x === b)); }); swap();
+      });
+    });
+  }
+
 })();

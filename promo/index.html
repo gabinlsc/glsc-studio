@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>StudioGLSC — film promotionnel</title>
+<link rel="stylesheet" href="promo.css?v=36389946">
+</head>
+<body>
+<div id="stage">
+
+  <!-- Fonds des scènes (empilés ; chaque scène en recouvre la précédente) -->
+  <section class="sc dark" id="sA">
+    <div class="grid"></div><div class="glow g1"></div>
+    <h1 class="big" id="aTitle"><span class="ln">Vos clients vous cherchent</span><span class="ln b">sur leur téléphone.</span></h1>
+  </section>
+
+  <section class="sc light" id="sB">
+    <div class="grid"></div><div class="glow g2"></div>
+    <div class="copy left" id="bCopy">
+      <p class="kick" id="bKick">StudioGLSC</p>
+      <h2 class="big" id="bTitle"><span class="ln">Un site web</span><span class="ln b">à votre image.</span></h2>
+      <p class="lede" id="bLede">Clair. Rapide. Pensé pour le mobile.</p>
+    </div>
+  </section>
+
+  <section class="sc dark" id="sC">
+    <div class="grid"></div><div class="glow g1"></div>
+    <div class="ring3d" id="ring"></div>
+    <div class="cap" id="cWord"></div>
+    <p class="kick c" id="cKick">Chaque métier a son site</p>
+  </section>
+
+  <section class="sc light" id="sD">
+    <div class="grid"></div><div class="glow g2"></div>
+    <div class="dnum" id="dNum"><svg viewBox="0 0 600 600" id="dRing"><circle class="tr" cx="300" cy="300" r="268"/><circle class="pr" cx="300" cy="300" r="268"/></svg><div class="n"><b id="dVal">0</b><i>h</i></div></div>
+    <div class="copy right" id="dCopy">
+      <p class="kick">Livraison</p>
+      <h2 class="big"><span class="ln">Première version</span><span class="ln b">en 48 heures.</span></h2>
+      <ul class="steps" id="dSteps"><li>Cadrage</li><li>Création</li><li>Livraison</li></ul>
+    </div>
+  </section>
+
+  <section class="sc dark" id="sE">
+    <div class="grid"></div><div class="glow g1"></div>
+    <h2 class="big mid" id="eTitle"><span class="ln">Tout ce qu’il faut</span><span class="ln b">pour vendre.</span></h2>
+    <div class="cards" id="eCards"></div>
+  </section>
+
+  <section class="sc light" id="sF">
+    <div class="grid"></div><div class="glow g2"></div>
+    <h2 class="big mid" id="fTitle"><span class="ln">Un prix clair.</span></h2>
+    <div class="prices" id="fPrices">
+      <div class="pc"><p class="pn">One-Page Express</p><p class="pv"><b data-v="550">0</b><i>€</i></p><p class="pd">Une page sur mesure, en 48 h</p></div>
+      <div class="pc"><p class="pn">Refonte &amp; multi-pages</p><p class="pv"><u>dès</u><b data-v="750">0</b><i>€</i></p><p class="pd">Sur devis</p></div>
+      <div class="pc"><p class="pn">E-commerce</p><p class="pv"><u>dès</u><b data-v="950">0</b><i>€</i></p><p class="pd">Catalogue, panier, paiement</p></div>
+    </div>
+    <p class="foot" id="fFoot">Abonnement en option · 50 € / mois &nbsp;—&nbsp; Vous restez propriétaire de votre site.</p>
+  </section>
+
+  <section class="sc dark" id="sG">
+    <div class="grid"></div><div class="glow g1"></div>
+    <h2 class="big mid" id="gTitle"><span class="ln">Parlons de</span><span class="ln b">votre projet.</span></h2>
+    <div class="cta" id="gBtn"><span class="ico"></span><span>Réserver un premier échange</span><em>20 min</em></div>
+    <svg class="cursor" id="gCursor" viewBox="0 0 24 24"><path d="M4 2l16 9-7 2-3 7z" fill="#fff" stroke="#0a0f1c" stroke-width="1.5" stroke-linejoin="round"/></svg>
+    <div class="ripple" id="gRip"></div>
+  </section>
+
+  <section class="sc dark" id="sH">
+    <div class="grid"></div><div class="glow g3"></div>
+    <div class="logo" id="logo">
+      <svg class="mark" id="lMark" viewBox="0 0 64 64"><rect class="sq" width="64" height="64" rx="16" fill="#2447D6"/><path class="gd" id="lG" pathLength="1" d=""/></svg>
+      <div class="word" id="lWord"><span class="w1">Studio</span><span class="w2">GLSC</span></div>
+    </div>
+    <p class="tag" id="lTag">Un site web à votre image.</p>
+    <p class="url" id="lUrl">studio.glsc.fr</p>
+  </section>
+
+  <!-- Téléphone « héros » : traverse les scènes A, B et C -->
+  <div class="hero3d" id="hero"></div>
+
+  <!-- Voile de transition (iris / bandeaux) -->
+  <div class="iris" id="iris"></div>
+  <div class="fade" id="fade"></div>
+</div>
+<script src="promo.js?v=85699e49"></script>
+</body>
+</html>

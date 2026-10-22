@@ -5,7 +5,7 @@ import { dirname, join, relative } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
-const SKIP = new Set(['node_modules', '.git', 'tools', 'branding', 'docs', 'tests']);
+const SKIP = new Set(['node_modules', '.git', 'tools', 'branding', 'docs', 'tests', 'promo']);
 const pages = [];
 (function walk(dir) { for (const f of readdirSync(dir)) { if (SKIP.has(f)) continue; const p = join(dir, f); if (statSync(p).isDirectory()) walk(p); else if (f.endsWith('.html')) pages.push(p); } })(ROOT);
 
