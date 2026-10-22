@@ -53,6 +53,7 @@ rollback() { c 31 "  ↩ retour à la version précédente"; rm -rf "$ROOT/asset
 rm -rf "$ROOT/assets.new"; cp -r "$SRC/assets" "$ROOT/assets.new"
 find "$ROOT/assets.new" -type d -exec chmod 755 {} + ; find "$ROOT/assets.new" -type f -exec chmod 644 {} +
 for f in "${FILES[@]}"; do install -m 644 "$SRC/$f" "$ROOT/$f.new" && mv -f "$ROOT/$f.new" "$ROOT/$f"; done
+[ -s "$ROOT/assets/img/gabin.jpg" ] && { mkdir -p "$ROOT/assets.new/img"; cp -p "$ROOT/assets/img/gabin.jpg" "$ROOT/assets.new/img/gabin.jpg"; }   # photo déposée sur le serveur, hors dépôt
 rm -rf "$ROOT/assets.old"; [ -d "$ROOT/assets" ] && mv "$ROOT/assets" "$ROOT/assets.old"; mv "$ROOT/assets.new" "$ROOT/assets"; rm -rf "$ROOT/assets.old"
 for d in "${DIRS[@]}"; do
   [ -d "$SRC/$d" ] || continue

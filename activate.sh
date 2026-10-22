@@ -17,6 +17,18 @@ curl -fsSL https://raw.githubusercontent.com/gabinlsc/portfolio/main/deploy/depl
 info "2/4 Site $DOMAIN"
 curl -fsSL https://raw.githubusercontent.com/gabinlsc/glsc-studio/main/deploy.sh | bash
 
+info "2b/4 Photo (cv.glsc.fr)"
+ROOT="$(nginx -T 2>/dev/null | awk -v d="$DOMAIN" '/^[[:space:]]*server[[:space:]]*\{/ {r=""; hit=0} /server_name/ && index($0,d) {hit=1} /^[[:space:]]*root[[:space:]]/ {gsub(/[;]/,"",$2); r=$2} hit && r!="" {print r; exit}')"
+ROOT="${ROOT:-/var/www/$DOMAIN}"
+if [ -s "$ROOT/assets/img/gabin.jpg" ]; then ok "photo déjà en place"
+else
+  T="$(mktemp)"
+  if curl -fsSL -m 30 -o "$T" https://cv.glsc.fr/photocv.jpg && [ "$(head -c3 "$T" | xxd -p)" = ffd8ff ] && [ "$(stat -c%s "$T")" -lt 3000000 ]; then
+    install -d -m 755 "$ROOT/assets/img"; install -m 644 "$T" "$ROOT/assets/img/gabin.jpg"; ok "photo installée"
+  else warn "photo introuvable sur cv.glsc.fr/photocv.jpg (ou pas un JPEG < 3 Mo) : monogramme conservé. Dépose-la en $ROOT/assets/img/gabin.jpg"; fi
+  rm -f "$T"
+fi
+
 info "3/4 nginx"
 [ -s /etc/nginx/snippets/studio-security.conf ] || die "snippet absent : deploy.sh ne l'a pas installé."
 if grep -rqs "snippets/studio-security.conf" /etc/nginx/sites-enabled /etc/nginx/conf.d 2>/dev/null; then
