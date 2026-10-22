@@ -6,7 +6,7 @@
   "scripts": {
     "build": "node tools/build-site.mjs",
     "check": "node tools/build-site.mjs && git diff --exit-code -- . ':!package-lock.json' && node tools/check-links.mjs && node tools/check-seo.mjs && node tools/check-budget.mjs",
-    "test": "node tests/e2e.mjs && node tests/suivi.mjs && node tests/csp.mjs && node tests/a11y.mjs",
+    "test": "node tests/e2e.mjs && node tests/suivi.mjs && node tests/demos.mjs && node tests/csp.mjs && node tests/a11y.mjs",
     "lighthouse": "node tests/lighthouse.mjs"
   },
   "devDependencies": {

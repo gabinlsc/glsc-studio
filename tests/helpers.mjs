@@ -21,12 +21,13 @@ export function serve({ csp = true } = {}) {
     if (!existsSync(file)) { file = join(ROOT, '404.html'); status = 404; }
     res.statusCode = status;
     res.setHeader('content-type', TYPES[extname(file)] || 'application/octet-stream');
-    if (csp && file.endsWith('.html') && !/-demo\.html$/.test(file)) res.setHeader('content-security-policy', CSP);
+    if (csp && file.endsWith('.html')) res.setHeader('content-security-policy', CSP);
     res.end(readFileSync(file));
   });
   return new Promise((resolve) => server.listen(0, '127.0.0.1', () => resolve({ server, base: `http://127.0.0.1:${server.address().port}`, close: () => server.close() })));
 }
 
 export const launch = () => chromium.launch({ executablePath: process.env.CHROMIUM_PATH || undefined });
-export const PAGES = ['/', '/a-propos/', '/blog/', '/blog/cout-site-vitrine-artisan/', '/sites-pour/artisans-btp/', '/creation-site-web/lorient/', '/mentions-legales.html', '/cgv.html', '/cgu.html', '/suivi/', '/introuvable-test'];
+export const DEMO_PAGES = ['/demos/restaurant/', '/demos/coiffeur/', '/demos/photographe/', '/demos/gite/', '/demos/club/', '/demos/btp/'];
+export const PAGES = ['/', '/a-propos/', '/blog/', '/blog/cout-site-vitrine-artisan/', '/sites-pour/artisans-btp/', '/creation-site-web/lorient/', '/mentions-legales.html', '/cgv.html', '/cgu.html', '/suivi/', '/demos/', ...DEMO_PAGES, '/introuvable-test'];
 export const ok = (m) => console.log('✓', m);

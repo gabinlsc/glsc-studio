@@ -47,7 +47,7 @@ assert.equal(await pg.locator('#form-done').isVisible(), false); ok('champ pièg
 // démos
 await pg.evaluate(() => document.querySelector('.demo-lab').scrollIntoView());
 assert.equal(await pg.locator('#demo-screen iframe').count(), 0); await pg.click('#demo-launch'); assert.equal(await pg.locator('#demo-screen iframe').count(), 1); ok('démo chargée seulement au clic');
-await pg.click('.seg button:nth-child(2)'); assert.match(await pg.getAttribute('#demo-screen iframe', 'src'), /btp-demo/); assert.match(await pg.getAttribute('#demo-open', 'href'), /btp-demo/); ok('changement de démo');
+assert.equal(await pg.locator('.seg button').count(), 6); await pg.click('.seg button:nth-child(6)'); assert.match(await pg.getAttribute('#demo-screen iframe', 'src'), /demos\/btp\//); assert.match(await pg.getAttribute('#demo-open', 'href'), /demos\/btp\//); ok('changement de démo (six onglets)');
 // rail
 assert.equal(await pg.locator('#rail').isVisible(), true); await pg.evaluate(() => document.querySelector('#engagements').scrollIntoView()); await pg.waitForTimeout(600);
 assert.equal(await pg.locator('#rail a[aria-current="location"]').getAttribute('href'), '#engagements'); ok('sommaire latéral suit la section');

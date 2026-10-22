@@ -15,7 +15,9 @@ Site statique, sans framework ni ressource externe : une page d'accueil, deux d�
 | `tools/content/*.mjs`, `tools/site.config.json` | le texte de ces pages et les réglages (liens officiels, fiche Google) |
 | `assets/search-index.json` | index de la recherche de la page 404 (généré) |
 | `legal.css`, `mentions-legales.html`, `cgu.html`, `cgv.html` | pages légales |
-| `club-demo.html`, `btp-demo.html` | concepts démo (ils chargent encore Google Fonts et Tailwind depuis un CDN, ce que les mentions légales indiquent) |
+| `demos/<démo>/` | six démos interactives (restaurant, coiffeur, photographe, gîte, club, artisan) : une page, un `style.css`, un `app.js` chacune, socle commun dans `demos/shared/`, polices dans `demos/fonts/`. Aucune ressource externe |
+| `club-demo.html`, `btp-demo.html` | anciennes adresses des démos, redirigent vers `/demos/club/` et `/demos/btp/` |
+| `demos/index.html` | galerie des démos (générée par `tools/build-site.mjs` depuis `tools/content/demos.mjs`) |
 | `404.html` | page d'erreur |
 
 ## Réglages (haut de `assets/studio.js`)
@@ -58,3 +60,10 @@ Le tout tourne aussi sur chaque PR (`.github/workflows/check.yml`). Si Chromium 
 ## Régénérer les images et les polices
 
 `python3 tools/build-assets.py fonts | thumbs <dossier de captures> | brand` (Pillow, fonttools, brotli ; les captures des démos sont faites avec Chromium). Le site, lui, n'a besoin d'aucun outil.
+
+## Démos
+
+- Contenu de la liste : `tools/content/demos.mjs`. La galerie `/demos/`, les cartes et les onglets de l'accueil sont régénérés par `node tools/build-site.mjs`.
+- Visuels : `python3 tools/build-demo-images.py` (paysages et affiches illustrés, sans banque d'images ni photo) ; vignettes : `CHROMIUM_PATH=… node tools/build-demo-thumbs.mjs`.
+- Chaque démo est fictive, `noindex`, sans requête externe ni script en ligne (elle passe sous la CSP de production) ; ses formulaires sont simulés.
+- Tests : `tests/demos.mjs` (parcours de chaque démo), `tests/csp.mjs` et `tests/a11y.mjs` (toutes les démos).

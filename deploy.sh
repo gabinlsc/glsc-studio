@@ -11,7 +11,7 @@ DOMAIN=studio.glsc.fr
 REPO=gabinlsc/glsc-studio
 BACKUPS=/var/backups/glsc
 FILES=(index.html 404.html legal.css cgu.html cgv.html mentions-legales.html club-demo.html btp-demo.html robots.txt sitemap.xml)
-DIRS=(a-propos blog creation-site-web sites-pour)   # pages générées (tools/build-site.mjs)
+DIRS=(a-propos blog creation-site-web demos sites-pour suivi)   # pages générées (tools/build-site.mjs)
 
 c() { printf '\033[%sm%s\033[0m\n' "$1" "$2"; }
 info() { c 36 "▸ $*"; }
@@ -35,7 +35,7 @@ else
   curl -fsSL "https://codeload.github.com/$REPO/tar.gz/$REF" | tar -xz -C "$WORK"
   SRC="$(find "$WORK" -mindepth 1 -maxdepth 1 -type d | head -1)"
 fi
-for f in "${FILES[@]}" assets/studio.css assets/studio.js assets/home.js assets/fonts/inter-400.woff2 assets/favicon.svg assets/theme-init.js assets/notfound.css assets/legal.js; do
+for f in "${FILES[@]}" assets/studio.css assets/studio.js assets/home.js assets/fonts/inter-400.woff2 assets/favicon.svg assets/theme-init.js assets/notfound.css assets/legal.js assets/suivi.js suivi/index.html demos/index.html demos/shared/demo.css demos/shared/demo.js demos/restaurant/index.html demos/fonts/fraunces.woff2; do
   [ -s "$SRC/$f" ] || die "Archive incomplète : $f manquant. Rien n'a été modifié."
 done
 ok "archive complète"
@@ -66,7 +66,7 @@ ok "fichiers en place"
 
 # ---- vérification
 if [ -z "${GLSC_SRC:-}" ] && command -v curl >/dev/null; then
-  for path in / /assets/studio.css /assets/home.js /assets/fonts/inter-400.woff2 /mentions-legales.html /blog/ /a-propos/; do
+  for path in / /assets/studio.css /assets/home.js /assets/fonts/inter-400.woff2 /mentions-legales.html /blog/ /a-propos/ /demos/ /suivi/; do
     code="$(curl -s -o /dev/null -w '%{http_code}' --max-time 15 "https://$DOMAIN$path" || echo 000)"
     [ "$code" = 200 ] && ok "$path → 200" || { c 31 "  ✗ $path → $code"; rollback; }
   done

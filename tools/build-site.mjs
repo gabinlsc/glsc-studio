@@ -8,6 +8,7 @@ import { fileURLToPath } from 'node:url';
 import { METIERS } from './content/metiers.mjs';
 import { VILLES } from './content/villes.mjs';
 import { ARTICLES } from './content/blog.mjs';
+import { DEMOS } from './content/demos.mjs';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
 const CFG = JSON.parse(readFileSync(join(ROOT, 'tools/site.config.json'), 'utf8'));
@@ -32,6 +33,15 @@ const cols = `<!--@footer-cols:start-->
       <!--@footer-cols:end-->`;
 if (index.includes('<!--@footer-cols:start-->')) index = index.replace(/<!--@footer-cols:start-->[\s\S]*?<!--@footer-cols:end-->/, cols);
 else index = index.replace('<p class="footer-status">', cols + '\n      <p class="footer-status">');
+// Cartes de démos et onglets du téléphone : générés depuis tools/content/demos.mjs (entre repères dans index.html).
+const demoCard = (d) => `<a class="project reveal" href="/demos/${d.slug}/" aria-label="Ouvrir la démo ${esc(d.sector)} : ${esc(d.name)}">
+            <div class="project-shot"><img src="/assets/img/demo-${d.slug}.webp" width="960" height="600" loading="lazy" alt="${esc(d.alt)}"><span class="project-tag">Démo · ${esc(d.sector)}</span></div>
+            <div class="project-body"><h3>${esc(d.name)}</h3><p>${esc(d.blurb)}</p><span class="project-link">Voir la démo ${icon('arrow')}</span></div>
+          </a>`;
+const demoTabs = DEMOS.map((d, i) => `<button type="button" role="tab" aria-selected="${i === 0}" data-demo="/demos/${d.slug}/" data-title="${esc(d.sector)}">${esc(d.sector)}</button>`).join('\n              ');
+index = index.replace(/<!--@demo-cards:start-->[\s\S]*?<!--@demo-cards:end-->/, `<!--@demo-cards:start-->\n          ${DEMOS.slice(0, 2).map(demoCard).join('\n          ')}\n          <!--@demo-cards:end-->`);
+index = index.replace(/<!--@demo-tabs:start-->[\s\S]*?<!--@demo-tabs:end-->/, `<!--@demo-tabs:start-->\n              ${demoTabs}\n              <!--@demo-tabs:end-->`);
+index = index.replace(/(<a class="btn btn-secondary" id="demo-open" href=")[^"]*(")/, `$1/demos/${DEMOS[0].slug}/$2`);
 // JSON-LD de l'accueil : liens officiels (dont la fiche Google Business Profile si renseignée) et zones desservies.
 const sameAs = [...CFG.sameAs, ...(CFG.googleBusinessProfile ? [CFG.googleBusinessProfile] : [])];
 index = index.replace(/"areaServed": (?:"[^"]*"|\[[^\]]*\]),\s*(?:"sameAs": \[[^\]]*\],\s*)?/, `"areaServed": ${JSON.stringify(['Bretagne', ...VILLES.map((v) => v.name)])},\n    "sameAs": ${JSON.stringify(sameAs)},\n    `);
@@ -247,11 +257,25 @@ for (const a of ARTICLES) {
   write(`/blog/${a.slug}/`, shell({ path: `/blog/${a.slug}/`, title: a.title, desc: a.desc, type: 'article', jsonld: [bc.ld, { '@type': 'Article', headline: a.title, description: a.desc, datePublished: a.date, dateModified: a.date, inLanguage: 'fr-FR', author: { '@type': 'Person', name: 'Gabin Lescoat', url: 'https://glsc.fr/' }, publisher: orgRef, mainEntityOfPage: ORIGIN + `/blog/${a.slug}/`, image: ORIGIN + '/assets/img/og.png' }], body, search: [a.tag, a.title, 'article', 'conseil'] }));
 }
 
+// ---------------------------------------------------------------- galerie des démos
+{
+  const bc = crumbs([['Accueil', '/'], ['Démos', '/demos/']]);
+  const body = pageHero({ bc: bc.html, eyebrow: 'Démos interactives', h1: 'Six exemples de sites, à essayer vous-même', lead: 'Chaque démo est un site complet et fictif, avec sa propre identité et ses fonctions : carte, réservation, calendrier, billetterie, estimation. Elles montrent ce qu’un site peut faire pour votre métier.', extra: heroCtas }) + `
+    <section class="section"><div class="wrap">
+      <div class="project-grid">${DEMOS.map(demoCard).join('\n')}</div>
+      <ul class="chips-list demo-notes"><li>Établissements, noms, prix et avis entièrement fictifs</li><li>Aucune donnée n’est envoyée : les formulaires sont simulés</li><li>Aucun service tiers : polices et visuels hébergés sur le site</li><li>Utilisables au clavier, sur mobile et avec réduction des animations</li></ul>
+    </div></section>
+    <section class="section band"><div class="wrap two-col">
+      <div><p class="eyebrow">Et pour vous ?</p><h2>Une démo n’est pas votre site</h2><p class="muted">Ces pages servent à montrer le niveau de finition et les fonctions possibles. Votre site reprend votre identité, vos textes et vos vraies informations, avec uniquement ce qui sert votre activité.</p></div>
+      <div><p class="eyebrow">Par métier</p><h2>Voir les sites par activité</h2><ul class="ticks">${DEMOS.map((d) => `<li>${esc(d.sector)} : ${esc(d.features.join(', ').toLowerCase())}</li>`).join('')}</ul>${heroCtas}</div>
+    </div></section>` + ctaBand();
+  write('/demos/', shell({ path: '/demos/', title: 'Démos de sites web par métier', desc: 'Six démos interactives de sites vitrines : restaurant, coiffeur, photographe, gîte, club, artisan du bâtiment. Carte, réservation, calendrier, billetterie, estimation.', jsonld: [bc.ld], body, search: ['démo', 'exemples', 'réalisations', 'restaurant', 'coiffeur', 'photographe', 'gîte', 'club', 'artisan'] }));
+}
 // ---------------------------------------------------------------- plan du site, index de recherche
 const fixed = [
   ['/', CFG.date, 'monthly', '1.0'], ['/cgu.html', '2026-09-30', 'yearly', '0.3'], ['/cgv.html', '2026-09-30', 'yearly', '0.3'], ['/mentions-legales.html', '2026-09-30', 'yearly', '0.3'],
 ];
-const prio = (p) => (p === '/blog/' || p === '/sites-pour/' || p === '/creation-site-web/' ? '0.7' : p.startsWith('/blog/') ? '0.6' : '0.8');
+const prio = (p) => (p === '/blog/' || p === '/sites-pour/' || p === '/creation-site-web/' || p === '/demos/' ? '0.7' : p.startsWith('/blog/') ? '0.6' : '0.8');
 const urls = [...fixed.map(([p, d, f, pr]) => ({ p, d, f, pr })), ...registry.map((r) => ({ p: r.path, d: CFG.date, f: 'monthly', pr: prio(r.path) }))];
 writeFileSync(join(ROOT, 'sitemap.xml'), `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls.map((u) => `  <url>\n    <loc>${ORIGIN}${u.p}</loc>\n    <lastmod>${u.d}</lastmod>\n    <changefreq>${u.f}</changefreq>\n    <priority>${u.pr}</priority>\n  </url>`).join('\n')}\n</urlset>\n`);
 const searchable = [{ path: '/', title: 'Accueil', desc: 'Création de sites vitrines, forfaits, réalisations, contact', keywords: 'accueil tarifs devis contact offres' }, { path: '/#offres', title: 'Tarifs et forfaits', desc: 'One-Page Express 400 €, refonte sur devis, hébergement', keywords: 'prix tarif forfait hébergement' }, { path: '/#contact', title: 'Demander un devis', desc: 'Le premier échange est gratuit', keywords: 'contact devis téléphone email' }, { path: '/mentions-legales.html', title: 'Mentions légales', desc: 'Éditeur, hébergeur, données personnelles', keywords: 'légal rgpd cookies' }, { path: '/cgv.html', title: 'Conditions générales de vente', desc: 'Prix, délais, rétractation, garanties', keywords: 'cgv conditions vente' }, ...registry];

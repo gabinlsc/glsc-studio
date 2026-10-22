@@ -13,7 +13,7 @@ for (const theme of ['light', 'dark']) {
   for (const path of PAGES) {
     const page = await ctx.newPage();
     await page.goto(base + path, { waitUntil: 'networkidle' });
-    await page.addStyleTag({ content: '.reveal{opacity:1!important;transform:none!important;transition:none!important}' });
+    await page.addStyleTag({ content: '.reveal,.rv{opacity:1!important;transform:none!important;transition:none!important}.rv-clip{clip-path:none!important;transition:none!important}.js-motion [data-split] .sw>span{transform:none!important;transition:none!important}' });
     await page.evaluate(axeSource);
     const res = await page.evaluate(() => axe.run(document, { resultTypes: ['violations'] }));
     for (const v of res.violations.filter((x) => ['serious', 'critical'].includes(x.impact))) bad.push(`${path} (${theme}) ${v.id} : ${v.nodes.slice(0, 2).map((n) => n.target.join(' ')).join(' ; ')}`);

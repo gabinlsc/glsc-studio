@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Atelier Le Goff · Démo artisan rénovation · StudioGLSC</title>
+  <meta name="description" content="Démonstration StudioGLSC : site d’un artisan du bâtiment avec comparateur avant/après, estimateur de travaux, méthode en étapes et formulaire de devis. Exemple fictif.">
+  <meta name="robots" content="noindex,follow">
+  <meta name="theme-color" content="#e9e7e1">
+  <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+  <link rel="preload" href="../fonts/manrope.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="../shared/demo.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="../shared/demo.js"></script>
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <a class="skip" href="#savoir-faire">Aller au contenu</a>
+  <div class="dm-bar"><div class="wrap"><span><b>Démo fictive</b> · site d’exemple réalisé par StudioGLSC</span><span><a href="/demos/">← Toutes les démos</a> &nbsp; <a href="/#contact">Je veux un site comme celui-ci</a></span></div></div>
+
+  <header class="dm-header"><div class="wrap bar">
+    <a class="brand" href="#top" aria-label="Atelier Le Goff, retour en haut"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M3 15L16 4l13 11M7 13v15h18V13M13 28v-8h6v8" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>Atelier <b>Le&nbsp;Goff</b></a>
+    <nav aria-label="Navigation principale"><a href="#savoir-faire">Savoir-faire</a><a href="#chantiers">Chantiers</a><a href="#estimer">Estimer</a><a href="#methode">Méthode</a></nav>
+    <a class="btn" href="#devis">Demander un devis</a>
+  </div></header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="wrap hero-grid">
+        <div>
+          <p class="eyebrow rv">Rénovation et menuiserie · Vannes et alentours</p>
+          <h1 data-split>Rénover sans mauvaises surprises.</h1>
+          <p class="lede rv" data-d="300">Isolation, menuiseries, salles de bain, extensions. Un devis détaillé poste par poste, un planning tenu et un seul interlocuteur du premier rendez-vous à la réception des travaux.</p>
+          <div class="hero-cta rv" data-d="420"><a class="btn btn-big" href="#devis">Demander un devis gratuit</a><a class="link" href="#estimer">Estimer mon budget&nbsp;→</a></div>
+          <ul class="badges rv" data-d="520"><li>Garantie décennale</li><li>Artisan RGE</li><li>Devis sous 48 h</li></ul>
+        </div>
+        <figure class="plan rv-clip" aria-label="Élévation d’une maison en cours de rénovation"><svg id="hero-svg" viewBox="0 0 600 440" role="img" aria-labelledby="hs-t"><title id="hs-t">Dessin d’une façade avec échafaudage</title></svg></figure>
+      </div>
+    </section>
+
+    <section class="stats" aria-label="Chiffres clés">
+      <ul class="wrap stats-row">
+        <li class="rv"><b class="tnum" data-count="22">22</b><span>ans d’expérience</span></li>
+        <li class="rv" data-d="80"><b class="tnum" data-count="480" data-suffix="+">480+</b><span>chantiers livrés</span></li>
+        <li class="rv" data-d="160"><b class="tnum" data-count="10">10</b><span>ans de garantie décennale</span></li>
+        <li class="rv" data-d="240"><b class="tnum" data-count="48" data-suffix=" h">48 h</b><span>pour recevoir votre devis</span></li>
+      </ul>
+    </section>
+
+    <section class="sf" id="savoir-faire" aria-labelledby="sf-t">
+      <div class="wrap">
+        <h2 id="sf-t" data-split>Ce que nous faisons, et bien.</h2>
+        <ul class="cards">
+          <li class="card rv"><svg viewBox="0 0 40 40" aria-hidden="true"><path d="M4 18L20 6l16 12M8 16v18h24V16M8 26h24"/></svg><h3>Isolation</h3><p>Combles, murs par l’intérieur ou l’extérieur. Un diagnostic avant, des mesures après.</p><span class="more">Dès 35 €/m²</span></li>
+          <li class="card rv" data-d="80"><svg viewBox="0 0 40 40" aria-hidden="true"><path d="M7 5h26v30H7zM20 5v30M7 20h26"/></svg><h3>Menuiseries</h3><p>Fenêtres, portes, volets. Bois, PVC ou aluminium, posés en rénovation ou en neuf.</p><span class="more">Dès 480 € la fenêtre</span></li>
+          <li class="card rv" data-d="160"><svg viewBox="0 0 40 40" aria-hidden="true"><path d="M5 20h30v6a8 8 0 01-8 8H13a8 8 0 01-8-8zM9 20V9a4 4 0 018 0M12 34l-2 3M28 34l2 3"/></svg><h3>Salle de bain</h3><p>Dépose, plomberie, étanchéité, carrelage. Livrée propre, sans que vous ayez à coordonner.</p><span class="more">Dès 5 800 € clé en main</span></li>
+          <li class="card rv" data-d="240"><svg viewBox="0 0 40 40" aria-hidden="true"><path d="M4 34V16l10-8 10 8v18M24 34V22h12v12M2 34h36"/></svg><h3>Extension</h3><p>Plain-pied ou surélévation : étude, permis, gros œuvre et finitions par la même équipe.</p><span class="more">Sur étude</span></li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="ba" id="chantiers" aria-labelledby="ba-t">
+      <div class="wrap">
+        <div class="ba-head"><h2 id="ba-t" data-split>Avant, après.</h2><p class="rv">Faites glisser pour comparer une rénovation de façade complète : ravalement, toiture, menuiseries, volets.</p></div>
+        <div class="ba-stage rv" id="ba">
+          <div class="ba-pane ba-after" id="ba-after"></div>
+          <div class="ba-pane ba-before" id="ba-before"></div>
+          <span class="ba-tag t-before" aria-hidden="true">Avant</span><span class="ba-tag t-after" aria-hidden="true">Après</span>
+          <div class="ba-handle" id="ba-handle" aria-hidden="true"><i></i></div>
+          <input class="ba-range" id="ba-range" type="range" min="0" max="100" value="50" aria-label="Comparer avant et après : curseur de 0 à 100">
+        </div>
+        <ul class="ba-facts rv"><li><b>Chantier</b><span>Maison de 1960, 110 m², Séné</span></li><li><b>Durée</b><span>5 semaines</span></li><li><b>Travaux</b><span>Ravalement, isolation extérieure, toiture, 9 menuiseries</span></li></ul>
+      </div>
+    </section>
+
+    <section class="est" id="estimer" aria-labelledby="es-t">
+      <div class="wrap est-grid">
+        <div>
+          <h2 id="es-t" data-split>Estimer mon budget.</h2>
+          <p class="rv est-lede" data-d="100">Une fourchette indicative en trente secondes. Elle ne remplace pas un devis, qui dépend de l’état réel du bâti.</p>
+          <form class="est-form" id="est" novalidate>
+            <fieldset><legend>Type de travaux</legend><div class="opts" id="e-type" role="radiogroup" aria-label="Type de travaux"></div></fieldset>
+            <div class="field"><label for="e-s">Surface concernée</label><input id="e-s" type="range" min="5" max="150" step="5" value="30"><output id="e-so" class="tnum" for="e-s"></output></div>
+            <fieldset><legend>Niveau de finition</legend><div class="opts" id="e-fin" role="radiogroup" aria-label="Niveau de finition"></div></fieldset>
+          </form>
+        </div>
+        <aside class="est-res rv" data-d="150" aria-live="polite">
+          <p class="est-l">Budget indicatif TTC</p>
+          <p class="est-v tnum" id="e-v"></p>
+          <p class="est-d" id="e-d"></p>
+          <ul class="est-points" id="e-pts"></ul>
+          <a class="btn btn-big" href="#devis" id="e-go">Obtenir un devis détaillé</a>
+          <p class="est-n">Estimation fictive pour la démonstration. TVA à 5,5 ou 10 % selon l’ancienneté du logement et la nature des travaux.</p>
+        </aside>
+      </div>
+    </section>
+
+    <section class="mt" id="methode" aria-labelledby="mt-t">
+      <div class="wrap mt-grid">
+        <h2 id="mt-t" data-split>Comment ça se passe.</h2>
+        <ol class="steps" id="steps">
+          <li class="rv"><span class="n tnum">01</span><div><h3>Visite et écoute</h3><p>Nous venons chez vous, mesurons, regardons l’existant et notons vos priorités. C’est gratuit et sans engagement.</p></div></li>
+          <li class="rv"><span class="n tnum">02</span><div><h3>Devis détaillé</h3><p>Sous 48 h, poste par poste : matériaux, main-d’œuvre, délais. Pas de ligne vague, pas de surprise.</p></div></li>
+          <li class="rv"><span class="n tnum">03</span><div><h3>Chantier suivi</h3><p>Un planning daté, un point chaque semaine, un chantier propre chaque soir. Vous savez toujours où nous en sommes.</p></div></li>
+          <li class="rv"><span class="n tnum">04</span><div><h3>Réception</h3><p>Visite de fin de chantier ensemble, remise des garanties et des factures. Nous restons joignables après.</p></div></li>
+        </ol>
+      </div>
+    </section>
+
+    <section class="dv" id="devis" aria-labelledby="dv-t">
+      <div class="wrap dv-grid">
+        <div><h2 id="dv-t" data-split>Parlons de votre projet.</h2>
+          <p class="rv dv-lede" data-d="120">Décrivez-nous votre besoin en quelques lignes. Nous répondons sous 48 h ouvrées.</p>
+          <p class="zone rv" data-d="200"><b>Zone d’intervention</b> : Vannes, Séné, Arradon, Theix, Saint-Avé, Auray, Sarzeau, Muzillac, et 30 km autour.</p></div>
+        <form class="dv-form rv" data-d="150" id="dv-form" novalidate>
+          <label class="field"><span>Nom</span><input id="d-name" autocomplete="name"><small class="err" id="d-e1"></small></label>
+          <label class="field"><span>Téléphone ou e-mail</span><input id="d-contact" autocomplete="email"><small class="err" id="d-e2"></small></label>
+          <label class="field"><span>Votre projet</span><textarea id="d-msg" rows="4"></textarea></label>
+          <button class="btn btn-big" type="submit">Envoyer ma demande</button>
+          <p class="done" id="d-done" role="status" hidden>Merci. C’est une démonstration : votre message n’est pas parti.</p>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer class="foot"><div class="wrap foot-row"><p class="brand">Atelier <b>Le&nbsp;Goff</b></p><p>14 rue des Vénètes, 56000 Vannes · 02 00 00 00 00 · contact@atelier-legoff.example</p><p class="foot-small">Entreprise fictive créée pour la démonstration. Estimations et références non contractuelles.</p></div></footer>
+</body>
+</html>
