@@ -250,7 +250,7 @@ for (const v of VILLES) {
     <section class="section"><div class="wrap"><div class="section-head"><div><p class="eyebrow">Autres zones</p><h2>Je travaille dans toute la Bretagne</h2></div></div>
       <ul class="chips-list">${others.map((o) => `<li><a href="/creation-site-web/${o.slug}/">${esc(o.name)}</a></li>`).join('')}</ul>
       <p class="muted mt">Vous cherchez un site pour votre métier ? <a class="inline-link" href="/sites-pour/">Voir les sites par métier</a>.</p></div></section>` + ctaBand(`Un site pour votre activité à ${v.name} ?`);
-  write(`/creation-site-web/${v.slug}/`, shell({ path: `/creation-site-web/${v.slug}/`, title: `Création de site web à ${v.name}`, desc: `StudioGLSC crée des sites vitrines rapides et adaptés au mobile pour artisans, commerçants et indépendants à ${v.name} (${v.dept}). One-Page Express à 550 €, e-commerce dès 950 €.`, jsonld: [bc.ld, faqLd(faq), { ...orgRef, areaServed: { '@type': 'City', name: v.name, containedInPlace: { '@type': 'AdministrativeArea', name: v.dept } } }], body, search: [v.name, v.dept, 'ville', 'site', 'web'] }));
+  write(`/creation-site-web/${v.slug}/`, shell({ path: `/creation-site-web/${v.slug}/`, title: `Création de site web à ${v.name}`, desc: `StudioGLSC crée des sites vitrines et boutiques en ligne pour artisans, commerçants et indépendants à ${v.name}. One-Page Express 550 €, e-commerce dès 950 €.`, jsonld: [bc.ld, faqLd(faq), { ...orgRef, areaServed: { '@type': 'City', name: v.name, containedInPlace: { '@type': 'AdministrativeArea', name: v.dept } } }], body, search: [v.name, v.dept, 'ville', 'site', 'web'] }));
 }
 {
   const bc = crumbs([['Accueil', '/'], ['Création de site web', '/creation-site-web/']]);
