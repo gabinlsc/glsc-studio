@@ -5,3 +5,5 @@ Thumbs.db
 .idea/
 node_modules/
 .lighthouse/
+promo/dist/
+promo/audio/*.wav

@@ -1,0 +1,87 @@
+@font-face { font-family: "Inter"; font-weight: 400; src: url("../assets/fonts/inter-400.woff2") format("woff2"); }
+@font-face { font-family: "Inter"; font-weight: 500; src: url("../assets/fonts/inter-500.woff2") format("woff2"); }
+@font-face { font-family: "Inter"; font-weight: 600; src: url("../assets/fonts/inter-600.woff2") format("woff2"); }
+@font-face { font-family: "ID"; font-weight: 700; src: url("../assets/fonts/inter-display-700.woff2") format("woff2"); }
+@font-face { font-family: "ID"; font-weight: 600; src: url("../assets/fonts/inter-display-600.woff2") format("woff2"); }
+:root { --ink: #0a0f1c; --navy: #111829; --blue: #2447d6; --light: #f6f7f9; --muted: #566074; --line: #d9deea; }
+* { box-sizing: border-box; margin: 0; padding: 0; transition: none !important; animation: none !important; }
+html, body { width: 1920px; height: 1080px; overflow: hidden; background: #000; font-family: "Inter", system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
+#stage { position: relative; width: 1920px; height: 1080px; overflow: hidden; perspective: 2400px; background: var(--ink); }
+.sc { position: absolute; inset: 0; overflow: hidden; visibility: hidden; }
+.sc.dark { background: var(--ink); color: #fff; } .sc.light { background: var(--light); color: var(--ink); }
+.grid { position: absolute; inset: -60px; background-image: linear-gradient(rgba(127,140,170,.13) 1px, transparent 1px), linear-gradient(90deg, rgba(127,140,170,.13) 1px, transparent 1px); background-size: 72px 72px; -webkit-mask-image: radial-gradient(ellipse 70% 70% at 50% 50%, #000 20%, transparent 80%); mask-image: radial-gradient(ellipse 70% 70% at 50% 50%, #000 20%, transparent 80%); }
+.glow { position: absolute; border-radius: 50%; }
+.g1 { width: 1500px; height: 1500px; left: 210px; top: -250px; background: radial-gradient(closest-side, rgba(36,71,214,.40), transparent); }
+.g2 { width: 1400px; height: 1400px; left: 700px; top: -500px; background: radial-gradient(closest-side, rgba(36,71,214,.16), transparent); }
+.g3 { width: 1700px; height: 1700px; left: 110px; top: -310px; background: radial-gradient(closest-side, rgba(36,71,214,.46), transparent); }
+.big { font: 700 168px/1 "ID", sans-serif; letter-spacing: -.045em; }
+.big .ln { display: block; white-space: nowrap; } .big .b { color: var(--blue); }
+.big .wd { display: inline-block; will-change: transform, opacity, filter; }
+.kick { font: 600 30px/1 "Inter"; letter-spacing: .16em; text-transform: uppercase; color: var(--blue); }
+.sc.dark .kick { color: #5b7cf5; }
+.lede { font: 500 44px/1.3 "Inter"; color: var(--muted); }
+.copy { position: absolute; top: 50%; width: 1100px; transform: translateY(-50%); }
+.copy.left { left: 120px; } .copy.right { right: 90px; text-align: left; width: 980px; }
+.copy .big { margin: 28px 0 36px; font-size: 156px; } #dCopy .big { font-size: 100px; }
+#aTitle { position: absolute; left: 0; right: 0; top: 50%; text-align: center; transform: translateY(-50%); font-size: 132px; }
+.mid { position: absolute; left: 0; right: 0; text-align: center; top: 110px; font-size: 128px; } #eTitle { font-size: 100px; top: 84px; }
+
+/* téléphone */
+.hero3d, .ring3d { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; transform-style: preserve-3d; pointer-events: none; }
+.hero3d { z-index: 40; } .ring3d { z-index: 2; }
+.phone { position: absolute; left: 50%; top: 50%; width: 418px; height: 872px; margin: -436px 0 0 -209px; transform-style: preserve-3d; will-change: transform; }
+.phone .frame { position: absolute; inset: 0; border-radius: 68px; background: #0e1119; box-shadow: 0 0 0 2px #596076, 0 0 0 5px #171b27, inset 0 0 0 2px #1d2230, 0 60px 120px rgba(0,0,0,.55); }
+.phone .frame::before, .phone .frame::after { content: ""; position: absolute; width: 5px; background: #2b3144; border-radius: 3px; }
+.phone .frame::before { left: -9px; top: 170px; height: 70px; box-shadow: 0 100px 0 #2b3144; } .phone .frame::after { right: -9px; top: 230px; height: 118px; }
+.phone .screen { position: absolute; left: 14px; top: 14px; width: 390px; height: 844px; border-radius: 54px; overflow: hidden; background: #fff; transform: translateZ(1px); }
+.phone .shot { position: absolute; left: 0; top: 0; width: 390px; display: block; will-change: transform; }
+.phone .island { position: absolute; left: 50%; top: 26px; width: 118px; height: 34px; margin-left: -59px; border-radius: 20px; background: #04060a; z-index: 5; transform: translateZ(2px); }
+.phone .sb { background: var(--sbbg, #fff); position: absolute; left: 0; right: 0; top: 0; height: 66px; z-index: 4; display: flex; justify-content: space-between; align-items: center; padding: 8px 34px 0 40px; font: 600 15px "Inter"; letter-spacing: -.01em; }
+.phone .sb i { display: inline-block; width: 26px; height: 12px; border: 1.5px solid currentColor; border-radius: 4px; position: relative; opacity: .9; } .phone .sb i::after { content: ""; position: absolute; left: 2px; top: 2px; bottom: 2px; width: 70%; background: currentColor; border-radius: 1.5px; }
+.phone .glare { position: absolute; left: 14px; top: 14px; width: 390px; height: 844px; border-radius: 54px; background: linear-gradient(112deg, rgba(255,255,255,.22) 0%, rgba(255,255,255,0) 34%); pointer-events: none; z-index: 6; transform: translateZ(3px); }
+.phone .shadow { position: absolute; left: 6%; right: 6%; bottom: -70px; height: 60px; border-radius: 50%; background: radial-gradient(closest-side, rgba(0,0,0,.45), transparent); transform: translateZ(-1px); }
+
+/* anneau de téléphones */
+.cap { position: absolute; left: 0; right: 0; bottom: 40px; text-align: center; font: 700 132px/1 "ID"; letter-spacing: -.04em; color: #fff; z-index: 8; }
+.cap .wd { display: inline-block; } .kick.c { position: absolute; left: 0; right: 0; top: 84px; text-align: center; z-index: 8; }
+
+/* scène D */
+.dnum { position: absolute; left: 150px; top: 50%; width: 600px; height: 600px; margin-top: -300px; }
+.dnum svg { position: absolute; inset: 0; width: 100%; height: 100%; transform: rotate(-90deg); } .dnum circle { fill: none; stroke-width: 26; } .dnum .tr { stroke: #dfe4f1; } .dnum .pr { stroke: var(--blue); stroke-linecap: round; }
+.dnum .n { position: absolute; inset: 0; display: flex; justify-content: center; align-items: baseline; padding-top: 150px; font: 700 280px/1 "ID"; letter-spacing: -.06em; color: var(--ink); } .dnum .n i { font: 600 110px/1 "ID"; color: var(--blue); font-style: normal; letter-spacing: -.02em; margin-left: 12px; }
+.steps { display: flex; gap: 20px; list-style: none; margin-top: 18px; } .steps li { padding: 20px 32px; border: 2px solid var(--line); border-radius: 999px; background: #fff; font: 600 36px/1 "Inter"; color: var(--muted); }
+
+/* scène E */
+.cards { position: absolute; left: 0; right: 0; top: 372px; height: 680px; }
+.card { position: absolute; top: 0; width: 520px; height: 640px; border-radius: 48px; background: var(--navy); border: 2px solid #232d49; overflow: hidden; box-shadow: 0 50px 100px rgba(0,0,0,.45); }
+.card .win { position: absolute; left: 24px; right: 24px; top: 24px; height: 380px; border-radius: 28px; overflow: hidden; background: #fff; }
+.card .win img { position: absolute; left: 0; top: 0; width: 100%; display: block; }
+.card h3 { position: absolute; left: 36px; right: 36px; top: 430px; font: 700 52px/1.05 "ID"; letter-spacing: -.03em; color: #fff; }
+.card p { position: absolute; left: 36px; right: 36px; top: 548px; font: 500 28px/1.35 "Inter"; color: #98a5c3; }
+
+/* scène F */
+.prices { position: absolute; left: 120px; right: 120px; top: 330px; display: flex; gap: 36px; }
+.pc { flex: 1; padding: 56px 52px; border-radius: 48px; background: #fff; border: 2px solid var(--line); box-shadow: 0 30px 70px rgba(36,71,214,.12); }
+.pc:first-child { border-color: var(--blue); box-shadow: 0 0 0 10px rgba(36,71,214,.10), 0 40px 90px rgba(36,71,214,.22); }
+.pn { font: 600 38px/1.1 "ID"; color: var(--muted); letter-spacing: -.02em; } .pv { margin-top: 26px; font: 700 190px/1 "ID"; letter-spacing: -.06em; color: var(--ink); white-space: nowrap; } .pv i { font-style: normal; font-size: 120px; margin-left: 10px; letter-spacing: -.02em; color: var(--blue); } .pv u { text-decoration: none; display: block; font: 600 40px/1 "Inter"; letter-spacing: 0; color: var(--muted); margin-bottom: 8px; }
+.pc:first-child .pv { margin-top: 26px; padding-top: 52px; } .pd { margin-top: 24px; font: 500 34px/1.3 "Inter"; color: var(--muted); }
+.foot { position: absolute; left: 0; right: 0; bottom: 84px; text-align: center; font: 500 40px/1.3 "Inter"; color: var(--muted); }
+
+/* scène G */
+.cta { position: absolute; left: 50%; top: 640px; transform: translateX(-50%); display: flex; align-items: center; gap: 26px; padding: 40px 64px; border-radius: 999px; background: var(--blue); color: #fff; font: 600 56px/1 "ID"; letter-spacing: -.02em; box-shadow: 0 30px 80px rgba(36,71,214,.55); white-space: nowrap; }
+.cta em { font: 600 34px/1 "Inter"; font-style: normal; padding: 12px 20px; border-radius: 999px; background: rgba(255,255,255,.18); }
+.cta .ico { width: 54px; height: 54px; border-radius: 16px; background: rgba(255,255,255,.2); position: relative; } .cta .ico::before { content: ""; position: absolute; left: 12px; right: 12px; top: 14px; bottom: 12px; border: 3px solid #fff; border-radius: 8px; border-top-width: 10px; }
+.cursor { position: absolute; width: 64px; height: 64px; left: 0; top: 0; z-index: 9; filter: drop-shadow(0 8px 12px rgba(0,0,0,.4)); }
+.ripple { position: absolute; width: 180px; height: 180px; margin: -90px 0 0 -90px; border-radius: 50%; border: 6px solid rgba(255,255,255,.8); z-index: 8; }
+
+/* logo */
+.logo { position: absolute; left: 0; right: 0; top: 50%; margin-top: -170px; height: 220px; display: flex; justify-content: center; align-items: center; gap: 42px; }
+.mark { width: 220px; height: 220px; flex: none; overflow: visible; filter: drop-shadow(0 30px 60px rgba(36,71,214,.55)); } .mark .gd { fill: transparent; stroke: #fff; stroke-width: .5; stroke-linejoin: round; stroke-dasharray: 1; stroke-dashoffset: 1; }
+.word { font: 700 210px/1 "ID"; letter-spacing: -.045em; color: #fff; display: flex; overflow: hidden; padding: 8px 10px 24px; margin: -8px -10px -24px; } .word .w2 { color: var(--blue); } .word span { display: inline-block; }
+.tag { position: absolute; left: 0; right: 0; top: 640px; text-align: center; font: 500 56px/1.2 "Inter"; color: #c3cbe0; letter-spacing: -.01em; }
+.url { position: absolute; left: 0; right: 0; top: 760px; text-align: center; font: 600 44px/1 "Inter"; color: #fff; letter-spacing: .02em; }
+.iris { position: absolute; inset: 0; z-index: 30; visibility: hidden; }
+.fade { position: absolute; inset: 0; z-index: 60; background: #000; opacity: 0; pointer-events: none; }
+
+#sC { perspective: 2400px; perspective-origin: 50% 46%; }
+.ring3d .phone, .ring3d .phone * { backface-visibility: hidden; }

@@ -1,0 +1,54 @@
+{
+ "home": {
+  "bg": "rgb(246, 247, 249)",
+  "top": {
+   "#services": 1710,
+   "#offres": 3176,
+   "#realisations": 10886
+  }
+ },
+ "restaurant": {
+  "bg": "rgb(243, 238, 228)",
+  "top": {
+   "#carte": 1133,
+   "#reserver": 3343
+  }
+ },
+ "coiffeur": {
+  "bg": "rgb(236, 230, 220)",
+  "top": {
+   "#nuancier": 651,
+   "#rdv": 3585
+  }
+ },
+ "photographe": {
+  "bg": "rgb(241, 239, 234)",
+  "top": {
+   "#galerie": 1253
+  }
+ },
+ "gite": {
+  "bg": "rgb(245, 240, 230)",
+  "top": {
+   "#sejour": 2168,
+   "#tarifs": 3330
+  }
+ },
+ "club": {
+  "bg": "rgb(235, 231, 222)",
+  "top": {
+   "#agenda": 616
+  }
+ },
+ "btp": {
+  "bg": "rgb(233, 231, 225)",
+  "top": {
+   "#chantiers": 2709,
+   "#estimer": 3442
+  }
+ },
+ "suivi": {
+  "bg": "rgb(246, 247, 249)",
+  "top": {}
+ }
+}
