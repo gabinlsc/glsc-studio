@@ -12,10 +12,16 @@ let pg = await home.newPage(); const errs = [];
 pg.on('pageerror', (e) => errs.push(e.message)); pg.on('console', (m) => m.type() === 'error' && !/ERR_FAILED|net::|503/.test(m.text()) && errs.push(m.text()));
 await pg.goto(base + '/', { waitUntil: 'networkidle' });
 // estimation
-assert.equal(await pg.textContent('#est-total'), '400 €'); ok('estimation par défaut : 400 €');
-await pg.check('input[name="est-host"][value="year"]', { force: true }); assert.equal((await pg.textContent('#est-total')).replace(/\s/g, ' '), '700 €'); ok('400 € + hébergement annuel = 700 €');
-await pg.check('input[name="est-host"][value="month"]', { force: true }); assert.equal((await pg.textContent('#est-total')).replace(/\s/g, ' '), '760 €'); ok('400 € + hébergement mensuel (12 × 30) = 760 €');
-await pg.check('input[name="est-site"][value="multi"]', { force: true }); assert.match(await pg.textContent('#est-total'), /360 € \+ devis/); ok('multi-pages : sur devis + hébergement');
+const tot = async () => (await pg.textContent('#est-total')).replace(/\s/g, ' ');
+assert.equal(await tot(), '550 €'); ok('estimation par défaut : One-Page Express 550 €');
+await pg.check('input[name="est-host"][value="year"]', { force: true }); assert.equal(await tot(), '1 050 €'); ok('550 € + abonnement annuel (500 €) = 1 050 €');
+await pg.check('input[name="est-host"][value="month"]', { force: true }); assert.equal(await tot(), '1 150 €'); ok('550 € + abonnement mensuel (12 × 50 €) = 1 150 €');
+await pg.check('input[name="est-host"][value="none"]', { force: true });
+await pg.check('input[name="est-site"][value="multi"]', { force: true }); assert.equal(await pg.locator('fieldset[data-for="multi"]').isVisible(), true); assert.equal(await tot(), '750 € – 950 €'); ok('multi-pages : estimation de départ dès 750 €');
+await pg.check('input[name="est-pages"][value="2"]', { force: true }); assert.equal(await tot(), '1 250 € – 1 750 €'); ok('multi-pages : 7 à 10 pages');
+await pg.check('input[name="est-site"][value="ecom"]', { force: true }); assert.equal(await pg.locator('fieldset[data-for="ecom"]').isVisible(), true); assert.equal(await tot(), '950 € – 1 300 €'); ok('e-commerce : dès 950 €');
+await pg.check('input[name="est-prod"][value="2"]', { force: true }); assert.equal(await tot(), 'Dès 2 000 €'); await pg.check('input[name="est-host"][value="year"]', { force: true }); assert.equal(await tot(), 'Dès 2 500 €'); ok('e-commerce : plus de 50 produits + abonnement annuel');
+await pg.check('input[name="est-host"][value="none"]', { force: true }); await pg.check('input[name="est-site"][value="express"]', { force: true });
 // formulaire : erreurs en ligne
 await pg.evaluate(() => document.querySelector('#contact').scrollIntoView());
 assert.equal(await pg.locator('#step-back').isVisible(), false); assert.equal(await pg.locator('#step-send').isVisible(), false); ok('étape 1 : seul « Continuer » est visible');
@@ -54,8 +60,9 @@ await pg.focus('.sc-tab[aria-selected="true"]'); await pg.keyboard.press('ArrowU
 // rail
 assert.equal(await pg.locator('#rail').isVisible(), true); await pg.evaluate(() => document.querySelector('#engagements').scrollIntoView()); await pg.waitForTimeout(600);
 assert.equal(await pg.locator('#rail a[aria-current="location"]').getAttribute('href'), '#engagements'); ok('sommaire latéral suit la section');
-// bouton rendez-vous : sans lien, mailto
-assert.match(await pg.getAttribute('[data-booking-link]', 'href'), /^mailto:/); ok('rendez-vous : repli par e-mail tant que BOOKING_URL est vide');
+// bouton rendez-vous : Cal.com
+assert.equal(await pg.getAttribute('[data-booking-link]', 'href'), 'https://cal.com/studioglsc/premier-echange'); ok('rendez-vous : lien Cal.com du premier échange');
+assert.equal(await pg.locator('.price-card').count(), 3); assert.match(await pg.textContent('#offres'), /550 €/); assert.match(await pg.textContent('#offres'), /950 €/); assert.match(await pg.textContent('#offres'), /50 € \/ mois/); assert.doesNotMatch(await pg.textContent('body'), /400 €|non proposée/); ok('tarifs : 550 € / dès 750 € / dès 950 € / abonnement 50 € et 500 €, aucune trace de l’ancien prix');
 // estimation -> formulaire
 await pg.check('input[name="est-site"][value="express"]', { force: true }); await pg.check('input[name="est-host"][value="none"]', { force: true });
 await pg.evaluate(() => document.querySelector('#estimate').scrollIntoView()); await pg.click('#est-cta'); await pg.waitForTimeout(400);

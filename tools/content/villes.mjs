@@ -13,7 +13,7 @@ export const VILLES = [
     intro: 'Lorient vit au rythme de sa rade, de son port et de ses événements : le Festival Interceltique en été, la Cité de la voile, une vie nocturne et des artisans très présents sur le bassin.',
     sectors: ['Artisans du bâtiment du pays de Lorient', 'Restauration et tourisme autour de la rade', 'Commerces de proximité', 'Vie nocturne et événements'],
     local: 'Avec une activité très marquée par les saisons et les événements, un site qui affiche clairement les périodes d’ouverture et les horaires évite des appels inutiles. Mes deux concepts démo, Club56 pour la vie nocturne et Breizh Étanchéité pour un artisan du Morbihan, ont été imaginés pour des activités comme celles du bassin lorientais ; ce sont des maquettes, pas des projets clients.',
-    faq: ['Mon activité est saisonnière : comment est-ce géré ?', 'On prévoit un encart de dates d’ouverture et un message clair hors saison. Les mises à jour sont faites sur demande, ou incluses dans l’option Sérénité & Hébergement pour les petites modifications.'],
+    faq: ['Mon activité est saisonnière : comment est-ce géré ?', 'On prévoit un encart de dates d’ouverture et un message clair hors saison. Les mises à jour sont faites sur demande, ou incluses dans l’abonnement Sérénité & Hébergement pour les petites modifications.'],
   },
   {
     slug: 'vannes', name: 'Vannes', dept: 'Morbihan',
@@ -27,7 +27,7 @@ export const VILLES = [
     intro: 'Quimper, capitale de la Cornouaille, mêle centre historique commerçant, artisanat, faïence et un grand rendez-vous estival avec le Festival de Cornouaille.',
     sectors: ['Commerçants du centre historique', 'Artisans d’art et créateurs', 'Restauration et crêperies', 'Associations culturelles et clubs'],
     local: 'Les commerçants et artisans d’art gagnent à montrer leur savoir-faire en photo : un site qui raconte une fabrication ou un produit donne envie de pousser la porte. Pour les associations, un calendrier lisible des activités et des événements fait gagner du temps à tous.',
-    faq: ['Je suis créateur ou artisan d’art : puis-je présenter mes pièces ?', 'Oui, avec une sélection de photos de qualité. Si vous souhaitez vendre en ligne, c’est un autre projet : la boutique en ligne n’est pas proposée pour le moment, je vous l’indique franchement.'],
+    faq: ['Je suis créateur ou artisan d’art : puis-je présenter mes pièces ?', 'Oui, avec une sélection de photos de qualité. Si vous souhaitez vendre en ligne, la formule E-commerce (dès 950 €, sur devis) ajoute catalogue, panier et paiement sécurisé.'],
   },
   {
     slug: 'brest', name: 'Brest', dept: 'Finistère',

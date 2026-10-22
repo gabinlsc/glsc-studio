@@ -175,13 +175,13 @@ for (const d of ['a-propos', 'sites-pour', 'creation-site-web', 'blog']) rmSync(
         <ul class="ticks">
           <li><strong>Un interlocuteur unique.</strong> Je conçois et je réalise moi-même chaque site. Vous n’avez pas à expliquer votre projet à plusieurs personnes.</li>
           <li><strong>Un cadre clair avant de commencer.</strong> Le premier échange est gratuit ; le devis précise le contenu, le prix, les délais et le paiement.</li>
-          <li><strong>Un site qui vous appartient.</strong> Pas d’abonnement imposé : l’hébergement est une option que vous pouvez résilier à tout moment.</li>
+          <li><strong>Un site qui vous appartient.</strong> Pas d’abonnement imposé : l’abonnement Sérénité & Hébergement est une option, à ajouter à un site, que vous pouvez résilier à tout moment.</li>
           <li><strong>Des échanges simples.</strong> Par téléphone, WhatsApp ou e-mail, selon ce qui vous convient.</li>
         </ul>
-        <h2>Ce que je ne fais pas</h2>
-        <p>Je ne propose pas de boutique en ligne pour le moment. Si votre projet en a besoin, je vous le dis honnêtement dès le premier échange plutôt que de promettre ce que je ne maîtrise pas.</p>
+        <h2>Sites vitrines et boutiques en ligne</h2>
+        <p>Je crée des sites vitrines (One-Page Express, multi-pages) et des boutiques en ligne (catalogue, panier, paiement). Si votre projet demande autre chose, je vous le dis honnêtement dès le premier échange plutôt que de promettre ce que je ne maîtrise pas.</p>
         <h2>Pour juger sur pièces</h2>
-        <p>Vous pouvez voir mon travail : mon <a href="https://glsc.fr" rel="noopener">portfolio</a>, mes <a href="https://github.com/gabinlsc" rel="noopener">projets sur GitHub</a>, la <a href="https://games.glsc.fr" rel="noopener">salle de jeux</a> que j’ai développée, et les <a href="/#realisations">démos</a> de cette page. Les deux concepts démo sont des maquettes, pas des projets clients.</p>
+        <p>Vous pouvez voir mon travail : mon <a href="https://glsc.fr" rel="noopener">portfolio</a>, mes <a href="https://github.com/gabinlsc" rel="noopener">projets sur GitHub</a>, la <a href="https://games.glsc.fr" rel="noopener">salle de jeux</a> que j’ai développée, et les <a href="/#realisations">démos</a> de cette page. Les démos sont des maquettes fictives, pas des projets clients.</p>
       </div>
       <aside class="about-side">${photo}<p class="about-name">Gabin Lescoat</p><p class="muted">Studio web indépendant · Bretagne</p>
         <div class="btn-row"><a class="btn btn-primary" href="/#contact">Me contacter ${icon('arrow')}</a></div></aside>
@@ -234,10 +234,11 @@ for (const v of VILLES) {
     </div></section>
     <section class="section band"><div class="wrap">
       <div class="section-head"><div><p class="eyebrow">Tarifs</p><h2>Un prix clair, annoncé avant de commencer</h2></div><p>Le devis est gratuit et sans engagement. Les prix sont TTC (TVA non applicable).</p></div>
-      <div class="pledge-grid three">
-        <article class="pledge"><h3>One-Page Express</h3><p class="price-inline">400 €</p><p>Une page sur mesure, boutons d’appel et WhatsApp, première version en 48 h* après validation du contenu.</p></article>
-        <article class="pledge"><h3>Refonte &amp; multi-pages</h3><p class="price-inline">Sur devis</p><p>Moderniser un ancien site ou présenter services, réalisations et tarifs sur plusieurs pages.</p></article>
-        <article class="pledge"><h3>Sérénité &amp; Hébergement</h3><p class="price-inline">30 € / mois</p><p>Option facultative : hébergement sécurisé, SSL, sauvegardes et petites modifications. Ou 300 € par an.</p></article>
+      <div class="pledge-grid four">
+        <article class="pledge"><h3>One-Page Express</h3><p class="price-inline">550 €</p><p>Une page sur mesure, boutons d’appel et WhatsApp, première version en 48 h* après validation du contenu.</p></article>
+        <article class="pledge"><h3>Refonte &amp; multi-pages</h3><p class="price-inline">Dès 750 €</p><p>Sur devis. Moderniser un ancien site ou présenter services, réalisations et tarifs sur plusieurs pages.</p></article>
+        <article class="pledge"><h3>E-commerce</h3><p class="price-inline">Dès 950 €</p><p>Sur devis. Catalogue de produits, panier, commande et paiement en ligne sécurisé.</p></article>
+        <article class="pledge"><h3>Abonnement Sérénité</h3><p class="price-inline">50 € / mois</p><p>Option, à ajouter à un site : hébergement sécurisé, SSL, sauvegardes et petites modifications. Ou 500 € par an.</p></article>
       </div>
       <p class="price-note">* Délai indicatif après réception des contenus et validation du périmètre.</p>
     </div></section>
@@ -249,7 +250,7 @@ for (const v of VILLES) {
     <section class="section"><div class="wrap"><div class="section-head"><div><p class="eyebrow">Autres zones</p><h2>Je travaille dans toute la Bretagne</h2></div></div>
       <ul class="chips-list">${others.map((o) => `<li><a href="/creation-site-web/${o.slug}/">${esc(o.name)}</a></li>`).join('')}</ul>
       <p class="muted mt">Vous cherchez un site pour votre métier ? <a class="inline-link" href="/sites-pour/">Voir les sites par métier</a>.</p></div></section>` + ctaBand(`Un site pour votre activité à ${v.name} ?`);
-  write(`/creation-site-web/${v.slug}/`, shell({ path: `/creation-site-web/${v.slug}/`, title: `Création de site web à ${v.name}`, desc: `StudioGLSC crée des sites vitrines rapides et adaptés au mobile pour artisans, commerçants et indépendants à ${v.name} (${v.dept}). One-Page Express à 400 €.`, jsonld: [bc.ld, faqLd(faq), { ...orgRef, areaServed: { '@type': 'City', name: v.name, containedInPlace: { '@type': 'AdministrativeArea', name: v.dept } } }], body, search: [v.name, v.dept, 'ville', 'site', 'web'] }));
+  write(`/creation-site-web/${v.slug}/`, shell({ path: `/creation-site-web/${v.slug}/`, title: `Création de site web à ${v.name}`, desc: `StudioGLSC crée des sites vitrines rapides et adaptés au mobile pour artisans, commerçants et indépendants à ${v.name} (${v.dept}). One-Page Express à 550 €, e-commerce dès 950 €.`, jsonld: [bc.ld, faqLd(faq), { ...orgRef, areaServed: { '@type': 'City', name: v.name, containedInPlace: { '@type': 'AdministrativeArea', name: v.dept } } }], body, search: [v.name, v.dept, 'ville', 'site', 'web'] }));
 }
 {
   const bc = crumbs([['Accueil', '/'], ['Création de site web', '/creation-site-web/']]);
@@ -342,7 +343,7 @@ const WORD_PATH = ''; // le logotype de la figure « zone de protection » est v
   ];
   const tones = [
     ['Clair', 'On dit ce qu’on fait, avec des mots simples.', 'Nous mettons en œuvre une solution digitale omnicanale.', 'Je crée votre site et il fonctionne sur téléphone.'],
-    ['Direct', 'Une phrase, une idée. Le prix et le délai d’abord.', 'Nos tarifs sont disponibles sur demande après étude.', 'One-Page Express : 400 €, première version en 48 h.'],
+    ['Direct', 'Une phrase, une idée. Le prix et le délai d’abord.', 'Nos tarifs sont disponibles sur demande après étude.', 'One-Page Express : 550 €, première version en 48 h.'],
     ['Humain', 'On parle à une personne, pas à un « utilisateur ».', 'Les utilisateurs peuvent contacter notre équipe.', 'Vous m’écrivez, je vous réponds moi-même.'],
     ['Honnête', 'On n’invente ni références, ni garanties.', 'Plus de 500 clients satisfaits.', 'Studio indépendant, quelques projets, un suivi de près.'],
   ];
@@ -445,7 +446,7 @@ const fixed = [
 const prio = (p) => (p === '/blog/' || p === '/sites-pour/' || p === '/creation-site-web/' || p === '/demos/' ? '0.7' : p.startsWith('/blog/') ? '0.6' : '0.8');
 const urls = [...fixed.map(([p, d, f, pr]) => ({ p, d, f, pr })), ...registry.map((r) => ({ p: r.path, d: CFG.date, f: 'monthly', pr: prio(r.path) }))];
 writeFileSync(join(ROOT, 'sitemap.xml'), `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls.map((u) => `  <url>\n    <loc>${ORIGIN}${u.p}</loc>\n    <lastmod>${u.d}</lastmod>\n    <changefreq>${u.f}</changefreq>\n    <priority>${u.pr}</priority>\n  </url>`).join('\n')}\n</urlset>\n`);
-const searchable = [{ path: '/', title: 'Accueil', desc: 'Création de sites vitrines, forfaits, réalisations, contact', keywords: 'accueil tarifs devis contact offres' }, { path: '/#offres', title: 'Tarifs et forfaits', desc: 'One-Page Express 400 €, refonte sur devis, hébergement', keywords: 'prix tarif forfait hébergement' }, { path: '/#contact', title: 'Demander un devis', desc: 'Le premier échange est gratuit', keywords: 'contact devis téléphone email' }, { path: '/mentions-legales.html', title: 'Mentions légales', desc: 'Éditeur, hébergeur, données personnelles', keywords: 'légal rgpd cookies' }, { path: '/cgv.html', title: 'Conditions générales de vente', desc: 'Prix, délais, rétractation, garanties', keywords: 'cgv conditions vente' }, ...registry];
+const searchable = [{ path: '/', title: 'Accueil', desc: 'Création de sites vitrines, forfaits, réalisations, contact', keywords: 'accueil tarifs devis contact offres' }, { path: '/#offres', title: 'Tarifs et forfaits', desc: 'One-Page Express 550 €, multi-pages dès 750 €, e-commerce dès 950 €, abonnement 50 €/mois', keywords: 'prix tarif forfait hébergement' }, { path: '/#contact', title: 'Demander un devis', desc: 'Le premier échange est gratuit', keywords: 'contact devis téléphone email' }, { path: '/mentions-legales.html', title: 'Mentions légales', desc: 'Éditeur, hébergeur, données personnelles', keywords: 'légal rgpd cookies' }, { path: '/cgv.html', title: 'Conditions générales de vente', desc: 'Prix, délais, rétractation, garanties', keywords: 'cgv conditions vente' }, ...registry];
 mkdirSync(join(ROOT, 'assets'), { recursive: true });
 writeFileSync(join(ROOT, 'assets/search-index.json'), JSON.stringify(searchable.map((r) => ({ u: r.path, t: r.title, d: r.desc, k: r.keywords }))));
 console.log(`${registry.length} pages générées · plan du site : ${urls.length} adresses · index de recherche : ${searchable.length} entrées`);

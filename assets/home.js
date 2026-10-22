@@ -160,29 +160,45 @@
   /* ---------- Estimation de prix ---------- */
   var estimate = $('#estimate');
   function money(n) { return n.toLocaleString('fr-FR') + ' €'; }
+  var PRICES = { express: 550, month: 50, year: 500 };
+  // Projets sur devis : fourchettes de départ, calées sur la One-Page Express (550 €) et le plancher annoncé (750 € / 950 €)
+  var PAGES = [[750, 950, '2 à 3 pages'], [950, 1250, '4 à 6 pages'], [1250, 1750, '7 à 10 pages']];
+  var PRODUCTS = [[950, 1300, 'jusqu’à 10 produits'], [1300, 2000, '11 à 50 produits'], [2000, null, 'plus de 50 produits']];
+  function checked(name) { return estimate.querySelector('input[name="' + name + '"]:checked').value; }
   function updateEstimate() {
-    var site = estimate.querySelector('input[name="est-site"]:checked').value;
-    var host = estimate.querySelector('input[name="est-host"]:checked').value;
-    var lines = [], total = 0, quote = site === 'multi';
-    if (quote) lines.push(['Refonte ou site multi-pages', 'Sur devis']); else { lines.push(['One-Page Express', money(400)]); total += 400; }
-    if (host === 'month') { lines.push(['Sérénité & Hébergement (12 × 30 €)', money(360)]); total += 360; }
-    if (host === 'year') { lines.push(['Sérénité & Hébergement (2 mois offerts)', money(300)]); total += 300; }
-    $('#est-total').textContent = quote ? (host === 'none' ? 'Sur devis' : money(total) + ' + devis') : money(total);
+    var site = checked('est-site'), host = checked('est-host');
+    $$('fieldset[data-for]', estimate).forEach(function (f) { f.hidden = f.dataset.for !== site; });
+    var lines = [], lo = 0, hi = 0, open = false, quote = site !== 'express', sub = host === 'month' ? 12 * PRICES.month : host === 'year' ? PRICES.year : 0;
+    if (site === 'express') { lines.push(['One-Page Express', money(PRICES.express)]); lo = hi = PRICES.express; }
+    else {
+      var t = site === 'multi' ? PAGES[+checked('est-pages')] : PRODUCTS[+checked('est-prod')];
+      lines.push([site === 'multi' ? 'Refonte ou multi-pages · ' + t[2] : 'E-commerce · ' + t[2], t[1] ? money(t[0]) + ' à ' + money(t[1]) : 'dès ' + money(t[0])]);
+      lo = t[0]; hi = t[1]; open = !t[1];
+    }
+    if (host === 'month') lines.push(['Abonnement Sérénité (12 × 50 €)', money(sub)]);
+    if (host === 'year') lines.push(['Abonnement Sérénité (2 mois offerts)', money(sub)]);
+    $('#est-label').textContent = quote ? 'Estimation de départ' : 'Votre première année';
+    $('#est-total').textContent = !quote ? money(lo + sub) : open ? 'Dès ' + money(lo + sub) : money(lo + sub) + ' – ' + money(hi + sub);
+    $('#est-note').textContent = quote
+      ? 'Estimation indicative, calée sur la One-Page Express. Le prix exact est précisé dans un devis gratuit avant tout démarrage. Prix TTC : TVA non applicable (art. 293 B du CGI).'
+      : 'Prix TTC : TVA non applicable (franchise en base, article 293 B du CGI). Estimation indicative, le devis fait foi.';
     var ul = $('#est-lines'); ul.textContent = '';
     lines.forEach(function (l) { var li = document.createElement('li'); var a = document.createElement('span'); a.textContent = l[0]; var b = document.createElement('span'); b.textContent = l[1]; li.append(a, b); ul.append(li); });
   }
   estimate.addEventListener('change', updateEstimate);
   updateEstimate();
-  $('#est-cta').addEventListener('click', function () {
-    var site = estimate.querySelector('input[name="est-site"]:checked').value;
-    var host = estimate.querySelector('input[name="est-host"]:checked').value;
-    var wanted = host !== 'none' && site === 'express' ? null : (site === 'multi' ? 'Refonte ou site multi-pages' : 'One-Page Express');
-    if (wanted) { var r = form.querySelector('input[name="service"][value="' + wanted + '"]'); if (r) r.checked = true; }
+  function chooseService(name) {
+    var r = form.querySelector('input[name="service"][value="' + name + '"]'); if (r) r.checked = true;
     if (resetNeeded()) resetForm();
     $('#contact').scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth' });
-    goStep(wanted ? 2 : 1, false);
+    goStep(2, false);
     if (!form.querySelector('input[name="activity"]:checked')) goStep(0, false);
+  }
+  $('#est-cta').addEventListener('click', function () {
+    var site = checked('est-site');
+    chooseService(site === 'multi' ? 'Refonte ou site multi-pages' : site === 'ecom' ? 'E-commerce' : 'One-Page Express');
   });
+  $$('[data-choose]').forEach(function (a) { a.addEventListener('click', function (e) { e.preventDefault(); chooseService(a.dataset.choose); }); });
   function resetNeeded() { return form.hidden; }
 
   /* ---------- Démos en direct : liste de cartes + appareil au choix ---------- */
