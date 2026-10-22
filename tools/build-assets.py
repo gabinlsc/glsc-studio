@@ -59,7 +59,7 @@ def brand():
     d.text((72, 300), "à votre image.", font=F("InterDisplay-Bold", 104), fill=ACCENT)
     d.text((72, 440), "Sites vitrines rapides et adaptés au mobile, en Bretagne.", font=F("Inter-Medium", 30), fill=(90, 100, 120))
     x = 72
-    for t in ("Première version sous 48 h", "One-Page Express · 400 €", "Sans abonnement obligatoire"):
+    for t in ("Première version sous 48 h", "One-Page Express · 550 €", "Sans abonnement obligatoire"):
         fnt = F("Inter-SemiBold", 22); w = d.textlength(t, font=fnt) + 36
         d.rounded_rectangle((x, 510, x + w, 562), 26, fill="white", outline=(214, 220, 230), width=2)
         d.text((x + 18, 536), t, font=fnt, fill=INK, anchor="lm"); x += w + 12

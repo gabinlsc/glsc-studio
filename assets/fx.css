@@ -11,11 +11,9 @@
 .fxw > span { display: inline-block; }
 .hero h1 span.fxw, .hero h1 span.fxw > span { display: inline-block; }
 .fx-split .accent { background: none; -webkit-text-fill-color: currentColor; color: var(--accent); }
-.fx-split .accent .fxw > span { background: linear-gradient(100deg, var(--accent) 25%, color-mix(in srgb, var(--accent) 62%, #6f8bff) 50%, var(--accent) 75%); background-size: 220% 100%; -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+.fx-split .accent .fxw > span { color: var(--accent); -webkit-text-fill-color: currentColor; }
 .fx-on .fx-split .fxw > span { transform: translateY(112%) rotate(3deg); opacity: 0; transition: transform .95s cubic-bezier(.2, .7, .1, 1), opacity .6s; transition-delay: calc(var(--i, 0) * 70ms + var(--d, 0ms)); }
 .fx-on .fx-split.fx-in .fxw > span { transform: none; opacity: 1; }
-.fx-on .fx-split.fx-in .accent .fxw > span { animation: fx-shimmer 7s ease-in-out 1.4s infinite; }
-@keyframes fx-shimmer { 0%, 100% { background-position: 0% 0; } 50% { background-position: 100% 0; } }
 
 /* ---------- Fond du héros : aurore + grille qui suit le curseur ---------- */
 .hero::before { -webkit-mask-image: radial-gradient(ellipse 70% 60% at var(--mx, 62%) var(--my, 30%), #000, transparent 75%); mask-image: radial-gradient(ellipse 70% 60% at var(--mx, 62%) var(--my, 30%), #000, transparent 75%); }
@@ -143,9 +141,3 @@ html.fx-theme-vt::view-transition-old(root) { z-index: 1; } html.fx-theme-vt::vi
 
 /* Les panneaux à halo décoratif ne doivent jamais défiler d'eux-mêmes (scrollIntoView sur un contenu interne les décalait) */
 .contact, .showcase, .bk-kit, .hero { overflow: clip; }
-
-/* Thème sombre : tous les textes en dégradé deviennent du bleu uni de la marque */
-:root[data-theme="dark"] .hero h1 .accent,
-:root[data-theme="dark"] .fx-split .accent,
-:root[data-theme="dark"] .fx-split .accent .fxw > span,
-:root[data-theme="dark"] .nf-code { background: none; -webkit-background-clip: border-box; background-clip: border-box; -webkit-text-fill-color: var(--accent); color: var(--accent); animation: none; }
