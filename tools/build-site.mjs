@@ -20,7 +20,7 @@ const words = (s) => s.split(/\s+/).filter(Boolean).length;
 // ---------------------------------------------------------------- gabarit lu dans index.html
 let index = readFileSync(join(ROOT, 'index.html'), 'utf8');
 const grab = (re, what) => { const m = re.exec(index); if (!m) throw new Error(`index.html : ${what} introuvable`); return m[0]; };
-const sprite = grab(/<svg width="0"[\s\S]*?<\/svg>/, 'sprite d’icônes');
+const sprite = grab(/<svg class="sprite"[\s\S]*?<\/svg>/, 'sprite d’icônes');
 
 // Colonnes de liens du pied de page : écrites dans index.html (entre deux repères) puis reprises partout.
 const cols = `<!--@footer-cols:start-->
@@ -54,7 +54,7 @@ function shell({ path, title, desc, type = 'website', jsonld = [], body, noindex
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#f6f7f9">
-  <title>${esc(title)} · StudioGLSC</title>
+  <title>${esc(title.length + 13 <= 70 ? title + ' · StudioGLSC' : title)}</title>
   <meta name="description" content="${esc(desc)}">
   <meta name="robots" content="${noindex ? 'noindex,follow' : 'index,follow'}">
   <link rel="canonical" href="${url}">
@@ -72,13 +72,7 @@ function shell({ path, title, desc, type = 'website', jsonld = [], body, noindex
   <link rel="preload" href="/assets/fonts/inter-400.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/assets/fonts/inter-display-700.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="/assets/studio.css">
-  <script>
-    document.documentElement.classList.add('js');
-    try {
-      var saved = localStorage.getItem('studioglsc-theme');
-      document.documentElement.dataset.theme = saved || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
-    } catch (e) { document.documentElement.dataset.theme = 'light'; }
-  </script>
+  <script src="/assets/theme-init.js"></script>
 ${ld}
 </head>
 <body>
@@ -214,7 +208,7 @@ for (const v of VILLES) {
     <section class="section band"><div class="wrap faq-layout"><div class="section-head"><div><p class="eyebrow">Questions fréquentes</p><h2>À ${esc(v.name)}, on me demande souvent</h2></div></div>${faqHtml(faq)}</div></section>
     <section class="section"><div class="wrap"><div class="section-head"><div><p class="eyebrow">Autres zones</p><h2>Je travaille dans toute la Bretagne</h2></div></div>
       <ul class="chips-list">${others.map((o) => `<li><a href="/creation-site-web/${o.slug}/">${esc(o.name)}</a></li>`).join('')}</ul>
-      <p class="muted" style="margin-top:20px">Vous cherchez un site pour votre métier ? <a class="inline-link" href="/sites-pour/">Voir les sites par métier</a>.</p></div></section>` + ctaBand(`Un site pour votre activité à ${v.name} ?`);
+      <p class="muted mt">Vous cherchez un site pour votre métier ? <a class="inline-link" href="/sites-pour/">Voir les sites par métier</a>.</p></div></section>` + ctaBand(`Un site pour votre activité à ${v.name} ?`);
   write(`/creation-site-web/${v.slug}/`, shell({ path: `/creation-site-web/${v.slug}/`, title: `Création de site web à ${v.name}`, desc: `StudioGLSC crée des sites vitrines rapides et adaptés au mobile pour artisans, commerçants et indépendants à ${v.name} (${v.dept}). One-Page Express à 400 €.`, jsonld: [bc.ld, faqLd(faq), { ...orgRef, areaServed: { '@type': 'City', name: v.name, containedInPlace: { '@type': 'AdministrativeArea', name: v.dept } } }], body, search: [v.name, v.dept, 'ville', 'site', 'web'] }));
 }
 {

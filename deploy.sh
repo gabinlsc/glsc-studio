@@ -35,7 +35,7 @@ else
   curl -fsSL "https://codeload.github.com/$REPO/tar.gz/$REF" | tar -xz -C "$WORK"
   SRC="$(find "$WORK" -mindepth 1 -maxdepth 1 -type d | head -1)"
 fi
-for f in "${FILES[@]}" assets/studio.css assets/studio.js assets/home.js assets/fonts/inter-400.woff2 assets/favicon.svg; do
+for f in "${FILES[@]}" assets/studio.css assets/studio.js assets/home.js assets/fonts/inter-400.woff2 assets/favicon.svg assets/theme-init.js assets/notfound.css assets/legal.js; do
   [ -s "$SRC/$f" ] || die "Archive incomplète : $f manquant. Rien n'a été modifié."
 done
 ok "archive complète"
@@ -69,5 +69,15 @@ if [ -z "${GLSC_SRC:-}" ] && command -v curl >/dev/null; then
     code="$(curl -s -o /dev/null -w '%{http_code}' --max-time 15 "https://$DOMAIN$path" || echo 000)"
     [ "$code" = 200 ] && ok "$path → 200" || { c 31 "  ✗ $path → $code"; rollback; }
   done
+fi
+# ---- en-têtes de sécurité (fichier installé, mais jamais inclus automatiquement dans nginx)
+if [ -s "$SRC/deploy/studio-security.conf" ] && [ -d /etc/nginx/snippets ]; then
+  install -m 644 "$SRC/deploy/studio-security.conf" /etc/nginx/snippets/studio-security.conf
+  if grep -rqs "snippets/studio-security.conf" /etc/nginx/sites-enabled /etc/nginx/conf.d 2>/dev/null; then
+    ok "en-têtes de sécurité : snippet à jour et déjà inclus dans nginx"
+  else
+    c 33 "  ! en-têtes de sécurité : snippet installé mais pas encore actif. Dans le bloc server de $DOMAIN, ajouter :"
+    c 33 "      include snippets/studio-security.conf;     puis : nginx -t && systemctl reload nginx"
+  fi
 fi
 c 32 "Terminé : https://$DOMAIN/ (Ctrl+F5 pour contourner le cache du navigateur)"

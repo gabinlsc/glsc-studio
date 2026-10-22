@@ -22,13 +22,7 @@
   <link rel="preload" href="/assets/fonts/inter-400.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/assets/fonts/inter-display-700.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="/assets/studio.css">
-  <script>
-    document.documentElement.classList.add('js');
-    try {
-      var saved = localStorage.getItem('studioglsc-theme');
-      document.documentElement.dataset.theme = saved || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
-    } catch (e) { document.documentElement.dataset.theme = 'light'; }
-  </script>
+  <script src="/assets/theme-init.js"></script>
   <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -110,7 +104,7 @@
   </script>
 </head>
 <body>
-  <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <svg class="sprite" width="0" height="0" aria-hidden="true" focusable="false">
     <defs>
       <symbol id="i-check" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></symbol>
       <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></symbol>
@@ -207,7 +201,7 @@
     <section class="section band"><div class="wrap faq-layout"><div class="section-head"><div><p class="eyebrow">Questions fréquentes</p><h2>À Brest, on me demande souvent</h2></div></div><div class="faq-list"><details><summary>Mon activité est liée au nautisme, quelles informations mettre ?</summary><p>Périodes d’activité, tarifs, matériel fourni, conditions météo et modalités de réservation : tout ce qui évite un appel pour une question simple.</p></details><details><summary>Combien de temps faut-il pour avoir mon site ?</summary><p>Pour la formule One-Page Express, la première version est présentée sous 48 h après réception des contenus et validation du périmètre. Les refontes et sites multi-pages sont chiffrés sur devis.</p></details><details><summary>Le site m’appartient-il ?</summary><p>Oui. Au paiement intégral, vous devenez propriétaire de la conception graphique et du contenu créé pour vous, et les codes sources vous sont cédés. Aucun abonnement n’est imposé.</p></details></div></div></section>
     <section class="section"><div class="wrap"><div class="section-head"><div><p class="eyebrow">Autres zones</p><h2>Je travaille dans toute la Bretagne</h2></div></div>
       <ul class="chips-list"><li><a href="/creation-site-web/rennes/">Rennes</a></li><li><a href="/creation-site-web/lorient/">Lorient</a></li><li><a href="/creation-site-web/vannes/">Vannes</a></li><li><a href="/creation-site-web/quimper/">Quimper</a></li><li><a href="/creation-site-web/saint-brieuc/">Saint-Brieuc</a></li></ul>
-      <p class="muted" style="margin-top:20px">Vous cherchez un site pour votre métier ? <a class="inline-link" href="/sites-pour/">Voir les sites par métier</a>.</p></div></section>
+      <p class="muted mt">Vous cherchez un site pour votre métier ? <a class="inline-link" href="/sites-pour/">Voir les sites par métier</a>.</p></div></section>
     <section class="section cta-band-wrap"><div class="wrap"><div class="cta-band">
       <div><h2>Un site pour votre activité à Brest ?</h2><p>Le premier échange est gratuit et sans engagement. Je vous réponds directement.</p></div>
       <div class="btn-row"><a class="btn btn-primary" href="/#contact">Demander un devis <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a><a class="btn btn-secondary" href="/#offres">Voir les tarifs</a></div>

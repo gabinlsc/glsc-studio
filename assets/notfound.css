@@ -1,0 +1,18 @@
+/* Page 404 (en plus de studio.css). */
+body { min-height: 100vh; display: grid; place-items: center; padding: 24px; }
+.nf { position: relative; width: min(100%, 640px); padding: clamp(32px, 7vw, 64px); border: 1px solid var(--line); border-radius: 24px; background: var(--surface); box-shadow: var(--shadow); text-align: center; }
+.nf .brand { justify-content: center; }
+.nf-code { margin-top: 48px; font: 700 clamp(5rem, 20vw, 8.5rem)/.9 var(--font-display); letter-spacing: -.05em; background: linear-gradient(100deg, var(--accent), color-mix(in srgb, var(--accent) 55%, #7c3aed)); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+.nf h1 { margin-top: 20px; font-size: clamp(1.6rem, 4.5vw, 2.2rem); line-height: 1.15; }
+.nf p { max-width: 42ch; margin: 14px auto 0; color: var(--muted); }
+.nf .btn-row { justify-content: center; margin-top: 28px; }
+.nf-search { margin-top: 28px; text-align: left; }
+.nf-search label { display: block; margin-bottom: 8px; font-size: .85rem; font-weight: 600; }
+.nf-search input { width: 100%; min-height: 48px; padding: 12px 14px; border: 1px solid var(--line-strong); border-radius: 10px; background: var(--bg); color: var(--ink); font: 400 1rem/1.4 var(--font); }
+.nf-search input:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 4px var(--accent-soft); }
+.nf-results { display: grid; gap: 8px; margin-top: 12px; }
+.nf-results a { display: block; padding: 12px 14px; border: 1px solid var(--line); border-radius: 10px; background: var(--bg); text-decoration: none; }
+.nf-results a:hover, .nf-results a:focus-visible { border-color: var(--accent); }
+.nf-results strong { display: block; font-weight: 600; font-size: .95rem; }
+.nf-results span { color: var(--muted); font-size: .85rem; }
+.nf .nf-hint { margin: 10px 0 0; max-width: none; text-align: left; color: var(--muted); font-size: .88rem; }
