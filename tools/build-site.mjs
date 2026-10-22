@@ -124,7 +124,9 @@ for (const d of ['a-propos', 'sites-pour', 'creation-site-web', 'blog']) rmSync(
 // ---------------------------------------------------------------- à propos
 {
   const bc = crumbs([['Accueil', '/'], ['À propos', '/a-propos/']]);
-  const photo = existsSync(join(ROOT, 'assets/img/gabin.webp')) ? '<img class="about-photo" src="/assets/img/gabin.webp" width="480" height="480" alt="Portrait de Gabin Lescoat" loading="lazy">' : '<div class="about-photo about-monogram" aria-hidden="true">G</div>';
+  // Photo : gabin.webp si elle est dans le dépôt, sinon gabin.jpg (déposée sur le serveur par activate.sh depuis cv.glsc.fr) ; studio.js revient au monogramme si le fichier est absent.
+  const photoSrc = existsSync(join(ROOT, 'assets/img/gabin.webp')) ? '/assets/img/gabin.webp' : '/assets/img/gabin.jpg';
+  const photo = `<img class="about-photo" src="${photoSrc}" width="480" height="480" alt="Portrait de Gabin Lescoat" loading="lazy" data-fallback="G">`;
   const body = pageHero({ bc: bc.html, eyebrow: 'À propos', h1: 'Vous parlez à la personne qui crée votre site.', lead: 'StudioGLSC est mon studio web indépendant. Je m’appelle Gabin Lescoat et je crée des sites vitrines clairs et rapides pour les artisans, commerçants et indépendants de Bretagne.' }) + `
     <section class="section"><div class="wrap about-grid">
       <div class="prose">
