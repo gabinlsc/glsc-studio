@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Quai 56 · Démo salle de concerts et club · StudioGLSC</title>
+  <meta name="description" content="Démonstration StudioGLSC : site d’un club et salle de concerts avec agenda filtrable, billetterie en ligne simulée et infos pratiques. Exemple fictif.">
+  <meta name="robots" content="noindex,follow">
+  <meta name="theme-color" content="#ebe7de">
+  <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+  <link rel="preload" href="../fonts/inter-tight.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="../shared/demo.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="../shared/demo.js"></script>
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <a class="skip" href="#agenda">Aller à l’agenda</a>
+  <div class="dm-bar"><div class="wrap"><span><b>Démo fictive</b> · site d’exemple réalisé par StudioGLSC</span><span><a href="/demos/">← Toutes les démos</a> &nbsp; <a href="/#contact">Je veux un site comme celui-ci</a></span></div></div>
+
+  <header class="dm-header"><div class="wrap bar">
+    <a class="brand" href="#top" aria-label="Quai 56, retour en haut">QUAI&nbsp;<b>56</b></a>
+    <nav aria-label="Navigation principale"><a href="#agenda">Agenda</a><a href="#infos">Infos</a><a href="#privatiser">Privatiser</a></nav>
+    <a class="btn" href="#agenda">Billetterie</a>
+  </div></header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="wrap">
+        <p class="eyebrow rv">Salle de concerts et club · Lorient · 600 personnes</p>
+        <h1 aria-label="Quai 56"><span class="line"><span class="g">Quai</span></span><span class="line"><span class="g big">56</span></span></h1>
+        <div class="hero-row">
+          <p class="lede rv" data-d="300">Concerts le jeudi et le vendredi, club le samedi. Un son soigné, un bar tenu par des gens qui connaissent leur métier, et une équipe de sécurité qui veille à ce que tout le monde rentre chez soi.</p>
+          <div class="next rv" data-d="450" id="next" aria-live="polite"></div>
+        </div>
+      </div>
+      <div class="ticker" aria-hidden="true"><div class="ticker-track" id="ticker"></div></div>
+    </section>
+
+    <section class="agenda" id="agenda" aria-labelledby="ag-t">
+      <div class="wrap">
+        <div class="ag-head"><h2 id="ag-t" data-split>Agenda</h2>
+          <div class="filters" role="group" aria-label="Filtrer l’agenda"><button aria-pressed="true" data-f="all">Tout</button><button aria-pressed="false" data-f="concert">Concerts</button><button aria-pressed="false" data-f="club">Club</button><button aria-pressed="false" data-f="special">Soirées spéciales</button></div></div>
+        <ol class="events" id="events"></ol>
+        <p class="empty" id="empty" hidden>Aucune date dans cette catégorie pour le moment.</p>
+      </div>
+    </section>
+
+    <section class="infos" id="infos" aria-labelledby="in-t">
+      <div class="wrap in-grid">
+        <div><h2 id="in-t" data-split>Pratique</h2>
+          <dl class="facts">
+            <div class="rv"><dt>Adresse</dt><dd>Quai des Brumes, 56100 Lorient<br><span>À dix minutes à pied de la gare</span></dd></div>
+            <div class="rv" data-d="60"><dt>Ouverture</dt><dd>Jeudi et vendredi 20 h – 2 h<br>Samedi 23 h – 5 h<span class="open" id="open"></span></dd></div>
+            <div class="rv" data-d="120"><dt>Âge</dt><dd>18 ans et plus, pièce d’identité obligatoire.</dd></div>
+            <div class="rv" data-d="180"><dt>Accessibilité</dt><dd>Salle de plain-pied, toilettes adaptées, placement réservé sur demande.</dd></div>
+          </dl>
+        </div>
+        <div class="care rv" data-d="150">
+          <h3>Faire la fête, mais bien</h3>
+          <ul><li>Eau gratuite au bar, toute la nuit.</li><li>Bouchons d’oreilles offerts à l’entrée.</li><li>Un référent « Safe » identifiable, joignable à tout moment.</li><li>Retours : taxis et navette de nuit, horaires affichés dans la salle.</li></ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="priv" id="privatiser" aria-labelledby="pv-t">
+      <div class="wrap pv-grid">
+        <div><p class="eyebrow rv">Événements privés</p><h2 id="pv-t" data-split>Privatiser la salle.</h2><p class="rv pv-lede" data-d="150">Anniversaire, soirée d’entreprise, lancement de produit, captation. Capacité de 80 à 600 personnes, technique et bar inclus.</p></div>
+        <form class="pv-form rv" data-d="150" id="pv-form" novalidate>
+          <label class="field"><span>Votre nom</span><input id="pv-name" autocomplete="name"><small class="err" id="pv-e1"></small></label>
+          <label class="field"><span>E-mail</span><input id="pv-mail" type="email" autocomplete="email"><small class="err" id="pv-e2"></small></label>
+          <label class="field"><span>Nombre de personnes</span><input id="pv-n" type="range" min="80" max="600" step="20" value="200"><output id="pv-o" class="tnum">200 personnes</output></label>
+          <button class="btn btn-big" type="submit">Demander un devis</button>
+          <p class="done" id="pv-done" role="status" hidden>Merci. C’est une démonstration : rien n’a été envoyé.</p>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer class="foot"><div class="wrap foot-row"><p class="brand">QUAI&nbsp;<b>56</b></p><p>Établissement fictif créé pour la démonstration · contact@quai56.example</p><p class="foot-small">L’abus d’alcool est dangereux pour la santé, à consommer avec modération.</p></div></footer>
+
+  <dialog class="tk" id="tk" aria-labelledby="tk-t">
+    <form method="dialog" class="tk-x"><button aria-label="Fermer">×</button></form>
+    <div id="tk-body">
+      <p class="eyebrow" id="tk-date"></p>
+      <h3 id="tk-t"></h3>
+      <fieldset><legend>Tarif</legend><div class="opts" id="tk-types" role="radiogroup" aria-label="Tarif"></div></fieldset>
+      <div class="field"><span id="tk-q-l">Places</span><div class="counter" role="group" aria-labelledby="tk-q-l"><button type="button" id="q-m" aria-label="Retirer une place">−</button><output id="q-o" class="tnum">1</output><button type="button" id="q-p" aria-label="Ajouter une place">+</button></div></div>
+      <label class="field"><span>E-mail pour recevoir les billets</span><input id="tk-mail" type="email" autocomplete="email"><small class="err" id="tk-e"></small></label>
+      <p class="tk-total">Total <b id="tk-tot" class="tnum"></b></p>
+      <button class="btn btn-big" id="tk-go" type="button">Payer et recevoir les billets</button>
+      <p class="tk-note">Démonstration : aucun paiement, aucun billet réel.</p>
+    </div>
+    <div id="tk-done" hidden><svg viewBox="0 0 48 48" width="48" height="48" aria-hidden="true"><circle cx="24" cy="24" r="22" fill="none" stroke="currentColor" stroke-width="2"/><path d="M14 25l7 7 13-15" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg><h3>Billets réservés</h3><p id="tk-done-t"></p><form method="dialog"><button class="btn">Fermer</button></form></div>
+  </dialog>
+</body>
+</html>

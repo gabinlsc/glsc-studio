@@ -300,34 +300,43 @@
 
     <section id="realisations" class="section band">
       <div class="wrap">
-        <div class="section-head reveal"><div><p class="eyebrow">Réalisations &amp; démonstrations</p><h2>Démos &amp; concepts <span class="accent">interactifs.</span></h2></div><p>Un projet personnel en ligne et deux concepts démo consultables, pour montrer comment un site peut guider vos clients vers l’action.</p></div>
-        <div class="callout reveal"><svg class="icon" aria-hidden="true"><use href="#i-info"/></svg><p><strong>Deux cartes sont des concepts démo.</strong> Le concept Clubbing &amp; Nightlife et le concept Artisanat &amp; BTP sont tous deux consultables en ligne. Ces maquettes illustrent des pistes d’interface pour des secteurs différents, ce ne sont pas des projets clients.</p></div>
+        <div class="section-head reveal"><div><p class="eyebrow">Réalisations &amp; démonstrations</p><h2>Démos &amp; concepts <span class="accent">interactifs.</span></h2></div><p>Mon site personnel et six démos interactives, pour montrer comment un site peut guider vos clients vers l’action.</p></div>
+        <div class="callout reveal"><svg class="icon" aria-hidden="true"><use href="#i-info"/></svg><p><strong>Les démos sont des concepts fictifs.</strong> Restaurant, coiffeur, photographe, gîte, club et artisan : chacun est consultable en ligne avec ses vraies fonctions. Ces maquettes illustrent des pistes d’interface pour des secteurs différents, ce ne sont pas des projets clients.</p></div>
         <div class="project-grid">
           <a class="project reveal" href="https://glsc.fr" target="_blank" rel="noopener noreferrer" aria-label="Visiter glsc.fr, site personnel et portfolio technique de Gabin Lescoat (nouvel onglet)">
             <div class="project-shot"><img src="/assets/img/hub.webp" width="960" height="600" loading="lazy" alt="Aperçu de glsc.fr, le site personnel de Gabin Lescoat"><span class="project-tag live">En ligne · Projet personnel</span></div>
             <div class="project-body"><h3>glsc.fr</h3><p>Mon site personnel et portfolio technique.</p><span class="project-link">Visiter le site <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></span></div>
           </a>
-          <a class="project reveal" href="/club-demo.html" aria-label="Découvrir la démo Clubbing &amp; Nightlife, concept de landing page pour le Club56 à Lorient">
-            <div class="project-shot"><img src="/assets/img/club.webp" width="960" height="600" loading="lazy" alt="Aperçu du concept Clubbing &amp; Nightlife : landing page sombre pour le Club56 à Lorient"><span class="project-tag">Concept démo</span></div>
-            <div class="project-body"><h3>Clubbing &amp; Nightlife</h3><p>Une landing page sombre et dynamique, avec agenda et réservation de tables.</p><span class="project-link">Voir la démo <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></span></div>
+          <!--@demo-cards:start-->
+          <a class="project reveal" href="/demos/restaurant/" aria-label="Ouvrir la démo Restaurant : Maison Kerloc’h">
+            <div class="project-shot"><img src="/assets/img/demo-restaurant.webp" width="960" height="600" loading="lazy" alt="Aperçu de la démo restaurant : titre « Le port, la saison, la braise » et illustration de rade au coucher du soleil"><span class="project-tag">Démo · Restaurant</span></div>
+            <div class="project-body"><h3>Maison Kerloc’h</h3><p>Cuisine de port, carte de saison et réservation de table.</p><span class="project-link">Voir la démo <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></span></div>
           </a>
-          <a class="project reveal" href="/btp-demo.html" aria-label="Découvrir la démo Artisanat &amp; BTP, concept de landing page pour un artisan du Morbihan">
-            <div class="project-shot"><img src="/assets/img/btp.webp" width="960" height="600" loading="lazy" alt="Aperçu du concept Artisanat &amp; BTP : vitrine claire pour un artisan du Morbihan"><span class="project-tag">Concept démo</span></div>
-            <div class="project-body"><h3>Artisanat &amp; BTP</h3><p>Une vitrine claire et directe, pensée pour la prise de contact sur mobile.</p><span class="project-link">Voir la démo <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></span></div>
+          <a class="project reveal" href="/demos/coiffeur/" aria-label="Ouvrir la démo Coiffure : Atelier Maëlle">
+            <div class="project-shot"><img src="/assets/img/demo-coiffeur.webp" width="960" height="600" loading="lazy" alt="Aperçu de la démo salon de coiffure : grand titre en serif sur fond crème"><span class="project-tag">Démo · Coiffure</span></div>
+            <div class="project-body"><h3>Atelier Maëlle</h3><p>Un salon qui montre ses techniques et prend les rendez-vous.</p><span class="project-link">Voir la démo <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></span></div>
           </a>
+          <!--@demo-cards:end-->
         </div>
+        <p class="reveal all-demos"><a class="btn btn-secondary" href="/demos/">Voir les six démos <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a></p>
         <div class="demo-lab reveal">
           <div class="demo-lab-copy">
             <p class="eyebrow">Essayer en direct</p>
             <h3>Testez une démo comme le ferait un client, sur son téléphone.</h3>
             <p class="muted">Choisissez un concept puis lancez-le dans le téléphone. La démo ne se charge que lorsque vous cliquez.</p>
             <div class="seg" role="tablist" aria-label="Choisir une démo">
-              <button type="button" role="tab" aria-selected="true" data-demo="/club-demo.html" data-title="Clubbing &amp; Nightlife">Clubbing &amp; Nightlife</button>
-              <button type="button" role="tab" aria-selected="false" data-demo="/btp-demo.html" data-title="Artisanat &amp; BTP">Artisanat &amp; BTP</button>
+              <!--@demo-tabs:start-->
+              <button type="button" role="tab" aria-selected="true" data-demo="/demos/restaurant/" data-title="Restaurant">Restaurant</button>
+              <button type="button" role="tab" aria-selected="false" data-demo="/demos/coiffeur/" data-title="Coiffure">Coiffure</button>
+              <button type="button" role="tab" aria-selected="false" data-demo="/demos/photographe/" data-title="Photographe">Photographe</button>
+              <button type="button" role="tab" aria-selected="false" data-demo="/demos/gite/" data-title="Gîte et location">Gîte et location</button>
+              <button type="button" role="tab" aria-selected="false" data-demo="/demos/club/" data-title="Club et concerts">Club et concerts</button>
+              <button type="button" role="tab" aria-selected="false" data-demo="/demos/btp/" data-title="Artisan du bâtiment">Artisan du bâtiment</button>
+              <!--@demo-tabs:end-->
             </div>
             <div class="btn-row">
               <button type="button" class="btn btn-primary" id="demo-launch"><svg class="icon" aria-hidden="true"><use href="#i-play"/></svg> Lancer la démo</button>
-              <a class="btn btn-secondary" id="demo-open" href="/club-demo.html" target="_blank" rel="noopener">Ouvrir en plein écran <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+              <a class="btn btn-secondary" id="demo-open" href="/demos/restaurant/" target="_blank" rel="noopener">Ouvrir en plein écran <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
             </div>
           </div>
           <div class="demo-phone" aria-live="polite">

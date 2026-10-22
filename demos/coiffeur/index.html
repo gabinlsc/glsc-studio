@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Atelier Maëlle · Démo salon de coiffure · StudioGLSC</title>
+  <meta name="description" content="Démonstration StudioGLSC : site d’un salon de coiffure avec nuancier interactif, tarifs détaillés et prise de rendez-vous par créneaux. Exemple fictif.">
+  <meta name="robots" content="noindex,follow">
+  <meta name="theme-color" content="#ece6dc">
+  <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+  <link rel="preload" href="../fonts/instrument-serif.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="../shared/demo.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="../shared/demo.js"></script>
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <a class="skip" href="#prestations">Aller aux prestations</a>
+  <div class="dm-bar"><div class="wrap"><span><b>Démo fictive</b> · site d’exemple réalisé par StudioGLSC</span><span><a href="/demos/">← Toutes les démos</a> &nbsp; <a href="/#contact">Je veux un site comme celui-ci</a></span></div></div>
+
+  <header class="dm-header"><div class="wrap bar">
+    <a class="brand" href="#top" aria-label="Atelier Maëlle, retour en haut">Atelier <em>Maëlle</em></a>
+    <nav aria-label="Navigation principale"><a href="#nuancier">Nuancier</a><a href="#prestations">Prestations</a><a href="#equipe">Équipe</a><a href="#rdv">Rendez-vous</a></nav>
+    <a class="btn" href="#rdv">Prendre rendez-vous</a>
+  </div></header>
+
+  <main id="top">
+    <section class="hero wrap">
+      <p class="eyebrow rv">Salon de coiffure · Vannes</p>
+      <h1 data-split>Des couleurs justes, des coupes qui vous ressemblent.</h1>
+      <div class="hero-foot">
+        <p class="lede rv" data-d="300">Un salon de quatre fauteuils au centre de Vannes. Chaque rendez-vous commence par une consultation de dix minutes, offerte, pour comprendre ce que vous voulez vraiment.</p>
+        <ul class="hero-points rv" data-d="450"><li><b class="tnum" data-count="12">12</b><span>ans de métier</span></li><li><b class="tnum" data-count="4">4</b><span>coiffeuses et coiffeurs</span></li><li><b class="tnum" data-count="10">10</b><span>min de consultation offerte</span></li></ul>
+      </div>
+    </section>
+
+    <section class="nuancier" id="nuancier" aria-labelledby="nu-t">
+      <div class="wrap nu-grid">
+        <div class="nu-copy">
+          <p class="eyebrow rv">Le nuancier</p>
+          <h2 id="nu-t" data-split>Choisissez une teinte, voyez la technique.</h2>
+          <p class="rv" data-d="150">Huit bases que nous réalisons le plus souvent. Pour chacune : la technique, la durée et le tarif indicatif, avant même de venir.</p>
+          <div class="swatches" id="swatches" role="radiogroup" aria-label="Teintes"></div>
+        </div>
+        <div class="nu-card rv" data-d="150" id="nu-card">
+          <svg class="locks" viewBox="0 0 600 700" aria-hidden="true" preserveAspectRatio="xMidYMid slice"><g id="locks" fill="none" stroke="currentColor" stroke-linecap="round"></g></svg>
+          <div class="nu-info">
+            <p class="nu-tech" id="nu-tech"></p>
+            <h3 id="nu-name"></h3>
+            <p id="nu-desc"></p>
+            <dl class="nu-meta"><div><dt>Durée</dt><dd id="nu-time"></dd></div><div><dt>À partir de</dt><dd id="nu-price" class="tnum"></dd></div><div><dt>Entretien</dt><dd id="nu-care"></dd></div></dl>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="prest" id="prestations" aria-labelledby="pr-t">
+      <div class="wrap">
+        <h2 id="pr-t" data-split>Prestations et tarifs</h2>
+        <div class="acc" id="acc">
+          <article class="acc-item rv"><h3><button aria-expanded="true" aria-controls="p1"><span>Coupe</span><i aria-hidden="true"></i></button></h3><div class="acc-body" id="p1"><div><ul class="prices"><li><span>Coupe femme, shampoing, coiffage</span><b class="tnum">48 €</b></li><li><span>Coupe homme</span><b class="tnum">28 €</b></li><li><span>Coupe enfant (moins de 12 ans)</span><b class="tnum">19 €</b></li><li><span>Barbe, taille et soin</span><b class="tnum">16 €</b></li></ul></div></div></article>
+          <article class="acc-item rv"><h3><button aria-expanded="false" aria-controls="p2"><span>Couleur</span><i aria-hidden="true"></i></button></h3><div class="acc-body" id="p2"><div><ul class="prices"><li><span>Racines</span><b class="tnum">52 €</b></li><li><span>Couleur complète</span><b class="tnum">68 €</b></li><li><span>Balayage ou mèches</span><b class="tnum">95 €</b></li><li><span>Patine, gloss</span><b class="tnum">32 €</b></li></ul><p class="note">Le prix final dépend de la longueur et de la densité : il est confirmé après la consultation.</p></div></div></article>
+          <article class="acc-item rv"><h3><button aria-expanded="false" aria-controls="p3"><span>Soins</span><i aria-hidden="true"></i></button></h3><div class="acc-body" id="p3"><div><ul class="prices"><li><span>Soin profond, 20 minutes</span><b class="tnum">24 €</b></li><li><span>Soin kératine</span><b class="tnum">45 €</b></li><li><span>Diagnostic du cuir chevelu</span><b class="tnum">Offert</b></li></ul></div></div></article>
+          <article class="acc-item rv"><h3><button aria-expanded="false" aria-controls="p4"><span>Mariage et cérémonies</span><i aria-hidden="true"></i></button></h3><div class="acc-body" id="p4"><div><ul class="prices"><li><span>Essai coiffure</span><b class="tnum">60 €</b></li><li><span>Jour J, au salon</span><b class="tnum">120 €</b></li><li><span>Jour J, à domicile (Vannes et alentours)</span><b class="tnum">180 €</b></li></ul><p class="note">Réservation conseillée trois mois à l’avance.</p></div></div></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="equipe" id="equipe" aria-labelledby="eq-t">
+      <div class="wrap">
+        <h2 id="eq-t" data-split>Les mains derrière les ciseaux</h2>
+        <ul class="team">
+          <li class="rv"><span class="avatar" aria-hidden="true">M</span><h3>Maëlle</h3><p class="role">Fondatrice · couleur et coupe</p><p>Formée à Rennes puis à Londres. Passionnée par les blonds naturels et les carrés qui tombent bien.</p></li>
+          <li class="rv" data-d="100"><span class="avatar" aria-hidden="true">T</span><h3>Théo</h3><p class="role">Coupe homme · barbe</p><p>Précis, rapide, discret. Le rendez-vous de ceux qui n’ont pas envie de discuter une heure.</p></li>
+          <li class="rv" data-d="200"><span class="avatar" aria-hidden="true">L</span><h3>Louise</h3><p class="role">Mariage · coiffures de cérémonie</p><p>Chignons, tresses, coiffures qui tiennent toute la journée, et la photo qui va avec.</p></li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="rdv" id="rdv" aria-labelledby="rdv-t">
+      <div class="wrap rdv-grid">
+        <div class="rdv-copy">
+          <p class="eyebrow rv">Rendez-vous</p>
+          <h2 id="rdv-t" data-split>Réservez en une minute.</h2>
+          <p class="rv" data-d="150">Les créneaux affichés sont ceux de l’agenda du salon. Vous recevez un rappel la veille.</p>
+          <p class="demo-note rv" data-d="200">Démonstration : aucune réservation n’est réellement envoyée.</p>
+        </div>
+        <div class="rdv-card rv" data-d="150">
+          <form id="rdv-form" novalidate>
+            <fieldset><legend>1. La prestation</legend>
+              <div class="choices" id="r-presta" role="radiogroup" aria-label="Prestation">
+                <button type="button" role="radio" aria-checked="true" data-v="Coupe femme · 48 €" data-t="1 h">Coupe femme<small>1 h</small></button>
+                <button type="button" role="radio" aria-checked="false" data-v="Coupe homme · 28 €" data-t="30 min">Coupe homme<small>30 min</small></button>
+                <button type="button" role="radio" aria-checked="false" data-v="Couleur · 68 €" data-t="2 h">Couleur<small>2 h</small></button>
+                <button type="button" role="radio" aria-checked="false" data-v="Balayage · 95 €" data-t="3 h">Balayage<small>3 h</small></button>
+              </div>
+            </fieldset>
+            <fieldset><legend>2. Le jour</legend><div class="days" id="r-days" role="radiogroup" aria-label="Jour"></div></fieldset>
+            <fieldset><legend>3. L’heure</legend><div class="times" id="r-times" role="radiogroup" aria-label="Heure"></div></fieldset>
+            <fieldset class="contact"><legend>4. Vos coordonnées</legend>
+              <label class="field"><span>Nom</span><input id="r-name" autocomplete="name"><small class="err" id="e-name"></small></label>
+              <label class="field"><span>Téléphone</span><input id="r-tel" type="tel" inputmode="tel" autocomplete="tel"><small class="err" id="e-tel"></small></label>
+            </fieldset>
+            <div class="summary" id="r-sum" aria-live="polite"></div>
+            <button type="submit" class="btn btn-big">Confirmer le rendez-vous</button>
+          </form>
+          <div class="done" id="r-done" hidden><svg viewBox="0 0 48 48" width="48" height="48" aria-hidden="true"><circle cx="24" cy="24" r="22" fill="none" stroke="currentColor" stroke-width="2"/><path d="M14 25l7 7 13-15" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg><h3>À très vite.</h3><p id="r-done-t"></p><button class="btn-ghost" type="button" id="r-again">Nouveau rendez-vous</button></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="avis" aria-labelledby="av-t">
+      <div class="wrap">
+        <h2 class="sr-only" id="av-t">Avis</h2>
+        <div class="quote-box" id="quotes" aria-live="polite">
+          <blockquote class="q on"><p>« Enfin quelqu’un qui m’écoute avant de couper. Mon balayage a l’air naturel, et il a bien vieilli. »</p><footer>Claire, cliente depuis 2021 · <i>avis d’exemple</i></footer></blockquote>
+          <blockquote class="q"><p>« Rapide et précis. Je réserve en ligne en trente secondes, je n’attends jamais. »</p><footer>Julien · <i>avis d’exemple</i></footer></blockquote>
+          <blockquote class="q"><p>« Louise a coiffé ma sœur et toute la famille le jour du mariage. Rien n’a bougé de la journée. »</p><footer>Anaïs · <i>avis d’exemple</i></footer></blockquote>
+        </div>
+        <div class="q-dots" id="q-dots" role="tablist" aria-label="Choisir un avis"></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="foot"><div class="wrap foot-grid">
+    <div><p class="brand">Atelier <em>Maëlle</em></p><p>8 rue de la Monnaie<br>56000 Vannes</p></div>
+    <div><p class="foot-t">Horaires</p><p>Mardi – vendredi · 9 h – 19 h<br>Samedi · 9 h – 17 h<br>Dimanche et lundi · fermé</p></div>
+    <div><p class="foot-t">Contact</p><p>02 00 00 00 00<br>salon@atelier-maelle.example</p><p class="foot-small">Établissement fictif créé pour la démonstration.</p></div>
+  </div></footer>
+</body>
+</html>

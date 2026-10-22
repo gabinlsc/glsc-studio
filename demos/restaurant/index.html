@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Maison Kerloc’h · Démo restaurant · StudioGLSC</title>
+  <meta name="description" content="Démonstration StudioGLSC : site d’un restaurant de port, avec carte filtrable, statut d’ouverture en direct et réservation en trois étapes. Exemple fictif.">
+  <meta name="robots" content="noindex,follow">
+  <meta name="theme-color" content="#f3eee4">
+  <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+  <link rel="preload" href="../fonts/fraunces.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="../shared/demo.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="../shared/demo.js"></script>
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <a class="skip" href="#carte">Aller à la carte</a>
+  <div class="dm-bar"><div class="wrap"><span><b>Démo fictive</b> · site d’exemple réalisé par StudioGLSC</span><span><a href="/demos/">← Toutes les démos</a> &nbsp; <a href="/#contact">Je veux un site comme celui-ci</a></span></div></div>
+
+  <header class="dm-header">
+    <div class="wrap bar">
+      <a class="brand" href="#top" aria-label="Maison Kerloc’h, retour en haut"><span>Maison</span> Kerloc’h</a>
+      <nav aria-label="Navigation principale"><a href="#carte">La carte</a><a href="#maison">La maison</a><a href="#infos">Infos</a></nav>
+      <p class="open-pill" id="open-pill" role="status"><i aria-hidden="true"></i><span>Horaires…</span></p>
+      <a class="btn" href="#reserver">Réserver</a>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="wrap hero-grid">
+        <div class="hero-copy">
+          <p class="eyebrow rv">Cuisine de port · Lorient</p>
+          <h1 data-split>Le port, la saison, la braise.</h1>
+          <p class="lede rv" data-d="350">Une salle de trente couverts face aux bateaux. Le poisson arrive à la criée le matin, les légumes d’un maraîcher à dix kilomètres, et tout passe par le feu de bois.</p>
+          <div class="hero-cta rv" data-d="450"><a class="btn btn-big" href="#reserver">Réserver une table</a><a class="link" href="#carte">Voir la carte&nbsp;→</a></div>
+        </div>
+        <figure class="hero-img rv-clip"><img data-parallax="38" src="img/hero.webp" width="1200" height="1500" alt="Illustration : soleil bas sur la rade, au-dessus de l’eau calme et de la côte sombre" fetchpriority="high"></figure>
+      </div>
+      <dl class="wrap facts rv" data-d="200">
+        <div><dt>Adresse</dt><dd>12 quai des Indes, Lorient</dd></div>
+        <div><dt>Déjeuner</dt><dd>Mar. – dim., 12 h – 14 h</dd></div>
+        <div><dt>Dîner</dt><dd>Mar. – sam., 19 h – 22 h</dd></div>
+        <div><dt>Fermé</dt><dd>Lundi, et dimanche soir</dd></div>
+      </dl>
+    </section>
+
+    <div class="marquee" aria-hidden="true"><div class="marquee-track"><span>Lieu jaune de ligne</span><span>Langoustines de Lorient</span><span>Sarrasin du Blavet</span><span>Beurre demi-sel</span><span>Pommes de Pleine-Fougères</span><span>Algues de l’île de Groix</span><span>Chèvre de Guidel</span><span>Cidre fermier</span><span>Lieu jaune de ligne</span><span>Langoustines de Lorient</span><span>Sarrasin du Blavet</span><span>Beurre demi-sel</span><span>Pommes de Pleine-Fougères</span><span>Algues de l’île de Groix</span><span>Chèvre de Guidel</span><span>Cidre fermier</span></div></div>
+
+    <section class="carte" id="carte" aria-labelledby="carte-t">
+      <div class="wrap">
+        <div class="carte-head">
+          <h2 id="carte-t" data-split>La carte de la semaine</h2>
+          <p class="rv">Elle change avec la marée. Les plats sont servis à partager ou seuls.</p>
+        </div>
+        <div class="carte-tools rv">
+          <div class="tabs" role="tablist" aria-label="Catégories">
+            <button role="tab" aria-selected="true" data-cat="entrees">Entrées</button>
+            <button role="tab" aria-selected="false" data-cat="plats">Plats</button>
+            <button role="tab" aria-selected="false" data-cat="desserts">Desserts</button>
+            <button role="tab" aria-selected="false" data-cat="vins">Vins</button>
+          </div>
+          <div class="chips" role="group" aria-label="Filtres">
+            <button class="chip" aria-pressed="false" data-tag="veg">Végétarien</button>
+            <button class="chip" aria-pressed="false" data-tag="gf">Sans gluten</button>
+            <button class="chip" aria-pressed="false" data-tag="mer">De la mer</button>
+          </div>
+        </div>
+        <div class="carte-grid">
+          <ul class="menu" id="menu" aria-live="polite">
+            <li data-cat="entrees" data-tags="mer gf"><div><h3>Tartare de lieu jaune</h3><p>Pomme verte, huile d’algues, sarrasin soufflé</p></div><span class="tnum">14</span></li>
+            <li data-cat="entrees" data-tags="mer"><div><h3>Langoustines rôties</h3><p>Beurre demi-sel, citron brûlé, pain de campagne</p></div><span class="tnum">19</span></li>
+            <li data-cat="entrees" data-tags="veg gf"><div><h3>Betterave au feu de bois</h3><p>Chèvre frais de Guidel, noisettes, miel de lande</p></div><span class="tnum">12</span></li>
+            <li data-cat="entrees" data-tags="veg"><div><h3>Velouté de topinambour</h3><p>Huile de noisette, croûtons de seigle</p></div><span class="tnum">11</span></li>
+            <li data-cat="plats" data-tags="mer gf"><div><h3>Bar de ligne, beurre blanc</h3><p>Poireaux braisés, pommes de terre grenaille</p></div><span class="tnum">29</span></li>
+            <li data-cat="plats" data-tags="mer"><div><h3>Cotriade du port</h3><p>Trois poissons du jour, pommes de terre, tartine à l’ail</p></div><span class="tnum">26</span></li>
+            <li data-cat="plats" data-tags=""><div><h3>Côte de porc noir, cuisson braise</h3><p>Chou grillé, jus au cidre, moutarde à l’ancienne</p></div><span class="tnum">27</span></li>
+            <li data-cat="plats" data-tags="veg"><div><h3>Galette de sarrasin du moment</h3><p>Légumes de saison, œuf fermier, fromage affiné</p></div><span class="tnum">18</span></li>
+            <li data-cat="desserts" data-tags="veg"><div><h3>Far breton revisité</h3><p>Pruneaux à l’armagnac, crème fouettée</p></div><span class="tnum">9</span></li>
+            <li data-cat="desserts" data-tags="veg gf"><div><h3>Riz au lait de la maison</h3><p>Caramel au beurre salé, éclats de sablé</p></div><span class="tnum">8</span></li>
+            <li data-cat="desserts" data-tags="veg"><div><h3>Tarte fine aux pommes</h3><p>Glace au lait ribot</p></div><span class="tnum">10</span></li>
+            <li data-cat="vins" data-tags="veg gf"><div><h3>Muscadet sur lie</h3><p>Domaine des Roches, Loire-Atlantique · verre / bouteille</p></div><span class="tnum">6 / 32</span></li>
+            <li data-cat="vins" data-tags="veg gf"><div><h3>Chinon rouge</h3><p>Cuvée de la Haye, Touraine · verre / bouteille</p></div><span class="tnum">7 / 38</span></li>
+            <li data-cat="vins" data-tags="veg gf"><div><h3>Cidre brut fermier</h3><p>Pays de Rance · bolée / bouteille</p></div><span class="tnum">4 / 14</span></li>
+          </ul>
+          <aside class="today rv" aria-labelledby="today-t">
+            <p class="eyebrow">Ce midi</p>
+            <h3 id="today-t">Plat du jour</h3>
+            <p class="today-dish">Sardines grillées, tomates anciennes, vinaigrette à l’échalote</p>
+            <p class="today-price tnum">16 €</p>
+            <p class="today-note">Entrée + plat 22 € · plat + dessert 22 € · formule complète 27 €</p>
+          </aside>
+        </div>
+        <p class="empty" id="empty" hidden>Aucun plat ne correspond à ces filtres dans cette catégorie.</p>
+      </div>
+    </section>
+
+    <section class="maison" id="maison" aria-labelledby="maison-t">
+      <div class="wrap maison-grid">
+        <div>
+          <p class="eyebrow rv">La maison</p>
+          <h2 id="maison-t" data-split>Peu de produits, bien choisis.</h2>
+        </div>
+        <div class="maison-text rv" data-d="150">
+          <p>Maison Kerloc’h est tenue par deux associés. L’un cuisine, l’autre fait le service et choisit les vins. Il n’y a pas de congélateur : on cuisine ce qui est arrivé le matin, et quand il n’y en a plus, la carte s’arrête.</p>
+          <p>Les fournisseurs sont tous nommés sur l’ardoise. Vous savez d’où vient votre assiette, et nous savons à qui la renvoyer si elle n’est pas parfaite.</p>
+        </div>
+      </div>
+      <ul class="wrap numbers">
+        <li class="rv"><b class="tnum" data-count="30">30</b><span>couverts, pas un de plus</span></li>
+        <li class="rv" data-d="100"><b class="tnum" data-count="11">11</b><span>producteurs et pêcheurs</span></li>
+        <li class="rv" data-d="200"><b class="tnum" data-count="10">10</b><span>kilomètres au plus pour les légumes</span></li>
+        <li class="rv" data-d="300"><b class="tnum" data-count="0">0</b><span>produit surgelé</span></li>
+      </ul>
+    </section>
+
+    <section class="reserve" id="reserver" aria-labelledby="res-t">
+      <div class="wrap reserve-grid">
+        <div class="reserve-copy">
+          <p class="eyebrow rv">Réservation</p>
+          <h2 id="res-t" data-split>Une table, en trois gestes.</h2>
+          <p class="rv" data-d="150">Choisissez le jour, l’heure, puis laissez un nom et un numéro. Pour plus de huit personnes, appelez-nous.</p>
+          <p class="rv demo-note" data-d="250">Démonstration : aucune réservation n’est réellement envoyée.</p>
+        </div>
+        <div class="reserve-card rv" data-d="150">
+          <ol class="stepper" aria-label="Progression"><li class="on" data-s="1">Quand</li><li data-s="2">Heure</li><li data-s="3">Contact</li></ol>
+          <form id="res-form" novalidate>
+            <fieldset class="step" data-step="1">
+              <legend class="sr-only">Date et nombre de convives</legend>
+              <label class="field"><span>Date</span><select id="res-date" name="date"></select></label>
+              <div class="field"><span id="g-label">Convives</span>
+                <div class="counter" role="group" aria-labelledby="g-label">
+                  <button type="button" id="g-minus" aria-label="Retirer un convive">−</button>
+                  <output id="g-out" class="tnum" aria-live="polite">2</output>
+                  <button type="button" id="g-plus" aria-label="Ajouter un convive">+</button>
+                </div>
+              </div>
+            </fieldset>
+            <fieldset class="step" data-step="2" hidden>
+              <legend class="sr-only">Heure</legend>
+              <p class="step-hint" id="slots-hint"></p>
+              <div class="slots" id="slots" role="radiogroup" aria-label="Créneaux disponibles"></div>
+            </fieldset>
+            <fieldset class="step" data-step="3" hidden>
+              <legend class="sr-only">Vos coordonnées</legend>
+              <label class="field"><span>Nom</span><input id="res-name" name="name" autocomplete="name" required><small class="err" id="err-name"></small></label>
+              <label class="field"><span>Téléphone</span><input id="res-tel" name="tel" type="tel" autocomplete="tel" inputmode="tel" required><small class="err" id="err-tel"></small></label>
+              <p class="recap" id="recap"></p>
+            </fieldset>
+            <div class="actions">
+              <button type="button" class="btn-ghost" id="res-back" hidden>Retour</button>
+              <button type="button" class="btn btn-big" id="res-next">Choisir l’heure</button>
+            </div>
+          </form>
+          <div class="done" id="res-done" hidden>
+            <svg viewBox="0 0 48 48" width="48" height="48" aria-hidden="true"><circle cx="24" cy="24" r="22" fill="none" stroke="currentColor" stroke-width="2"/><path d="M14 25l7 7 13-15" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <h3>Table notée.</h3>
+            <p id="done-text"></p>
+            <button class="btn-ghost" id="res-again" type="button">Nouvelle réservation</button>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="foot" id="infos">
+    <div class="wrap foot-grid">
+      <div><p class="brand brand-foot"><span>Maison</span> Kerloc’h</p><p>12 quai des Indes<br>56100 Lorient</p></div>
+      <div><p class="foot-t">Horaires</p><ul class="hours" id="hours"><li data-d="2"><span>Mardi</span><span>12 h – 14 h · 19 h – 22 h</span></li><li data-d="3"><span>Mercredi</span><span>12 h – 14 h · 19 h – 22 h</span></li><li data-d="4"><span>Jeudi</span><span>12 h – 14 h · 19 h – 22 h</span></li><li data-d="5"><span>Vendredi</span><span>12 h – 14 h · 19 h – 22 h</span></li><li data-d="6"><span>Samedi</span><span>12 h – 14 h · 19 h – 22 h</span></li><li data-d="0"><span>Dimanche</span><span>12 h – 14 h</span></li><li data-d="1"><span>Lundi</span><span>Fermé</span></li></ul></div>
+      <div><p class="foot-t">Contact</p><p>02 00 00 00 00<br>bonjour@maison-kerloch.example</p><p class="foot-small">Établissement fictif créé pour la démonstration. Numéro et adresse e-mail non attribués.</p></div>
+    </div>
+  </footer>
+</body>
+</html>
