@@ -139,3 +139,10 @@
 @media (min-width: 860px) { .bk-kit { grid-template-columns: 1.2fr .8fr; } .bk-kit-cta { justify-items: end; text-align: right; } }
 @media (max-width: 640px) { .brand-hero { padding-top: 120px; } .bk-orbit.o2 { display: none; } }
 :root[data-theme="dark"] .bk-no { color: #ffb4aa; background: color-mix(in srgb, #c0392b 18%, var(--surface)); } :root[data-theme="dark"] .bk-no span { color: #ff8a7a; }
+
+/* Kit de marque en thème sombre : panneau clair-sur-sombre lisible (le fond « encre » est clair dans ce thème) */
+:root[data-theme="dark"] .bk-kit { background: var(--surface); color: var(--ink); border: 1px solid var(--line-strong); box-shadow: 0 30px 70px -40px color-mix(in srgb, var(--accent) 60%, transparent); }
+:root[data-theme="dark"] .bk-kit .eyebrow { color: var(--accent); }
+:root[data-theme="dark"] .bk-kit .hero-lead, :root[data-theme="dark"] .bk-contents, :root[data-theme="dark"] .bk-kit-cta .muted { color: var(--muted); }
+:root[data-theme="dark"] .bk-contents li::before { border-color: var(--ok); }
+:root[data-theme="dark"] .bk-kit-cta a:not(.btn) { color: var(--accent); }

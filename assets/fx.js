@@ -85,17 +85,7 @@
       }), { passive: true });
     }
 
-    /* ---------- Boutons : aimant + ondulation au clic ---------- */
-    if (fine && !calm) {
-      var mags = $$('.hero .btn-primary, .btn-big, #step-send, .nav-cta');
-      mags.forEach(function (b) { b.classList.add('fx-mag'); });
-      document.addEventListener('pointermove', raf(function (e) {
-        mags.forEach(function (b) {
-          var r = b.getBoundingClientRect(), cx = r.left + r.width / 2, cy = r.top + r.height / 2, dx = e.clientX - cx, dy = e.clientY - cy, d = Math.hypot(dx, dy), reach = Math.max(r.width, r.height) * .9;
-          if (d < reach) { b.style.setProperty('--mx', (dx * .22).toFixed(1) + 'px'); b.style.setProperty('--my', (dy * .3).toFixed(1) + 'px'); } else { b.style.setProperty('--mx', '0px'); b.style.setProperty('--my', '0px'); }
-        });
-      }), { passive: true });
-    }
+    /* ---------- Boutons : ondulation au clic (aucun effet de suivi du curseur) ---------- */
     if (!calm) $$('.btn').forEach(function (b) {
       b.addEventListener('pointerdown', function (e) {
         var r = b.getBoundingClientRect(), s = Math.max(r.width, r.height) * 2.2, d = document.createElement('span'); d.className = 'fx-ripple'; d.setAttribute('aria-hidden', 'true');

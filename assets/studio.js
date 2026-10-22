@@ -4,8 +4,9 @@
   // --- Réglages (à adapter ici, nulle part ailleurs) ---
   // Numéro public au format international, par exemple +33612345678.
   var CONTACT_PHONE = '+33767204424';
-  // Lien de prise de rendez-vous (Cal.com, Calendly…). Vide : le bouton propose d'écrire pour convenir d'un créneau.
-  var BOOKING_URL = '';
+  // Lien de prise de rendez-vous (Cal.com). Vide : le bouton propose d'écrire pour convenir d'un créneau.
+  // Autres rendez-vous (page de suivi client) : cal.com/studioglsc/debut-de-projet (60 min), /ajustement-de-projet (45 min), /fin-de-projet (60 min).
+  var BOOKING_URL = 'https://cal.com/studioglsc/premier-echange';
   // Délai de réponse annoncé après l'envoi du formulaire, par exemple 'sous 24 h ouvrées'. Vide : aucune promesse de délai.
   var REPLY_DELAY = 'sous 48 h ouvrées';
   // Adresse du service qui reçoit les demandes (POST JSON). Vide : le formulaire prépare un e-mail dans la messagerie du visiteur.
@@ -95,7 +96,7 @@
   $$('[data-booking-link]').forEach(function (link) {
     if (!BOOKING_URL) return;
     link.href = BOOKING_URL; link.target = '_blank'; link.rel = 'noopener noreferrer';
-    var label = $('[data-booking-label]', link); if (label) label.textContent = 'Réserver un échange gratuit';
+    var label = $('[data-booking-label]', link); if (label) label.textContent = 'Réserver un premier échange (20 min)';
   });
 
   /* ---------- Téléphone et WhatsApp ---------- */

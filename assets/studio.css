@@ -145,7 +145,7 @@ h3 { font-size: 1.22rem; line-height: 1.25; letter-spacing: -.012em; font-weight
 .pill i { width: 8px; height: 8px; border-radius: 50%; background: var(--ok); box-shadow: 0 0 0 4px var(--ok-soft); }
 .hero h1 { margin-top: 24px; max-width: 12ch; font-size: clamp(2.35rem, 9.2vw, 5.2rem); line-height: 1.04; letter-spacing: -.038em; }
 .hero h1 span { display: block; }
-.hero h1 .accent { background: linear-gradient(100deg, var(--accent), color-mix(in srgb, var(--accent) 55%, #7c3aed)); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+.hero h1 .accent { background: linear-gradient(100deg, var(--accent), color-mix(in srgb, var(--accent) 62%, #6f8bff)); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
 .hero-lead { max-width: 52ch; margin-top: 24px; color: var(--muted); font-size: clamp(1.08rem, 1.5vw, 1.25rem); line-height: 1.6; }
 .hero-promise { display: flex; align-items: center; gap: 10px; margin-top: 20px; font-weight: 500; }
 .hero-promise .icon { color: var(--ok); }
@@ -248,7 +248,7 @@ h3 { font-size: 1.22rem; line-height: 1.25; letter-spacing: -.012em; font-weight
 .timeline-step span { display: block; margin-top: 4px; color: var(--muted); font-size: .95rem; }
 .price-note { margin-top: 26px; color: var(--muted); font-size: .86rem; line-height: 1.6; max-width: 90ch; }
 @media (min-width: 800px) {
-  .price-grid { grid-template-columns: 1.1fr .9fr; }
+  .price-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
   .hosting { grid-template-columns: 1fr auto; gap: 48px; }
   .hosting-prices { justify-items: end; text-align: right; }
   .timeline { grid-template-columns: repeat(3, 1fr); }
@@ -419,7 +419,7 @@ footer { padding: 72px 0 36px; border-top: 1px solid var(--line); background: va
 .estimate-lines li { display: flex; justify-content: space-between; gap: 16px; }
 .estimate-lines li span:last-child { font-weight: 600; white-space: nowrap; }
 .estimate-note { margin-bottom: 18px; color: var(--muted); font-size: .82rem; line-height: 1.5; }
-@media (min-width: 900px) { .estimate-grid { grid-template-columns: 1fr 1fr 1.1fr; } }
+@media (min-width: 900px) { .estimate-grid { grid-template-columns: 1.5fr 1fr; align-items: start; } .estimate-fields { grid-template-columns: 1fr 1fr; } .estimate-fields fieldset:first-child { grid-column: 1 / -1; } .estimate-fields fieldset:first-child { grid-template-columns: repeat(3, 1fr); } .estimate-result { position: sticky; top: 100px; } }
 
 /* Engagements */
 .pledge-grid { display: grid; gap: 20px; }
@@ -664,3 +664,18 @@ footer { padding: 72px 0 36px; border-top: 1px solid var(--line); background: va
   .sc-device { min-height: 0; }
 }
 @media (max-width: 480px) { .showcase { border-radius: 24px; padding: 18px 14px; } .sc-tab { width: 210px; grid-template-columns: 72px 1fr; } .sc-num { display: none; } .sc-thumb { width: 72px; height: 45px; } .sc-switch button { padding: 0 10px; } }
+
+/* Tarifs : « dès », devis et fourchettes */
+.price small { margin-right: .35em; font: 600 .9rem/1 var(--font); letter-spacing: 0; color: var(--muted); vertical-align: .45em; }
+.price-quote { margin-top: 8px; color: var(--accent); font-weight: 600; font-size: .95rem; }
+.estimate-fields { display: grid; gap: 22px; align-content: start; }
+.estimate-fields fieldset[hidden] { display: none; }
+.estimate-hint { margin-top: 10px; color: var(--muted); font-size: .88rem; }
+.compare td small { display: block; margin-top: 2px; font-weight: 500; }
+
+/* Page de suivi : rendez-vous par étape */
+.rdv-list { display: grid; gap: 10px; margin-top: 16px; }
+.rdv { display: grid; gap: 2px; padding: 14px 16px; border: 1px solid var(--line); border-radius: 14px; background: var(--bg); color: var(--ink); text-decoration: none; transition: border-color .2s, transform .25s var(--ease), box-shadow .25s; }
+.rdv:hover { border-color: var(--accent); transform: translateY(-2px); box-shadow: var(--shadow-sm); }
+.rdv strong { font: 600 1rem/1.3 var(--font-display); } .rdv span { color: var(--muted); font-size: .9rem; }
+@media (min-width: 640px) { .rdv-list { grid-template-columns: repeat(3, 1fr); } }

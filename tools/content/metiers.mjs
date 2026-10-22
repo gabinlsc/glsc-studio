@@ -3,7 +3,7 @@ export const METIERS = [
   {
     slug: 'artisans-btp', icon: 'monitor', name: 'Artisans & BTP', short: 'Plombiers, électriciens, couvreurs, maçons, peintres…',
     title: 'Site web pour artisan et professionnel du BTP',
-    desc: 'Un site vitrine clair pour artisans du bâtiment : numéro cliquable, zone d’intervention, réalisations et demande de devis. Première version sous 48 h, à partir de 400 €.',
+    desc: 'Un site vitrine clair pour artisans du bâtiment : numéro cliquable, zone d’intervention, réalisations et demande de devis. Première version sous 48 h, à partir de 550 €.',
     lead: 'Quand une fuite ou une toiture ne peut pas attendre, vos futurs clients cherchent un artisan près de chez eux, depuis leur téléphone, et appellent le premier qui inspire confiance. Votre site doit leur répondre en quelques secondes.',
     searches: ['« plombier + ma ville », « couvreur près de moi »', 'Le numéro à appeler, tout de suite', 'Votre zone d’intervention', 'Des photos de vrais chantiers', 'Une idée du sérieux : assurances, labels, avis'],
     must: [
@@ -26,7 +26,7 @@ export const METIERS = [
   {
     slug: 'commercants', icon: 'layout', name: 'Commerçants', short: 'Boutiques, cavistes, fleuristes, librairies…',
     title: 'Site web pour commerçant et boutique de quartier',
-    desc: 'Un site vitrine pour commerce de proximité : horaires, adresse, produits, actualités et appel en un geste. One-Page Express à 400 €, sans abonnement obligatoire.',
+    desc: 'Un site vitrine pour commerce de proximité : horaires, adresse, produits, actualités et appel en un geste. One-Page Express à 550 €, sans abonnement obligatoire.',
     lead: 'Un commerce de proximité vit de ceux qui passent la porte. Votre site n’a pas besoin de tout vendre en ligne : il doit donner envie de venir, et rendre la venue facile.',
     searches: ['Si la boutique est ouverte maintenant', 'L’adresse exacte et comment s’y rendre', 'Ce que vous vendez, avec des photos', 'Les nouveautés ou arrivages', 'Un moyen de poser une question avant de venir'],
     must: [
@@ -35,13 +35,13 @@ export const METIERS = [
       ['Vos produits phares en photo', 'Quelques images soignées de ce qui vous distingue, plutôt qu’un catalogue complet impossible à tenir à jour.'],
       ['Les actualités de la boutique', 'Arrivages, animations, événements : une zone courte, datée, que vous pouvez faire vivre.'],
       ['Le téléphone et WhatsApp', 'Pour vérifier un produit en stock ou réserver un article avant de se déplacer.'],
-      ['Ce que vous ne faites pas en ligne', 'Dites clairement si l’on vient en boutique pour acheter. Une boutique en ligne n’est pas proposée pour le moment.'],
+      ['Ce que vous vendez en ligne ou en boutique', 'Dites clairement si l’on vient en boutique pour acheter. Si vous voulez aussi vendre en ligne, la formule E-commerce ajoute catalogue, panier et paiement.'],
     ],
     avoid: ['Des horaires différents sur le site, Google et la vitrine', 'Un catalogue de centaines de produits jamais mis à jour', 'Des photos floues ou trop lourdes qui ralentissent la page', 'Un site qui ne dit pas où se trouve la boutique'],
-    fit: 'La formule One-Page Express convient à la plupart des commerces de proximité : tout tient sur une page, optimisée pour le mobile, avec les boutons d’appel et d’itinéraire. Pour présenter plusieurs rayons, des services ou des tarifs, un site multi-pages sur devis est plus approprié.',
+    fit: 'La formule One-Page Express convient à la plupart des commerces de proximité : tout tient sur une page, optimisée pour le mobile, avec les boutons d’appel et d’itinéraire. Pour présenter plusieurs rayons, des services ou des tarifs, un site multi-pages sur devis (dès 750 €) est plus approprié. Pour vendre en ligne, la formule E-commerce démarre à 950 €.',
     faq: [
-      ['Dois-je vendre en ligne ?', 'Pas nécessairement. Un site vitrine qui attire en boutique est souvent suffisant. La vente en ligne n’est pas proposée pour le moment ; je vous le dis franchement si votre projet en a besoin.'],
-      ['Qui met à jour les horaires ?', 'Les petites modifications de contenu sont incluses dans l’option Sérénité & Hébergement, ou nous convenons d’une demande ponctuelle.'],
+      ['Dois-je vendre en ligne ?', 'Pas nécessairement. Un site vitrine qui attire en boutique est souvent suffisant. Si vous voulez vendre en ligne, la formule E-commerce (dès 950 €, sur devis) ajoute catalogue, panier et paiement sécurisé ; je vous dis franchement si votre projet en a besoin.'],
+      ['Qui met à jour les horaires ?', 'Les petites modifications de contenu sont incluses dans l’abonnement Sérénité & Hébergement, ou nous convenons d’une demande ponctuelle.'],
       ['Mon commerce est saisonnier, est-ce un problème ?', 'Non : on prévoit un encart pour les périodes d’ouverture et un message clair hors saison.'],
     ],
     related: ['site-vitrine-ou-reseaux-sociaux', 'informations-que-vos-clients-cherchent'],
@@ -49,7 +49,7 @@ export const METIERS = [
   {
     slug: 'restauration', icon: 'refresh', name: 'Restauration', short: 'Restaurants, bars, crêperies, traiteurs…',
     title: 'Site web pour restaurant, bar et traiteur',
-    desc: 'Un site vitrine pour la restauration : carte lisible sur mobile, horaires, réservation par téléphone ou WhatsApp. Première version sous 48 h, One-Page Express à 400 €.',
+    desc: 'Un site vitrine pour la restauration : carte lisible sur mobile, horaires, réservation par téléphone ou WhatsApp. Première version sous 48 h, One-Page Express à 550 €.',
     lead: 'Avant de réserver une table, on regarde la carte, les horaires et les photos, presque toujours sur son téléphone. Si l’information est difficile à trouver, la table va ailleurs.',
     searches: ['La carte et les prix, lisibles sans zoomer', 'Les horaires, y compris le service du midi et du soir', 'Un moyen de réserver rapidement', 'Des photos des plats et du lieu', 'L’adresse et l’accès'],
     must: [
@@ -61,10 +61,10 @@ export const METIERS = [
       ['Information sur les allergènes', 'L’information du consommateur sur les allergènes est une obligation en restauration : un renvoi vers votre carte à jour ou vers votre personnel aide à la respecter.'],
     ],
     avoid: ['Une carte au format PDF lourd et non adapté au mobile', 'Une musique ou une vidéo qui démarre toute seule', 'Des horaires de saison jamais mis à jour', 'Des prix périmés qui provoquent des litiges à l’addition'],
-    fit: 'Une page unique, rapide, avec la carte, les horaires et les boutons d’appel et WhatsApp, c’est exactement le périmètre du One-Page Express. Si vous voulez des pages dédiées (menus, événements, traiteur), nous passerons par un devis multi-pages.',
+    fit: 'Une page unique, rapide, avec la carte, les horaires et les boutons d’appel et WhatsApp, c’est exactement le périmètre du One-Page Express. Si vous voulez des pages dédiées (menus, événements, traiteur), nous passerons par un devis multi-pages (dès 750 €).',
     faq: [
       ['Peut-on réserver en ligne directement ?', 'Pour une première version, la réservation passe par le téléphone ou WhatsApp. Un outil de réservation dédié peut être lié depuis la page si vous en utilisez déjà un.'],
-      ['Comment mettre la carte à jour ?', 'Vous m’envoyez les changements, je les applique. Pour des mises à jour fréquentes, l’option Sérénité & Hébergement les inclut dans les petites modifications de contenu.'],
+      ['Comment mettre la carte à jour ?', 'Vous m’envoyez les changements, je les applique. Pour des mises à jour fréquentes, l’abonnement Sérénité & Hébergement les inclut dans les petites modifications de contenu.'],
       ['Mes avis Google peuvent-ils apparaître ?', 'On peut ajouter un lien vers votre fiche et vos avis, plutôt que de les copier sur le site.'],
     ],
     related: ['site-rapide-mobile', 'informations-que-vos-clients-cherchent'],
@@ -72,7 +72,7 @@ export const METIERS = [
   {
     slug: 'sante-bien-etre', icon: 'lifebuoy', name: 'Santé & bien-être', short: 'Kinés, ostéopathes, sophrologues, coachs…',
     title: 'Site web pour professionnel de santé et de bien-être',
-    desc: 'Un site vitrine sobre pour kinés, ostéopathes, sophrologues et coachs : spécialités expliquées simplement, accès, prise de rendez-vous. À partir de 400 €.',
+    desc: 'Un site vitrine sobre pour kinés, ostéopathes, sophrologues et coachs : spécialités expliquées simplement, accès, prise de rendez-vous. À partir de 550 €.',
     lead: 'Un patient qui cherche un praticien veut surtout être rassuré : qui vous êtes, comment se passe une séance, où vous trouver et comment prendre rendez-vous. Le ton doit être calme et clair.',
     searches: ['Votre spécialité, expliquée sans jargon', 'Le déroulement d’une première séance', 'L’adresse, le stationnement, l’accessibilité', 'Comment et quand prendre rendez-vous', 'Votre parcours et vos diplômes'],
     must: [
@@ -95,7 +95,7 @@ export const METIERS = [
   {
     slug: 'beaute', icon: 'layout', name: 'Beauté & coiffure', short: 'Coiffeurs, barbiers, esthéticiennes, prothésistes ongulaires…',
     title: 'Site web pour salon de coiffure et institut de beauté',
-    desc: 'Un site vitrine pour salon de coiffure, barbier ou institut : réalisations, tarifs, horaires et prise de rendez-vous. Première version sous 48 h, à partir de 400 €.',
+    desc: 'Un site vitrine pour salon de coiffure, barbier ou institut : réalisations, tarifs, horaires et prise de rendez-vous. Première version sous 48 h, à partir de 550 €.',
     lead: 'En beauté, on choisit avec les yeux. Vos réalisations, votre ambiance et vos tarifs doivent être visibles en quelques secondes, et le rendez-vous à un geste de pouce.',
     searches: ['Des photos de vos réalisations', 'Les tarifs des prestations principales', 'L’ambiance du salon, l’équipe', 'Les horaires et la prise de rendez-vous', 'Votre compte Instagram'],
     must: [
@@ -118,7 +118,7 @@ export const METIERS = [
   {
     slug: 'associations-clubs', icon: 'lifebuoy', name: 'Associations & clubs', short: 'Clubs sportifs, associations culturelles, collectifs…',
     title: 'Site web pour association et club',
-    desc: 'Un site vitrine pour association ou club : horaires, inscriptions, actualités et contacts. Simple à faire évoluer, première version sous 48 h, à partir de 400 €.',
+    desc: 'Un site vitrine pour association ou club : horaires, inscriptions, actualités et contacts. Simple à faire évoluer, première version sous 48 h, à partir de 550 €.',
     lead: 'Pour une association, le site sert à recruter de nouveaux adhérents et à informer les membres. Il doit répondre vite aux mêmes questions : quand, où, combien, et comment s’inscrire.',
     searches: ['Les jours et horaires des activités', 'Le lieu des séances', 'Le montant de l’adhésion et comment s’inscrire', 'Qui contacter', 'Les prochains événements'],
     must: [
@@ -133,8 +133,8 @@ export const METIERS = [
     fit: 'Le One-Page Express couvre bien une petite association : présentation, activités, inscription, contacts. Pour une structure avec plusieurs sections, un agenda ou un espace d’actualités, nous prévoyons un devis multi-pages.',
     faq: [
       ['Le site peut-il être mis à jour par plusieurs bénévoles ?', 'Le plus simple est de passer par moi pour les modifications. Si vous voulez une gestion autonome, il faut en parler : c’est un autre type de projet, à chiffrer sur devis.'],
-      ['Peut-on prendre les inscriptions en ligne ?', 'Un formulaire de contact est possible ; une inscription avec paiement en ligne relève d’un outil dédié que l’on peut relier au site.'],
-      ['Mon association a peu de budget, comment faire ?', 'La formule One-Page Express à 400 € est un paiement ponctuel, sans abonnement obligatoire. Parlons-en lors du premier échange gratuit.'],
+      ['Peut-on prendre les inscriptions en ligne ?', 'Un formulaire de contact est possible ; pour des inscriptions avec paiement en ligne, la formule E-commerce (dès 950 €, sur devis) ou un outil dédié relié au site conviennent.'],
+      ['Mon association a peu de budget, comment faire ?', 'La formule One-Page Express à 550 € est un paiement ponctuel, sans abonnement obligatoire. Parlons-en lors du premier échange gratuit.'],
     ],
     related: ['cout-site-vitrine-artisan', 'site-rapide-mobile'],
   },

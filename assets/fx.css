@@ -11,7 +11,7 @@
 .fxw > span { display: inline-block; }
 .hero h1 span.fxw, .hero h1 span.fxw > span { display: inline-block; }
 .fx-split .accent { background: none; -webkit-text-fill-color: currentColor; color: var(--accent); }
-.fx-split .accent .fxw > span { background: linear-gradient(100deg, var(--accent) 20%, color-mix(in srgb, var(--accent) 50%, #8b5cf6) 50%, var(--accent) 80%); background-size: 220% 100%; -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+.fx-split .accent .fxw > span { background: linear-gradient(100deg, var(--accent) 25%, color-mix(in srgb, var(--accent) 62%, #6f8bff) 50%, var(--accent) 75%); background-size: 220% 100%; -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
 .fx-on .fx-split .fxw > span { transform: translateY(112%) rotate(3deg); opacity: 0; transition: transform .95s cubic-bezier(.2, .7, .1, 1), opacity .6s; transition-delay: calc(var(--i, 0) * 70ms + var(--d, 0ms)); }
 .fx-on .fx-split.fx-in .fxw > span { transform: none; opacity: 1; }
 .fx-on .fx-split.fx-in .accent .fxw > span { animation: fx-shimmer 7s ease-in-out 1.4s infinite; }
@@ -22,8 +22,8 @@
 .fx-aurora { position: absolute; inset: 0; z-index: -1; overflow: hidden; pointer-events: none; }
 .fx-aurora i { position: absolute; width: 62vmax; height: 62vmax; border-radius: 50%; opacity: .55; will-change: transform; }
 .fx-aurora i:nth-child(1) { left: -22vmax; top: -34vmax; background: radial-gradient(circle, color-mix(in srgb, var(--accent) 26%, transparent), transparent 62%); animation: fx-drift-a 22s ease-in-out infinite alternate; }
-.fx-aurora i:nth-child(2) { right: -26vmax; top: -20vmax; background: radial-gradient(circle, color-mix(in srgb, #8b5cf6 18%, transparent), transparent 62%); animation: fx-drift-b 28s ease-in-out infinite alternate; }
-.fx-aurora i:nth-child(3) { left: 24vmax; bottom: -46vmax; background: radial-gradient(circle, color-mix(in srgb, #06b6d4 14%, transparent), transparent 62%); animation: fx-drift-a 34s ease-in-out infinite alternate-reverse; }
+.fx-aurora i:nth-child(2) { right: -26vmax; top: -20vmax; background: radial-gradient(circle, color-mix(in srgb, var(--accent) 14%, transparent), transparent 62%); animation: fx-drift-b 28s ease-in-out infinite alternate; }
+.fx-aurora i:nth-child(3) { left: 24vmax; bottom: -46vmax; background: radial-gradient(circle, color-mix(in srgb, var(--accent) 12%, transparent), transparent 62%); animation: fx-drift-a 34s ease-in-out infinite alternate-reverse; }
 @keyframes fx-drift-a { to { transform: translate3d(9vmax, 5vmax, 0) scale(1.12); } }
 @keyframes fx-drift-b { to { transform: translate3d(-8vmax, 7vmax, 0) scale(.92); } }
 .fx-calm .fx-aurora i { animation: none; }
@@ -54,7 +54,6 @@
 .btn { position: relative; overflow: hidden; }
 .btn-primary::after { content: ""; position: absolute; inset: 0; background: linear-gradient(105deg, transparent 35%, rgba(255, 255, 255, .32) 50%, transparent 65%); transform: translateX(-120%); pointer-events: none; }
 .fx-on .btn-primary:hover::after { transform: translateX(120%); transition: transform .75s cubic-bezier(.2, .7, .2, 1); }
-.fx-mag { translate: var(--mx, 0px) var(--my, 0px); transition: translate .25s cubic-bezier(.2, .7, .2, 1), transform .15s, background .15s, box-shadow .2s; }
 .fx-ripple { position: absolute; border-radius: 50%; background: rgba(255, 255, 255, .45); transform: scale(0); animation: fx-ripple .65s ease-out forwards; pointer-events: none; }
 @keyframes fx-ripple { to { transform: scale(1); opacity: 0; } }
 
@@ -119,7 +118,7 @@
 .contact-section { padding-top: clamp(96px, 11vw, 150px); padding-bottom: clamp(96px, 11vw, 150px); }
 .contact { background-image: linear-gradient(rgba(255, 255, 255, .045) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, .045) 1px, transparent 1px); background-size: 48px 48px; background-color: var(--ink); box-shadow: 0 50px 90px -50px color-mix(in srgb, var(--accent) 70%, transparent); }
 :root[data-theme="dark"] .contact { background-image: linear-gradient(var(--line) 1px, transparent 1px), linear-gradient(90deg, var(--line) 1px, transparent 1px); background-color: var(--surface); }
-.contact::after { content: ""; position: absolute; z-index: -1; width: 520px; height: 520px; left: -200px; bottom: -260px; border-radius: 50%; background: radial-gradient(closest-side, color-mix(in srgb, #8b5cf6 32%, transparent), transparent); }
+.contact::after { content: ""; position: absolute; z-index: -1; width: 520px; height: 520px; left: -200px; bottom: -260px; border-radius: 50%; background: radial-gradient(closest-side, color-mix(in srgb, var(--accent) 26%, transparent), transparent); }
 .fx-on .contact::before { animation: fx-drift-b 14s ease-in-out infinite alternate; }
 .fx-on .contact::after { animation: fx-drift-a 18s ease-in-out infinite alternate; }
 .contact-mail-row { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; margin-top: 26px; }
@@ -144,3 +143,9 @@ html.fx-theme-vt::view-transition-old(root) { z-index: 1; } html.fx-theme-vt::vi
 
 /* Les panneaux à halo décoratif ne doivent jamais défiler d'eux-mêmes (scrollIntoView sur un contenu interne les décalait) */
 .contact, .showcase, .bk-kit, .hero { overflow: clip; }
+
+/* Thème sombre : tous les textes en dégradé deviennent du bleu uni de la marque */
+:root[data-theme="dark"] .hero h1 .accent,
+:root[data-theme="dark"] .fx-split .accent,
+:root[data-theme="dark"] .fx-split .accent .fxw > span,
+:root[data-theme="dark"] .nf-code { background: none; -webkit-background-clip: border-box; background-clip: border-box; -webkit-text-fill-color: var(--accent); color: var(--accent); animation: none; }

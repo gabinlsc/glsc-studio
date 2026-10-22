@@ -23,5 +23,6 @@ assert.equal(await pg.locator('.bubble img').count(), 0); ok('suivi : messages a
 
 await pg.goto(base + '/suivi/#zzz'); await pg.reload(); await pg.waitForTimeout(300);
 assert.equal(await pg.locator('#state-error').isVisible(), true); ok('suivi : jeton mal formé refusé côté client');
+const cal = await pg.$$eval('.rdv', (as) => as.map((a) => a.href)); assert.deepEqual(cal, ['https://cal.com/studioglsc/debut-de-projet', 'https://cal.com/studioglsc/ajustement-de-projet', 'https://cal.com/studioglsc/fin-de-projet']); ok('suivi : rendez-vous début, ajustement et fin de projet (Cal.com)');
 assert.deepEqual(errs, []); ok('suivi : aucune erreur JS');
 await b.close(); close();
