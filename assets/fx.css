@@ -141,3 +141,6 @@
 /* ---------- Bascule de thème : onde circulaire depuis le bouton ---------- */
 html.fx-theme-vt::view-transition-old(root), html.fx-theme-vt::view-transition-new(root) { animation: none; mix-blend-mode: normal; }
 html.fx-theme-vt::view-transition-old(root) { z-index: 1; } html.fx-theme-vt::view-transition-new(root) { z-index: 2; }
+
+/* Les panneaux à halo décoratif ne doivent jamais défiler d'eux-mêmes (scrollIntoView sur un contenu interne les décalait) */
+.contact, .showcase, .bk-kit, .hero { overflow: clip; }
