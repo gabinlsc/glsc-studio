@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Ty Mor · Démo gîte de vacances · StudioGLSC</title>
+  <meta name="description" content="Démonstration StudioGLSC : site d’un gîte en bord de mer avec calendrier de disponibilités, tarifs saisonniers, calcul du séjour et plan des environs. Exemple fictif.">
+  <meta name="robots" content="noindex,follow">
+  <meta name="theme-color" content="#f5f0e6">
+  <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+  <link rel="preload" href="../fonts/dm-serif.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="../shared/demo.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="../shared/demo.js"></script>
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <a class="skip" href="#sejour">Aller au calendrier</a>
+  <div class="dm-bar"><div class="wrap"><span><b>Démo fictive</b> · site d’exemple réalisé par StudioGLSC · visuels illustrés</span><span><a href="/demos/">← Toutes les démos</a> &nbsp; <a href="/#contact">Je veux un site comme celui-ci</a></span></div></div>
+
+  <header class="dm-header"><div class="wrap bar">
+    <a class="brand" href="#top" aria-label="Ty Mor, retour en haut">Ty&nbsp;Mor</a>
+    <nav aria-label="Navigation principale"><a href="#gite">Le gîte</a><a href="#galerie">Photos</a><a href="#sejour">Disponibilités</a><a href="#tarifs">Tarifs</a><a href="#alentours">Alentours</a></nav>
+    <a class="btn" href="#sejour">Vérifier les dates</a>
+  </div></header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="hero-img"><img data-parallax="46" src="img/hero.webp" width="1920" height="1100" alt="Illustration : soleil bas sur la mer, côte boisée au premier plan" fetchpriority="high"></div>
+      <div class="wrap hero-copy">
+        <p class="eyebrow">Gîte de charme · Carnac, Morbihan</p>
+        <h1 data-split>À deux cents mètres de la plage, pour six.</h1>
+        <p class="lede rv" data-d="300">Une longère de pierre rénovée, trois chambres, un jardin clos. On y vient à pied jusqu’à la mer, et on y reste plus longtemps que prévu.</p>
+        <div class="hero-cta rv" data-d="420"><a class="btn btn-big btn-light" href="#sejour">Voir les disponibilités</a><span class="from">à partir de <b class="tnum">95 €</b> / nuit</span></div>
+      </div>
+    </section>
+
+    <section class="gite wrap" id="gite" aria-labelledby="gi-t">
+      <div class="gi-text">
+        <h2 id="gi-t" data-split>Une maison simple, pensée pour durer.</h2>
+        <p class="rv" data-d="100">La longère date de 1890. Murs en granit, sol en chêne, cheminée à insert. Nous l’avons rénovée en gardant la pierre apparente et en isolant par l’intérieur : elle reste fraîche l’été et chaude l’hiver.</p>
+        <p class="rv" data-d="200">Le linge de lit et de toilette est fourni. La cuisine est équipée pour de vrais repas, pas seulement pour des pâtes.</p>
+      </div>
+      <ul class="feat">
+        <li class="rv"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 20v-8l9-8 9 8v8zM9 20v-6h6v6"/></svg><b class="tnum" data-count="110" data-suffix=" m²">110 m²</b><span>de surface habitable</span></li>
+        <li class="rv" data-d="60"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 17v-6a3 3 0 013-3h12a3 3 0 013 3v6M3 17h18M6 17v3M18 17v3M7 8V6h10v2"/></svg><b class="tnum" data-count="3">3</b><span>chambres, 6 couchages</span></li>
+        <li class="rv" data-d="120"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 16c3 0 3-2 5.5-2S10.500 16 13 16s3-2 5.500-2S21 16 22 16M2 20c3 0 3-2 5.500-2s3 2 5.500 2 3-2 5.500-2 2.500 2 3.500 2M12 3v7M9 6l3-3 3 3"/></svg><b class="tnum" data-count="200" data-suffix=" m">200 m</b><span>de la plage à pied</span></li>
+        <li class="rv" data-d="180"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21V9M12 9c0-3 2-5 5-5 0 3-2 5-5 5zM12 13c0-3-2-5-5-5 0 3 2 5 5 5z"/></svg><b class="tnum" data-count="600" data-suffix=" m²">600 m²</b><span>de jardin clos</span></li>
+        <li class="rv" data-d="240"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.500a10 10 0 0114 0M8.500 16a5 5 0 017 0M12 20h.01"/></svg><b>Fibre</b><span>wifi gratuit</span></li>
+        <li class="rv" data-d="300"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 11a2 2 0 100-4 2 2 0 000 4zM17 11a2 2 0 100-4 2 2 0 000 4zM12 8a2 2 0 100-4 2 2 0 000 4zM12 21c-3 0-5-1.500-5-3.500S9 13 12 13s5 2.500 5 4.500S15 21 12 21z"/></svg><b>Animaux</b><span>acceptés (sur demande)</span></li>
+      </ul>
+    </section>
+
+    <section class="galerie" id="galerie" aria-label="Photographies du gîte">
+      <div class="wrap g-top"><h2 class="rv">Lumières du lieu</h2><div class="g-ctl"><button id="g-prev" aria-label="Photos précédentes">←</button><button id="g-next" aria-label="Photos suivantes">→</button></div></div>
+      <ul class="rail" id="rail" tabindex="0" aria-label="Défilement horizontal des photos">
+        <li><img src="img/hero.webp" width="1920" height="1100" alt="Illustration : la mer au soleil couchant" loading="lazy"><span>La mer, depuis le chemin des douaniers</span></li>
+        <li><img src="img/jardin.webp" width="1100" height="760" alt="Illustration : le jardin sous un ciel clair" loading="lazy"><span>Le jardin, côté sud</span></li>
+        <li><img src="img/soir.webp" width="1100" height="760" alt="Illustration : la baie en fin de journée" loading="lazy"><span>La baie en fin de journée</span></li>
+        <li><img src="img/brume.webp" width="1100" height="760" alt="Illustration : brume matinale sur la lande" loading="lazy"><span>Brume du matin sur la lande</span></li>
+      </ul>
+    </section>
+
+    <section class="sejour" id="sejour" aria-labelledby="se-t">
+      <div class="wrap se-grid">
+        <div class="se-cal">
+          <h2 id="se-t" data-split>Choisissez vos dates.</h2>
+          <p class="rv se-lede" data-d="120">Cliquez sur le jour d’arrivée, puis sur le jour de départ. Les dates barrées sont déjà réservées.</p>
+          <div class="cal rv" data-d="200" id="cal">
+            <div class="cal-head"><button id="c-prev" aria-label="Mois précédent">←</button><div class="cal-months" id="c-title" aria-live="polite"></div><button id="c-next" aria-label="Mois suivant">→</button></div>
+            <div class="cal-grid" id="c-grid"></div>
+            <p class="cal-legend"><span class="dot free"></span>Libre <span class="dot busy"></span>Réservé <span class="dot sel"></span>Votre séjour</p>
+          </div>
+        </div>
+        <aside class="se-sum rv" data-d="200" aria-live="polite">
+          <h3>Votre séjour</h3>
+          <p class="se-empty" id="s-empty">Sélectionnez une arrivée et un départ.</p>
+          <div id="s-box" hidden>
+            <p class="se-dates" id="s-dates"></p>
+            <label class="field"><span>Voyageurs</span>
+              <div class="counter"><button type="button" id="v-m" aria-label="Retirer un voyageur">−</button><output id="v-o" class="tnum">2</output><button type="button" id="v-p" aria-label="Ajouter un voyageur">+</button></div></label>
+            <dl class="lines" id="s-lines"></dl>
+            <p class="s-warn" id="s-warn" role="alert" hidden></p>
+            <button class="btn btn-big" id="s-go" type="button">Demander ce séjour</button>
+            <p class="se-note">Aucun paiement en ligne. Démonstration : rien n’est envoyé.</p>
+          </div>
+          <div id="s-done" hidden><p class="done-t">Demande notée.</p><p class="se-note">C’est une démonstration, aucune demande n’a été transmise.</p><button class="btn-ghost" id="s-reset" type="button">Nouveau séjour</button></div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="tarifs" id="tarifs" aria-labelledby="ta-t">
+      <div class="wrap">
+        <h2 id="ta-t" data-split>Tarifs à la nuit</h2>
+        <div class="seasons" id="seasons">
+          <article class="rv" data-s="low"><h3>Basse saison</h3><p class="when">Novembre à mars</p><p class="price tnum"><b>95 €</b> / nuit</p><p class="min">2 nuits minimum</p></article>
+          <article class="rv" data-s="mid" data-d="80"><h3>Moyenne saison</h3><p class="when">Avril à juin · septembre · octobre</p><p class="price tnum"><b>130 €</b> / nuit</p><p class="min">3 nuits minimum</p></article>
+          <article class="rv" data-s="high" data-d="160"><h3>Haute saison</h3><p class="when">Juillet et août</p><p class="price tnum"><b>185 €</b> / nuit</p><p class="min">7 nuits minimum, du samedi au samedi</p></article>
+        </div>
+        <ul class="inc rv"><li>Ménage de fin de séjour : <b class="tnum">60 €</b></li><li>Taxe de séjour : <b class="tnum">1,20 €</b> par adulte et par nuit</li><li>Linge de lit et de toilette : inclus</li><li>Animal de compagnie : <b class="tnum">15 €</b> par séjour</li></ul>
+      </div>
+    </section>
+
+    <section class="alentours" id="alentours" aria-labelledby="al-t">
+      <div class="wrap al-grid">
+        <div>
+          <h2 id="al-t" data-split>Tout se fait à pied.</h2>
+          <ul class="places" id="places">
+            <li><button data-p="plage" aria-pressed="true"><span>Plage de Saint-Colomban</span><b class="tnum">200 m</b></button></li>
+            <li><button data-p="pain" aria-pressed="false"><span>Boulangerie et marché</span><b class="tnum">800 m</b></button></li>
+            <li><button data-p="port" aria-pressed="false"><span>Port de La Trinité-sur-Mer</span><b class="tnum">1,2 km</b></button></li>
+            <li><button data-p="alignements" aria-pressed="false"><span>Alignements de Carnac</span><b class="tnum">2,5 km</b></button></li>
+          </ul>
+        </div>
+        <figure class="map rv" aria-label="Plan schématique des environs">
+          <svg viewBox="0 0 600 420" role="img" aria-labelledby="map-t"><title id="map-t">Plan schématique : le gîte, la plage à l’ouest, le port à l’est</title>
+            <rect width="600" height="420" fill="#d9e6e8"/>
+            <path d="M0 0H330C310 60 350 90 330 150S300 230 340 290 330 380 350 420H0Z" fill="#efe7d6"/>
+            <path d="M330 0C310 60 350 90 330 150S300 230 340 290 330 380 350 420" fill="none" stroke="#b9a98a" stroke-width="3"/>
+            <path d="M120 420C140 330 200 260 280 210S440 130 600 120" fill="none" stroke="#fff" stroke-width="6" stroke-dasharray="2 12" stroke-linecap="round"/>
+            <g id="pts"></g>
+            <g class="home"><circle cx="150" cy="260" r="11" fill="#12384a"/><circle cx="150" cy="260" r="20" fill="none" stroke="#12384a" stroke-opacity=".35"/><text x="150" y="294" text-anchor="middle">Ty Mor</text></g>
+          </svg>
+        </figure>
+      </div>
+    </section>
+  </main>
+
+  <footer class="foot"><div class="wrap foot-row"><p class="brand">Ty&nbsp;Mor</p><p>Impasse de Kerlescan, 56340 Carnac · 02 00 00 00 00 · gite@tymor.example</p><p class="foot-small">Établissement fictif créé pour la démonstration. Visuels illustrés.</p></div></footer>
+</body>
+</html>

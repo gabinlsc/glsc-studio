@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Ewen Le Gall · Démo portfolio photographe · StudioGLSC</title>
+  <meta name="description" content="Démonstration StudioGLSC : portfolio de photographe avec diaporama plein écran, galerie filtrable, visionneuse au clavier et simulateur de tirages. Exemple fictif.">
+  <meta name="robots" content="noindex,follow">
+  <meta name="theme-color" content="#f1efea">
+  <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+  <link rel="preload" href="../fonts/cormorant.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="../shared/demo.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="../shared/demo.js"></script>
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <a class="skip" href="#galerie">Aller à la galerie</a>
+  <div class="dm-bar"><div class="wrap"><span><b>Démo fictive</b> · site d’exemple réalisé par StudioGLSC · visuels illustrés, générés pour la démonstration</span><span><a href="/demos/">← Toutes les démos</a> &nbsp; <a href="/#contact">Je veux un site comme celui-ci</a></span></div></div>
+
+  <header class="dm-header is-over"><div class="wrap bar">
+    <a class="brand" href="#top" aria-label="Ewen Le Gall, retour en haut">Ewen <em>Le Gall</em></a>
+    <nav aria-label="Navigation principale"><a href="#galerie">Galerie</a><a href="#series">Séries</a><a href="#tirages">Tirages</a><a href="#contact">Contact</a></nav>
+  </div></header>
+
+  <main id="top">
+    <section class="stage" aria-roledescription="diaporama" aria-label="Sélection de photographies">
+      <div class="slides" id="slides"></div>
+      <div class="stage-ui wrap">
+        <div class="stage-title">
+          <p class="eyebrow">Photographe de paysage · Bretagne</p>
+          <h1 data-split>La lumière du bord de mer.</h1>
+        </div>
+        <div class="stage-ctl">
+          <p class="caption" id="caption" aria-live="polite"></p>
+          <div class="count tnum"><b id="cur">01</b><span>/ 08</span></div>
+          <div class="arrows"><button id="prev" aria-label="Photo précédente">←</button><button id="next" aria-label="Photo suivante">→</button></div>
+        </div>
+        <div class="progress" aria-hidden="true"><i id="bar"></i></div>
+      </div>
+    </section>
+
+    <section class="intro wrap">
+      <h2 class="rv">Quinze ans à attendre le bon moment, vingt minutes pour le prendre.</h2>
+      <div class="intro-cols rv" data-d="150">
+        <p>Je photographie les côtes du Morbihan et du Finistère, à l’aube et à la tombée du jour, sur le même principe : arriver tôt, rester longtemps, ne rien retoucher qui n’existait pas.</p>
+        <p>Les tirages sont réalisés sur papier de conservation, numérotés et signés. Je réponds moi-même à chaque message, généralement sous deux jours.</p>
+      </div>
+    </section>
+
+    <section class="galerie" id="galerie" aria-labelledby="g-t">
+      <div class="wrap">
+        <div class="g-head"><h2 id="g-t" data-split>Galerie</h2>
+          <div class="filters" role="group" aria-label="Filtrer par thème"><button aria-pressed="true" data-f="all">Tout</button><button aria-pressed="false" data-f="mer">Mer</button><button aria-pressed="false" data-f="terre">Terre</button><button aria-pressed="false" data-f="lumiere">Lumière</button></div>
+        </div>
+        <ul class="grid" id="grid"></ul>
+      </div>
+    </section>
+
+    <section class="series" id="series" aria-labelledby="s-t">
+      <div class="wrap">
+        <h2 id="s-t" class="sr-only">Séries</h2>
+        <ol class="s-list" id="s-list">
+          <li><a href="#galerie" data-img="aube-ouessant"><span class="n tnum">01</span><span class="t">Aubes</span><span class="m">8 images · 2021 – 2024</span></a></li>
+          <li><a href="#galerie" data-img="brume-monts"><span class="n tnum">02</span><span class="t">Brumes</span><span class="m">12 images · 2019 – 2023</span></a></li>
+          <li><a href="#galerie" data-img="maree-basse"><span class="n tnum">03</span><span class="t">Marées basses</span><span class="m">10 images · 2022 – 2024</span></a></li>
+          <li><a href="#galerie" data-img="dunes-pen-bron"><span class="n tnum">04</span><span class="t">Dunes</span><span class="m">6 images · 2020</span></a></li>
+          <li><a href="#galerie" data-img="lande-hiver"><span class="n tnum">05</span><span class="t">Landes d’hiver</span><span class="m">9 images · 2023 – 2025</span></a></li>
+        </ol>
+        <img class="s-peek" id="peek" alt="" width="360" height="240" hidden>
+      </div>
+    </section>
+
+    <section class="tirages" id="tirages" aria-labelledby="t-t">
+      <div class="wrap t-grid">
+        <div>
+          <p class="eyebrow rv">Tirages d’art</p>
+          <h2 id="t-t" data-split>Composez votre tirage.</h2>
+          <p class="rv t-lede" data-d="150">Papier de conservation 310 g, encres pigmentaires, édition limitée à trente exemplaires par image, numérotés et signés au dos.</p>
+          <form id="t-form" class="t-form" novalidate>
+            <label class="field"><span>Photographie</span><select id="t-img"></select></label>
+            <fieldset><legend>Format</legend><div class="opts" id="t-fmt" role="radiogroup" aria-label="Format"></div></fieldset>
+            <fieldset><legend>Finition</legend><div class="opts" id="t-fin" role="radiogroup" aria-label="Finition"></div></fieldset>
+          </form>
+        </div>
+        <aside class="t-sum rv" data-d="150" aria-live="polite">
+          <div class="t-frame" id="t-frame"><img id="t-pic" alt="" width="700" height="466"></div>
+          <dl class="t-lines"><div><dt id="t-l1"></dt><dd id="t-p1" class="tnum"></dd></div><div><dt id="t-l2"></dt><dd id="t-p2" class="tnum"></dd></div><div class="t-total"><dt>Total TTC</dt><dd id="t-tot" class="tnum"></dd></div></dl>
+          <a class="btn btn-big" href="#contact" id="t-cta">Demander ce tirage</a>
+          <p class="t-note">Livraison offerte en France. Démonstration : les prix sont fictifs.</p>
+        </aside>
+      </div>
+    </section>
+
+    <section class="contact" id="contact" aria-labelledby="c-t">
+      <div class="wrap c-grid">
+        <h2 id="c-t" data-split>Parlons de votre projet.</h2>
+        <div class="c-side rv" data-d="150">
+          <form id="c-form" novalidate>
+            <label class="field"><span>Nom</span><input id="c-name" autocomplete="name"><small class="err" id="c-e1"></small></label>
+            <label class="field"><span>E-mail</span><input id="c-mail" type="email" autocomplete="email"><small class="err" id="c-e2"></small></label>
+            <label class="field"><span>Message</span><textarea id="c-msg" rows="4"></textarea></label>
+            <button class="btn btn-big" type="submit">Envoyer</button>
+          </form>
+          <p class="c-done" id="c-done" role="status" hidden>Merci. Votre message n’est pas réellement parti : c’est une démonstration.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="foot"><div class="wrap foot-row"><p class="brand">Ewen <em>Le Gall</em></p><p>Atelier à Lorient · ewen@legall-photo.example</p><p class="foot-small">Photographe fictif. Visuels illustrés générés pour la démonstration.</p></div></footer>
+
+  <dialog class="lb" id="lb" aria-label="Visionneuse">
+    <button class="lb-x" id="lb-x" aria-label="Fermer">×</button>
+    <button class="lb-n lb-p" id="lb-p" aria-label="Photo précédente">←</button>
+    <figure><img id="lb-img" alt=""><figcaption id="lb-cap"></figcaption></figure>
+    <button class="lb-n lb-nx" id="lb-nx" aria-label="Photo suivante">→</button>
+  </dialog>
+</body>
+</html>
