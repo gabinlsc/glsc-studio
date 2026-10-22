@@ -31,11 +31,14 @@ fi
 
 info "3/4 nginx"
 [ -s /etc/nginx/snippets/studio-security.conf ] || die "snippet absent : deploy.sh ne l'a pas installé."
-if grep -rqs "snippets/studio-security.conf" /etc/nginx/sites-enabled /etc/nginx/conf.d 2>/dev/null; then
+if nginx -T 2>/dev/null | grep -q "include[[:space:]]*snippets/studio-security.conf"; then
   ok "include déjà présent"
 else
-  CONF="$(grep -rls "server_name[^;]*$DOMAIN" /etc/nginx/sites-enabled /etc/nginx/conf.d 2>/dev/null | head -1 || true)"
-  [ -n "$CONF" ] || die "aucune conf nginx pour $DOMAIN."
+  # nginx -T liste chaque fichier chargé (« # configuration file … ») : on prend celui qui déclare le domaine (grep -r ne suit pas les liens symboliques de sites-enabled).
+  CONF="$(nginx -T 2>/dev/null | awk -v d="$DOMAIN" '/^# configuration file /{f=$4; sub(/:$/,"",f)} /^[[:space:]]*server_name/ && index($0,d) && f!="" {print f; exit}')"
+  [ -n "$CONF" ] || CONF="$(grep -Rls "server_name[^;]*$DOMAIN" /etc/nginx 2>/dev/null | head -1 || true)"
+  [ -n "$CONF" ] || die "aucune conf nginx pour $DOMAIN (nginx -T | grep -n server_name pour voir ce qui existe)."
+  CONF="$(readlink -f "$CONF")"
   cp -a "$CONF" "$CONF.bak-$(date +%s)"
   python3 - "$CONF" "$DOMAIN" <<'PY' || die "bloc HTTPS de $DOMAIN introuvable dans $CONF (ajoutez l'include à la main)."
 import re, sys

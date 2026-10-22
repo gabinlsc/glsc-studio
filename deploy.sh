@@ -74,7 +74,7 @@ fi
 # ---- en-têtes de sécurité (fichier installé, mais jamais inclus automatiquement dans nginx)
 if [ -s "$SRC/deploy/studio-security.conf" ] && [ -d /etc/nginx/snippets ]; then
   install -m 644 "$SRC/deploy/studio-security.conf" /etc/nginx/snippets/studio-security.conf
-  if grep -rqs "snippets/studio-security.conf" /etc/nginx/sites-enabled /etc/nginx/conf.d 2>/dev/null; then
+  if nginx -T 2>/dev/null | grep -q "include[[:space:]]*snippets/studio-security.conf"; then
     ok "en-têtes de sécurité : snippet à jour et déjà inclus dans nginx"
   else
     c 33 "  ! en-têtes de sécurité : snippet installé mais pas encore actif. Dans le bloc server de $DOMAIN, ajouter :"
