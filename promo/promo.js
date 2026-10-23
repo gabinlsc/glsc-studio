@@ -12,15 +12,10 @@
   const eio5 = (x) => (x < .5 ? 16 * x ** 5 : 1 - Math.pow(-2 * x + 2, 5) / 2);
   const back = (x) => { const c1 = 1.70158, c3 = c1 + 1; return 1 + c3 * Math.pow(x - 1, 3) + c1 * Math.pow(x - 1, 2); };
   const spring = (x) => (x <= 0 ? 0 : x >= 1 ? 1 : 1 - Math.exp(-7 * x) * Math.cos(11 * x));
-  const Q = new URLSearchParams(location.search), V = Q.get('f') === 'v', SHORT = Q.get('s') === '1';
+  const Q = new URLSearchParams(location.search), V = Q.get('f') === 'v';
   const W = V ? 1080 : 1920, H = V ? 1920 : 1080, CX = W / 2, CY = H / 2;
   document.documentElement.classList.toggle('v', V);
-  // Version courte : extraits accélérés de la version longue (début, fin, vitesse)
-  const SEGS = [[0.2, 4.4, 1.9], [4.2, 7.6, 1.8], [10.4, 14.6, 1.9], [18.6, 22.2, 1.9], [30.4, 34.0, 1.9], [39.6, 46.4, 1.6]];
-  const SEG_OUT = []; (() => { let a = 0; SEGS.forEach(([s0, s1, sp]) => { const d = (s1 - s0) / sp; SEG_OUT.push([a, a + d, s0, sp]); a += d; }); })();
-  const mapT = (t) => { for (const [a, b, s0, sp] of SEG_OUT) if (t < b) return s0 + (t - a) * sp; const l = SEG_OUT[SEG_OUT.length - 1]; return l[2] + (l[1] - l[0]) * l[3]; };
-  window.FPS = 30; window.TOTAL = SHORT ? Math.round(SEG_OUT[SEG_OUT.length - 1][1] * 10) / 10 + .2 : 47;
-  window.CUTS_OUT = SHORT ? SEG_OUT.map((x) => x[0]).slice(1) : [];
+  window.FPS = 30; window.TOTAL = 47;
   const LAY = V ? { hx: 0, hy: 330, hs: 1.12, ringS: 1.22, ringY: 20, ctaY: 1110, curFrom: [880, 1560], cardW: 900 } : { hx: 480, hy: 0, hs: 1, ringS: .76, ringY: -78, ctaY: 700, curFrom: [1560, 930], cardW: 520 };
   const T = { A: 0, B: 4.2, C: 10.4, D: 18.6, E: 23.6, F: 30.4, G: 36.6, H: 40.3 };
   window.CUTS = Object.values(T).slice(1);
@@ -77,7 +72,7 @@
   };
 
   function render(tIn) {
-    const tOut = tIn, t = SHORT ? mapT(tIn) : tIn;
+    const tOut = tIn, t = tIn;
     // --- visibilité / révélations
     sc.A.style.visibility = 'visible';
     reveal(sc.B, t, T.B, T.B + 1.2, 'circle', V ? CX : 1180, V ? CY + 140 : CY, eio5);

@@ -5,12 +5,15 @@ Film de 47 s (1920 × 1080, 30 i/s) construit comme une page web animée, puis e
 - `index.html`, `promo.css`, `promo.js` : la « scène ». `promo.js` ne contient aucune animation CSS : `render(t)` place tout à l'instant `t`, donc le rendu est identique à chaque passage (déterministe).
 - `capture.mjs` : prend les écrans de téléphone **réels** (site et démos) dans `promo/img/`.
 - `audio.py` : bande-son de synthèse (numpy), sans échantillon ni musique sous licence.
+- `court.html`, `court.css`, `court.js` : film court (≈ 17 s), monté à part (quatre scènes lentes), pas une version accélérée du film complet.
 - `render.mjs` : enregistre les images avec Chromium et assemble en MP4 avec ffmpeg.
 
 ```
 CHROMIUM_PATH=… node promo/capture.mjs                 # écrans (à refaire si le site change)
 python3 promo/audio.py                                  # bande-son → promo/audio/bande-son.wav
 CHROMIUM_PATH=… node promo/render.mjs promo/dist/studioglsc-promo.mp4 --audio promo/audio/bande-son.wav
+python3 promo/audio.py short                            # bande-son du film court
+CHROMIUM_PATH=… node promo/render.mjs promo/dist/studioglsc-court.mp4 --audio promo/audio/bande-son-courte.wav --short   # + --vertical pour le 9:16
 CHROMIUM_PATH=… node promo/render.mjs --frames 5,12.5,41 /tmp/controle   # images fixes pour vérifier
 ```
 
