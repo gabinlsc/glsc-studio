@@ -80,49 +80,60 @@ export function offresSection() {
             </table>
           </div>
         </div>`;
-  // Estimateur
-  const sizeRadios = (name, list) => list.map((t, i) => `<label class="choice"><input type="radio" name="${name}" value="${i}"${i === 0 ? ' checked' : ''}><span><strong>${esc(t[2][0].toUpperCase() + t[2].slice(1))}</strong></span></label>`).join('\n                ');
+  // Estimateur : quatre étapes à gauche, résumé fixe à droite
+  const seg = (name, list) => `<div class="seg">${list.map((t, i) => `<label class="choice"><input type="radio" name="${name}" value="${i}"${i === 0 ? ' checked' : ''}><span>${esc(t[2][0].toUpperCase() + t[2].slice(1))}</span></label>`).join('')}</div>`;
   const hide = { google: 'pack vitrine', reseaux: 'pack', photos: 'pack vitrine', page: 'express pack boutique' };
+  const card = (v, name, price, sub, badge, checked) => `<label class="choice est-card"><input type="radio" name="est-site" value="${v}"${checked ? ' checked' : ''}><span>${badge ? `<em class="est-tag">${badge}</em>` : ''}<strong>${esc(name)}</strong><b>${price}</b><small>${esc(sub)}</small></span></label>`;
   const estimate = `
-        <form class="estimate reveal" id="estimate" aria-labelledby="estimate-title" onsubmit="return false">
-          <div class="estimate-head"><span class="eyebrow">Estimation</span><h3 id="estimate-title">Combien ça coûte pour moi ?</h3></div>
-          <div class="estimate-grid">
-            <div class="estimate-fields">
-              <fieldset><legend>Votre projet</legend>
-                <label class="choice"><input type="radio" name="est-site" value="express" checked><span><strong>${esc(g[0].name)}</strong><small>${eur(g[0].price)}, une page</small></span></label>
-                <label class="choice"><input type="radio" name="est-site" value="pack"><span><strong>${esc(PACK.name)}</strong><small>${eur(PACK.price)}, site + fiche Google + visuels</small></span></label>
-                <label class="choice"><input type="radio" name="est-site" value="vitrine"><span><strong>${esc(g[1].name)}</strong><small>Dès ${eur(g[1].price)}, sur devis</small></span></label>
-                <label class="choice"><input type="radio" name="est-site" value="boutique"><span><strong>${esc(g[2].name)}</strong><small>Dès ${eur(g[2].price)}, sur devis</small></span></label>
+        <form class="estimate est reveal" id="estimate" aria-labelledby="estimate-title" onsubmit="return false">
+          <div class="estimate-head"><span class="eyebrow">Estimation</span><h3 id="estimate-title">Combien ça coûte pour moi ?</h3><p class="muted">Composez votre projet : le total se met à jour tout de suite.</p></div>
+          <div class="est-layout">
+            <div class="est-steps">
+              <fieldset class="est-step"><legend><i>1</i>Votre projet</legend>
+                <div class="est-cards">
+                  ${card('express', g[0].name, eur(g[0].price), 'Une page, première version en 48 h', '', true)}
+                  ${card('pack', PACK.name, eur(PACK.price), 'Site + fiche Google + visuels', 'Le plus choisi', false)}
+                  ${card('vitrine', g[1].name, 'dès ' + eur(g[1].price), 'Plusieurs pages, sur devis', '', false)}
+                  ${card('boutique', g[2].name, 'dès ' + eur(g[2].price), 'Vendre en ligne, sur devis', '', false)}
+                </div>
               </fieldset>
-              <fieldset data-for="vitrine" hidden><legend>Nombre de pages</legend>
-                ${sizeRadios('est-pages', PAGES)}
+              <fieldset class="est-step est-sub" data-for="vitrine" hidden><legend><i>↳</i>Nombre de pages</legend>
+                ${seg('est-pages', PAGES)}
               </fieldset>
-              <fieldset data-for="boutique" hidden><legend>Taille de la boutique</legend>
-                ${sizeRadios('est-prod', PRODUITS)}
+              <fieldset class="est-step est-sub" data-for="boutique" hidden><legend><i>↳</i>Taille de la boutique</legend>
+                ${seg('est-prod', PRODUITS)}
               </fieldset>
-              <fieldset class="est-opts"><legend>Options à la carte</legend>
-                ${OPTIONS.map((o) => `<label class="choice" data-hide-for="${hide[o.id]}"><input type="checkbox" name="est-opt" value="${o.id}"><span><strong>${esc(o.name)}</strong><small>${eur(o.price)}</small></span></label>`).join('\n                ')}
+              <fieldset class="est-step"><legend><i>2</i>Options à la carte</legend>
+                <div class="est-chips">
+                  ${OPTIONS.map((o) => `<label class="choice est-chip" data-hide-for="${hide[o.id]}"><input type="checkbox" name="est-opt" value="${o.id}"><span>${esc(o.name)}<b>+ ${eur(o.price)}</b></span></label>`).join('\n                  ')}
+                </div>
+                <p class="est-none muted" hidden>Rien à ajouter ici : ces options sont déjà incluses dans votre formule.</p>
               </fieldset>
-              <fieldset><legend>Abonnement Sérénité (option)</legend>
-                <label class="choice"><input type="radio" name="est-plan" value="none" checked><span><strong>Sans abonnement</strong><small>Je m’occupe de l’hébergement</small></span></label>
-                ${SERENITE.map((s) => `<label class="choice"><input type="radio" name="est-plan" value="${s.id}"><span><strong>${esc(s.name)}</strong><small>${eur(s.month)} / mois</small></span></label>`).join('\n                ')}
+              <fieldset class="est-step"><legend><i>3</i>Abonnement Sérénité <small>(option)</small></legend>
+                <div class="est-plans">
+                  <label class="choice est-plan"><input type="radio" name="est-plan" value="none" checked><span><strong>Aucun</strong><small>Je gère l’hébergement</small></span></label>
+                  ${SERENITE.map((s) => `<label class="choice est-plan"><input type="radio" name="est-plan" value="${s.id}"><span><strong>${esc(s.name)}</strong><small>${eur(s.month)} / mois</small></span></label>`).join('\n                  ')}
+                </div>
+                <fieldset class="est-bill" data-for-plan hidden><legend class="sr-only">Facturation de l’abonnement</legend>
+                  <div class="seg">
+                    <label class="choice"><input type="radio" name="est-bill" value="month" checked><span>Au mois</span></label>
+                    <label class="choice"><input type="radio" name="est-bill" value="year"><span>À l’année · 2 mois offerts</span></label>
+                  </div>
+                </fieldset>
                 <p class="estimate-hint">L’abonnement s’ajoute à un site : il ne se prend pas seul.</p>
               </fieldset>
-              <fieldset data-for-plan hidden><legend>Facturation de l’abonnement</legend>
-                <label class="choice"><input type="radio" name="est-bill" value="month" checked><span><strong>Au mois</strong><small>Sans engagement</small></span></label>
-                <label class="choice"><input type="radio" name="est-bill" value="year"><span><strong>À l’année</strong><small>2 mois offerts</small></span></label>
-              </fieldset>
-              <fieldset><legend>Parrainage</legend>
-                <label class="choice"><input type="checkbox" name="est-ref"><span><strong>Un client StudioGLSC m’a recommandé</strong><small>− ${eur(PARRAINAGE.filleul)} sur la création</small></span></label>
+              <fieldset class="est-step"><legend><i>4</i>Parrainage</legend>
+                <label class="choice est-ref"><input type="checkbox" name="est-ref"><span><strong>Un client StudioGLSC m’a recommandé</strong><small>− ${eur(PARRAINAGE.filleul)} sur la création de mon site</small></span></label>
               </fieldset>
             </div>
-            <div class="estimate-result" aria-live="polite">
+            <aside class="est-sum estimate-result" aria-live="polite">
               <p class="estimate-label" id="est-label">Votre première année</p>
               <p class="estimate-total" id="est-total">${eur(g[0].price)}</p>
               <ul class="estimate-lines" id="est-lines"></ul>
               <p class="estimate-note" id="est-note">Prix TTC : TVA non applicable (franchise en base, article 293 B du CGI). Estimation indicative, le devis fait foi.</p>
               <button type="button" class="btn btn-primary" id="est-cta">Demander ce devis ${ic('arrow')}</button>
-            </div>
+              <p class="est-reassure">Devis gratuit, sans engagement</p>
+            </aside>
           </div>
         </form>`;
   return `<!--@offres:start-->

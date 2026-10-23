@@ -159,7 +159,7 @@
 
   /* ---------- Estimation de prix (tarifs : window.OFFRES, généré depuis tools/content/offres.mjs) ---------- */
   var estimate = $('#estimate'), O = window.OFFRES;
-  function money(n) { return n.toLocaleString('fr-FR') + ' €'; }
+  function money(n) { return n.toLocaleString('fr-FR').replace(/\u202f/g, '\u00a0') + ' €'; }
   function checked(name) { return estimate.querySelector('input[name="' + name + '"]:checked').value; }
   var SERVICE_OF = { express: 'Express', pack: 'Pack Lancement', vitrine: 'Vitrine', boutique: 'Boutique en ligne' };
   var summary = '';
@@ -171,6 +171,7 @@
       var hide = l.dataset.hideFor.split(' ').indexOf(site) >= 0; l.hidden = hide;
       var i = l.querySelector('input'); if (hide && i.checked) i.checked = false;
     });
+    var none = $('.est-none', estimate); if (none) none.hidden = $$('.est-chip:not([hidden])', estimate).length > 0;
     var lines = [], lo = 0, hi = 0, open = false, quote = site === 'vitrine' || site === 'boutique';
     if (site === 'express') { lines.push(['Express', money(O.express)]); lo = hi = O.express; }
     else if (site === 'pack') { lines.push(['Pack Lancement', money(O.pack)]); lo = hi = O.pack; }
