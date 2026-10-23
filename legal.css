@@ -149,3 +149,6 @@ footer { padding: 45px 0 26px; }
   footer { display: none; }
 }
 .wordmark.lg { font-size: 1.25rem; }
+
+.legal-body blockquote { margin: 16px 0; padding: 4px 20px; border-left: 3px solid var(--accent, #2447d6); background: var(--surface-2, #f1f3f8); border-radius: 0 10px 10px 0; }
+.legal-body blockquote p { margin: 12px 0; }
