@@ -5,10 +5,16 @@
 import { existsSync, mkdirSync, readFileSync, rmSync, statSync, writeFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { METIERS } from './content/metiers.mjs';
-import { VILLES } from './content/villes.mjs';
-import { ARTICLES } from './content/blog.mjs';
+import { METIERS as METIERS_RAW } from './content/metiers.mjs';
+import { VILLES as VILLES_RAW } from './content/villes.mjs';
+import { ARTICLES as ARTICLES_RAW } from './content/blog.mjs';
 import { DEMOS } from './content/demos.mjs';
+import * as OF from './content/offres.mjs';
+// Les textes de contenu citent les prix par jetons ({{express}}, {{pack}}…) : ils sont remplis ici depuis tools/content/offres.mjs.
+const TOK = { ...OF.T, rate: OF.eur(OF.RATE_H), sMax: OF.eur(OF.SERENITE[2].month) };
+const fillTok = (v) => (typeof v === 'string' ? v.replace(/\{\{(\w+)\}\}/g, (m, k) => (typeof TOK[k] === 'string' ? TOK[k] : m)) : Array.isArray(v) ? v.map(fillTok) : v && typeof v === 'object' ? Object.fromEntries(Object.entries(v).map(([k, x]) => [k, fillTok(x)])) : v);
+const METIERS = fillTok(METIERS_RAW), VILLES = fillTok(VILLES_RAW), ARTICLES = fillTok(ARTICLES_RAW);
+import { offresSection, faqHtml as homeFaq, formServices, jsonldOffers, cgvPrestations, cgvSerenite } from './offres-html.mjs';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
 const CFG = JSON.parse(readFileSync(join(ROOT, 'tools/site.config.json'), 'utf8'));
@@ -70,6 +76,21 @@ const showcase = `<!--@showcase:start-->
         </div>
         <!--@showcase:end-->`;
 index = index.replace(/<!--@showcase:start-->[\s\S]*?<!--@showcase:end-->/, showcase);
+// Offres : section, FAQ, choix du besoin du formulaire et JSON-LD générés depuis tools/content/offres.mjs ; description de la page ; données de l'estimateur (assets/offres.js).
+index = index.replace(/<!--@offres:start-->[\s\S]*?<!--@offres:end-->/, () => offresSection());
+index = index.replace(/<!--@metric-price:start-->[\s\S]*?<!--@metric-price:end-->/, () => `<!--@metric-price:start--><strong>${OF.T.express}</strong><span>Express, paiement ponctuel</span><!--@metric-price:end-->`);
+index = index.replace(/<!--@faq:start-->[\s\S]*?<!--@faq:end-->/, () => homeFaq());
+index = index.replace(/<!--@services:start-->[\s\S]*?<!--@services:end-->/, () => formServices());
+index = index.replace(/"makesOffer": \[[\s\S]*?\n    \]/, () => jsonldOffers());
+const HOME_DESC = `Sites vitrines et boutiques pour artisans, commerçants et indépendants en Bretagne. Express ${OF.T.express} en 48 h, Pack Lancement ${OF.T.pack}, vitrine dès ${OF.T.vitrine}, boutique dès ${OF.T.boutique}.`;
+index = index.replace(/(<meta name="description" content=")[^"]*(")/, (m, a, b) => a + HOME_DESC.replace(/\u00a0/g, ' ') + b);
+index = index.replace(/(<meta property="og:description" content=")[^"]*(")/, (m, a, b) => a + `Un site rapide, pensé pour le smartphone et sans abonnement obligatoire. Express ${OF.T.express}, Pack Lancement ${OF.T.pack}, boutique dès ${OF.T.boutique}.`.replace(/\u00a0/g, ' ') + b);
+{ // CGV : prestations et abonnements générés depuis les mêmes données que le site
+  let cgv = readFileSync(join(ROOT, 'cgv.html'), 'utf8');
+  cgv = cgv.replace(/<!--@cgv-prestations:start-->[\s\S]*?<!--@cgv-prestations:end-->/, () => cgvPrestations()).replace(/<!--@cgv-serenite:start-->[\s\S]*?<!--@cgv-serenite:end-->/, () => cgvSerenite());
+  writeFileSync(join(ROOT, 'cgv.html'), cgv);
+}
+writeFileSync(join(ROOT, 'assets/offres.js'), `/* Généré par tools/build-site.mjs depuis tools/content/offres.mjs : ne pas modifier à la main. */\nwindow.OFFRES = ${JSON.stringify(OF.clientData())};\n`);
 // JSON-LD de l'accueil : liens officiels (dont la fiche Google Business Profile si renseignée) et zones desservies.
 const sameAs = [...CFG.sameAs, ...(CFG.googleBusinessProfile ? [CFG.googleBusinessProfile] : [])];
 index = index.replace(/"areaServed": (?:"[^"]*"|\[[^\]]*\]),\s*(?:"sameAs": \[[^\]]*\],\s*)?/, `"areaServed": ${JSON.stringify(['Bretagne', ...VILLES.map((v) => v.name)])},\n    "sameAs": ${JSON.stringify(sameAs)},\n    `);
@@ -177,11 +198,11 @@ for (const d of ['a-propos', 'sites-pour', 'creation-site-web', 'blog']) rmSync(
         <ul class="ticks">
           <li><strong>Un interlocuteur unique.</strong> Je conçois et je réalise moi-même chaque site. Vous n’avez pas à expliquer votre projet à plusieurs personnes.</li>
           <li><strong>Un cadre clair avant de commencer.</strong> Le premier échange est gratuit ; le devis précise le contenu, le prix, les délais et le paiement.</li>
-          <li><strong>Un site qui vous appartient.</strong> Pas d’abonnement imposé : l’abonnement Sérénité & Hébergement est une option, à ajouter à un site, que vous pouvez résilier à tout moment.</li>
+          <li><strong>Un site qui vous appartient.</strong> Pas d’abonnement imposé : les abonnements Sérénité sont des options, à ajouter à un site, que vous pouvez résilier à tout moment.</li>
           <li><strong>Des échanges simples.</strong> Par téléphone, WhatsApp ou e-mail, selon ce qui vous convient.</li>
         </ul>
         <h2>Sites vitrines et boutiques en ligne</h2>
-        <p>Je crée des sites vitrines (One-Page Express, multi-pages) et des boutiques en ligne (catalogue, panier, paiement). Si votre projet demande autre chose, je vous le dis honnêtement dès le premier échange plutôt que de promettre ce que je ne maîtrise pas.</p>
+        <p>Je crée des sites vitrines (Express, Pack Lancement, Vitrine multi-pages) et des boutiques en ligne (catalogue, panier, paiement). Si votre projet demande autre chose, je vous le dis honnêtement dès le premier échange plutôt que de promettre ce que je ne maîtrise pas.</p>
         <h2>Pour juger sur pièces</h2>
         <p>Vous pouvez voir mon travail : mon <a href="https://glsc.fr" rel="noopener">portfolio</a>, mes <a href="https://github.com/gabinlsc" rel="noopener">projets sur GitHub</a>, la <a href="https://games.glsc.fr" rel="noopener">salle de jeux</a> que j’ai développée, et les <a href="/#realisations">démos</a> de cette page. Les démos sont des maquettes fictives, pas des projets clients.</p>
       </div>
@@ -215,7 +236,7 @@ for (const m of METIERS) {
       ${faqHtml(m.faq)}
     </div></section>
     <section class="section"><div class="wrap"><div class="section-head"><div><p class="eyebrow">À lire aussi</p><h2>Pour aller plus loin</h2></div></div>${linkCards(related)}</div></section>` + ctaBand();
-  write(`/sites-pour/${m.slug}/`, shell({ path: `/sites-pour/${m.slug}/`, title: m.title, desc: m.desc, jsonld: [bc.ld, faqLd(m.faq), { '@type': 'Service', name: m.title, serviceType: 'Création de site vitrine', provider: orgRef, areaServed: 'Bretagne', offers: { '@type': 'Offer', name: 'One-Page Express', price: '400', priceCurrency: 'EUR' } }], body, search: [m.name, m.short, 'site', 'web', 'devis'] }));
+  write(`/sites-pour/${m.slug}/`, shell({ path: `/sites-pour/${m.slug}/`, title: m.title, desc: m.desc, jsonld: [bc.ld, faqLd(m.faq), { '@type': 'Service', name: m.title, serviceType: 'Création de site vitrine', provider: orgRef, areaServed: 'Bretagne', offers: { '@type': 'Offer', name: 'Express', price: String(OF.GAMMES[0].price), priceCurrency: 'EUR' } }], body, search: [m.name, m.short, 'site', 'web', 'devis'] }));
 }
 {
   const bc = crumbs([['Accueil', '/'], ['Sites par métier', '/sites-pour/']]);
@@ -226,7 +247,7 @@ for (const m of METIERS) {
 // ---------------------------------------------------------------- pages par ville
 for (const v of VILLES) {
   const bc = crumbs([['Accueil', '/'], ['Création de site web', '/creation-site-web/'], [v.name, `/creation-site-web/${v.slug}/`]]);
-  const common = [['Combien de temps faut-il pour avoir mon site ?', 'Pour la formule One-Page Express, la première version est présentée sous 48 h après réception des contenus et validation du périmètre. Les refontes et sites multi-pages sont chiffrés sur devis.'], ['Le site m’appartient-il ?', 'Oui. Au paiement intégral, vous devenez propriétaire de la conception graphique et du contenu créé pour vous, et les codes sources vous sont cédés. Aucun abonnement n’est imposé.']];
+  const common = [['Combien de temps faut-il pour avoir mon site ?', 'Pour les formules Express et Pack Lancement, la première version est présentée sous 48 h après réception des contenus et validation du périmètre. Les sites Vitrine et les boutiques sont chiffrés sur devis.'], ['Le site m’appartient-il ?', 'Oui. Au paiement intégral, vous devenez propriétaire de la conception graphique et du contenu créé pour vous, et les codes sources vous sont cédés. Aucun abonnement n’est imposé.']];
   const faq = [v.faq, ...common];
   const others = VILLES.filter((o) => o.slug !== v.slug);
   const body = pageHero({ bc: bc.html, eyebrow: `${v.name} · ${v.dept}`, h1: `Création de site web à ${v.name}`, lead: v.intro, extra: heroCtas }) + `
@@ -237,10 +258,11 @@ for (const v of VILLES) {
     <section class="section band"><div class="wrap">
       <div class="section-head"><div><p class="eyebrow">Tarifs</p><h2>Un prix clair, annoncé avant de commencer</h2></div><p>Le devis est gratuit et sans engagement. Les prix sont TTC (TVA non applicable).</p></div>
       <div class="pledge-grid four">
-        <article class="pledge"><h3>One-Page Express</h3><p class="price-inline">550 €</p><p>Une page sur mesure, boutons d’appel et WhatsApp, première version en 48 h* après validation du contenu.</p></article>
-        <article class="pledge"><h3>Refonte &amp; multi-pages</h3><p class="price-inline">Dès 750 €</p><p>Sur devis. Moderniser un ancien site ou présenter services, réalisations et tarifs sur plusieurs pages.</p></article>
-        <article class="pledge"><h3>E-commerce</h3><p class="price-inline">Dès 950 €</p><p>Sur devis. Catalogue de produits, panier, commande et paiement en ligne sécurisé.</p></article>
-        <article class="pledge"><h3>Abonnement Sérénité</h3><p class="price-inline">50 € / mois</p><p>Option, à ajouter à un site : hébergement sécurisé, SSL, sauvegardes et petites modifications. Ou 500 € par an.</p></article>
+        <article class="pledge"><h3>Express</h3><p class="price-inline">${OF.T.express}</p><p>Une page sur mesure, boutons d’appel et WhatsApp, première version en 48 h* après validation du contenu.</p></article>
+        <article class="pledge"><h3>Pack Lancement</h3><p class="price-inline">${OF.T.pack}</p><p>Votre site Express, votre fiche Google, un kit réseaux sociaux et la retouche de 10 photos : tout pour être trouvé dès le premier jour.</p></article>
+        <article class="pledge"><h3>Vitrine</h3><p class="price-inline">Dès ${OF.T.vitrine}</p><p>Sur devis. Moderniser un ancien site ou présenter services, réalisations et tarifs sur plusieurs pages.</p></article>
+        <article class="pledge"><h3>Boutique</h3><p class="price-inline">Dès ${OF.T.boutique}</p><p>Sur devis. Catalogue de produits, panier, commande et paiement en ligne sécurisé.</p></article>
+        <article class="pledge"><h3>Abonnement Sérénité</h3><p class="price-inline">De ${OF.T.sMin} à ${OF.eur(OF.SERENITE[2].month)} / mois</p><p>Option, à ajouter à un site : hébergement sécurisé, SSL, sauvegardes, puis modifications et suivi selon la formule.</p></article>
       </div>
       <p class="price-note">* Délai indicatif après réception des contenus et validation du périmètre.</p>
     </div></section>
@@ -252,7 +274,7 @@ for (const v of VILLES) {
     <section class="section"><div class="wrap"><div class="section-head"><div><p class="eyebrow">Autres zones</p><h2>Je travaille dans toute la Bretagne</h2></div></div>
       <ul class="chips-list">${others.map((o) => `<li><a href="/creation-site-web/${o.slug}/">${esc(o.name)}</a></li>`).join('')}</ul>
       <p class="muted mt">Vous cherchez un site pour votre métier ? <a class="inline-link" href="/sites-pour/">Voir les sites par métier</a>.</p></div></section>` + ctaBand(`Un site pour votre activité à ${v.name} ?`);
-  write(`/creation-site-web/${v.slug}/`, shell({ path: `/creation-site-web/${v.slug}/`, title: `Création de site web à ${v.name}`, desc: `StudioGLSC crée des sites vitrines et boutiques en ligne pour artisans, commerçants et indépendants à ${v.name}. One-Page Express 550 €, e-commerce dès 950 €.`, jsonld: [bc.ld, faqLd(faq), { ...orgRef, areaServed: { '@type': 'City', name: v.name, containedInPlace: { '@type': 'AdministrativeArea', name: v.dept } } }], body, search: [v.name, v.dept, 'ville', 'site', 'web'] }));
+  write(`/creation-site-web/${v.slug}/`, shell({ path: `/creation-site-web/${v.slug}/`, title: `Création de site web à ${v.name}`, desc: `StudioGLSC crée des sites vitrines et boutiques en ligne pour artisans, commerçants et indépendants à ${v.name}. Express ${OF.T.express}, boutique dès ${OF.T.boutique}.`.replace(/\u00a0/g, ' '), jsonld: [bc.ld, faqLd(faq), { ...orgRef, areaServed: { '@type': 'City', name: v.name, containedInPlace: { '@type': 'AdministrativeArea', name: v.dept } } }], body, search: [v.name, v.dept, 'ville', 'site', 'web'] }));
 }
 {
   const bc = crumbs([['Accueil', '/'], ['Création de site web', '/creation-site-web/']]);
@@ -345,7 +367,7 @@ const WORD_PATH = ''; // le logotype de la figure « zone de protection » est v
   ];
   const tones = [
     ['Clair', 'On dit ce qu’on fait, avec des mots simples.', 'Nous mettons en œuvre une solution digitale omnicanale.', 'Je crée votre site et il fonctionne sur téléphone.'],
-    ['Direct', 'Une phrase, une idée. Le prix et le délai d’abord.', 'Nos tarifs sont disponibles sur demande après étude.', 'One-Page Express : 550 €, première version en 48 h.'],
+    ['Direct', 'Une phrase, une idée. Le prix et le délai d’abord.', 'Nos tarifs sont disponibles sur demande après étude.', `Express : ${OF.T.express}, première version en 48 h.`],
     ['Humain', 'On parle à une personne, pas à un « utilisateur ».', 'Les utilisateurs peuvent contacter notre équipe.', 'Vous m’écrivez, je vous réponds moi-même.'],
     ['Honnête', 'On n’invente ni références, ni garanties.', 'Plus de 500 clients satisfaits.', 'Studio indépendant, quelques projets, un suivi de près.'],
   ];
@@ -452,7 +474,7 @@ const fixed = [
 const prio = (p) => (p === '/blog/' || p === '/sites-pour/' || p === '/creation-site-web/' || p === '/demos/' ? '0.7' : p.startsWith('/blog/') ? '0.6' : '0.8');
 const urls = [...fixed.map(([p, d, f, pr]) => ({ p, d, f, pr })), ...registry.map((r) => ({ p: r.path, d: CFG.date, f: 'monthly', pr: prio(r.path) }))];
 writeFileSync(join(ROOT, 'sitemap.xml'), `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls.map((u) => `  <url>\n    <loc>${ORIGIN}${u.p}</loc>\n    <lastmod>${u.d}</lastmod>\n    <changefreq>${u.f}</changefreq>\n    <priority>${u.pr}</priority>\n  </url>`).join('\n')}\n</urlset>\n`);
-const searchable = [{ path: '/', title: 'Accueil', desc: 'Création de sites vitrines, forfaits, réalisations, contact', keywords: 'accueil tarifs devis contact offres' }, { path: '/#offres', title: 'Tarifs et forfaits', desc: 'One-Page Express 550 €, multi-pages dès 750 €, e-commerce dès 950 €, abonnement 50 €/mois', keywords: 'prix tarif forfait hébergement' }, { path: '/#contact', title: 'Demander un devis', desc: 'Le premier échange est gratuit', keywords: 'contact devis téléphone email' }, { path: '/mentions-legales.html', title: 'Mentions légales', desc: 'Éditeur, hébergeur, données personnelles', keywords: 'légal rgpd cookies' }, { path: '/cgv.html', title: 'Conditions générales de vente', desc: 'Prix, délais, rétractation, garanties', keywords: 'cgv conditions vente' }, ...registry];
+const searchable = [{ path: '/', title: 'Accueil', desc: 'Création de sites vitrines, forfaits, réalisations, contact', keywords: 'accueil tarifs devis contact offres' }, { path: '/#offres', title: 'Tarifs et forfaits', desc: `Express ${OF.T.express}, Pack Lancement ${OF.T.pack}, vitrine dès ${OF.T.vitrine}, boutique dès ${OF.T.boutique}, abonnements dès ${OF.T.sMin}/mois`.replace(/\u00a0/g, ' '), keywords: 'prix tarif forfait hébergement pack lancement parrainage options' }, { path: '/#contact', title: 'Demander un devis', desc: 'Le premier échange est gratuit', keywords: 'contact devis téléphone email' }, { path: '/mentions-legales.html', title: 'Mentions légales', desc: 'Éditeur, hébergeur, données personnelles', keywords: 'légal rgpd cookies' }, { path: '/cgv.html', title: 'Conditions générales de vente', desc: 'Prix, délais, rétractation, garanties', keywords: 'cgv conditions vente' }, ...registry];
 mkdirSync(join(ROOT, 'assets'), { recursive: true });
 writeFileSync(join(ROOT, 'assets/search-index.json'), JSON.stringify(searchable.map((r) => ({ u: r.path, t: r.title, d: r.desc, k: r.keywords }))));
 console.log(`${registry.length} pages générées · plan du site : ${urls.length} adresses · index de recherche : ${searchable.length} entrées`);

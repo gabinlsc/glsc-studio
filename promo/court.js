@@ -21,6 +21,9 @@
     ? { hx: 0, hy: 330, hs: 1.12, fanY: 1380, fanC: 1.0, fanS: .8, fanX: 345 }
     : { hx: 480, hy: 0, hs: 1, fanY: 718, fanC: .8, fanS: .68, fanX: 520 };
 
+  const O = window.OFFRES, eur = (n) => String(n).replace(/\B(?=(\d{3})+(?!\d))/g, '\u00a0') + '\u00a0€';
+  [...$('#cChips').children].forEach((c, i) => { c.textContent = [`Express ${eur(O.express)}`, `Vitrine dès ${eur(O.vitrine[0][0])}`, `Boutique dès ${eur(O.boutique[0][0])}`][i]; });
+  $('#cFoot').textContent = `Sérénité dès ${eur(O.serenite.essentiel.month)} / mois  ·  Parrainage : ${eur(O.filleul)} offerts`;
   const META = {};
   const tf = (el, o) => {
     el.style.transform = `translate3d(${o.x || 0}px,${o.y || 0}px,${o.z || 0}px) rotateX(${o.rx || 0}deg) rotateY(${o.ry || 0}deg) rotateZ(${o.r || 0}deg) scale(${o.s == null ? 1 : o.s})`;
@@ -98,10 +101,9 @@
 
     /* ===== 3 · le prix ===== */
     const cl = t - T.C, pp = eo4(P(cl, .55, 2.1)), pop = spring(P(cl, .3, 1.3));
-    $('#cVal').textContent = Math.round(550 * pp);
+    $('#cVal').textContent = Math.round(O.pack * pp);
     tf($('#cKick'), { y: (1 - eo3(P(cl, .4, 1))) * -20, o: eo3(P(cl, .4, 1)) });
     tf($('#cPrice'), { s: lerp(.82, 1, pop), o: eo3(P(cl, .3, .8)), y: (1 - eo4(P(cl, .3, 1.2))) * 60 });
-    $('#cPrice').querySelector('u').style.opacity = eo3(P(cl, 1.6, 2.2));
     tf($('#cLabel'), { y: (1 - eo4(P(cl, 2.0, 2.8))) * 40, o: eo3(P(cl, 2.0, 2.8)), b: (1 - eo3(P(cl, 2.0, 2.8))) * 10 });
     [...$('#cChips').children].forEach((c, i) => { const a = 2.8 + i * .35, p = expo(P(cl, a, a + .9)); tf(c, { y: (1 - p) * 60, s: lerp(.92, 1, p), o: eo3(P(cl, a, a + .5)) }); });
     tf($('#cFoot'), { o: eo3(P(cl, 3.5, 4.1)) * (1 - eio(P(t, T.D - .5, T.D + .1))), y: (1 - eo3(P(cl, 3.5, 4.1))) * 20 });

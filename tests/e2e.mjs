@@ -13,22 +13,31 @@ pg.on('pageerror', (e) => errs.push(e.message)); pg.on('console', (m) => m.type(
 await pg.goto(base + '/', { waitUntil: 'networkidle' });
 // estimation
 const tot = async () => (await pg.textContent('#est-total')).replace(/\s/g, ' ');
-assert.equal(await tot(), '550 €'); ok('estimation par défaut : One-Page Express 550 €');
-await pg.check('input[name="est-host"][value="year"]', { force: true }); assert.equal(await tot(), '1 050 €'); ok('550 € + abonnement annuel (500 €) = 1 050 €');
-await pg.check('input[name="est-host"][value="month"]', { force: true }); assert.equal(await tot(), '1 150 €'); ok('550 € + abonnement mensuel (12 × 50 €) = 1 150 €');
-await pg.check('input[name="est-host"][value="none"]', { force: true });
-await pg.check('input[name="est-site"][value="multi"]', { force: true }); assert.equal(await pg.locator('fieldset[data-for="multi"]').isVisible(), true); assert.equal(await tot(), '750 € – 950 €'); ok('multi-pages : estimation de départ dès 750 €');
-await pg.check('input[name="est-pages"][value="2"]', { force: true }); assert.equal(await tot(), '1 250 € – 1 750 €'); ok('multi-pages : 7 à 10 pages');
-await pg.check('input[name="est-site"][value="ecom"]', { force: true }); assert.equal(await pg.locator('fieldset[data-for="ecom"]').isVisible(), true); assert.equal(await tot(), '950 € – 1 300 €'); ok('e-commerce : dès 950 €');
-await pg.check('input[name="est-prod"][value="2"]', { force: true }); assert.equal(await tot(), 'Dès 2 000 €'); await pg.check('input[name="est-host"][value="year"]', { force: true }); assert.equal(await tot(), 'Dès 2 500 €'); ok('e-commerce : plus de 50 produits + abonnement annuel');
-await pg.check('input[name="est-host"][value="none"]', { force: true }); await pg.check('input[name="est-site"][value="express"]', { force: true });
+assert.equal(await tot(), '590 €'); ok('estimation par défaut : Express 590 €');
+const radio = (n, v) => pg.check(`input[name="${n}"][value="${v}"]`, { force: true });
+await radio('est-plan', 'essentiel'); assert.equal(await pg.locator('fieldset[data-for-plan]').isVisible(), true);
+await radio('est-bill', 'year'); assert.equal(await tot(), '880 €'); ok('Express + Sérénité Essentiel à l’année (290 €) = 880 €');
+await radio('est-bill', 'month'); assert.equal(await tot(), '938 €'); ok('Express + Sérénité Essentiel au mois (12 × 29 €) = 938 €');
+await radio('est-plan', 'plus'); await radio('est-bill', 'year'); assert.equal(await tot(), '1 180 €'); ok('Express + Sérénité Plus à l’année (590 €) = 1 180 €');
+await radio('est-plan', 'none'); assert.equal(await pg.locator('fieldset[data-for-plan]').isVisible(), false);
+await pg.check('input[name="est-opt"][value="google"]', { force: true }); assert.equal(await tot(), '740 €'); ok('option fiche Google : + 150 €');
+await pg.check('input[name="est-ref"]', { force: true }); assert.equal(await tot(), '690 €'); ok('parrainage : − 50 €');
+await pg.uncheck('input[name="est-ref"]', { force: true });
+await radio('est-site', 'pack'); assert.equal(await tot(), '790 €'); assert.equal(await pg.locator('input[name="est-opt"][value="google"]').isVisible(), false); assert.equal(await pg.locator('input[name="est-opt"][value="google"]').isChecked(), false); ok('Pack Lancement : 790 €, options déjà incluses masquées');
+await radio('est-site', 'vitrine'); assert.equal(await pg.locator('fieldset[data-for="vitrine"]').isVisible(), true); assert.equal(await tot(), '990 € – 1 190 €'); ok('vitrine : estimation de départ dès 990 €');
+await radio('est-pages', '2'); assert.equal(await tot(), '1 490 € – 1 990 €'); ok('vitrine : 7 à 10 pages');
+await pg.check('input[name="est-opt"][value="page"]', { force: true }); assert.equal(await tot(), '1 610 € – 2 110 €'); assert.equal(await pg.locator('input[name="est-opt"][value="google"]').isVisible(), false); ok('vitrine : page supplémentaire ajoutée, fiche Google déjà incluse');
+await pg.uncheck('input[name="est-opt"][value="page"]', { force: true });
+await radio('est-site', 'boutique'); assert.equal(await pg.locator('fieldset[data-for="boutique"]').isVisible(), true); assert.equal(await tot(), '1 490 € – 1 890 €'); ok('boutique : dès 1 490 €');
+await radio('est-prod', '2'); assert.equal(await tot(), 'Dès 2 590 €'); await radio('est-plan', 'croissance'); await radio('est-bill', 'year'); assert.equal(await tot(), 'Dès 3 580 €'); ok('boutique : plus de 50 produits + Sérénité Croissance annuelle');
+await radio('est-plan', 'none'); await radio('est-site', 'express');
 // formulaire : erreurs en ligne
 await pg.evaluate(() => document.querySelector('#contact').scrollIntoView());
 assert.equal(await pg.locator('#step-back').isVisible(), false); assert.equal(await pg.locator('#step-send').isVisible(), false); ok('étape 1 : seul « Continuer » est visible');
 await pg.click('#step-next'); assert.match(await pg.textContent('[data-error="activity"]'), /Choisissez/); ok('étape 1 : erreur si rien n’est choisi');
 await pg.check('input[name=activity][value="Commerce"]', { force: true }); await pg.click('#step-next');
 assert.equal(await pg.textContent('#step-label'), 'Étape 2 sur 4'); ok('étape 2');
-await pg.check('input[name=service][value="One-Page Express"]', { force: true }); await pg.click('#step-next');
+await pg.check('input[name=service][value="Express"]', { force: true }); await pg.click('#step-next');
 await pg.check('input[name=timing][value="Dans le mois"]', { force: true }); await pg.click('#step-next');
 assert.equal(await pg.textContent('#step-label'), 'Étape 4 sur 4'); assert.equal(await pg.locator('#step-send').isVisible(), true); ok('étape 4 : bouton Envoyer');
 await pg.click('#step-send'); assert.match(await pg.textContent('#err-name'), /nom/); assert.match(await pg.textContent('#err-email'), /e-mail/); ok('erreurs nom et e-mail en ligne');
@@ -39,15 +48,15 @@ await pg.route('mailto:**', (r) => r.abort()).catch(() => {});
 await pg.route('**/api/contact', (r) => r.fulfill({ status: 503, body: '{}' }));
 await pg.click('#step-send'); await pg.waitForTimeout(300);
 assert.equal(await pg.locator('#form-done').isVisible(), true); assert.match(await pg.textContent('#done-title'), /Merci Léa/); assert.equal(await pg.locator('#done-fallback').isVisible(), true);
-const copy = await pg.inputValue('#done-copy'); assert.match(copy, /Activité : Commerce/); assert.match(copy, /Besoin : One-Page Express/); assert.match(copy, /Léa Martin/); ok('service indisponible : repli e-mail + message à copier');
+const copy = await pg.inputValue('#done-copy'); assert.match(copy, /Activité : Commerce/); assert.match(copy, /Besoin : Express/); assert.match(copy, /Léa Martin/); ok('service indisponible : repli e-mail + message à copier');
 await pg.unroute('**/api/contact'); let posted = null; await pg.route('**/api/contact', (r) => { posted = r.request().postDataJSON(); r.fulfill({ status: 201, contentType: 'application/json', body: '{"ok":true}' }); });
 await pg.click('#done-restart'); assert.equal(await pg.locator('#contact-form').isVisible(), true); assert.equal(await pg.textContent('#step-label'), 'Étape 1 sur 4'); ok('nouvelle demande réinitialise');
-await pg.check('input[name=activity][value="Commerce"]', { force: true }); await pg.click('#step-next'); await pg.check('input[name=service][value="One-Page Express"]', { force: true }); await pg.click('#step-next'); await pg.check('input[name=timing][value="Dans le mois"]', { force: true }); await pg.click('#step-next');
+await pg.check('input[name=activity][value="Commerce"]', { force: true }); await pg.click('#step-next'); await pg.check('input[name=service][value="Express"]', { force: true }); await pg.click('#step-next'); await pg.check('input[name=timing][value="Dans le mois"]', { force: true }); await pg.click('#step-next');
 await pg.fill('#form-name', 'Léa Martin'); await pg.fill('#form-email', 'lea@example.fr'); await pg.click('#step-send'); await pg.waitForSelector('#form-done:not([hidden])');
-assert.equal(await pg.locator('#done-fallback').isVisible(), false); assert.equal(posted.email, 'lea@example.fr'); assert.equal(posted.service, 'One-Page Express'); ok('service disponible : demande envoyée à /api/contact, sans repli');
+assert.equal(await pg.locator('#done-fallback').isVisible(), false); assert.equal(posted.email, 'lea@example.fr'); assert.equal(posted.service, 'Express'); ok('service disponible : demande envoyée à /api/contact, sans repli');
 await pg.click('#done-restart');
 // piège anti-robot : rien ne s'affiche
-await pg.check('input[name=activity][value="Commerce"]', { force: true }); await pg.click('#step-next'); await pg.check('input[name=service][value="One-Page Express"]', { force: true }); await pg.click('#step-next'); await pg.check('input[name=timing][value="Dans le mois"]', { force: true }); await pg.click('#step-next');
+await pg.check('input[name=activity][value="Commerce"]', { force: true }); await pg.click('#step-next'); await pg.check('input[name=service][value="Express"]', { force: true }); await pg.click('#step-next'); await pg.check('input[name=timing][value="Dans le mois"]', { force: true }); await pg.click('#step-next');
 await pg.fill('#form-name', 'Bot'); await pg.fill('#form-email', 'bot@example.fr'); await pg.evaluate(() => { document.querySelector('input[name=website]').value = 'http://spam'; }); await pg.click('#step-send');
 assert.equal(await pg.locator('#form-done').isVisible(), false); ok('champ piège rempli : rien n’est envoyé');
 // démos
@@ -71,11 +80,16 @@ assert.match(await pg.evaluate(() => document.querySelector('#film-video source'
 assert.equal(await pg.getAttribute('#film-box', 'data-fmt'), 'v'); assert.match(await pg.evaluate(() => document.querySelector('#film-video').getAttribute('poster')), /court-v\.webp$/);
 for (const u of ['complet-h.mp4', 'court-v.mp4', 'court-v.webp']) { const r = await pg.evaluate((x) => fetch('/assets/video/studioglsc-' + x, { method: 'HEAD' }).then((q) => q.status + ' ' + q.headers.get('content-type')), u); assert.match(r, /^200 (video\/mp4|image\/webp)/, u + ' : ' + r); }
 ok('film : durée et format changent la source, fichiers présents');
-assert.equal(await pg.locator('.price-card').count(), 3); assert.match(await pg.textContent('#offres'), /550 €/); assert.match(await pg.textContent('#offres'), /950 €/); assert.match(await pg.textContent('#offres'), /50 € \/ mois/); assert.doesNotMatch(await pg.textContent('body'), /400 €|non proposée/); ok('tarifs : 550 € / dès 750 € / dès 950 € / abonnement 50 € et 500 €, aucune trace de l’ancien prix');
+const off = (await pg.textContent('#offres')).replace(/\s/g, ' ');
+assert.equal(await pg.locator('.price-card').count(), 3); assert.equal(await pg.locator('.plan').count(), 3); assert.equal(await pg.locator('.opts-grid li').count(), 4); assert.equal(await pg.locator('.pack').count(), 1); assert.equal(await pg.locator('.referral').count(), 1);
+for (const t of [/590 €/, /790 €/, /au lieu de 890 €/, /dès 990 €/, /1 490 €/, /29 € \/ mois/, /59 € \/ mois/, /99 € \/ mois/, /290 € \/ an/, /50 € de remise/, /50 € de crédit/]) assert.match(off, t, String(t));
+assert.doesNotMatch((await pg.textContent('body')).replace(/\s/g, ' '), /550 €|750 €|950 €|400 €|One-Page|non proposée|50 € \/ mois ou 500/); ok('offre : Pack Lancement 790 €, Express 590 €, Vitrine dès 990 €, Boutique dès 1 490 €, Sérénité 29/59/99 €, options, parrainage, aucune trace des anciens prix');
+// les cartes Vitrine et Boutique ouvrent l'estimation avec la bonne formule
+await pg.click('[data-pick="boutique"]'); assert.equal(await pg.locator('input[name="est-site"][value="boutique"]').isChecked(), true); await pg.check('input[name="est-site"][value="express"]', { force: true }); ok('carte Boutique : ouvre l’estimation sur la boutique');
 // estimation -> formulaire
-await pg.check('input[name="est-site"][value="express"]', { force: true }); await pg.check('input[name="est-host"][value="none"]', { force: true });
+await pg.check('input[name="est-site"][value="pack"]', { force: true }); await pg.check('input[name="est-plan"][value="plus"]', { force: true });
 await pg.evaluate(() => document.querySelector('#estimate').scrollIntoView()); await pg.click('#est-cta'); await pg.waitForTimeout(400);
-assert.equal(await pg.locator('input[name=service][value="One-Page Express"]').isChecked(), true); ok('« Demander ce devis » préremplit le formulaire');
+assert.equal(await pg.locator('input[name=service][value="Pack Lancement"]').isChecked(), true); assert.match(await pg.inputValue('#form-message'), /Mon estimation : Pack Lancement 790 €.*Sérénité Plus/s); ok('« Demander ce devis » préremplit le besoin et le message');
 assert.deepEqual(errs, []); ok('aucune erreur JS');
 await home.close();
 

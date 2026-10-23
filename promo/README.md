@@ -17,4 +17,4 @@ CHROMIUM_PATH=… node promo/render.mjs promo/dist/studioglsc-court.mp4 --audio 
 CHROMIUM_PATH=… node promo/render.mjs --frames 5,12.5,41 /tmp/controle   # images fixes pour vérifier
 ```
 
-Pour changer un texte, un prix ou une durée : modifier `index.html` / `promo.js` (les instants des scènes sont dans l'objet `T`, les coupes de la musique dans `audio.py`). Les prix du film suivent le site : 550 €, dès 750 €, dès 950 €.
+Pour changer un texte, un prix ou une durée : modifier `index.html` / `promo.js` (les instants des scènes sont dans l'objet `T`, les coupes de la musique dans `audio.py`). Les prix des films suivent le site : ils sont lus dans `assets/offres.js`, généré par `node tools/build-site.mjs` depuis `tools/content/offres.mjs`. Après un changement de prix, relancer le build puis refaire les films.

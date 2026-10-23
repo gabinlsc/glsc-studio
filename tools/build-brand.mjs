@@ -40,7 +40,7 @@ await shot('studioglsc-banniere-1500x500.png', 1500, 500, `<div style="width:150
   ul{position:absolute;left:72px;top:510px;margin:0;padding:0;display:flex;gap:16px;list-style:none}li{padding:14px 18px;border:1.5px solid #cfd5e1;border-radius:999px;background:#fff;font:600 22px/1 Inter}
   </style><div class=bar></div><div class=brand>${readFileSync(join(OUT, 'studioglsc-monogramme.svg'), 'utf8').replace(/ width="[\d.]+" height="[\d.]+"/, '')}<span>Studio<b>GLSC</b></span></div>
   <h1>Un site web<span>à votre image.</span></h1><p>Sites vitrines rapides et adaptés au mobile, en Bretagne.</p>
-  <ul><li>Première version sous 48 h</li><li>One-Page Express · 550 €</li><li>Sans abonnement obligatoire</li></ul>`;
+  <ul><li>Première version sous 48 h</li><li>Express · 590 €</li><li>Sans abonnement obligatoire</li></ul>`;
   writeFileSync(join(dir, 'og.html'), html);
   const pg = await ctx.newPage(); await pg.setViewportSize({ width: 1200, height: 630 }); await pg.goto('file://' + join(dir, 'og.html')); await pg.waitForTimeout(400);
   await pg.screenshot({ path: join(ROOT, 'assets/img/og.png'), clip: { x: 0, y: 0, width: 1200, height: 630 } }); console.log('og.png');

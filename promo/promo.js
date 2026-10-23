@@ -20,6 +20,9 @@
   const T = { A: 0, B: 4.2, C: 10.4, D: 18.6, E: 23.6, F: 30.4, G: 36.6, H: 40.3 };
   window.CUTS = Object.values(T).slice(1);
 
+  const O = window.OFFRES, PRICE = { express: O.express, pack: O.pack, vitrine: O.vitrine[0][0], boutique: O.boutique[0][0] };
+  const eur = (n) => String(n).replace(/\B(?=(\d{3})+(?!\d))/g, '\u00a0') + '\u00a0€';
+  $('#fFoot').textContent = `Boutique dès ${eur(PRICE.boutique)}  ·  Sérénité dès ${eur(O.serenite.essentiel.month)} / mois  ·  Parrainage : ${eur(O.filleul)} offerts`;
   const META = {};
   const SHOTS = ['home', 'restaurant', 'coiffeur', 'photographe', 'gite', 'club', 'btp'];
   const tf = (el, o) => {
@@ -154,7 +157,7 @@
     words(wF, t, T.F + .6, { stagger: .12 });
     [...$('#fPrices').children].forEach((pc, i) => {
       const a = T.F + 1.1 + i * .38, p = expo(P(t, a, a + 1.0)); tf(pc, { y: (1 - p) * 120, o: eo3(P(t, a, a + .5)), s: lerp(.94, 1, p), b: (1 - p) * 8 });
-      const b = $('b', pc), v = +b.dataset.v; b.textContent = Math.round(v * eo4(P(t, a + .25, a + 1.6)));
+      const b = $('b', pc), v = PRICE[b.dataset.k]; b.textContent = Math.round(v * eo4(P(t, a + .25, a + 1.6)));
     });
     tf($('#fFoot'), { o: eo3(P(t, T.F + 3.2, T.F + 4)), y: (1 - eo3(P(t, T.F + 3.2, T.F + 4))) * 30 });
     out($('#fPrices'), t, 35.9, 36.6, -50); out($('#fTitle'), t, 35.9, 36.6, -40); out($('#fFoot'), t, 35.9, 36.6, 20);
