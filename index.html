@@ -25,7 +25,7 @@
   <link rel="preload" href="/assets/fonts/inter-400.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/assets/fonts/inter-display-700.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="/assets/studio.css?v=ae4d0bea">
-  <link rel="stylesheet" href="/assets/offres.css?v=04af5560">
+  <link rel="stylesheet" href="/assets/offres.css?v=ffc03351">
   <link rel="stylesheet" href="/assets/fx.css?v=e1f2f212">
   <script src="/assets/theme-init.js?v=74add099"></script>
   <script src="/assets/fx.js?v=f253bbf4"></script>
@@ -309,54 +309,60 @@
             </table>
           </div>
         </div>
-        <form class="estimate reveal" id="estimate" aria-labelledby="estimate-title" onsubmit="return false">
-          <div class="estimate-head"><span class="eyebrow">Estimation</span><h3 id="estimate-title">Combien ça coûte pour moi ?</h3></div>
-          <div class="estimate-grid">
-            <div class="estimate-fields">
-              <fieldset><legend>Votre projet</legend>
-                <label class="choice"><input type="radio" name="est-site" value="express" checked><span><strong>Express</strong><small>590 €, une page</small></span></label>
-                <label class="choice"><input type="radio" name="est-site" value="pack"><span><strong>Pack Lancement</strong><small>790 €, site + fiche Google + visuels</small></span></label>
-                <label class="choice"><input type="radio" name="est-site" value="vitrine"><span><strong>Vitrine</strong><small>Dès 990 €, sur devis</small></span></label>
-                <label class="choice"><input type="radio" name="est-site" value="boutique"><span><strong>Boutique</strong><small>Dès 1 490 €, sur devis</small></span></label>
+        <form class="estimate est reveal" id="estimate" aria-labelledby="estimate-title" onsubmit="return false">
+          <div class="estimate-head"><span class="eyebrow">Estimation</span><h3 id="estimate-title">Combien ça coûte pour moi ?</h3><p class="muted">Composez votre projet : le total se met à jour tout de suite.</p></div>
+          <div class="est-layout">
+            <div class="est-steps">
+              <fieldset class="est-step"><legend><i>1</i>Votre projet</legend>
+                <div class="est-cards">
+                  <label class="choice est-card"><input type="radio" name="est-site" value="express" checked><span><strong>Express</strong><b>590 €</b><small>Une page, première version en 48 h</small></span></label>
+                  <label class="choice est-card"><input type="radio" name="est-site" value="pack"><span><em class="est-tag">Le plus choisi</em><strong>Pack Lancement</strong><b>790 €</b><small>Site + fiche Google + visuels</small></span></label>
+                  <label class="choice est-card"><input type="radio" name="est-site" value="vitrine"><span><strong>Vitrine</strong><b>dès 990 €</b><small>Plusieurs pages, sur devis</small></span></label>
+                  <label class="choice est-card"><input type="radio" name="est-site" value="boutique"><span><strong>Boutique</strong><b>dès 1 490 €</b><small>Vendre en ligne, sur devis</small></span></label>
+                </div>
               </fieldset>
-              <fieldset data-for="vitrine" hidden><legend>Nombre de pages</legend>
-                <label class="choice"><input type="radio" name="est-pages" value="0" checked><span><strong>2 à 3 pages</strong></span></label>
-                <label class="choice"><input type="radio" name="est-pages" value="1"><span><strong>4 à 6 pages</strong></span></label>
-                <label class="choice"><input type="radio" name="est-pages" value="2"><span><strong>7 à 10 pages</strong></span></label>
+              <fieldset class="est-step est-sub" data-for="vitrine" hidden><legend><i>↳</i>Nombre de pages</legend>
+                <div class="seg"><label class="choice"><input type="radio" name="est-pages" value="0" checked><span>2 à 3 pages</span></label><label class="choice"><input type="radio" name="est-pages" value="1"><span>4 à 6 pages</span></label><label class="choice"><input type="radio" name="est-pages" value="2"><span>7 à 10 pages</span></label></div>
               </fieldset>
-              <fieldset data-for="boutique" hidden><legend>Taille de la boutique</legend>
-                <label class="choice"><input type="radio" name="est-prod" value="0" checked><span><strong>Jusqu’à 10 produits</strong></span></label>
-                <label class="choice"><input type="radio" name="est-prod" value="1"><span><strong>11 à 50 produits</strong></span></label>
-                <label class="choice"><input type="radio" name="est-prod" value="2"><span><strong>Plus de 50 produits</strong></span></label>
+              <fieldset class="est-step est-sub" data-for="boutique" hidden><legend><i>↳</i>Taille de la boutique</legend>
+                <div class="seg"><label class="choice"><input type="radio" name="est-prod" value="0" checked><span>Jusqu’à 10 produits</span></label><label class="choice"><input type="radio" name="est-prod" value="1"><span>11 à 50 produits</span></label><label class="choice"><input type="radio" name="est-prod" value="2"><span>Plus de 50 produits</span></label></div>
               </fieldset>
-              <fieldset class="est-opts"><legend>Options à la carte</legend>
-                <label class="choice" data-hide-for="pack vitrine"><input type="checkbox" name="est-opt" value="google"><span><strong>Fiche Google Business Profile</strong><small>150 €</small></span></label>
-                <label class="choice" data-hide-for="pack"><input type="checkbox" name="est-opt" value="reseaux"><span><strong>Kit réseaux sociaux</strong><small>90 €</small></span></label>
-                <label class="choice" data-hide-for="pack vitrine"><input type="checkbox" name="est-opt" value="photos"><span><strong>Retouche photo</strong><small>60 €</small></span></label>
-                <label class="choice" data-hide-for="express pack boutique"><input type="checkbox" name="est-opt" value="page"><span><strong>Page supplémentaire</strong><small>120 €</small></span></label>
+              <fieldset class="est-step"><legend><i>2</i>Options à la carte</legend>
+                <div class="est-chips">
+                  <label class="choice est-chip" data-hide-for="pack vitrine"><input type="checkbox" name="est-opt" value="google"><span>Fiche Google Business Profile<b>+ 150 €</b></span></label>
+                  <label class="choice est-chip" data-hide-for="pack"><input type="checkbox" name="est-opt" value="reseaux"><span>Kit réseaux sociaux<b>+ 90 €</b></span></label>
+                  <label class="choice est-chip" data-hide-for="pack vitrine"><input type="checkbox" name="est-opt" value="photos"><span>Retouche photo<b>+ 60 €</b></span></label>
+                  <label class="choice est-chip" data-hide-for="express pack boutique"><input type="checkbox" name="est-opt" value="page"><span>Page supplémentaire<b>+ 120 €</b></span></label>
+                </div>
+                <p class="est-none muted" hidden>Rien à ajouter ici : ces options sont déjà incluses dans votre formule.</p>
               </fieldset>
-              <fieldset><legend>Abonnement Sérénité (option)</legend>
-                <label class="choice"><input type="radio" name="est-plan" value="none" checked><span><strong>Sans abonnement</strong><small>Je m’occupe de l’hébergement</small></span></label>
-                <label class="choice"><input type="radio" name="est-plan" value="essentiel"><span><strong>Essentiel</strong><small>29 € / mois</small></span></label>
-                <label class="choice"><input type="radio" name="est-plan" value="plus"><span><strong>Plus</strong><small>59 € / mois</small></span></label>
-                <label class="choice"><input type="radio" name="est-plan" value="croissance"><span><strong>Croissance</strong><small>99 € / mois</small></span></label>
+              <fieldset class="est-step"><legend><i>3</i>Abonnement Sérénité <small>(option)</small></legend>
+                <div class="est-plans">
+                  <label class="choice est-plan"><input type="radio" name="est-plan" value="none" checked><span><strong>Aucun</strong><small>Je gère l’hébergement</small></span></label>
+                  <label class="choice est-plan"><input type="radio" name="est-plan" value="essentiel"><span><strong>Essentiel</strong><small>29 € / mois</small></span></label>
+                  <label class="choice est-plan"><input type="radio" name="est-plan" value="plus"><span><strong>Plus</strong><small>59 € / mois</small></span></label>
+                  <label class="choice est-plan"><input type="radio" name="est-plan" value="croissance"><span><strong>Croissance</strong><small>99 € / mois</small></span></label>
+                </div>
+                <fieldset class="est-bill" data-for-plan hidden><legend class="sr-only">Facturation de l’abonnement</legend>
+                  <div class="seg">
+                    <label class="choice"><input type="radio" name="est-bill" value="month" checked><span>Au mois</span></label>
+                    <label class="choice"><input type="radio" name="est-bill" value="year"><span>À l’année · 2 mois offerts</span></label>
+                  </div>
+                </fieldset>
                 <p class="estimate-hint">L’abonnement s’ajoute à un site : il ne se prend pas seul.</p>
               </fieldset>
-              <fieldset data-for-plan hidden><legend>Facturation de l’abonnement</legend>
-                <label class="choice"><input type="radio" name="est-bill" value="month" checked><span><strong>Au mois</strong><small>Sans engagement</small></span></label>
-                <label class="choice"><input type="radio" name="est-bill" value="year"><span><strong>À l’année</strong><small>2 mois offerts</small></span></label>
-              </fieldset>
-              <fieldset><legend>Parrainage</legend>
-                <label class="choice"><input type="checkbox" name="est-ref"><span><strong>Un client StudioGLSC m’a recommandé</strong><small>− 50 € sur la création</small></span></label>
+              <fieldset class="est-step"><legend><i>4</i>Parrainage</legend>
+                <label class="choice est-ref"><input type="checkbox" name="est-ref"><span><strong>Un client StudioGLSC m’a recommandé</strong><small>− 50 € sur la création de mon site</small></span></label>
               </fieldset>
             </div>
-            <div class="estimate-result" aria-live="polite">
+            <aside class="est-sum estimate-result" aria-live="polite">
               <p class="estimate-label" id="est-label">Votre première année</p>
               <p class="estimate-total" id="est-total">590 €</p>
               <ul class="estimate-lines" id="est-lines"></ul>
               <p class="estimate-note" id="est-note">Prix TTC : TVA non applicable (franchise en base, article 293 B du CGI). Estimation indicative, le devis fait foi.</p>
               <button type="button" class="btn btn-primary" id="est-cta">Demander ce devis <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></button>
-            </div>
+              <p class="est-reassure">Devis gratuit, sans engagement</p>
+            </aside>
           </div>
         </form>
         <div class="timeline reveal" aria-label="Les étapes de livraison en 48 heures">
@@ -590,6 +596,6 @@
   <div class="m-cta" role="region" aria-label="Contact rapide"><a class="btn btn-primary" href="#contact">Devis gratuit</a><a class="btn btn-secondary" data-phone-link aria-disabled="true" tabindex="-1"><svg class="icon" aria-hidden="true"><use href="#i-phone"/></svg> Appeler</a></div>
   <script src="/assets/studio.js?v=8e609c6b" defer></script>
   <script src="/assets/offres.js?v=7690aaf4" defer></script>
-  <script src="/assets/home.js?v=9ca515de" defer></script>
+  <script src="/assets/home.js?v=77235249" defer></script>
 </body>
 </html>
