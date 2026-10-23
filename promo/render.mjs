@@ -16,7 +16,7 @@ const VW = vertical ? 1080 : 1920, VH = vertical ? 1920 : 1080;
 const ctx = await b.newContext({ viewport: { width: VW, height: VH }, deviceScaleFactor: 1 });
 const pg = await ctx.newPage();
 pg.on('pageerror', (e) => console.error('ERREUR PAGE', e.message));
-await pg.goto(base + `/promo/index.html?f=${vertical ? 'v' : 'h'}&s=${short ? 1 : 0}`); await pg.waitForFunction(() => window.READY === true, null, { timeout: 30000 });
+await pg.goto(base + `/promo/${short ? 'court' : 'index'}.html?f=${vertical ? 'v' : 'h'}`); await pg.waitForFunction(() => window.READY === true, null, { timeout: 30000 });
 
 if (args[0] === '--frames') {
   const dir = args.slice(2).find((a) => !a.startsWith('--')); mkdirSync(dir, { recursive: true });

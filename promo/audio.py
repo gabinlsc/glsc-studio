@@ -3,11 +3,11 @@
    Aucun échantillon externe, aucune musique sous licence. Sortie : promo/audio/bande-son.wav (44,1 kHz stéréo)."""
 import os, sys, numpy as np, wave
 SHORT = 'short' in sys.argv[1:]  # version courte (~14,5 s)
-SR = 44100; DUR = 14.5 if SHORT else 47.0; N = int(SR * DUR)
+SR = 44100; DUR = 17.6 if SHORT else 47.0; N = int(SR * DUR)
 rng = np.random.default_rng(7)
 t = np.arange(N) / SR
-CUTS = [2.2, 4.1, 6.3, 8.2, 10.1] if SHORT else [4.2, 10.4, 18.6, 23.6, 30.4, 36.6, 40.3]
-T_PULSE, T_ARP, T_END, T_CLICK, BELLS = (2.0, 2.4, 13.4, 10.05, (10.9, 10.95, 11.8, 12.5)) if SHORT else (4.0, 10.7, 37.0, 39.55, (40.95, 41.0, 42.35, 43.45))
+CUTS = [4.0, 8.2, 12.2] if SHORT else [4.2, 10.4, 18.6, 23.6, 30.4, 36.6, 40.3]
+T_PULSE, T_ARP, T_END, T_CLICK, BELLS = (1.6, 4.6, 12.0, 12.15, (13.15, 13.2, 14.6, 15.7)) if SHORT else (4.0, 10.7, 37.0, 39.55, (40.95, 41.0, 42.35, 43.45))
 L = np.zeros(N); R = np.zeros(N)
 
 def hz(note):  # note MIDI -> Hz

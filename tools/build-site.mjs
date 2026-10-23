@@ -16,7 +16,7 @@ const ORIGIN = CFG.origin;
 const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 const icon = (id, cls = 'icon') => `<svg class="${cls}" aria-hidden="true"><use href="#i-${id}"/></svg>`;
 const dateFr = (iso) => new Date(iso + 'T12:00:00Z').toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'UTC' });
-const FILMS = [['complet-h', 'Film complet, horizontal', '47 s · 1280 × 720'], ['complet-v', 'Film complet, vertical', '47 s · 720 × 1280'], ['court-h', 'Version courte, horizontale', '15 s · 1280 × 720'], ['court-v', 'Version courte, verticale', '15 s · 720 × 1280']];
+const FILMS = [['complet-h', 'Film complet, horizontal', '47 s · 1280 × 720'], ['complet-v', 'Film complet, vertical', '47 s · 720 × 1280'], ['court-h', 'Version courte, horizontale', '17 s · 1280 × 720'], ['court-v', 'Version courte, verticale', '17 s · 720 × 1280']];
 const fileSize = (u) => { const b = statSync(join(ROOT, u)).size; return (b / 1048576).toFixed(1).replace('.', ',') + ' Mo'; };
 const words = (s) => s.split(/\s+/).filter(Boolean).length;
 
