@@ -42,3 +42,5 @@
   .pack { grid-template-columns: 1.05fr .95fr; gap: 48px; align-items: center; }
   .opts-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); } .opts-grid li { grid-template-columns: 1fr; } .opt-price { order: -1; }
 }
+.pricing-label { margin-top: 56px; } .section-head + .pricing-label { margin-top: 0; }
+.plan .badge { align-self: flex-start; }

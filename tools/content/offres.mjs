@@ -15,7 +15,7 @@ export const GAMMES = [
   {
     id: 'vitrine', name: 'Vitrine', service: 'Vitrine', price: 990, from: true, quote: true, badge: 'Le site complet',
     pitch: 'Plusieurs pages pour présenter vos services, vos réalisations et vos tarifs, ou moderniser un site existant.',
-    includes: ['Jusqu’à 10 pages (services, réalisations, tarifs, contact…)', 'Référencement local et vitesse optimisés', 'Fiche Google Business Profile optimisée', 'Retouche de vos photos', '3 tours de retouches inclus', 'Mesure des visites sans cookies'],
+    includes: ['Jusqu’à 10 pages (services, réalisations, tarifs, contact…)', 'Référencement local et vitesse optimisés', 'Fiche Google Business Profile optimisée', 'Retouche de vos photos', '3 tours de retouches inclus', 'Mise en ligne accompagnée'],
     cta: 'Estimer ma vitrine', pageNote: 'De 2 à 10 pages',
   },
   {

@@ -35,6 +35,10 @@ Le formulaire pose trois questions (activité, besoin, délai) puis demande les 
 
 Sur le serveur, en root : `curl -fsSL https://raw.githubusercontent.com/gabinlsc/glsc-studio/main/deploy.sh | sudo bash` (ajouter `-s -- <branche>` pour une autre branche). Le script lit le dossier du site dans nginx, sauvegarde l'existant dans `/var/backups/glsc`, vérifie que le site répond et revient en arrière sinon.
 
+## Offre et prix
+
+Tout ce qui touche à l'offre (gammes Express, Vitrine, Boutique, Pack Lancement, abonnements Sérénité, options à la carte, parrainage) vient d'un seul fichier : `tools/content/offres.mjs`. `node tools/build-site.mjs` en génère la section « Offres » de l'accueil, l'estimateur, la FAQ, les choix du formulaire, les données structurées, les pages métiers, villes et blog (jetons `{{express}}`, `{{pack}}`…), les articles 3 et 10 des CGV et `assets/offres.js` (lu par l'estimateur et par les films). Pour changer un prix : le modifier dans ce fichier, relancer le build, puis refaire les films (`promo/`). Le service de demandes du portfolio (`deploy/studio/server.mjs`, liste `SERVICES`) doit accepter les noms de besoins de `SERVICES` dans `offres.mjs`.
+
 ## Pages de contenu et référencement
 
 `node tools/build-site.mjs` régénère : à propos, une page par métier, une page par ville, le blog, le plan du site (`sitemap.xml`), l'index de recherche et les colonnes de liens du pied de page (dans `index.html`, entre les repères `@footer-cols`). L'en-tête, le pied de page et les icônes viennent d'`index.html` : on ne les maintient qu'à un seul endroit.
