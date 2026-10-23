@@ -67,7 +67,8 @@ assert.match(await pg.getAttribute('#demo-open', 'href'), /demos\/btp\//); asser
 await pg.click('.sc-switch button[data-device="desktop"]'); assert.equal(await pg.getAttribute('#showcase', 'data-device'), 'desktop'); assert.equal(await pg.getAttribute('.sc-switch button[data-device="desktop"]', 'aria-pressed'), 'true'); ok('bascule mobile / ordinateur');
 await pg.focus('.sc-tab[aria-selected="true"]'); await pg.keyboard.press('ArrowUp'); assert.equal(await pg.getAttribute('.sc-tab:nth-child(5)', 'aria-selected'), 'true'); ok('sélecteur de démos au clavier');
 // rail
-assert.equal(await pg.locator('#rail').isVisible(), true); await pg.evaluate(() => document.querySelector('#engagements').scrollIntoView()); await pg.waitForTimeout(600);
+assert.equal(await pg.locator('#rail').isVisible(), true); await pg.evaluate(() => document.querySelector('#engagements').scrollIntoView({ behavior: 'instant' })); /* défilement instantané : la page est longue, un défilement fluide n'est pas fini au bout de 600 ms sur une machine lente */
+for (let i = 0; i < 50 && (await pg.locator('#rail a[aria-current="location"]').getAttribute('href').catch(() => null)) !== '#engagements'; i++) await pg.waitForTimeout(100);
 assert.equal(await pg.locator('#rail a[aria-current="location"]').getAttribute('href'), '#engagements'); ok('sommaire latéral suit la section');
 // bouton rendez-vous : Cal.com
 assert.equal(await pg.getAttribute('[data-booking-link]', 'href'), 'https://cal.com/studioglsc/premier-echange'); ok('rendez-vous : lien Cal.com du premier échange');
