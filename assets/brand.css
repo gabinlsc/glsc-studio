@@ -25,12 +25,6 @@
 .fx-on .bk-tag { animation: fx-bob 6s ease-in-out infinite; } .fx-on .bk-tag.t2 { animation-delay: -2s; } .fx-on .bk-tag.t3 { animation-delay: -4s; }
 @media (min-width: 960px) { .bk-hero-grid { grid-template-columns: 1.1fr .9fr; } }
 
-.bk-nav { position: sticky; top: 64px; z-index: 40; background: color-mix(in srgb, var(--bg) 88%, transparent); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-block: 1px solid var(--line); }
-.bk-nav .wrap { display: flex; gap: 4px; overflow-x: auto; padding-block: 8px; scrollbar-width: none; }
-.bk-nav .wrap::-webkit-scrollbar { display: none; }
-.bk-nav a { flex: none; padding: 8px 14px; border-radius: 999px; color: var(--muted); font: 600 .9rem/1 var(--font); text-decoration: none; transition: background .2s, color .2s; }
-.bk-nav a:hover { color: var(--ink); background: var(--surface-2); }
-.bk-nav a[aria-current="true"] { background: var(--accent); color: var(--accent-ink); }
 
 .bk-bg-switch { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; margin-bottom: 22px; }
 .bk-bg-switch span { margin-right: 6px; color: var(--muted); font-size: .92rem; }
