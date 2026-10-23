@@ -55,7 +55,7 @@ ok('démos : avec « réduire les animations », tout le contenu est visible');
   await pg.click('.sw-btn[aria-label="Cuivre"]'); assert.equal(await pg.textContent('#nu-name'), 'Cuivre'); assert.equal(await pg.getAttribute('.sw-btn[aria-label="Cuivre"]', 'aria-checked'), 'true'); ok('coiffeur : le nuancier change la teinte et les infos');
   await pg.focus('.sw-btn[aria-label="Cuivre"]'); await pg.keyboard.press('ArrowRight'); assert.equal(await pg.textContent('#nu-name'), 'Rouge acajou'); ok('coiffeur : nuancier au clavier');
   await pg.click('#acc .acc-item:nth-child(2) button'); assert.equal(await pg.getAttribute('#acc .acc-item:nth-child(2) button', 'aria-expanded'), 'true'); ok('coiffeur : accordéon');
-  await pg.click('#r-presta [role=radio]:nth-child(3)'); await pg.waitForSelector('#r-times button:not([disabled])'); await pg.locator('#r-times button:not([disabled])').first().click();
+  await pg.click('#r-presta [role=radio]:nth-child(3)'); await pg.click('#r-days [role=radio]:last-child'); /* un autre jour : le jour même n'a plus de créneau en fin de journée */ await pg.waitForSelector('#r-times button:not([disabled])'); await pg.locator('#r-times button:not([disabled])').first().click();
   await pg.click('#rdv-form [type=submit]'); assert.match(await pg.textContent('#e-name'), /nom/);
   await pg.fill('#r-name', 'Paul'); await pg.fill('#r-tel', '0612345678'); await pg.click('#rdv-form [type=submit]'); assert.equal(await pg.locator('#r-done').isVisible(), true); ok('coiffeur : rendez-vous'); await ctx.close();
 }

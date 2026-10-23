@@ -1,0 +1,3 @@
+Polices des démonstrations (démos fictives de StudioGLSC)
+
+Cormorant, DM Serif, Fraunces, Instrument Serif, Inter Tight et Manrope sont distribuées sous la licence SIL Open Font License 1.1 par leurs auteurs respectifs (Google Fonts). Le texte complet de cette licence figure dans assets/fonts/LICENSE-Inter-OFL.txt : il est identique pour toutes ces polices. Les noms des polices et les mentions de droits d'auteur restent ceux de leurs auteurs.
