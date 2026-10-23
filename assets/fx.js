@@ -146,14 +146,18 @@
     var header = $('#header'), top = $('.fx-top'), mcta = $('.m-cta'), ring = top && $('.pr', top), C = 2 * Math.PI * 22;
     if (ring) { ring.style.strokeDasharray = C; ring.style.strokeDashoffset = C; }
     var contact = $('#contact'), heroEl = $('.hero');
-    var lastY = 0, small = matchMedia('(max-width: 720px)');
+    var lastY = 0, run = 0, small = matchMedia('(max-width: 720px)');
     var onScroll = raf(function () {
       var y = scrollY, h = document.documentElement.scrollHeight - innerHeight, p = h > 0 ? y / h : 0;
       if (header) {
         header.classList.toggle('fx-stuck', y > 8);
         var open = document.getElementById('menu-toggle') && document.getElementById('menu-toggle').getAttribute('aria-expanded') === 'true';
-        header.classList.toggle('fx-hide', small.matches && !open && y > 360 && y > lastY + 4 && !header.contains(document.activeElement));
-        if (y < lastY - 4 || y < 360) header.classList.remove('fx-hide');
+        /* L'en-tête se range après un vrai geste vers le bas (48 px cumulés) et revient après un geste vers le haut (24 px) :
+           pas de va-et-vient avec les micro-mouvements de l'élan tactile ou de la barre d'adresse mobile. */
+        var dy = y - lastY; if (dy * run < 0) run = 0; run += dy;
+        if (!small.matches || open || y < 360 || header.contains(document.activeElement)) header.classList.remove('fx-hide');
+        else if (run > 48) header.classList.add('fx-hide');
+        else if (run < -24) header.classList.remove('fx-hide');
       }
       lastY = y;
       if (top) { top.classList.toggle('show', y > 700); ring.style.strokeDashoffset = C * (1 - p); }

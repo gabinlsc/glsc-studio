@@ -27,14 +27,4 @@
     art.addEventListener('pointermove', function (e) { var r = art.getBoundingClientRect(); mark.style.setProperty('--bkr', (((e.clientX - r.left) / r.width - .5) * 22).toFixed(1) + 'deg'); });
     art.addEventListener('pointerleave', function () { mark.style.setProperty('--bkr', '0deg'); });
   }
-
-  /* Sommaire : la section visible est mise en avant */
-  var links = $$('.bk-nav a'), map = {};
-  links.forEach(function (a) { map[a.hash.slice(1)] = a; });
-  if ('IntersectionObserver' in window) {
-    var io = new IntersectionObserver(function (es) {
-      es.forEach(function (e) { if (e.isIntersecting) { links.forEach(function (a) { a.removeAttribute('aria-current'); }); var a = map[e.target.id]; if (a) { a.setAttribute('aria-current', 'true'); a.scrollIntoView({ inline: 'center', block: 'nearest' }); } } });
-    }, { rootMargin: '-30% 0px -60% 0px' });
-    Object.keys(map).forEach(function (id) { var s = document.getElementById(id); if (s) io.observe(s); });
-  }
 })();

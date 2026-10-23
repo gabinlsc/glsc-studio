@@ -30,7 +30,6 @@ await pg.click('[data-bgset="dark"]'); assert.ok((await pg.$$eval('.bk-stage', (
 // essai typographique
 await pg.evaluate(() => { document.querySelector('#type-demo').textContent = ''; document.querySelector('#type-demo').dispatchEvent(new Event('blur')); }); assert.match(await pg.textContent('#type-demo'), /Un site web/); ok('marque : l’essai typographique revient au texte d’origine');
 // sommaire
-await pg.evaluate(() => window.scrollTo({ top: document.querySelector('#couleurs').getBoundingClientRect().top + scrollY - 200, behavior: 'instant' })); await pg.waitForTimeout(400); assert.equal(await pg.getAttribute('.bk-nav a[href="#couleurs"]', 'aria-current'), 'true'); ok('marque : sommaire actif');
 assert.equal(await pg.getAttribute('meta[name=robots]', 'content'), 'noindex,follow');
 assert.deepEqual(errs, []); assert.deepEqual(external, []); ok('marque : aucune erreur, aucune requête externe');
 // mobile

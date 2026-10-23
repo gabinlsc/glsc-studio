@@ -365,7 +365,6 @@ const WORD_PATH = ''; // le logotype de la figure « zone de protection » est v
       </div>
     </div></section>
 
-    <nav class="bk-nav" aria-label="Sections du centre de marque"><div class="wrap"><a href="#logo">Logo</a><a href="#zone">Construction</a><a href="#erreurs">À éviter</a><a href="#couleurs">Couleurs</a><a href="#typo">Typographie</a><a href="#interface">Interface</a><a href="#ton">Ton</a><a href="#reseaux">Réseaux</a><a href="#films">Films</a><a href="#kit">Kit</a></div></nav>
 
     <section class="section" id="logo"><div class="wrap">
       <div class="section-head"><div><p class="eyebrow">Le logo</p><h2>Un monogramme, un logotype, <span class="accent">six usages.</span></h2></div><p>Le G blanc sur carré bleu est la signature du studio. Choisissez la version qui convient au fond sur lequel elle sera posée.</p></div>
