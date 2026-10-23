@@ -157,46 +157,62 @@
       .catch(function () { btnSend.disabled = false; $('#form-status').textContent = ''; mailto(); }); // service indisponible : on retombe sur l'e-mail
   });
 
-  /* ---------- Estimation de prix ---------- */
-  var estimate = $('#estimate');
+  /* ---------- Estimation de prix (tarifs : window.OFFRES, généré depuis tools/content/offres.mjs) ---------- */
+  var estimate = $('#estimate'), O = window.OFFRES;
   function money(n) { return n.toLocaleString('fr-FR') + ' €'; }
-  var PRICES = { express: 550, month: 50, year: 500 };
-  // Projets sur devis : fourchettes de départ, calées sur la One-Page Express (550 €) et le plancher annoncé (750 € / 950 €)
-  var PAGES = [[750, 950, '2 à 3 pages'], [950, 1250, '4 à 6 pages'], [1250, 1750, '7 à 10 pages']];
-  var PRODUCTS = [[950, 1300, 'jusqu’à 10 produits'], [1300, 2000, '11 à 50 produits'], [2000, null, 'plus de 50 produits']];
   function checked(name) { return estimate.querySelector('input[name="' + name + '"]:checked').value; }
+  var SERVICE_OF = { express: 'Express', pack: 'Pack Lancement', vitrine: 'Vitrine', boutique: 'Boutique en ligne' };
+  var summary = '';
   function updateEstimate() {
-    var site = checked('est-site'), host = checked('est-host');
+    var site = checked('est-site'), plan = checked('est-plan'), bill = plan === 'none' ? 'month' : checked('est-bill');
     $$('fieldset[data-for]', estimate).forEach(function (f) { f.hidden = f.dataset.for !== site; });
-    var lines = [], lo = 0, hi = 0, open = false, quote = site !== 'express', sub = host === 'month' ? 12 * PRICES.month : host === 'year' ? PRICES.year : 0;
-    if (site === 'express') { lines.push(['One-Page Express', money(PRICES.express)]); lo = hi = PRICES.express; }
+    $$('fieldset[data-for-plan]', estimate).forEach(function (f) { f.hidden = plan === 'none'; });
+    $$('[data-hide-for]', estimate).forEach(function (l) {
+      var hide = l.dataset.hideFor.split(' ').indexOf(site) >= 0; l.hidden = hide;
+      var i = l.querySelector('input'); if (hide && i.checked) i.checked = false;
+    });
+    var lines = [], lo = 0, hi = 0, open = false, quote = site === 'vitrine' || site === 'boutique';
+    if (site === 'express') { lines.push(['Express', money(O.express)]); lo = hi = O.express; }
+    else if (site === 'pack') { lines.push(['Pack Lancement', money(O.pack)]); lo = hi = O.pack; }
     else {
-      var t = site === 'multi' ? PAGES[+checked('est-pages')] : PRODUCTS[+checked('est-prod')];
-      lines.push([site === 'multi' ? 'Refonte ou multi-pages · ' + t[2] : 'E-commerce · ' + t[2], t[1] ? money(t[0]) + ' à ' + money(t[1]) : 'dès ' + money(t[0])]);
+      var t = site === 'vitrine' ? O.vitrine[+checked('est-pages')] : O.boutique[+checked('est-prod')];
+      lines.push([(site === 'vitrine' ? 'Vitrine · ' : 'Boutique · ') + t[2], t[1] ? money(t[0]) + ' à ' + money(t[1]) : 'dès ' + money(t[0])]);
       lo = t[0]; hi = t[1]; open = !t[1];
     }
-    if (host === 'month') lines.push(['Abonnement Sérénité (12 × 50 €)', money(sub)]);
-    if (host === 'year') lines.push(['Abonnement Sérénité (2 mois offerts)', money(sub)]);
+    $$('input[name="est-opt"]:checked', estimate).forEach(function (i) { var o = O.options[i.value]; lines.push([o.name, money(o.price)]); lo += o.price; if (hi != null) hi += o.price; });
+    var ref = estimate.querySelector('input[name="est-ref"]').checked;
+    if (ref) { lines.push(['Parrainage', '− ' + money(O.filleul)]); lo -= O.filleul; if (hi != null) hi -= O.filleul; }
+    var sub = 0;
+    if (plan !== 'none') {
+      var sp = O.serenite[plan]; sub = bill === 'year' ? sp.year : 12 * sp.month;
+      lines.push(['Sérénité ' + sp.name + (bill === 'year' ? ' (2 mois offerts)' : ' (12 × ' + money(sp.month) + ')'), money(sub)]);
+    }
     $('#est-label').textContent = quote ? 'Estimation de départ' : 'Votre première année';
     $('#est-total').textContent = !quote ? money(lo + sub) : open ? 'Dès ' + money(lo + sub) : money(lo + sub) + ' – ' + money(hi + sub);
     $('#est-note').textContent = quote
-      ? 'Estimation indicative, calée sur la One-Page Express. Le prix exact est précisé dans un devis gratuit avant tout démarrage. Prix TTC : TVA non applicable (art. 293 B du CGI).'
+      ? 'Estimation indicative, le prix exact est précisé dans un devis gratuit avant tout démarrage. Prix TTC : TVA non applicable (art. 293 B du CGI).'
       : 'Prix TTC : TVA non applicable (franchise en base, article 293 B du CGI). Estimation indicative, le devis fait foi.';
     var ul = $('#est-lines'); ul.textContent = '';
     lines.forEach(function (l) { var li = document.createElement('li'); var a = document.createElement('span'); a.textContent = l[0]; var b = document.createElement('span'); b.textContent = l[1]; li.append(a, b); ul.append(li); });
+    summary = 'Mon estimation : ' + lines.map(function (l) { return l[0] + ' ' + l[1]; }).join(' ; ') + ' → ' + $('#est-total').textContent + '.';
   }
   estimate.addEventListener('change', updateEstimate);
   updateEstimate();
-  function chooseService(name) {
+  function chooseService(name, note) {
     var r = form.querySelector('input[name="service"][value="' + name + '"]'); if (r) r.checked = true;
     if (resetNeeded()) resetForm();
+    var msg = form.querySelector('[name="message"]'); if (msg && note && !msg.value.trim()) msg.value = note;
     $('#contact').scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth' });
     goStep(2, false);
     if (!form.querySelector('input[name="activity"]:checked')) goStep(0, false);
   }
-  $('#est-cta').addEventListener('click', function () {
-    var site = checked('est-site');
-    chooseService(site === 'multi' ? 'Refonte ou site multi-pages' : site === 'ecom' ? 'E-commerce' : 'One-Page Express');
+  $('#est-cta').addEventListener('click', function () { chooseService(SERVICE_OF[checked('est-site')], summary); });
+  // Les cartes Vitrine et Boutique ouvrent l'estimation avec la bonne formule
+  $$('[data-pick]').forEach(function (a) {
+    a.addEventListener('click', function (e) {
+      var r = estimate.querySelector('input[name="est-site"][value="' + a.dataset.pick + '"]'); if (r) { r.checked = true; updateEstimate(); }
+      e.preventDefault(); estimate.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', block: 'start' });
+    });
   });
   $$('[data-choose]').forEach(function (a) { a.addEventListener('click', function (e) { e.preventDefault(); chooseService(a.dataset.choose); }); });
   function resetNeeded() { return form.hidden; }
