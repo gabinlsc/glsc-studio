@@ -2,8 +2,8 @@
 
 À cocher avant d'envoyer un premier devis ou une première facture.
 
-- [ ] Entreprise immatriculée : SIREN et SIRET reçus.
-- [ ] Remplacer « En cours d'immatriculation » et l'adresse du siège dans `mentions-legales.html`, `cgv.html` et le pied de page (chercher la classe `todo`).
+- [x] Entreprise immatriculée : SIREN 132 216 086 et SIRET 132 216 086 00018 (INSEE, 29/10/2026).
+- [ ] Renseigner l'adresse du siège (SIREN et SIRET déjà en place) dans `mentions-legales.html`, `cgv.html` et le pied de page (chercher la classe `todo`).
 - [ ] Clients professionnels uniquement : le devis doit porter la mention « Le client déclare agir à titre professionnel » avec son SIREN ou RNA, et renvoyer aux CGV (à valider avant signature). Si tu acceptes un jour un particulier, il faudra un médiateur de la consommation (liste officielle de la CECMC) et rétablir les articles consommateurs des CGV.
 - [ ] Vérifier dans l'espace IONOS le lieu du centre de données du VPS : le §6.1 des mentions légales annonce un serveur hébergé en France.
 - [ ] Modèle de devis et de facture : mentions obligatoires (SIRET, numéro et date, « TVA non applicable, art. 293 B du CGI », pénalités de retard, indemnité forfaitaire de 40 €, mention d'entrepreneur individuel).
